@@ -1,7 +1,7 @@
 Name:		ACS Community Branch
 Version:	2015.4
 Release:	1%{?dist}
-Summary:	ACS CB for CenOSS 7	
+Summary:	ACS CB for CentOS 6	
 
 Group:		
 License:	
@@ -38,11 +38,11 @@ curl -O https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-mave
 # ACE-TAO RPM from OpenSUSE
 echo "
 [ace-tao_opensuse]
-name=Latest ACE micro release (CentOS_7)
+name=ACE+TAO RPMS for CentOS_CentOS-6
 type=rpm-md
-baseurl=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7/
+baseurl=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_CentOS-6/
 gpgcheck=1
-gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7//repodata/repomd.xml.key
+gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_CentOS-6/repodata/repomd.xml.key
 enabled=1
 " > /etc/yum.repos.d/ace-tao.repo
 
