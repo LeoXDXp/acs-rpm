@@ -53,6 +53,31 @@ enabled=1
 
 
 %post
+# Create systemd service
+echo "
+[Unit]
+Description=Alma Common Software Service
+Documentation=man:sshd(8) man:sshd_config(5)
+After=multi-user.target
+
+
+[Service]
+Type=forking
+PIDFile=/var/run/sshd.pid
+EnvironmentFile=-/alma/..../.bash_profile.acs
+User=almamgr
+ExecStart=/usr/sbin/sshd $OPTIONS
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+
+" > /etc/systemd/system/acscb.service
+systemctl enable acscb.service
+systemctl daemon-reload
 
 %files
 %doc
