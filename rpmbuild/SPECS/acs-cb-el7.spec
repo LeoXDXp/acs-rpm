@@ -36,6 +36,52 @@ mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cp -r %{_builddir}/%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ %{buildroot}/home/almamgr/%{name}-current/
+#Binaries ln
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsstartup/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsalarmidl/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acscommandcenter/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftwareacscourse/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsdaemon/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsexmpl/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/acsEclipseUtils/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/acssampGUI/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/alarmPanel/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/alarmSourcePanel/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/cdbBrowser/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/errorBrowser/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/eventGUI/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/jlog/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/logLevelGUI/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/logTools/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/objexp/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/ACSLaser/alarm-clients/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acslog/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsncdds/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acspy/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acspyexmpl/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acssim/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsstartup/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsutilpy/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdbChecker/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb_rdb/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/codegen/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/containerTests/contNcTest/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jcont/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jmanager/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/loggingts/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/nsStatisticsService/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/task/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/acs/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/acstempl/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/doc/bin/* /usr/local/bin/
 mkdir -p  %{buildroot}/home/almaproc/introot
 %clean
 
@@ -105,16 +151,63 @@ systemctl disable acscb.service
  
 %postun
 systemctl daemon-reload
+# Al user processes must be killed before userdel
+pkill -u almaproc
+pkill -u almamgr
+userdel -r almamgr
+userdel -r almaproc
 
 %files
 %doc
 %config %{_sysconfdir}/systemd/system/acscb.service
 %attr(0705,almagr,almamgr) /home/almamgr/ 
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-2015.4-x86_64/LGPL/CommonSoftware/acsstartup/bin/*
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-2015.4-x86_64/LGPL/CommonSoftware/cdb/ws/bin/*
-
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsstartup/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsalarmidl/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acscommandcenter/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftwareacscourse/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsdaemon/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsexmpl/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/acsEclipseUtils/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/acssampGUI/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/alarmPanel/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/alarmSourcePanel/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/cdbBrowser/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/errorBrowser/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/eventGUI/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/jlog/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/logLevelGUI/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/logTools/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsGUIs/objexp/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/ACSLaser/alarm-clients/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acslog/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsncdds/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acspy/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acspyexmpl/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acssim/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsstartup/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/acsutilpy/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdbChecker/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/cdb_rdb/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/codegen/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/containerTests/contNcTest/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jcont/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/jmanager/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/loggingts/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/nsStatisticsService/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/task/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/Kit/acs/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/Kit/acstempl/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/LGPL/Kit/doc/bin/*
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
-
+%config %{_usr}/local/bin/*
 
 %changelog
 * Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
