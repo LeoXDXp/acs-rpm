@@ -34,8 +34,8 @@ make %{?_smp_mflags}
 #%make_install
 mkdir -p  %{buildroot}/home/almamgr
 mkdir -p %{_usr}/local/bin/
-#mkdir -p %{_usr}/local/lib/
-mkdir -p %{_usr}/lib64/python2.7/site-packages/
+mkdir -p %{_usr}/local/lib64/
+#mkdir -p %{_usr}/lib64/python2.7/site-packages/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cp -r %{_builddir}/%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ %{buildroot}/home/almamgr/%{name}-current/
@@ -355,11 +355,11 @@ echo new2me | echo new2me | passwd --stdin almaproc
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chown almaproc:almaproc /home/almaproc/introot/
-
-# Create systemd service
+chmod o+x /home/almamgr/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+# Create systemd services
 echo "
 [Unit]
-Description=Alma Common Software CB Service
+Description=ACS Core Service
 #Documentation=man:sshd(8) man:sshd_config(5)
 After=multi-user.target
 
@@ -381,6 +381,32 @@ WantedBy=multi-user.target
 
 " > %{_sysconfdir}/systemd/system/acscb.service
 systemctl enable acscb.service
+
+echo "
+[Unit]
+Description=ACS Remote Management Daemon
+#Documentation=man:sshd(8) man:sshd_config(5)
+After=multi-user.target
+
+[Service]
+Type=forking
+Environment=INTROOT='/home/almaproc/introot/'
+EnvironmentFile=-/home/almamgr/ACS-current/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+User=almamgr
+#ExecPreStart=killACS -q
+ExecStart=acsdaemonStartAcs
+ExecStop=acsdaemonStopAcs && acsdataClean --all
+ExecReload=cdbjDALClearCache
+KillMode=process
+#Restart=on-failure
+#RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
+
+" > %{_sysconfdir}/systemd/system/acscbremote.service
+systemctl enable acscbremote.service
+
 systemctl daemon-reload
 
 # Set SELinux PERMISSIVE (Audit mode)
