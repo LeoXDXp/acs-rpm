@@ -22,8 +22,8 @@ BuildArch: x86_64
 # No existen en centos
 # perl-ExtUtils MakeMaker libncurses-devel Libdb-devel ime libpng10-devel expat21 castor* shunit2
 
-# Desglose de paquetes de X Window System desde glx-utils hasta initial-setup
-Requires:  python procmail lockfile-progs gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse initial-setup
+# Desglose de paquetes de X Window System desde glx-utils hasta xorg-x11-drv-mouse
+Requires:  python procmail lockfile-progs gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo xterm
 
 %description
 RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/ (symlink to /alma). 
@@ -40,23 +40,28 @@ make %{?_smp_mflags}
 %install
 #%make_install
 mkdir -p  %{buildroot}/home/almamgr
+# /usr/local
 mkdir -p %{buildroot}%{_usr}/local/bin/
 mkdir -p %{buildroot}%{_usr}/local/lib64/
 mkdir -p %{buildroot}%{_usr}/local/include/
 mkdir -p %{buildroot}%{_usr}/local/share/
+# /etc
+mkdir -p %{buildroot}%{_sysconfdir}/acs/
 #mkdir -p %{_usr}/lib64/python2.7/site-packages/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 #Source0 ACSSW - acsdata
 cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
+mv %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs
 #Source1 ExtProds
-install -m 0640 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
+install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 #Binaries ln
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
-#Python Libs
- 
 # Shared Objects
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
+unlink /usr/local/lib64/python
+#Python Libs
+
 # Libs in include
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
 # Mans
@@ -96,7 +101,8 @@ echo new2me | echo new2me | passwd --stdin almaproc
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chown almaproc:almaproc /home/almaproc/introot/
-chmod o+x /home/almamgr/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+#chmod o+x /home/almamgr/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+
 # Create systemd services
 echo "
 [Unit]
@@ -107,7 +113,7 @@ After=multi-user.target
 [Service]
 Type=forking
 Environment=INTROOT='/home/almaproc/introot/'
-EnvironmentFile=-/home/almamgr/ACS-current/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+EnvironmentFile=-/etc/acs/bash_profile.acs
 User=almamgr
 ExecPreStart=killACS -q
 ExecStart=acsStart
@@ -132,7 +138,8 @@ After=multi-user.target
 [Service]
 Type=forking
 Environment=INTROOT='/home/almaproc/introot/'
-EnvironmentFile=-/home/almamgr/ACS-current/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+# EnvFile to later be a conf file
+EnvironmentFile=-/etc/acs/bash_profile.acs
 User=almamgr
 #ExecPreStart=killACS -q
 ExecStart=acsdaemonStartAcs
@@ -176,6 +183,7 @@ userdel -r almaproc
 # find Kit/ -type d -name "bin" -exec chmod -R +x {} \;
 %doc
 %config %{_sysconfdir}/systemd/system/acscb.service
+%config %{_sysconfdir}/acs/bash_profile.acs
 %attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/*
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
