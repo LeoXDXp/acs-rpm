@@ -1,12 +1,14 @@
 #!/bin/sh
 # Migrate to https://wiki.python.org/moin/ConfigParserExamples
-# Non Default vars
-INTROOT=$HOME/introot
-#ACS_CDB=
-#MANAGER_REFERENCE=
+# IntRoot must be the first
+INTROOT=/home/almamgr/introot
 
 # Default vars
 PYTHONPATH="${PYTHONPATH}:/home/almaproc/introot/lib/python/site-packages:/alma/ACS-current/ACSSW/lib/python/site-packages:/alma/ACS-current/Python/omni/lib/python:/alma/ACS-current/Python/omni/lib:/alma/ACS-current/Python/lib/python2.6/site-packages:/alma/ACS-current/Python/omni/lib/python/site-packages:/alma/ACS-current/Python/omni/lib64/python2.6/site-packages"
 ACS_INSTANCE="0"
-ACSDATA="/alma/ACS-current/acsdata
+ACSDATA="/alma/ACS-current/acsdata"
+ACSROOT="/alma/ACS-current/ACSSW"
 
+# This Vars must be at the end
+#ACS_CDB=
+#MANAGER_REFERENCE=
