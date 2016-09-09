@@ -10,5 +10,5 @@ ACSDATA="/alma/ACS-current/acsdata"
 ACSROOT="/alma/ACS-current/ACSSW"
 
 # This Vars must be at the end
-#ACS_CDB=
+ACS_CDB=/alma/ACS-current/acsdata/config/defaultCDB
 #MANAGER_REFERENCE=
