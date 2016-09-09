@@ -46,13 +46,14 @@ mkdir -p %{buildroot}%{_usr}/local/lib64/
 mkdir -p %{buildroot}%{_usr}/local/include/
 mkdir -p %{buildroot}%{_usr}/local/share/
 # /etc
-mkdir -p %{buildroot}%{_sysconfdir}/acs/
+mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 #mkdir -p %{_usr}/lib64/python2.7/site-packages/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 #Source0 ACSSW - acsdata
 cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
 mv %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs
+cp -r %{buildroot}/home/almamgr%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 #Source1 ExtProds
 install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 #Binaries ln
