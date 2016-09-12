@@ -94,7 +94,7 @@ enabled=0
 " > /etc/yum.repos.d/ace-tao.repo
 
 #Local users
-useradd -U almamgr
+useradd -u 550 -U almamgr
 useradd -U almaproc
 echo new2me | echo new2me | passwd --stdin almaproc
 
