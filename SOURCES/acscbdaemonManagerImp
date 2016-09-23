@@ -15,38 +15,48 @@ touch $acscbFolder/$IORFILE
 touch $acscbFolder/$PIDFILE
 lockfile="/var/lock/subsys/acscbDaemonManagerImp"
 
+# SPECIAL OPTIONS SHOULD BE IN /etc/sysconfig/acscb/daemonManagerImp
+
 chown almaproc:root $acscbFolder/$IORFILE
 chown almaproc:root $acscbFolder/$PIDFILE
 
 user=almaproc
 # ACS Source Environment file
-. /etc/acscb/bash_profile.acs
+. /etc/acscb/bash_profile.acs.old
 
 # Start the service 
 start() {
-        initlog -c "echo -n Starting acscbDaemonManagerImp Service: "
+        echo  "Starting acscbDaemonManagerImp Service: "
 	# Run only if a Manager is not currently running in this host
-        if [ ! -f /var/lock/subsys/ ]; then
-            /usr/local/bin/acsdaemonManagerImp -o $acscbFolder/$IORFILE & 
-	    # Pid File
-	    echo $! > $acscbFolder/$PIDFILE
-            ### Create the lock file ### 
-	    ### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
-            touch $lockfile
+        if [ -f $lockfile ]; then
+            warning
+            echo "Service already running"
+            exit 0
 	fi
-        retval=$?
+
+        /usr/local/bin/acsdaemonManagerImp -o $acscbFolder/$IORFILE & 
+	retval=$?
+	# Pid File
+	echo $! > $acscbFolder/$PIDFILE
+        ### Create the lock file ### 
+	### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
+        touch $lockfile
 	if [ $retval -eq 0 ]; then
 	    success
 	    echo "acscbDaemonManagerImp started"
 	else
 	    failure
 	    echo "Startup Failed. Check logs"	
+	    # Cleanup
+	    rm -f $lockfile
+	    echo "" > $acscbFolder/$PIDFILE
+	    echo "" > $acscbFolder/$IORFILE
 	fi
         return $retval
 }
 # Stop the service
 stop() {
-        initlog -c "echo -n Stopping acscbDaemonManagerImp server: "
+        echo "Stopping acscbDaemonManagerImp server: "
 	# If file does not exist, the process is not running. Stop does nothing
 	if [ ! -f $lockfile ]; then
 	    warning
@@ -85,6 +95,7 @@ force-stop() {
             failure
             echo "Stopping Failed. Check logs"   
         fi
+	return $retval
 }
 
 ### main logic ###
@@ -99,7 +110,7 @@ case "$1" in
 	force-stop
 	;;
   status)
-        status FOO
+        status acsdaemonManagerImp
         ;;
   restart)
         stop
@@ -109,4 +120,4 @@ case "$1" in
         echo $"Usage: $0 {start|stop|restart|reload|status}"
         exit 1
 esac
-exit 0
+exit $?
