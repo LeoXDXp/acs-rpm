@@ -7,15 +7,13 @@
 . /etc/init.d/functions
 
 # Create files as root
-acscbFolder="/var/run/acscb/"
+acscbFolder="/var/run/acscb"
 mkdir -p $acscbFolder
 IORFILE="daemonManagerImp.ior"
 PIDFILE="daemonManagerImp.pid"
 touch $acscbFolder/$IORFILE
 touch $acscbFolder/$PIDFILE
 lockfile="/var/lock/subsys/acscbDaemonManagerImp"
-
-# SPECIAL OPTIONS SHOULD BE IN /etc/sysconfig/acscb/daemonManagerImp
 
 chown almaproc:root $acscbFolder/$IORFILE
 chown almaproc:root $acscbFolder/$PIDFILE
@@ -26,31 +24,23 @@ user=almaproc
 
 # Start the service 
 start() {
-        echo  "Starting acscbDaemonManagerImp Service: "
+        echo "Starting acscbDaemonManagerImp Service: "
 	# Run only if a Manager is not currently running in this host
-        if [ -f $lockfile ]; then
-            warning
-            echo "Service already running"
-            exit 0
+        if [ ! -f $lockfile ]; then
+            /usr/local/bin/acsdaemonManagerImp -o $acscbFolder/$IORFILE & 
+	    # Pid File
+	    echo $! > $acscbFolder/$PIDFILE
+            ### Create the lock file ### 
+	    ### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
+            touch $lockfile
 	fi
-
-        /usr/local/bin/acsdaemonManagerImp -o $acscbFolder/$IORFILE & 
-	retval=$?
-	# Pid File
-	echo $! > $acscbFolder/$PIDFILE
-        ### Create the lock file ### 
-	### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
-        touch $lockfile
+        retval=$?
 	if [ $retval -eq 0 ]; then
 	    success
 	    echo "acscbDaemonManagerImp started"
 	else
 	    failure
 	    echo "Startup Failed. Check logs"	
-	    # Cleanup
-	    rm -f $lockfile
-	    echo "" > $acscbFolder/$PIDFILE
-	    echo "" > $acscbFolder/$IORFILE
 	fi
         return $retval
 }
@@ -63,13 +53,21 @@ stop() {
 	    echo "Service not running"
 	    exit 0   
 	fi
-        acsdaemonImpStop -r $(cat "$acscbFolder/$IORFILE" )
-	# Clear IORFILE and PIDFILE
-	echo "" > $acscbFolder/$IORFILE
-	echo "" > $acscbFolder/$PIDFILE
+
+        # if no IOR File, we call force stop
+        if [ ! -f $acscbFolder/$IORFILE ]; then
+            force-stop
+        else
+            acsdaemonImpStop -r $(cat "$acscbFolder/$IORFILE" )
+        fi
+        # return value to check
+        retval=$?
+        # Clear IORFILE and PIDFILE
+        echo "" > $acscbFolder/$IORFILE
+        echo "" > $acscbFolder/$PIDFILE
         ### Now, delete the lock file ###
         rm -f $lockfile
-	
+
 	retval=$?
         if [ $retval -eq 0 ]; then
             success
