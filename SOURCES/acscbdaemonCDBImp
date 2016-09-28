@@ -1,0 +1,121 @@
+#!/bin/bash
+#
+# chkconfig: 35 90 12
+# description: ACS CB CDB service
+#
+# Get function from functions library
+. /etc/init.d/functions
+
+# Create files as root
+acscbFolder="/var/run/acscb"
+mkdir -p $acscbFolder
+IORFILE="daemonCDB.ior"
+PIDFILE="daemonCDB.pid"
+touch $acscbFolder/$IORFILE
+touch $acscbFolder/$PIDFILE
+lockfile="/var/lock/subsys/acscbDaemonCDB"
+
+chown almaproc:root $acscbFolder/$IORFILE
+chown almaproc:root $acscbFolder/$PIDFILE
+
+user=almaproc
+# ACS Source Environment file
+. /etc/acscb/bash_profile.acs.old
+
+# Start the service 
+start() {
+        echo "Starting acscbDaemonCDB Service: "
+	# Run only if a Manager is not currently running in this host
+        if [ ! -f $lockfile ]; then
+            /usr/local/bin/acsdaemonConfigurationDatabaseImp -o $acscbFolder/$IORFILE & 
+	    # Pid File
+	    echo $! > $acscbFolder/$PIDFILE
+            ### Create the lock file ### 
+	    ### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
+            touch $lockfile
+	fi
+        retval=$?
+	if [ $retval -eq 0 ]; then
+	    success
+	    echo "acscbDaemonCDB started"
+	else
+	    failure
+	    echo "CDB Startup Failed. Check logs"	
+	fi
+        return $retval
+}
+# Stop the service
+stop() {
+        echo "Stopping acscbDaemonCDB server: "
+	# If file does not exist, the process is not running. Stop does nothing
+	if [ ! -f $lockfile ]; then
+	    warning
+	    echo "Service not running"
+	    exit 0   
+	fi
+
+        # if no IOR File, we call force stop
+        if [ ! -f $acscbFolder/$IORFILE ]; then
+            force-stop
+        else
+            acsdaemonImpStop -r $(cat "$acscbFolder/$IORFILE" )
+        fi
+        # return value to check
+        retval=$?
+        # Clear IORFILE and PIDFILE
+        echo "" > $acscbFolder/$IORFILE
+        echo "" > $acscbFolder/$PIDFILE
+        ### Now, delete the lock file ###
+        rm -f $lockfile
+
+	retval=$?
+        if [ $retval -eq 0 ]; then
+            success
+            echo "acscbDaemonCDB stopped"
+        else
+            failure
+            echo "CDB Shutdown Failed. Check logs"   
+        fi
+        return $retval
+}
+
+force-stop() {
+	# If PIDFILE Exists and has a content
+	if [ -f "$acscbFolder/$PIDFILE"  ] && [ $(cat "$acscbFolder/$PIDFILE" ) ] ;then	
+	    killproc -p $acscbFolder/$PIDFILE acsdaemonConfigurationDatabaseImp
+	fi
+	
+	retval=$?
+	if [ $retval -eq 0 ]; then
+            success
+            echo "acscbDaemonCDB forcefully stopped"
+        else
+            failure
+            echo "CDB Stopping Failed. Check logs"   
+        fi
+	return $retval
+}
+
+### main logic ###
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  force-stop)
+	force-stop
+	;;
+  status)
+        status acsdaemonConfigurationDatabaseImp
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+exit $?
