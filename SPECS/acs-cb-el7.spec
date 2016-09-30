@@ -45,6 +45,8 @@ mkdir -p %{buildroot}%{_usr}/local/bin/
 mkdir -p %{buildroot}%{_usr}/local/lib64/
 mkdir -p %{buildroot}%{_usr}/local/include/
 mkdir -p %{buildroot}%{_usr}/local/share/
+# /var/run/
+mkdir -p %{buildroot}%{_var}/run/acscb/
 # /etc
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 #mkdir -p %{_usr}/lib64/python2.7/site-packages/
@@ -52,7 +54,7 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 #Source0 ACSSW - acsdata
 cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
-mv %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs
+cp %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs.old
 cp -r %{buildroot}/home/almamgr%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 #Source1 ExtProds
 install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
@@ -101,6 +103,7 @@ echo new2me | echo new2me | passwd --stdin almaproc
 %post
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
+chown almamgr:almamgr %{_var}/run/acscb/
 chown almaproc:almaproc /home/almaproc/introot/
 #chmod o+x /home/almamgr/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
 
@@ -191,6 +194,7 @@ userdel -r almaproc
 %{_usr}/local/bin/*
 #%{_usr}/local/lib/*
 %{_usr}/lib64/python2.7/site-packages/
+%{_var}/run/acscb/
 
 %changelog
 * Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
