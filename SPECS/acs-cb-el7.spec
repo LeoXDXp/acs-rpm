@@ -1,5 +1,5 @@
 Name:		ACS
-Version:	2015.4
+Version:	2016.6
 Release:	1%{?dist}
 Summary:	ACS CB for CentOS 7	
 
@@ -15,6 +15,7 @@ Source1:	ExtProds-%{version}.tar.gz
 #Source5:	http://www.jacorb.org/releases/3.6/jacorb-3.6-source.zip
 
 BuildArch: x86_64
+# BuildRequires: python-virtualenv
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 # BuildRequires not used , compilation made by JenkinsCI
 #BuildRequires: wget java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ksh blas-devel expat-devel vim libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel sqlite2-devel openssl-devel openldap-devel freetype-devel libpng-devel libpng10-devel libxml2-devel libxslt-devel gsl-devel xemacs xemacs-packages-extra autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig castor xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils git indent intltool patchutils rcs subversion swig systemtap xz
@@ -131,7 +132,7 @@ KillMode=process
 WantedBy=multi-user.target
 
 " > %{_sysconfdir}/systemd/system/acscb.service
-systemctl enable acscb.service
+#systemctl enable acscb.service
 
 echo "
 [Unit]
@@ -157,9 +158,9 @@ KillMode=process
 WantedBy=multi-user.target
 
 " > %{_sysconfdir}/systemd/system/acscbremote.service
-systemctl enable acscbremote.service
+#systemctl enable acscbremote.service
 
-systemctl daemon-reload
+#systemctl daemon-reload
 
 # Set SELinux PERMISSIVE (Audit mode)
 sed -i 's/SELINUX=disabled/SELINUX=permissive/g' %{_sysconfdir}/sysconfig/selinux
@@ -181,7 +182,6 @@ pkill -u almamgr
 userdel -r almamgr
 userdel -r almaproc
 
-
 %files
 # find CommonSoftware/ -type d -name "bin" -exec chmod -R +x {} \;
 # find Kit/ -type d -name "bin" -exec chmod -R +x {} \;
@@ -193,7 +193,7 @@ userdel -r almaproc
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
 %{_usr}/local/bin/*
 #%{_usr}/local/lib/*
-%{_usr}/lib64/python2.7/site-packages/
+#%{_usr}/lib64/python2.7/site-packages/
 %{_var}/run/acscb/
 
 %changelog
