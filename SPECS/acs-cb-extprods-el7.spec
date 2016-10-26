@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://acs-community.github.io/
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
-# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.1.4. Epel provides 4.2.0
+# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.1.4. Epel provides 4.2.0, but omniORBpy compilation must be changed: Using ACS's for now
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre
 
 BuildArch: x86_64
@@ -14,9 +14,12 @@ BuildArch: x86_64
 BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch
 # Packages checked
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB apache-maven-3.2.5-1.el7.noarch gcc-c++
-# PyModules
-BuildRequires: pytz python-pbr python-linecache2 python-jinja2 python-babel python-markupsafe 
-
+# PyModules With lower or equal version as acs.req
+BuildRequires: pytz python-pbr python-linecache2 python-jinja2 python-babel python-markupsafe python-pygments python-sphinx python2-sphinx-theme-alabaster python-astroid python-coverage python-docutils python-logilab-common python2-mock python-nose numpy pylint python-six python2-traceback2 
+# PyModules with higher versions than those in acs.req
+# BuildRequires: python-ipython python-sphinx_rtd_theme python-unittest2
+# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
+#Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
 
 # Packages in Testing
 #BuildRequires: ksh blas-devel expat-devel vim libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
@@ -52,7 +55,7 @@ cd %{_builddir}/ACS/ExtProds/INSTALL/
 ./buildEclipse
 ./buildTAO # Needs c++
 ./buildJacORB # Depends on TAO and Maven
-./buildPython 
+./buildPython # Python and PyModules source PYTHON_ROOT/bin/activate file
 ./buildPyModules # PyModules could be installed directly as requires. Depends on buildPython
 ./buildOmniORBpy 
 ./buildTcltk # TestPending
