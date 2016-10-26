@@ -11,9 +11,13 @@ Source0:	%{name}-%{version}.tar.gz
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2
+BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch
 # Packages checked
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB apache-maven-3.2.5-1.el7.noarch gcc-c++
+# PyModules
+BuildRequires: pytz python-pbr python-linecache2 python-jinja2 python-babel python-markupsafe 
+
+
 # Packages in Testing
 #BuildRequires: ksh blas-devel expat-devel vim libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
@@ -33,6 +37,7 @@ export ALMASW_RELEASE="ACS-%{version}"
 
 export ACE_ROOT="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux"
 export ACE_ROOT_DIR="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build"
+export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
 export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
@@ -47,9 +52,9 @@ cd %{_builddir}/ACS/ExtProds/INSTALL/
 ./buildEclipse
 ./buildTAO # Needs c++
 ./buildJacORB # Depends on TAO and Maven
-./buildPython # TestPending
+./buildPython 
 ./buildPyModules # PyModules could be installed directly as requires. Depends on buildPython
-./buildOmniORBpy
+./buildOmniORBpy 
 ./buildTcltk # TestPending
 
 
