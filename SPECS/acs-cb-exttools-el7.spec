@@ -4,14 +4,14 @@ Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
 URL:		http://acs-community.github.io/
-# Source0, no need for anything else than ACS/ExtProds folder
+# Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
 # Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.1.4. Epel provides 4.2.0
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar
+BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2
 # Packages checked
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB apache-maven-3.2.5-1.el7.noarch gcc-c++
 # Packages in Testing
@@ -24,15 +24,18 @@ RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and 
 
 %prep
 %setup -q
-# builddir = /home/user/rpmbuild/BUILDDIR
-# setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
-# Sources already downloaded
+# builddir = /home/user/rpmbuild/BUILDDIR # setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
 
-#%build
+%build
 # Declare Global Variables for scripts in ExtProds/INSTALL/
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
+export ACE_ROOT="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux"
+export ACE_ROOT_DIR="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build"
+export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
+export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
 
 %install
 #Create basic folder and symlink
@@ -42,12 +45,18 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/ACS/ExtProds/INSTALL/
 # Run scripts
 ./buildEclipse
-./buildTAO
-
+./buildTAO # Needs c++
+./buildJacORB # Depends on TAO and Maven
+./buildPython # TestPending
+./buildPyModules # PyModules could be installed directly as requires. Depends on buildPython
+./buildOmniORBpy
+./buildTcltk # TestPending
 
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
+cd $ALMASW_INSTDIR
+find -name "*.o" | xargs rm -rf
 
 %pre
 # Install epel-maven repo
@@ -67,20 +76,10 @@ enabled=0
 
 #Local users
 useradd -u 550 -U almamgr
-useradd -U almaproc
-echo new2me | echo new2me | passwd --stdin almaproc
 
 %post
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
-
-# Set SELinux PERMISSIVE (Audit mode)
-sed -i 's/SELINUX=disabled/SELINUX=permissive/g' %{_sysconfdir}/sysconfig/selinux
-sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' %{_sysconfdir}/sysconfig/selinux
-setenforce 0
-
-# /etc/hosts
-#echo "" >> /etc/hosts
 
 %preun
  
