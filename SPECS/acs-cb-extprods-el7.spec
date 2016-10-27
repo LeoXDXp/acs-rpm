@@ -7,7 +7,7 @@ URL:		http://acs-community.github.io/
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
 # Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.1.4. Epel provides 4.2.0, but omniORBpy compilation must be changed: Using ACS's for now
-# ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre
+# ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1
 
 BuildArch: x86_64
 # Base tools
