@@ -30,9 +30,12 @@ start() {
             /usr/local/bin/acsdaemonManagerImp -o $acscbFolder/$IORFILE & 
 	    # Pid File
 	    echo $! > $acscbFolder/$PIDFILE
-            ### Create the lock file ### 
-	    ### Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
+            ### Create the lock file. Remember ACS has its own Lock file for instances in /alma/ACS-<version>/acsdata/tmp/
             touch $lockfile
+	else
+	    warning
+            echo "Service already running"
+            return 0
 	fi
         retval=$?
 	if [ $retval -eq 0 ]; then
@@ -51,14 +54,16 @@ stop() {
 	if [ ! -f $lockfile ]; then
 	    warning
 	    echo "Service not running"
-	    exit 0   
+	    return 0   
 	fi
 
         # if no IOR File, we call force stop
         if [ ! -f $acscbFolder/$IORFILE ]; then
             force-stop
         else
-            acsdaemonImpStop -r $(cat "$acscbFolder/$IORFILE" )
+	    # In case of SIGSEV in ImpStop go to force-stop
+            #acsdaemonImpStop -r $(cat "$acscbFolder/$IORFILE" ) || force-stop
+	    force-stop
         fi
         # return value to check
         retval=$?
@@ -88,13 +93,18 @@ force-stop() {
 	retval=$?
 	if [ $retval -eq 0 ]; then
             success
-            echo "acscbDaemonManagerImp forcefully stopped"
+            echo "acscbDaemonManagerImp stopped through killproc"
         else
             failure
             echo "Stopping Failed. Check logs"   
         fi
 	return $retval
 }
+
+#TODO for Complete LSB fullfilment
+#reload () {
+#
+#}
 
 ### main logic ###
 case "$1" in
@@ -114,6 +124,9 @@ case "$1" in
         stop
         start
         ;;
+  reload)
+	restart
+	;;
   *)
         echo $"Usage: $0 {start|stop|restart|reload|status}"
         exit 1
