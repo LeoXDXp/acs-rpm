@@ -21,13 +21,8 @@ BuildRequires: pytz python-pbr python-linecache2 python-jinja2 python-babel pyth
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
 #Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
 
-# Packages in Testing
-#BuildRequires: ksh blas-devel expat-devel vim libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
-# In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
-# No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21 castor* shunit2
-
 %description
-RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and installs it on /home/almamgr/ (symlink to /alma). 
+RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and installs them on /home/almamgr/ACS-version (symlink to /alma). 
 
 %prep
 %setup -q
