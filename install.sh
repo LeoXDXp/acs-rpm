@@ -10,6 +10,8 @@ mv ACS-2015.4 /home/almamgr/
 
 chmod 0705 /home/almamgr/
 chown -R almamgr. /home/almamgr/
+# Mount
+echo "10.10.3.87:acsdata              /home/almamgr/ACS-current/acsdata glusterfs    defaults,_netdev 0 0" >> /etc/fstab
 
 mkdir -p /home/almaproc/introot/
 chown almaproc:almaproc /home/almaproc/introot/
