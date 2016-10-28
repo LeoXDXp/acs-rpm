@@ -45,7 +45,7 @@ export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 # Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
-cd %{_builddir}/ACS/ExtProds/INSTALL/
+cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse
 ./buildTAO # Needs c++
