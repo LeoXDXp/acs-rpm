@@ -11,7 +11,7 @@ Source0:	%{name}-%{version}.tar.gz
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch
+BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch tar
 # Packages checked
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB gcc-c++, apache-maven == 3.2.5
 # PyModules With lower or equal version as acs.req
