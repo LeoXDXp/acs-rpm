@@ -1,15 +1,3 @@
-# Declare Global Variables for scripts in ExtProds/INSTALL/
-%define ALMASW_ROOTDIR %{buildroot}/alma
-%define ALMASW_RELEASE ACS-%{version}
-
-%define ACE_ROOT %{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux
-%define ACE_ROOT_DIR %{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build
-%define M2_HOME %{_usr}/share/apache-maven
-# Exported by apache-maven itself, only after re-login
-%define JACORB_HOME %{buildroot}/alma/ACS-%{version}/JacORB
-%define PYTHON_ROOT %{buildroot}/alma/ACS-%{version}/Python
-%define OMNI_ROOT %{buildroot}/alma/ACS-%{version}/Python/
-
 Name:		ACS-ExtProds
 Version:	2016.6
 Release:	1%{?dist}
@@ -43,6 +31,17 @@ RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and 
 #%build
 
 %install
+# Declare Global Variables for scripts in ExtProds/INSTALL/
+export ALMASW_ROOTDIR="%{buildroot}/alma"
+export ALMASW_RELEASE="ACS-%{version}"
+
+export ACE_ROOT="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux"
+export ACE_ROOT_DIR="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build"
+export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
+export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
+export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
+
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
