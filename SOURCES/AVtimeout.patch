@@ -1,0 +1,359 @@
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/Protocol_Factory.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/Protocol_Factory.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/Protocol_Factory.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/Protocol_Factory.h	2014-12-11 10:41:30.000000000 +0000
+@@ -57,7 +57,8 @@
+ 
+   /// send a data frame.
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0) = 0;
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *timeout = 0) = 0; //ACS added timeout
+ 
+   /// send a frame in iovecs.
+   virtual int send_frame (const iovec *iov,
+@@ -65,7 +66,8 @@
+                           TAO_AV_frame_info *frame_info = 0) = 0;
+ 
+   virtual int send_frame (const char *buf,
+-                          size_t len) = 0;
++                          size_t len,
++			  ACE_Time_Value *timeout = 0) = 0; //ACS added timeout
+ 
+   /// end the stream.
+   virtual void control_object (TAO_AV_Protocol_Object *object);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.cpp TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.cpp	2013-04-12 22:47:02.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -410,7 +410,8 @@
+ 
+ int
+ TAO_AV_RTCP_Object::send_frame (ACE_Message_Block *frame,
+-                                TAO_AV_frame_info * /*frame_info*/)
++                                TAO_AV_frame_info * /*frame_info*/,
++				ACE_Time_Value*)
+ {
+   return this->transport_->send (frame);
+ }
+@@ -426,7 +427,8 @@
+ 
+ int
+ TAO_AV_RTCP_Object::send_frame (const char*,
+-                                size_t)
++                                size_t,
++				ACE_Time_Value*)
+ {
+   return 0;
+ }
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTCP.h	2014-12-11 10:09:31.000000000 +0000
+@@ -222,7 +222,8 @@
+ 
+   /// send a data frame.
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *tv =0);
+ 
+   /// send a frame in iovecs.
+   virtual int send_frame (const iovec *iov,
+@@ -230,7 +231,8 @@
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *tv =0);
+ 
+   /// end the stream.
+   virtual int destroy (void);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.cpp TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.cpp	2013-04-12 22:47:02.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -369,7 +369,8 @@
+ 
+ int
+ TAO_AV_RTP_Object::send_frame (ACE_Message_Block *frame,
+-                               TAO_AV_frame_info *frame_info)
++                               TAO_AV_frame_info *frame_info,
++			       ACE_Time_Value *tv)
+ {
+ //  ACE_Addr *addr = this->transport_->get_peer_addr ();
+ 
+@@ -615,7 +616,8 @@
+ 
+ int
+ TAO_AV_RTP_Object::send_frame (const char*,
+-                               size_t)
++                               size_t,
++			       ACE_Time_Value *tv)
+ {
+   return 0;
+ }
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/RTP.h	2014-12-11 10:09:31.000000000 +0000
+@@ -367,14 +367,16 @@
+   virtual int stop (void);
+   virtual int handle_input (void);
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *tv=0);
+ 
+   virtual int send_frame (const iovec *iov,
+                           int iovcnt,
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *tv=0);
+ 
+   virtual int destroy (void);
+   virtual int set_policies (const TAO_AV_PolicyList &policy_list);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.cpp TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.cpp	2013-04-12 22:47:02.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -871,7 +871,8 @@
+ 
+ int
+ TAO_SFP_Object::send_frame (ACE_Message_Block *frame,
+-                            TAO_AV_frame_info *frame_info)
++                            TAO_AV_frame_info *frame_info,
++			    ACE_Time_Value *tv)
+ {
+   TAO_OutputCDR out_stream;
+   CORBA::Boolean result = 0;
+@@ -1036,7 +1037,8 @@
+ 
+ int
+ TAO_SFP_Object::send_frame (const char* /*buf*/,
+-                               size_t /*len*/)
++			    size_t /*len*/,
++			    ACE_Time_Value *tv)
+ {
+   return 0;
+ }
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/sfp.h	2014-12-11 10:09:31.000000000 +0000
+@@ -227,14 +227,16 @@
+ 
+   virtual int handle_input (void) = 0;
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *tv=0);
+ 
+   virtual int send_frame (const iovec *iov,
+                           int iovcnt,
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *tv=0);
+ 
+   virtual int destroy (void);
+   virtual int set_policies (const TAO_AV_PolicyList &policies);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.cpp TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.cpp	2013-04-12 22:47:02.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -53,7 +53,7 @@
+ }
+ 
+ ssize_t
+-TAO_AV_TCP_Transport::send (const ACE_Message_Block *mblk, ACE_Time_Value *)
++TAO_AV_TCP_Transport::send (const ACE_Message_Block *mblk, ACE_Time_Value *timeout)
+ {
+   // For the most part this was copied from GIOP::send_request and
+   // friends.
+@@ -83,7 +83,7 @@
+           if (iovcnt == ACE_IOV_MAX)
+             {
+               n = this->handler_->peer ().sendv_n ((const iovec *) iov,
+-                                                   iovcnt);
++                                                   iovcnt, timeout);
+               if (n < 1)
+                 return n;
+ 
+@@ -97,7 +97,7 @@
+   if (iovcnt != 0)
+     {
+       n = this->handler_->peer ().sendv_n ((const iovec *) iov,
+-                                           iovcnt);
++                                           iovcnt, timeout);
+       if (n < 1)
+         return n;
+ 
+@@ -110,9 +110,9 @@
+ ssize_t
+ TAO_AV_TCP_Transport::send (const char *buf,
+                             size_t len,
+-                            ACE_Time_Value *)
++                            ACE_Time_Value *timeout)
+ {
+-  return this->handler_->peer ().send_n (buf, len);
++    return this->handler_->peer ().send_n (buf, len, timeout);
+ }
+ 
+ ssize_t
+@@ -220,9 +220,10 @@
+ 
+ int
+ TAO_AV_TCP_Object::send_frame (ACE_Message_Block *frame,
+-                               TAO_AV_frame_info * /*frame_info*/)
++                               TAO_AV_frame_info * /*frame_info*/,
++			       ACE_Time_Value *timeout) //ACS added timeout
+ {
+-  int result = this->transport_->send (frame);
++    int result = this->transport_->send (frame, timeout);
+   return result;
+ }
+ 
+@@ -236,9 +237,10 @@
+ 
+ int
+ TAO_AV_TCP_Object::send_frame (const char*buf,
+-                               size_t len)
++                               size_t len,
++			       ACE_Time_Value *timeout) //ACS added timeout
+ {
+-  int result = this->transport_->send (buf, len, 0);
++  int result = this->transport_->send (buf, len, timeout);
+   return result;
+ }
+ 
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.h	2010-05-28 17:27:24.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/TCP.h	2014-12-11 10:09:31.000000000 +0000
+@@ -236,14 +236,16 @@
+ 
+   /// send a data frame.
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *timeout = 0); //ACS added timeout
+ 
+   virtual int send_frame (const iovec *iov,
+                           int iovcnt,
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *timeout = 0); //ACS added timeout
+ 
+   /// end the stream.
+   virtual int destroy (void);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.cpp TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.cpp	2013-04-12 22:47:02.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -976,11 +976,12 @@
+ 
+ int
+ TAO_AV_UDP_Object::send_frame (ACE_Message_Block *frame,
+-                               TAO_AV_frame_info * /*frame_info*/)
++                               TAO_AV_frame_info * /*frame_info*/,
++			       ACE_Time_Value *tv)
+ {
+   if (TAO_debug_level > 0)
+     ORBSVCS_DEBUG ((LM_DEBUG,"TAO_AV_UDP_Object::send_frame\n"));
+-  int const result = this->transport_->send (frame);
++  int const result = this->transport_->send (frame, tv);
+   if (result < 0)
+     return result;
+   return 0;
+@@ -999,9 +1000,10 @@
+ 
+ int
+ TAO_AV_UDP_Object::send_frame (const char*buf,
+-                               size_t len)
++                               size_t len,
++			       ACE_Time_Value *tv)
+ {
+-  int const result = this->transport_->send (buf, len, 0);
++  int const result = this->transport_->send (buf, len, tv);
+   if (result < 0)
+     return result;
+   return 0;
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.h TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/AV/UDP.h	2014-12-11 10:09:31.000000000 +0000
+@@ -243,14 +243,16 @@
+ 
+   /// send a data frame.
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *tv =0 );
+ 
+   virtual int send_frame (const iovec *iov,
+                           int iovcnt,
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *tv =0 );
+ 
+   /// end the stream.
+   virtual int destroy (void);
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.cpp TAO/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.cpp
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.cpp	2010-09-14 09:27:43.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.cpp	2014-12-11 10:09:31.000000000 +0000
+@@ -120,7 +120,8 @@
+ /// send a data frame.
+ int
+ TimeStamp_Protocol_Object::send_frame (ACE_Message_Block *frame,
+-                                       TAO_AV_frame_info *)
++                                       TAO_AV_frame_info *,
++				       ACE_Time_Value *tv)
+ {
+   ACE_DEBUG ((LM_DEBUG,
+               "TimeStamp_Protocol_Object::send_frame\n"));
+@@ -143,7 +144,7 @@
+ 
+   frame->cont (timestamp);
+ 
+-  ssize_t result = this->transport_->send (frame);
++  ssize_t result = this->transport_->send (frame, tv);
+   if (result < 0)
+     return result;
+   return 0;
+@@ -159,9 +160,10 @@
+ 
+ int
+ TimeStamp_Protocol_Object::send_frame (const char* buf,
+-                                       size_t len)
++                                       size_t len,
++				       ACE_Time_Value *tv)
+ {
+-  int result = this->transport_->send (buf, len, 0);
++  int result = this->transport_->send (buf, len, tv);
+   if (result < 0)
+     return result;
+   return 0;
+diff -Naur TAO.org/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.h TAO/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.h
+--- TAO.org/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.h	2008-09-29 08:02:27.000000000 +0000
++++ TAO/ACE_wrappers/TAO/orbsvcs/tests/AVStreams/Pluggable_Flow_Protocol/TimeStamp.h	2014-12-11 10:09:31.000000000 +0000
+@@ -22,14 +22,16 @@
+ 
+   /// send a data frame.
+   virtual int send_frame (ACE_Message_Block *frame,
+-                          TAO_AV_frame_info *frame_info = 0);
++                          TAO_AV_frame_info *frame_info = 0,
++			  ACE_Time_Value *tv=0);
+ 
+   virtual int send_frame (iovec const* iov,
+                           int iovcnt,
+                           TAO_AV_frame_info *frame_info = 0);
+ 
+   virtual int send_frame (const char*buf,
+-                          size_t len);
++                          size_t len,
++			  ACE_Time_Value *tv=0);
+ 
+   /// end the stream.
+   virtual int destroy (void);
