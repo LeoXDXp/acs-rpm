@@ -11,9 +11,9 @@ Source0:	%{name}-%{version}.tar.gz
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch
+BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch, ace-tao == 6.3.0
 # Packages checked
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB gcc-c++, apache-maven == 3.2.5
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB, apache-maven == 3.2.5
 # PyModules With lower or equal version as acs.req
 BuildRequires: pytz python-pbr python-linecache2 python-jinja2 python-babel python-markupsafe python-pygments python-sphinx python2-sphinx-theme-alabaster python-astroid python-coverage python-docutils python-logilab-common python2-mock python-nose numpy pylint python-six python2-traceback2 
 # PyModules with higher versions than those in acs.req
@@ -49,7 +49,6 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse
-./buildTAO # Needs c++
 ./buildJacORB # Depends on TAO and Maven
 ./buildPython # Python and PyModules source PYTHON_ROOT/bin/activate file
 ./buildPyModules # PyModules could be installed directly as requires. Depends on buildPython
