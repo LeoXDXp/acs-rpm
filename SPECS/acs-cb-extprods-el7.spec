@@ -6,14 +6,14 @@ License:	LGPL
 URL:		http://acs-community.github.io/
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
-# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.1.4. Epel provides 4.2.0, but omniORBpy compilation must be changed: Using ACS's for now
+# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch, ace-tao == 6.3.0, python-pip
+BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch, ace-tao == 6.3.0, python-pip centos-release-scl 
 # Packages checked
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148 omniORB-devel omniORB-doc omniORB-servers omniORB-utils omniORB, apache-maven == 3.2.5
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148, apache-maven == 3.2.5, 
 # PyModules With lower or equal version as acs.req. Jinja2 Req: 2.7.3 vs 2.7.2. Pytz . Coverage Req: 3.7.1 vs 3.6. DocUtils Req: 0.12 vs 0.11. Linecache2 1.0.0 exact match- Traceback2 1.4.0 exact match. Scipy 0.12.1 exact match. python-six 1.9.0 exact match. 
 # Diference between python-sphinx_rtd_theme 0.1.7 and 0.1.8: 4 features: https://github.com/snide/sphinx_rtd_theme#v0-1-8
 # Suds Requires 0.4 vs 0.4.1. unittest2 1.1.0 includes 3 bugfixes 1.0.1 does not.
@@ -43,8 +43,8 @@ export ACE_ROOT="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux"
 export ACE_ROOT_DIR="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build"
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
-export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
+#export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
+#export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -65,9 +65,10 @@ find -name "*.o" | xargs rm -rf
 # Install epel-maven repo
 curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
 yum -y install epel-release
+# acs.req.0 file
 # Numpy 1.9.2
 yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/n/numpy-1.9.2-2.fc23.x86_64.rpm
-# PyModules
+## PyModules in acs.req file
 # Babel 1.3
 yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/p/python-babel-1.3-8.fc23.noarch.rpm
 # MarkUpSafe 0.23
@@ -121,7 +122,6 @@ pip install Twisted==10.1.0
 pip install gcovr --no-dependencies
 # Numeric 24.2
 yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python-numeric-24.2-25.fc24.x86_64.rpm
-
 
 # ACE-TAO RPM from OpenSUSE
 echo "
