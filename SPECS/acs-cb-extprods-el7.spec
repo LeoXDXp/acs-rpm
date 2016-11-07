@@ -54,7 +54,6 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse
 ./buildJacORB # Depends on TAO and Maven, which are rpms
-./buildOmniORBpy 
 ./buildTcltk # TestPending
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
