@@ -6,14 +6,17 @@ License:	LGPL
 URL:		http://acs-community.github.io/
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
-# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3  # Boost for ACS is 1.41. Epel provides 1.48 # ACS uses omniORB 4.2.1, in F24
-# ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1
+# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3. Provided in F21  
+# Boost for ACS is 1.41. Epel provides 1.48. Changes should not affect ACS: http://www.boost.org/doc/libs/1_53_0/doc/html/hash/changes.html
+# ACS uses omniORB 4.2.1, in F24
+# ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
+# ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully. ACS patches must be included in rpm
 
 BuildArch: x86_64
 # Base tools
 BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch, ace-tao == 6.3.0, python-pip centos-release-scl 
 # Packages checked
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo ant boost148, apache-maven == 3.2.5, 
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo boost148, apache-maven == 3.2.5, omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # PyModules With lower or equal version as acs.req. Jinja2 Req: 2.7.3 vs 2.7.2. Pytz . Coverage Req: 3.7.1 vs 3.6. DocUtils Req: 0.12 vs 0.11. Linecache2 1.0.0 exact match- Traceback2 1.4.0 exact match. Scipy 0.12.1 exact match. python-six 1.9.0 exact match. 
 # Diference between python-sphinx_rtd_theme 0.1.7 and 0.1.8: 4 features: https://github.com/snide/sphinx_rtd_theme#v0-1-8
 # Suds Requires 0.4 vs 0.4.1. unittest2 1.1.0 includes 3 bugfixes 1.0.1 does not.
@@ -55,6 +58,7 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 ./buildEclipse
 ./buildJacORB # Depends on TAO and Maven, which are rpms
 ./buildTcltk # TestPending
+./buildMico # TestPending
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
@@ -65,6 +69,8 @@ find -name "*.o" | xargs rm -rf
 # Install epel-maven repo
 curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
 yum -y install epel-release
+# Apache Ant 1.9.3
+yum install -y http://arm.koji.fedoraproject.org/kojifiles/packages/ant/1.9.3/2.fc21/noarch/ant-1.9.3-2.fc21.noarch.rpm
 # acs.req.0 file
 # Numpy 1.9.2
 yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/n/numpy-1.9.2-2.fc23.x86_64.rpm
