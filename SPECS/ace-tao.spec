@@ -2,6 +2,7 @@
 %define ACEVER  6.3.0
 %define TAOVER  2.3.0
 %define CIAOVER 1.3.0
+%define ACSVER  2016.6
 
 # Conditional build
 # Default values are
@@ -56,14 +57,14 @@
 %define OPTTAG .O0
 %endif
 
-Name:         ace-tao-ACS2016.6
+Name:         ace-tao
 %if 0%{?_with_tao:1}%{?_without_tao:0}
 Summary:      The ADAPTIVE Communication Environment (ACE) and The ACE ORB (TAO)
 %else
 Summary:      The ADAPTIVE Communication Environment (ACE)
 %endif
 
-Version:      %{ACEVER}
+Version:      %{ACSVER}-%{ACEVER}
 
 %if 0%{?opensuse_bs}
 Release:      <CI_CNT>%{?OPTTAG}%{?dist}
