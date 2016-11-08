@@ -49,4 +49,4 @@ diff -Naur TAO.orig/ACE_wrappers/ace/Hash_Map_Manager_T.h TAO/ACE_wrappers/ace/H
 +      return 0;
    else
      {
-       // Initially assume that the iterator has the requested number of
+       ACE_READ_GUARD_THROW_EX (TAO_SYNCH_RW_MUTEX,
