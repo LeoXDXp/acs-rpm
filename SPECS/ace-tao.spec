@@ -56,7 +56,7 @@
 %define OPTTAG .O0
 %endif
 
-Name:         ace-tao
+Name:         ace-tao-ACS2016.6
 %if 0%{?_with_tao:1}%{?_without_tao:0}
 Summary:      The ADAPTIVE Communication Environment (ACE) and The ACE ORB (TAO)
 %else
@@ -80,6 +80,11 @@ Source0:      http://download.dre.vanderbilt.edu/previous_versions/ACE+TAO+CIAO-
 Source0:      http://download.dre.vanderbilt.edu/previous_versions/ACE-src-%{ACEVER}.tar.gz
 %endif
 Source1:      ace-tao-rpmlintrc
+patch0:	      TAOLog.patch
+patch1:	      AVtimeout.patch
+patch2:	      TAO_IFR_Inheritance_problems_workaround.patch
+patch3:	      Notify_Service_stacksize.patch
+patch4:	      ict94.patch
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %define _extension .gz
@@ -811,7 +816,11 @@ using the XtResource_Factory.
 
 %prep
 %setup -q -n ACE_wrappers
-
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 # ================================================================
 # build
 # ================================================================
