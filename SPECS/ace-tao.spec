@@ -64,7 +64,7 @@ Summary:      The ADAPTIVE Communication Environment (ACE) and The ACE ORB (TAO)
 Summary:      The ADAPTIVE Communication Environment (ACE)
 %endif
 
-Version:      %{ACSVER}-%{ACEVER}
+Version:      %{ACEVER}.%{ACSVER}
 
 %if 0%{?opensuse_bs}
 Release:      <CI_CNT>%{?OPTTAG}%{?dist}
@@ -81,11 +81,11 @@ Source0:      http://download.dre.vanderbilt.edu/previous_versions/ACE+TAO+CIAO-
 Source0:      http://download.dre.vanderbilt.edu/previous_versions/ACE-src-%{ACEVER}.tar.gz
 %endif
 Source1:      ace-tao-rpmlintrc
-patch0:	      TAOLog.patch
-patch1:	      AVtimeout.patch
-patch2:	      TAO_IFR_Inheritance_problems_workaround.patch
-patch3:	      Notify_Service_stacksize.patch
-patch4:	      ict94.patch
+Patch0:	      TAOLog.patch
+Patch1:	      AVtimeout.patch
+Patch2:	      TAO_IFR_Inheritance_problems_workaround.patch
+Patch3:	      Notify_Service_stacksize.patch
+Patch4:	      ict94.patch
 BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 %define _extension .gz
@@ -817,11 +817,11 @@ using the XtResource_Factory.
 
 %prep
 %setup -q -n ACE_wrappers
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%patch0 -p1 < 
+%patch1 -p1 <
+%patch2 -p1 <
+%patch3 -p1 <
+%patch4 -p1 <
 # ================================================================
 # build
 # ================================================================
