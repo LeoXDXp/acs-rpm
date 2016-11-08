@@ -817,11 +817,11 @@ using the XtResource_Factory.
 
 %prep
 %setup -q -n ACE_wrappers
-%patch0 -p1 
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+%patch -p1 < %{PATCH0}
+%patch -p1 < %{PATCH1}
+%patch -p1 < %{PATCH2}
+%patch -p1 < %{PATCH3}
+%patch -p1 < %{PATCH4}
 # ================================================================
 # build
 # ================================================================
