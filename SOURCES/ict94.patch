@@ -41,7 +41,7 @@ diff -Naur TAO.orig/ACE_wrappers/ace/Hash_Map_Manager_T.h TAO/ACE_wrappers/ace/H
  
 --- TAO.orig/ACE_wrappers/TAO/orbsvcs/orbsvcs/Naming/Bindings_Iterator_T.cpp	2014-08-27 15:21:15.000000000 -0400
 +++ TAO/ACE_wrappers/TAO/orbsvcs/orbsvcs/Naming/Bindings_Iterator_T.cpp	2014-08-27 15:21:05.000000000 -0400
-@@ -132,6 +132,8 @@
+@@ -125,6 +125,8 @@
    // If there are no more bindings...
    if (hash_iter_->done ())
        return 0;
