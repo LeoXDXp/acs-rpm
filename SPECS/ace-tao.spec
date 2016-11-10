@@ -207,7 +207,7 @@ conventional ORBs for high-performance and real-time applications.
 
 %package -n     ace
 Summary:        The ADAPTIVE Communication Environment (ACE)
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
 Requires:       openssl
 
@@ -228,9 +228,9 @@ services, concurrent execution and synchronization.
 
 %package -n     ace-devel
 Summary:        Header files and development components for ACE
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace = %{ACEVER}
+Requires:       ace = %{ACEVER}.%{ACSVER}
 Requires:       openssl-devel
 %if !0%{?suse_version}
 Provides:       perl(PerlACE::Run_Test) perl(Process) perl(VmsProcess) perl(Win32::Process)
@@ -245,9 +245,9 @@ using ACE.
 
 %package -n     ace-xml
 Summary:        ACE XML Runtime Support
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace = %{ACEVER}
+Requires:       ace = %{ACEVER}.%{ACSVER}
 
 %description -n ace-xml
 
@@ -262,9 +262,9 @@ don't support C++ exceptions.  SAX is defined by David Megginson
 
 %package -n     ace-gperf
 Summary:        ACE gperf
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace = %{ACEVER}
+Requires:       ace = %{ACEVER}.%{ACSVER}
 
 %description -n ace-gperf
 
@@ -274,10 +274,10 @@ ACE gperf utility
 
 %package -n     ace-xml-devel
 Summary:        Header files and development components for ACE XML
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace-devel = %{ACEVER}
-Requires:       ace-xml = %{ACEVER}
+Requires:       ace-devel = %{ACEVER}.%{ACSVER}
+Requires:       ace-xml = %{ACEVER}.%{ACSVER}
 
 %description -n ace-xml-devel
 
@@ -288,9 +288,9 @@ using ACEXML.
 
 %package -n     ace-kokyu
 Summary:        Kokyu scheduling framework for ACE
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace = %{ACEVER}
+Requires:       ace = %{ACEVER}.%{ACSVER}
 
 %description -n ace-kokyu
 
@@ -307,10 +307,10 @@ implementations.
 
 %package -n     ace-kokyu-devel
 Summary:        Header files and development components for the ACE Kokyu scheduler
-Version:        %{ACEVER}
+Version:        %{ACEVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace-devel = %{ACEVER}
-Requires:       ace-kokyu = %{ACEVER}
+Requires:       ace-devel = %{ACEVER}.%{ACSVER}
+Requires:       ace-kokyu = %{ACEVER}.%{ACSVER}
 
 %description -n ace-kokyu-devel
 
@@ -501,7 +501,7 @@ using the ACE_XtReactor.
 
 %package -n   mpc
 Summary:      Make Project Creator
-Version:      %{ACEVER}
+Version:      %{ACEVER}.%{ACSVER}
 Group:        Development/Tools/Building
 %if !0%{?suse_version}
 Provides:     perl(Driver) perl(MakeProjectBase) perl(ObjectGenerator) perl(ProjectCreator) perl(WorkspaceCreator) perl(WorkspaceHelper) perl(DependencyWriter) perl(WIXProjectCreator)
@@ -524,9 +524,9 @@ include Make, NMake, Visual C++ 6, Visual C++ 7, etc.
 
 %package -n     tao
 Summary:        The ACE ORB (TAO)
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       ace = %{ACEVER}
+Requires:       ace = %{ACEVER}.%{ACSVER}
 
 %description -n tao
 
@@ -541,11 +541,11 @@ conventional ORBs for high-performance and real-time applications.
 
 %package -n     tao-devel
 Summary:        Header files and development components for TAO
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
 Requires:       tao = %{TAOVER}
-Requires:       ace-devel = %{ACEVER}
-Requires:       ace-gperf = %{ACEVER}
+Requires:       ace-devel = %{ACEVER}.%{ACSVER}
+Requires:       ace-gperf = %{ACEVER}.%{ACSVER}
 
 %description -n tao-devel
 
@@ -556,9 +556,9 @@ using TAO.
 
 %package -n     tao-utils
 Summary:        TAO naming service and IOR utilities
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 
 %description -n tao-utils
 
@@ -575,9 +575,9 @@ The following programs are included:
 
 %package -n     tao-cosnaming
 Summary:        The TAO CORBA Naming Service (CosNaming) and Interoperable Naming Service (INS)
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-cosnaming
@@ -603,9 +603,9 @@ install time.
 
 %package -n     tao-cosevent
 Summary:        The TAO CORBA CosEvent Service
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-cosevent
@@ -620,9 +620,9 @@ used by suppliers and consumers to send and receive events.
 
 %package -n     tao-cosnotification
 Summary:        The TAO CORBA Notification Service
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-cosnotification
@@ -637,9 +637,9 @@ and registers it with the Naming Service under the name
 
 %package -n     tao-costrading
 Summary:        The TAO CORBA Trading Service
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-costrading
@@ -650,9 +650,9 @@ The Trading_Service is a COS compliant Trading Service.
 
 %package -n     tao-rtevent
 Summary:        The TAO Real-time Event Service
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-rtevent
@@ -664,9 +664,9 @@ implementation
 
 %package -n     tao-cosconcurrency
 Summary:        The TAO CORBA Concurrency Service
-Version:        %{TAOVER}
+Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       logrotate
 
 %description -n tao-cosconcurrency
