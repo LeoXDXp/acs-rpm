@@ -543,7 +543,7 @@ conventional ORBs for high-performance and real-time applications.
 Summary:        Header files and development components for TAO
 Version:        %{TAOVER}.%{ACSVER}
 Group:          Development/Libraries/C and C++
-Requires:       tao = %{TAOVER}
+Requires:       tao = %{TAOVER}.%{ACSVER}
 Requires:       ace-devel = %{ACEVER}.%{ACSVER}
 Requires:       ace-gperf = %{ACEVER}.%{ACSVER}
 
