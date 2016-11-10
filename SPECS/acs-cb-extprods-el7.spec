@@ -10,31 +10,54 @@ Source0:	%{name}-%{version}.tar.gz
 # Boost for ACS is 1.41. Epel provides 1.48. Changes should not affect ACS: http://www.boost.org/doc/libs/1_53_0/doc/html/hash/changes.html
 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
-# ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully. ACS patches must be included in rpm
+# ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 
 BuildArch: x86_64
 # Base tools
-BuildRequires: python-virtualenv epel-release git wget unzip tar bzip2 patch, ace-tao == 6.3.0, python-pip centos-release-scl 
-# Packages checked
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo boost148, apache-maven == 3.2.5, omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
-# PyModules With lower or equal version as acs.req. Jinja2 Req: 2.7.3 vs 2.7.2. Pytz . Coverage Req: 3.7.1 vs 3.6. DocUtils Req: 0.12 vs 0.11. Linecache2 1.0.0 exact match- Traceback2 1.4.0 exact match. Scipy 0.12.1 exact match. python-six 1.9.0 exact match. 
-# Diference between python-sphinx_rtd_theme 0.1.7 and 0.1.8: 4 features: https://github.com/snide/sphinx_rtd_theme#v0-1-8
-# Suds Requires 0.4 vs 0.4.1. unittest2 1.1.0 includes 3 bugfixes 1.0.1 does not.
-BuildRequires: python-jinja2 pytz python-coverage python-docutils python-linecache2 python2-traceback2 scipy python-six python-sphinx_rtd_theme python-suds python-unittest2 pexpect
-# PyModules with higher versions than those in acs.req
-#BuildRequires: python-ipython python-sphinx_rtd_theme python-unittest2
-# 2016.6 New requirements. Matplotlib requires 1.2, exact match. Pychecker required 0.8.17, Epel provides 0.8.19. Gnuplot 1.8 required by ACS not found. Base provides 4.6.2
-BuildRequires: python-matplotlib pychecker gnuplot
+BuildRequires: epel-release git wget unzip tar bzip2 patch
+# ACE + TAO + ACS  Patches
+BuildRequires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.%{version}, tao-devel == 2.3.%{version}, tao-utils == 2.3.%{version}, tao-cosnaming == 2.3.%{version}, tao-cosevent == 2.3.%{version}, tao-cosnotification == 2.3.%{version}, tao-costrading == 2.3.%{version}, tao-rtevent == 2.3.%{version}, tao-cosconcurrency == 2.3.%{version}, ace-tao-debuginfo == 6.3.0.%{version} 
+# Java and Others
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148, ant == 1.9.31
+
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-#Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
+#BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
+
+# ACE + TAO + ACS  Patches
+Requires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.%{version}, tao-devel == 2.3.%{version}, tao-utils == 2.3.%{version}, tao-cosnaming == 2.3.%{version}, tao-cosevent == 2.3.%{version}, tao-cosnotification == 2.3.%{version}, tao-costrading == 2.3.%{version}, tao-rtevent == 2.3.%{version}, tao-cosconcurrency == 2.3.%{version}, ace-tao-debuginfo == 6.3.0.%{version}
+
+# OmniORB
+Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
+# Java and Others
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148, ant == 1.9.3, python-virtualenv epel-release python-pip centos-release-scl
+
+# PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
+Requires: python-coverage == 3.7.1, python-linecache2 == 1.0.0, python2-traceback2 == 1.4.0, scipy == 0.12.1, python-six == 1.9.0, pexpect, python-matplotlib == 1.2.0
+
+# PyModules lower in repo than acs.req: Jinja2 Req: 2.7.3 vs 2.7.2. Pytz 2012d vs 2015.2, Coverage Req: 3.7.1 vs 3.6. DocUtils Req: 0.12 vs 0.11.
+Requires: pytz python-jinja2 python-docutils
+
+# PyModules with higher versions in repos than in acs.req. Suds Requires 0.4 vs 0.4.1. unittest2 1.1.0 includes 3 bugfixes 1.0.1 does not.
+# Pychecker required 0.8.17, Epel provides 0.8.19. Gnuplot 1.8 required by ACS not found. Base provides 4.6.2. 
+# Diference between python-sphinx_rtd_theme 0.1.7 and 0.1.8: 4 features: https://github.com/snide/sphinx_rtd_theme#v0-1-8
+# python-ipython could be here: repo 3.2.1 vs acs.req 1.2.1
+Requires: python-sphinx_rtd_theme python-unittest2 python-suds pychecker gnuplot
+
+# PyModules from rpms of F21 to F24 symlinked in acs-cb-extprod repo
+# Exact version
+# Pylint 1.4.3. F24 has 1.5.5
+Requires: numpy == 1.9.2, python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1.3, python-logilab-common == 0.63.2, python-astroid ==1.3.6, pylint == 1.4.3, python2-snowballstemmer == 1.2.0, python-numeric == 24.2
+# Nose. Diference 1.3.6 - 1.3.7 does not apply to linux http://nose.readthedocs.io/en/latest/news.html
+# Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 features. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
+# F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
+Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
 
 %description
-RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and installs them on /home/almamgr/ACS-version (symlink to /alma). 
+RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
 
 %prep
 %setup -q
 # builddir = /home/user/rpmbuild/BUILDDIR # setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
-
 #%build
 
 %install
@@ -42,12 +65,8 @@ RPM Installer of ACS-CB ExtProducts %{version}. It takes the compiled files and 
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
-export ACE_ROOT="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build/linux"
-export ACE_ROOT_DIR="%{buildroot}/alma/ACS-%{version}/TAO/ACE_wrappers/build"
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-#export PYTHON_ROOT="%{buildroot}/alma/ACS-%{version}/Python"
-#export OMNI_ROOT="%{buildroot}/alma/ACS-%{version}/Python/"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -57,8 +76,8 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse
 ./buildJacORB # Depends on TAO and Maven, which are rpms
-./buildTcltk # TestPending
-./buildMico # TestPending
+./buildTcltk # TestPending. Uses gcc, make, tar
+./buildMico # TestPending. Uses gcc, make , tar
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
@@ -69,28 +88,30 @@ find -name "*.o" | xargs rm -rf
 # Install epel-maven repo
 curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
 yum -y install epel-release
-# Apache Ant 1.9.3
-yum install -y http://arm.koji.fedoraproject.org/kojifiles/packages/ant/1.9.3/2.fc21/noarch/ant-1.9.3-2.fc21.noarch.rpm
-# acs.req.0 file
-# Numpy 1.9.2
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/n/numpy-1.9.2-2.fc23.x86_64.rpm
+# Install acs-cb and acs-cb extprod repo #
+echo -n"
+[acs-cb]
+name=Alma Common Software for Enterprise Linux 7 - $basearch
+baseurl=http://repo.csrg.cl/$basearch/acscb/
+enabled=0
+gpgcheck=0
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ACS-CB-EL7
+
+[acs-cb-extprod]
+name=Alma Common Software Compiling/Base Packages for Enterprise Linux 7 - $basearch
+baseurl=http://repo.csrg.cl/$basearch/extprod/
+enabled=1
+gpgcheck=0
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ACS-CB-EL7
+" > /etc/yum.repos.d/acs-cb.repo
+
 ## PyModules in acs.req file
-# Babel 1.3
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/p/python-babel-1.3-8.fc23.noarch.rpm
-# MarkUpSafe 0.23
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python-markupsafe-0.23-9.fc24.x86_64.rpm
-# Pygments 2.1.3 (Requires 2.0.2). Syntax highlihter
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/updates/24/x86_64/p/python-pygments-2.1.3-1.fc24.noarch.rpm
 # Sphinx 1.2.3 (Requires 1.3.1)
 # Necesita: tex(upquote.sty)
 #yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/22/Everything/x86_64/os/Packages/p/python-sphinx-1.2.3-1.fc22.noarch.rpm
 pip install Sphinx==1.3.1 --no-dependencies
 # Argparse
 pip install argparse==1.3.0 --no-dependencies
-# Logilab
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python-logilab-common-0.63.2-5.fc24.noarch.rpm
-# Astroid 1.3.6. F24 has v1.4.5. Depends on Logilab
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/p/python-astroid-1.3.6-5.fc23.noarch.rpm
 # Distribute
 pip install distribute==0.7.3 --no-dependencies
 # iPython OLD 1.2.1
@@ -101,13 +122,6 @@ pip install logilab-astng==0.24.3 --no-dependencies
 pip install lxml==2.2.6 --no-dependencies
 # mock. EL7 has 1.0.1
 pip install mock==0.6.0 --no-dependencies
-# Nose. Diference 1.3.6 - 1.3.7 does not apply to linux http://nose.readthedocs.io/en/latest/news.html
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python-nose-1.3.7-7.fc24.noarch.rpm
-# Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 feauters. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
-# F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/p/pyephem-3.7.5.3-3.fc23.x86_64.rpm
-# Pylint 1.4.3. F24 has 1.5.5
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/23/Everything/x86_64/os/Packages/p/pylint-1.4.3-3.fc23.noarch.rpm
 # PyOpenSSL. EL7 has 0.13
 pip install pyOpenSSL==0.10 --no-dependencies
 # Pysnmp. EL7 has 4.2.5
@@ -120,14 +134,10 @@ pip install python-ldap==2.3.13 --no-dependencies
 pip install pythoscope==0.4.3 --no-dependencies
 # snakefood
 pip install snakefood==1.4 --no-dependencies
-# Snowballstemmer 1.2
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python2-snowballstemmer-1.2.0-3.fc24.noarch.rpm
 # Twisted. Dependencies: zope, setuptools
 pip install Twisted==10.1.0
 # Gcovr
 pip install gcovr --no-dependencies
-# Numeric 24.2
-yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/24/Everything/x86_64/os/Packages/p/python-numeric-24.2-25.fc24.x86_64.rpm
 
 # ACE-TAO RPM from OpenSUSE
 echo "
