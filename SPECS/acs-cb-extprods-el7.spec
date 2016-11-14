@@ -46,7 +46,7 @@ Requires: python-sphinx_rtd_theme python-unittest2 python-suds pychecker gnuplot
 # PyModules from rpms of F21 to F24 symlinked in acs-cb-extprod repo
 # Exact version
 # Pylint 1.4.3. F24 has 1.5.5
-Requires: numpy == 1.9.2, python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1.3, python-logilab-common == 0.63.2, python-astroid ==1.3.6, pylint == 1.4.3, python2-snowballstemmer == 1.2.0, python-numeric == 24.2
+Requires: numpy == 1.9.2, python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1.3, python-logilab-common == 0.63.2, python-astroid == 1.3.6, pylint == 1.4.3, python2-snowballstemmer == 1.2.0, python-numeric == 24.2
 # Nose. Diference 1.3.6 - 1.3.7 does not apply to linux http://nose.readthedocs.io/en/latest/news.html
 # Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 features. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
