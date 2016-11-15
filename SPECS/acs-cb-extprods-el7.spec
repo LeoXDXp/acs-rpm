@@ -14,7 +14,7 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 
-BuildArch: x86_64
+BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch
 # ACE + TAO + ACS  Patches
