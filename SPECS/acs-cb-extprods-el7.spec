@@ -85,6 +85,9 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
+echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
