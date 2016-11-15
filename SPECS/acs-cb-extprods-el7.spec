@@ -1,5 +1,5 @@
 Name:		ACS-ExtProds
-Version:	2016.6
+Version:	OCT2016
 Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
@@ -78,6 +78,11 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 ./buildJacORB # Depends on TAO and Maven, which are rpms
 ./buildTcltk # TestPending. Uses gcc, make, tar
 ./buildMico # TestPending. Uses gcc, make , tar
+
+# Self export var through etc profile
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
+echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
+echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
