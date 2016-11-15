@@ -1,3 +1,5 @@
+%define ALTVER 2016.10
+
 Name:		ACS-ExtProds
 Version:	OCT2016
 Release:	1%{?dist}
@@ -16,7 +18,7 @@ BuildArch: x86_64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch
 # ACE + TAO + ACS  Patches
-BuildRequires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version} 
+BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER} 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148, ant == 1.9.3
 
@@ -24,7 +26,7 @@ BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-de
 #BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
 
 # ACE + TAO + ACS  Patches
-Requires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version}
+Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER}
 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
