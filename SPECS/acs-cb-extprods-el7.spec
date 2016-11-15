@@ -173,6 +173,7 @@ userdel -r almamgr
 %doc
 %attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
+%config %{_sysconfdir}/profile.d/jacorb.sh
 
 %changelog
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
