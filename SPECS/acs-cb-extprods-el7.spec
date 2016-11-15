@@ -99,21 +99,7 @@ find -name "*.o" | xargs rm -rf
 curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
 yum -y install epel-release
 # Install acs-cb and acs-cb extprod repo #
-echo -n"
-[acs-cb]
-name=Alma Common Software for Enterprise Linux 7 - $basearch
-baseurl=http://repo.csrg.cl/$basearch/acscb/
-enabled=0
-gpgcheck=0
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ACS-CB-EL7
-
-[acs-cb-extprod]
-name=Alma Common Software Compiling/Base Packages for Enterprise Linux 7 - $basearch
-baseurl=http://repo.csrg.cl/$basearch/extprod/
-enabled=1
-gpgcheck=0
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ACS-CB-EL7
-" > /etc/yum.repos.d/acs-cb.repo
+curl http://repo.csrg.cl/acs-cb.repo -o %{_sysconfdir}/yum.repos.d/acs-cb.repo
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
