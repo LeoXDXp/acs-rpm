@@ -2,7 +2,7 @@
 %define ACEVER  6.3.0
 %define TAOVER  2.3.0
 %define CIAOVER 1.3.0
-%define ACSVER  2016.6
+%define ACSVER  OCT2016
 
 # Conditional build
 # Default values are
