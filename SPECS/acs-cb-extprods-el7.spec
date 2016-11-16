@@ -71,6 +71,9 @@ export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, 
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export TCLTK_ROOT="%{buildroot}/usr/local"
 
+# Ignore RPATHS Errors/Warning on RPM Build
+export QA_RPATHS=$[ 0x0001|0x0010 ]
+
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
@@ -93,7 +96,8 @@ echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
 %clean
-cd $ALMASW_INSTDIR
+#cd $ALMASW_INSTDIR
+cd %{buildroot}/alma/ACS-%{version}
 find -name "*.o" | xargs rm -rf
 
 %pre
@@ -167,7 +171,7 @@ userdel -r almamgr
 %attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
 %config %{_sysconfdir}/profile.d/jacorb.sh
-%{_usr}/local/
+%{_usr}/local/*
 
 %changelog
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
