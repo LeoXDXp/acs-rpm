@@ -12,11 +12,19 @@ BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 # Packages
 BuildRequires: ACS-ExtProds == %{version}
-BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
+BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor 
+
+# ExtPy Module: PyXB: Required: 1.1.2. Repos: 1.2.4. 
+# Pmw 1.2 vs 1.3.2
+BuildRequires: rh-java-common-PyXB python-pmw pexpect  
+#BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
+
+
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
-# No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21 castor* shunit2
+# No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21
 # Desglose de paquetes de X Window System desde glx-utils hasta xorg-x11-drv-mouse
 Requires: procmail lockfile-progs gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo man xterm ACS-ExtProds == %{version}
+
 
 %description
 RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/ (symlink to /alma). 
@@ -40,11 +48,14 @@ mkdir -p %{buildroot}%{_var}/run/acscb/
 # /etc
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 #mkdir -p %{_usr}/lib64/python2.7/site-packages/
+# Place to create files for variable exporting on boot
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
+
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 #Source0 ACSSW - acsdata
 cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
-cp %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs.old
+#cp %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs.old
 cp -r %{buildroot}/home/almamgr%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 #Binaries ln
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
@@ -70,6 +81,15 @@ mkdir -p  %{buildroot}/home/almaproc/introot
 %pre
 useradd -U almaproc
 echo new2me | echo new2me | passwd --stdin almaproc
+
+echo "
+[opensuse-13.2]
+name=Opensuse 13.2
+baseurl=http://download.opensuse.org/distribution/13.2/repo/oss/suse/
+gpgcheck=0
+gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7//repodata/repomd.xml.key
+enabled=0
+" >> /etc/yum.repos.d/opensuse-13.2.repo
 
 %post
 # Permissions
