@@ -1,3 +1,5 @@
+#%define _sbindir /sbin
+#%define _libdir  /%{_lib}
 %define ALTVER 2016.10
 
 Name:		ACS-ExtProds
@@ -72,7 +74,7 @@ export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export TCLTK_ROOT="%{buildroot}/usr/local"
 
 # Ignore RPATHS Errors/Warning on RPM Build
-export QA_RPATHS=0x0011
+export QA_CHECK_RPATHS=0
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
