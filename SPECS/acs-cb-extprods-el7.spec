@@ -16,7 +16,7 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 
-ExcludeArch: i386
+BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch
 # ACE + TAO + ACS  Patches
@@ -73,9 +73,6 @@ export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, 
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export TCLTK_ROOT="%{buildroot}/usr/local"
 
-# Ignore RPATHS Errors/Warning on RPM Build
-export QA_CHECK_RPATHS=0
-
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
@@ -97,6 +94,9 @@ echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
+%__arch_install_post
+
+
 %clean
 #cd $ALMASW_INSTDIR
 cd %{buildroot}/alma/ACS-%{version}
