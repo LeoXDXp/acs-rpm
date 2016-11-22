@@ -17,14 +17,7 @@ Source3:          http://central.maven.org/maven2/org/jacorb/jacorb-idl-compiler
 Patch0:           JacORB-all-2015-02-26.patch
 
 BuildArch:        noarch
-
-BuildRequires:    javapackages-local
-BuildRequires:    java-devel
-BuildRequires:    ant
-BuildRequires:    antlr-tool
-BuildRequires:    avalon-logkit
-BuildRequires:    bsh
-BuildRequires:    slf4j
+BuildRequires:    javapackages-local java-devel ant antlr-tool avalon-logkit bsh slf4j
 
 %description
 This package contains the Java implementation of the OMG's CORBA standard, and
