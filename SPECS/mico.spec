@@ -1,4 +1,5 @@
-%define version	2.3.11
+%define version	2.3.11 
+# ACS requires 2.3.13
 %define release	0
 %define name	mico
 %define libname_orig	lib%{name}
