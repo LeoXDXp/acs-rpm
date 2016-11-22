@@ -623,7 +623,7 @@ diff -rupN jacorb-3.6.1/core/src/main/java/org/jacorb/poa/RPPoolManager.java Jac
 diff -rupN jacorb-3.6.1/core/src/main/java/org/jacorb/util/threadpool/ConsumerFactory.java JacORB/core/src/main/java/org/jacorb/util/threadpool/ConsumerFactory.java
 --- jacorb-3.6.1/core/src/main/java/org/jacorb/util/threadpool/ConsumerFactory.java	2015-02-26 09:27:34.000000000 +0000
 +++ JacORB/core/src/main/java/org/jacorb/util/threadpool/ConsumerFactory.java	2015-02-26 08:30:42.000000000 +0000
-@@ -31,4 +31,9 @@ package org.jacorb.util.threadpool;
+@@ -31,6 +31,11 @@ package org.jacorb.util.threadpool;
  public interface ConsumerFactory  
  {
      public Consumer create();
