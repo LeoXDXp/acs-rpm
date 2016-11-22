@@ -1,7 +1,7 @@
 %define ALTVER 2016.10
 
-Name:             jacorb
-Version:          3.6.1.%{ALTVER}
+Name:             jacorb-ACS-%{ALTVER}
+Version:          3.6.1
 Release:          1%{?dist}
 Summary:          The Java implementation of the OMG's CORBA standard
 Group:            Development/Libraries
