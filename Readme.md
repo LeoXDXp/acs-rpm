@@ -1,6 +1,6 @@
 ACS and ACS ExtProd RPM in branch master
-ACE+TAO 6.3.0-<ACSVERSION> RPM in ace-tao branch. It has ACS patches applied to the source
-All has been done for CentOS 7 and above.
+ACE+TAO 6.3.0-ACS_VERSION RPM in ace-tao branch. It has ACS patches applied to the source.
+All has been thought for CentOS 7 and above.
 
 # Repository
 A repo (and the .repo file for /etc/yum.repos.d/) can be found in http://repo.csrg.cl.
