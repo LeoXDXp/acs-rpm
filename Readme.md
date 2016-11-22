@@ -1,5 +1,6 @@
 ACS and ACS ExtProd RPM in branch master
 ACE+TAO 6.3.0-<ACSVERSION> RPM in ace-tao branch. It has ACS patches applied to the source
+All has been done for CentOS 7 and above.
 
 # Repository
 A repo (and the .repo file for /etc/yum.repos.d/) can be found in http://repo.csrg.cl.
@@ -14,4 +15,5 @@ A temp fix done for the moment was to comment out the section %__arch_install_po
 in the .rpmmacro file in /home/<user used to build-rebuild rpm>
 
 #Pending:
-Sign the RPMs: http://giovannitorres.me/how-to-setup-an-rpm-signing-key.html
+- Sign the RPMs: http://giovannitorres.me/how-to-setup-an-rpm-signing-key.html
+- Complete the SysV daemons of acs commands (used in a Pacemaker PoC) and migrate them to SystemD
