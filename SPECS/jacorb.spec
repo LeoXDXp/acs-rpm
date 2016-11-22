@@ -17,7 +17,8 @@ Source3:          http://central.maven.org/maven2/org/jacorb/jacorb-idl-compiler
 Patch0:           JacORB-all-2015-02-26.patch
 
 BuildArch:        noarch
-BuildRequires:    javapackages-local java-devel ant antlr-tool avalon-logkit bsh slf4j
+# javapackages-local in Centos7 comes thru SCL repo as rh-java-common-javapackages-local
+BuildRequires:    rh-java-common-javapackages-local java-devel ant antlr-tool avalon-logkit bsh slf4j
 
 %description
 This package contains the Java implementation of the OMG's CORBA standard, and
@@ -25,7 +26,8 @@ This package contains the Java implementation of the OMG's CORBA standard, and
 %package javadoc
 Summary:          Javadocs for %{name}
 Group:            Documentation
-Requires:         jpackage-utils
+# jpackage-utils is provided by javapackages-tools
+Requires:         rh-java-common-javapackages-local
 
 %description javadoc
 This package contains the API documentation for %{name}.
@@ -79,4 +81,4 @@ ant all doc
 
 %changelog
 * Tue Nov 22 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl>-3.6.1-1
-Initial packaging based on 2.3.1 srpm
+Initial packaging based on 2.3.1 srpm. Building for CentOS 7 mainly
