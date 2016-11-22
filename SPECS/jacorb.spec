@@ -8,7 +8,7 @@ Group:            Development/Libraries
 License:          LGPLv2
 URL:              http://www.jacorb.org/index.html
 
-Source0:          http://www.jacorb.org/releases/%{version}/jacorb-%{version}-src.zip
+Source0:          http://www.jacorb.org/releases/%{version}/jacorb-%{version}-source.zip
 Source1:          http://central.maven.org/maven2/org/jacorb/jacorb-parent/%{version}/jacorb-parent-%{version}.pom
 Source2:          http://central.maven.org/maven2/org/jacorb/jacorb/%{version}/jacorb-%{version}.pom
 Source3:          http://central.maven.org/maven2/org/jacorb/jacorb-idl-compiler/%{version}/jacorb-idl-compiler-%{version}.pom
