@@ -70,7 +70,7 @@ export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
-export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+#export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
@@ -82,12 +82,12 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 ./buildEclipse # Libs should be left in system lib folders
 ./buildTcltk # Uses gcc, make, tar
 ./buildMico # Uses gcc, make , tar
-./buildJacORB # Depends on TAO and Maven, which are rpms
+#./buildJacORB # Depends on TAO and Maven, which are rpms
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
-echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
+#echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
+#echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 
