@@ -1,5 +1,6 @@
 ACS and ACS ExtProd RPM in branch master
 ACE+TAO 6.3.0-ACS_VERSION RPM in ace-tao branch. It has ACS patches applied to the source.
+JacORB branch not built yet. Mico Spec available for testing
 All has been thought for CentOS 7 and above.
 
 # Repository
