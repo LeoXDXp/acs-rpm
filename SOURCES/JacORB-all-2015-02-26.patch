@@ -633,6 +633,8 @@ diff -rupN jacorb-3.6.1/core/src/main/java/org/jacorb/util/threadpool/ConsumerFa
 +    // acs hack END
 +
  } // ConsumerFactory
+ 
+ 
 diff -rupN jacorb-3.6.1/idl-compiler/src/main/java/org/jacorb/idl/NameTable.java JacORB/idl-compiler/src/main/java/org/jacorb/idl/NameTable.java
 --- jacorb-3.6.1/idl-compiler/src/main/java/org/jacorb/idl/NameTable.java	2015-02-26 09:27:24.000000000 +0000
 +++ JacORB/idl-compiler/src/main/java/org/jacorb/idl/NameTable.java	2015-02-26 09:24:27.000000000 +0000
