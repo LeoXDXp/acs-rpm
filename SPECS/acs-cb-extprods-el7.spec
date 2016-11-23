@@ -100,9 +100,9 @@ echo "ALMASW_RELEASE=ACS-OCT2016" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 #echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
 
-install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/
-install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr%{name}-%{version}/
-install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr%{name}-%{version}/
+install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
+install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
+install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
 
 %clean
 #cd $ALMASW_INSTDIR
