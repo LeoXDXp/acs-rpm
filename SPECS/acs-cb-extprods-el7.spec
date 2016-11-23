@@ -15,6 +15,9 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
+Source1:	mico-2.3.13.%{ALTVER}.tar.gz
+Source2:	JacORB-3.6.1.%{ALTVER}.tar.gz
+Source3:	tctlk-8.5.15.%{ALTVER}.tar.gz
 
 BuildArch: x86_64 aarch64
 # Base tools
@@ -69,10 +72,10 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
-export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
-export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
-export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
+#export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
+#export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+#export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
+#export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -81,9 +84,9 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
-./buildTcltk # Uses gcc, make, tar
-./buildMico # Uses gcc, make , tar
-./buildJacORB # Depends on TAO and Maven, which are rpms
+#./buildTcltk # Uses gcc, make, tar
+#./buildMico # Uses gcc, make , tar
+#./buildJacORB # Depends on TAO and Maven, which are rpms
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -91,8 +94,16 @@ echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconf
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ALMASW_RELEASE=ACS-OCT2016" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+#echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
 
-#install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}
+install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/
+install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr%{name}-%{version}/
+install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr%{name}-%{version}/
+
 %clean
 #cd $ALMASW_INSTDIR
 cd %{buildroot}/alma/ACS-%{version}
