@@ -33,8 +33,7 @@ RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it 
 %setup -q
 
 %build
-export ALMASW_ROOTDIR="%{buildroot}/alma"
-export ALMASW_RELEASE="ACS-%{version}"
+# ALMASW_ROOTDIR, ALMASW_RELEASE and exported by ACS-ExtProd
 
 %install
 mkdir -p  %{buildroot}/home/almamgr
