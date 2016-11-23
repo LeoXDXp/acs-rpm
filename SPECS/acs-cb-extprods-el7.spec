@@ -179,6 +179,7 @@ userdel -r almamgr
 %doc
 %attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
+/alma/
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
