@@ -7,18 +7,21 @@ Summary:	ACS CB for CentOS 7
 License:	LGPL
 URL:		http://acs-community.github.io/
 Source0:	%{name}-%{version}.tar.gz
+Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 # Packages
-BuildRequires: ACS-ExtProds == %{version}
+BuildRequires: ACS-ExtProds == %{ALTVER}
 BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor 
 
 # ExtPy Module: PyXB: Required: 1.1.2. Repos: 1.2.4. 
-# Pmw 1.2 vs 1.3.2
-BuildRequires: rh-java-common-PyXB python-pmw pexpect  
-#BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
+# Pmw 1.2 vs 1.3.2: Only Change: In module PmwBase.py: An explicit cast is now required from exception to string (str) . http://pmw.sourceforge.net/doc/changes.html
+BuildRequires: rh-java-common-PyXB python-pmw == 1.3.2 pexpect
+# Pychecker 0.8.14 vs 0.8.19. Changelog: http://pychecker.cvs.sourceforge.net/viewvc/pychecker/pychecker/?pathrev=HEAD
+BuildRequires: pychecker
 
+#BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21
@@ -62,6 +65,8 @@ ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
 unlink /usr/local/lib64/python
 #Python Libs
+pip install --no-dependencies 
+
 
 # Libs in include
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
