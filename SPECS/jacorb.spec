@@ -44,10 +44,13 @@ find -name '*.jar' -exec rm -f '{}' \;
 find -name '*.zip' -exec rm -f '{}' \;
 
 %patch0 -p1
+# Version patching
+cp %{buildroot}/core/src/main/java-templates/org/jacorb/util/Version.java %{buildroot}/core/src/main/java-templates/org/jacorb/util/Version.java.bak
+BUILD_TS=$(date "+%d %B %Y %H:%M")
+sed -e "s/@releaseYear@/2015/;s/@timestamp@/$BUILD_TS/;s/@buildNumber@/ACS build based on 150a4c9/;s/@project.version@/%{version}/" < %{buildroot}/core/src/main/java-templates/org/jacorb/util/Version.java.bak > %{buildroot}/core/src/main/java-templates/org/jacorb/util/Version.java
 
-# No xdoclet available
-sed -i 's|,notification||' src/org/jacorb/build.xml
 
+# Need Revision
 ln -s $(build-classpath antlr) lib/antlr-2.7.2.jar
 ln -s $(build-classpath slf4j/api) lib/slf4j-api-1.5.6.jar
 
