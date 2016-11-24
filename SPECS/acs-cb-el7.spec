@@ -30,7 +30,7 @@ Requires: procmail lockfile-progs gnome-classic-session gnome-terminal nautilus-
 
 
 %description
-RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/ (symlink to /alma). 
+RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/. 
 
 %prep
 %setup -q
