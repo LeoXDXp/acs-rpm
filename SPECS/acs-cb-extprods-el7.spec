@@ -112,13 +112,15 @@ echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
+
+# removing objects
+cd %{buildroot}/alma/ACS-%{version}
+find -name "*.o" | xargs rm -rf
+
 # Destroy Symlink
 /usr/bin/unlink %{buildroot}/alma
 
 %clean
-#cd $ALMASW_INSTDIR
-cd %{buildroot}/alma/ACS-%{version}
-find -name "*.o" | xargs rm -rf
 
 %pre
 # Install epel-maven repo
