@@ -15,9 +15,18 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
-Source1:	mico-2.3.13.%{ALTVER}.tar.gz
-Source2:	JacORB-3.6.1.%{ALTVER}.tar.gz
-Source3:	tctlk-8.5.15.%{ALTVER}.tar.gz
+# Small ifarch hack for x86_64 and aarch64 arch 
+%ifarch x86_64
+Source1:        mico-2.3.13.%{ALTVER}.tar.gz
+Source2:        JacORB-3.6.1.%{ALTVER}.tar.gz
+Source3:        tctlk-8.5.15.%{ALTVER}.tar.gz
+%endif
+
+%ifarch aarch64 armv8 arm64
+Source1:	mico-2.3.13.%{ALTVER}-aarch64.tar.gz
+Source2:	JacORB-3.6.1.%{ALTVER}-aarch64.tar.gz
+Source3:	tctlk-8.5.15.%{ALTVER}-aarch64.tar.gz
+%endif
 
 BuildArch: x86_64 aarch64
 # Base tools
@@ -170,6 +179,7 @@ useradd -u 550 -U almamgr
 %post
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
+chmod 0705 /home/almamgr/
 
 %preun
  
@@ -180,8 +190,6 @@ userdel -r almamgr
 /usr/bin/unlink /alma
 
 %files
-%doc
-%attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
 %config %{_sysconfdir}/profile.d/*
 
