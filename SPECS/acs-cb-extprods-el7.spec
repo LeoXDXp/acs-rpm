@@ -104,7 +104,7 @@ install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
 # Destroy Symlink
-/usr/sbin/unlink %{buildroot}/alma
+/usr/bin/unlink %{buildroot}/alma
 
 %clean
 #cd $ALMASW_INSTDIR
