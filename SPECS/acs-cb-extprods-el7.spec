@@ -103,6 +103,8 @@ echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
+# Destroy Symlink
+/usr/sbin/unlink %{buildroot}/alma
 
 %clean
 #cd $ALMASW_INSTDIR
@@ -163,6 +165,7 @@ enabled=0
 
 #Local users
 useradd -u 550 -U almamgr
+/usr/bin/ln -s /home/almamgr/ /alma/
 
 %post
 # Permissions
@@ -174,12 +177,12 @@ chown -R almamgr:almamgr /home/almamgr/
 # Al user processes must be killed before userdel
 pkill -u almamgr
 userdel -r almamgr
+/usr/bin/unlink /alma
 
 %files
 %doc
 %attr(0705,almagr,almamgr) /home/almamgr/ 
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
-/alma/
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
