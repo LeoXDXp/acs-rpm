@@ -49,7 +49,6 @@ mkdir -p %{buildroot}%{_usr}/local/share/
 mkdir -p %{buildroot}%{_var}/run/acscb/
 # /etc
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
-#mkdir -p %{_usr}/lib64/python2.7/site-packages/
 # Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 
@@ -57,7 +56,7 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 #Source0 ACSSW - acsdata
 cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
-#cp %{buildroot}/home/almamgr%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs %{buildroot}%{_sysconfdir}/acs/bash_profile.acs.old
+
 cp -r %{buildroot}/home/almamgr%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 #Binaries ln
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
@@ -65,7 +64,7 @@ ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
 unlink /usr/local/lib64/python
 #Python Libs
-pip install --no-dependencies 
+#pip install --no-dependencies 
 
 
 # Libs in include
@@ -80,6 +79,9 @@ ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/swig /usr/local/sh
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/man/man1/* /usr/local/share/man/man1/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/man/man3/* /usr/local/share/man/man3/
 mkdir -p  %{buildroot}/home/almaproc/introot
+
+# Destroy Symlink in buildroot
+/usr/bin/unlink %{buildroot}/alma
 %clean
 
 %pre
@@ -176,18 +178,14 @@ userdel -r almamgr
 userdel -r almaproc
 
 %files
-# find CommonSoftware/ -type d -name "bin" -exec chmod -R +x {} \;
-# find Kit/ -type d -name "bin" -exec chmod -R +x {} \;
-%doc
 %config %{_sysconfdir}/systemd/system/acscb.service
-%config %{_sysconfdir}/acs/bash_profile.acs
-%attr(0705,almagr,almamgr) /home/almamgr/ 
+#%config %{_sysconfdir}/acs/bash_profile.acs
 %attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/*
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
 %{_usr}/local/bin/*
 #%{_usr}/local/lib/*
 #%{_usr}/lib64/python2.7/site-packages/
-%{_var}/run/acscb/
+%attr(0755,almagr,almamgr) %{_var}/run/acscb/
 
 %changelog
 * Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
