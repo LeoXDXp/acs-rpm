@@ -13,11 +13,16 @@ BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 # Packages
 BuildRequires: ACS-ExtProds == %{ALTVER}
-BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor 
+# Tools
+# Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
+# astyle 1.15 - 2.05 in repos
+# getopt in repos, check version
+BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3
 
 # ExtPy Module: PyXB: Required: 1.1.2. Repos: 1.2.4. 
 # Pmw 1.2 vs 1.3.2: Only Change: In module PmwBase.py: An explicit cast is now required from exception to string (str) . http://pmw.sourceforge.net/doc/changes.html
-BuildRequires: rh-java-common-PyXB python-pmw == 1.3.2 pexpect
+# PyXML only available at acs-cb repo (repo.csrg.cl)
+BuildRequires: rh-java-common-PyXB python-pmw == 1.3.2 pexpect PyXML
 # Pychecker 0.8.14 vs 0.8.19. Changelog: http://pychecker.cvs.sourceforge.net/viewvc/pychecker/pychecker/?pathrev=HEAD
 BuildRequires: pychecker
 
