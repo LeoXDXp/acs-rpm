@@ -37,11 +37,7 @@ BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
 #BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
-%ifarch x86_64
-BuildRequires: ant == 1.9.3
-
-%ifarch aarch64 armv8 arm64
-BuildRequires: ant == 1.9.2
+BuildRequires: ant >= 1.9.2
 
 # ACE + TAO + ACS  Patches
 Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER}
@@ -49,7 +45,7 @@ Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl
 
 %ifarch x86_64
 BuildRequires: ant == 1.9.3
@@ -77,6 +73,9 @@ Requires: numpy == 1.9.2, python-babel == 1.3, python-markupsafe == 0.23, python
 # Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 features. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
 Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
+
+# Devtoolset eclipse-jdt dependency in SCL
+#Requires: devtoolset-3-eclipse-jdt
 
 %description
 RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
