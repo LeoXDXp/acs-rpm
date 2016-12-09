@@ -39,9 +39,10 @@ BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-de
 #BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
 %ifarch x86_64
 BuildRequires: ant == 1.9.3
-
+%endif
 %ifarch aarch64 armv8 arm64
 BuildRequires: ant == 1.9.2
+%endif
 
 # ACE + TAO + ACS  Patches
 Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER}
