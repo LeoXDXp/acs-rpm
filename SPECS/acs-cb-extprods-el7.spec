@@ -36,7 +36,7 @@ BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-#BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
+BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
 %ifarch x86_64
 BuildRequires: ant == 1.9.3
 %endif
@@ -75,7 +75,7 @@ Requires: python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1
 Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
 
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-#Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
+Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
 
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
