@@ -113,11 +113,16 @@ echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconf
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "OMNI_ROOT="/usr/share/idl/omniORB" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "export OMNI_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+
 echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ALMASW_RELEASE=ACS-OCT2016" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-#echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
+
+echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
 install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
