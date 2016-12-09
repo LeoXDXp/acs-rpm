@@ -35,8 +35,8 @@ BuildRequires: epel-release git wget unzip tar bzip2 patch
 BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER} 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
-# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
+# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
+BuildRequires: tk iwidgets tclx tcllib blt tktable expect
 %ifarch x86_64
 BuildRequires: ant == 1.9.3
 %endif
@@ -74,8 +74,8 @@ Requires: python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
 Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
 
-# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-Requires: tk iwidgets tclx tcllib blt tktable expect tkcon
+# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
+Requires: tk iwidgets tclx tcllib blt tktable expect
 
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
