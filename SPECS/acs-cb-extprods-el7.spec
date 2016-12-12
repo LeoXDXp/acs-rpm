@@ -8,6 +8,7 @@ Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
 URL:		http://acs-community.github.io/
+AutoReq:	no
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
 # Ant for EL7 is up to 1.9.2. ACS uses 1.9.3. Provided in F21  
