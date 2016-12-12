@@ -117,11 +117,16 @@ echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "OMNI_ROOT=/usr/share/idl/omniORB" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export OMNI_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "ANT_HOME=/usr/share/ant" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
+echo "export ANT_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
 
 echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'CLASSPATH="$JACORB_HOME/lib/jacorb-3.6.1.jar:$JACORB_HOME/lib/jacorb-services-3.6.1.jar:$JACORB_HOME/lib/idl.jar:$ANT_HOME/lib/ant.jar" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+#CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
 echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
