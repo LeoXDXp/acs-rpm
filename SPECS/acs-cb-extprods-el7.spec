@@ -146,12 +146,6 @@ find -name "*.o" | xargs rm -rf
 %clean
 
 %pre
-# Install epel-maven repo
-curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
-yum -y install epel-release
-# Install acs-cb and acs-cb extprod repo #
-curl http://repo.csrg.cl/acs-cb.repo -o %{_sysconfdir}/yum.repos.d/acs-cb.repo
-
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
 # Necesita: tex(upquote.sty)
