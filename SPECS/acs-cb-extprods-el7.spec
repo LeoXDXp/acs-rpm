@@ -51,7 +51,7 @@ Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl gcc
 Requires: ant >= 1.9.2
 
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
@@ -94,10 +94,10 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
-#export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
-#export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-#export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
-#export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
+export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
+export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
+export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
