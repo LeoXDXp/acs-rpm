@@ -30,9 +30,10 @@ BuildRequires: pychecker
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21
-# Desglose de paquetes de X Window System desde glx-utils hasta xorg-x11-drv-mouse
-Requires: procmail lockfile-progs gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo man xterm ACS-ExtProds == %{version}
-
+Requires: procmail lockfile-progs net-tools xterm man ACS-ExtProds == %{version}
+# X Packages
+Requires gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse 
+Requires: gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo
 
 %description
 RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/. 
@@ -41,9 +42,57 @@ RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it 
 %setup -q
 
 %build
-# ALMASW_ROOTDIR, ALMASW_RELEASE and exported by ACS-ExtProd
+# ALMASW_ROOTDIR, ALMASW_RELEASE, CLASSPATH and JAVA_HOME (OpenJDK 1.8) exported by ACS-ExtProd
+# Env Vars for compilation
+export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
+export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
+export ACS_CDB="$ACSDATA/config/defaultCDB"
+export ACS_INSTANCE="0"
+export ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
+# hostname has to be short, or can be fqdn
+export ACS_TMP="$ACSDATA/tmp/$HOSTNAME"
+export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
+#IDL_PATH="-I/alma/ACS-OCT2016/ACSSW/idl -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/orbsvcs/orbsvcs -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/orbsvcs -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/tao"
+# DDS not added to LD PATH. Python, boost and omni all in lib64
+export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
+#LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
+# Compilation specific env vars
+export MAKE_NOSTATIC=yes
+export MAKE_NOIFR_CHECK=on
+export MAKE_PARS=" -j 2 -l 2 "
+make
 
 %install
+# Env Vars for installing
+export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
+export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
+export ACS_CDB="$ACSDATA/config/defaultCDB"
+export ACS_INSTANCE="0"
+export ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
+# hostname has to be short, or can be fqdn
+export ACS_TMP="$ACSDATA/tmp/$HOSTNAME"
+export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
+export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
+
+# Env Vars to profile.d
+echo "ACSDATA=$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACSROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_CDB=$ACSDATA/config/defaultCDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
+echo "ACS_INSTANCE=0" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_STARTUP_TIMEOUT_MULTIPLIER=2" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_TMP=$ACSDATA/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "LD_LIBRARY_PATH=$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
+echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ACS_CDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
+echo "export ACS_INSTANCE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ACS_STARTUP_TIMEOUT_MULTIPLIER" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
 mkdir -p  %{buildroot}/home/almamgr
 # /usr/local
 mkdir -p %{buildroot}%{_usr}/local/bin/
@@ -63,24 +112,18 @@ cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
 
 cp -r %{buildroot}/home/almamgr%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
-#Binaries ln
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
 # Shared Objects
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
+# Every python lib is installed through pip, rpm or as a rpm source.
 unlink /usr/local/lib64/python
-#Python Libs
-#pip install --no-dependencies 
+# Pythfilter
+install -m 0640 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/
+#Binaries ln
+ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
 
-
-# Libs in include
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
+#Libs in include. Seems there is no need for this
+#ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
 # Mans
-#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/man/* /usr/local/share/man/*
-# Shared
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/aclocal /usr/local/share/
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/antlr-2.7.7 /usr/local/share/
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/doc /usr/local/share/
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/swig /usr/local/share/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/man/man1/* /usr/local/share/man/man1/
 ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/share/man/man3/* /usr/local/share/man/man3/
 mkdir -p  %{buildroot}/home/almaproc/introot
@@ -92,15 +135,6 @@ mkdir -p  %{buildroot}/home/almaproc/introot
 %pre
 useradd -U almaproc
 echo new2me | echo new2me | passwd --stdin almaproc
-
-echo "
-[opensuse-13.2]
-name=Opensuse 13.2
-baseurl=http://download.opensuse.org/distribution/13.2/repo/oss/suse/
-gpgcheck=0
-gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7//repodata/repomd.xml.key
-enabled=0
-" >> /etc/yum.repos.d/opensuse-13.2.repo
 
 %post
 # Permissions
@@ -132,7 +166,7 @@ KillMode=process
 WantedBy=multi-user.target
 
 " > %{_sysconfdir}/systemd/system/acscb.service
-#systemctl enable acscb.service
+systemctl enable acscb.service
 
 echo "
 [Unit]
@@ -158,14 +192,14 @@ KillMode=process
 WantedBy=multi-user.target
 
 " > %{_sysconfdir}/systemd/system/acscbremote.service
-#systemctl enable acscbremote.service
+systemctl enable acscbremote.service
 
-#systemctl daemon-reload
+systemctl daemon-reload
 
-# Set SELinux PERMISSIVE (Audit mode)
-sed -i 's/SELINUX=disabled/SELINUX=permissive/g' %{_sysconfdir}/sysconfig/selinux
-sed -i 's/SELINUX=enforcing/SELINUX=permissive/g' %{_sysconfdir}/sysconfig/selinux
-setenforce 0
+# Set SELinux Enforcing
+sed -i 's/SELINUX=disabled/SELINUX=enforcing/g' %{_sysconfdir}/sysconfig/selinux
+sed -i 's/SELINUX=permissive/SELINUX=enforcing/g' %{_sysconfdir}/sysconfig/selinux
+setenforce 1
 
 # /etc/hosts
 #echo "" >> /etc/hosts
@@ -184,12 +218,13 @@ userdel -r almaproc
 
 %files
 %config %{_sysconfdir}/systemd/system/acscb.service
-#%config %{_sysconfdir}/acs/bash_profile.acs
+%config %{_sysconfdir}/systemd/system/acscbremote.service
+%config %{_sysconfdir}/acscb/*
 %attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/*
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
 %{_usr}/local/bin/*
-#%{_usr}/local/lib/*
-#%{_usr}/lib64/python2.7/site-packages/
+%{_usr}/local/lib/*
+%doc %{_usr}/local/share/man/man*
 %attr(0755,almagr,almamgr) %{_var}/run/acscb/
 
 %changelog
