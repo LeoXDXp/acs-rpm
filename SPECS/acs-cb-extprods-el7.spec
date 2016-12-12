@@ -193,7 +193,7 @@ enabled=0
 
 #Local users
 useradd -u 550 -U almamgr
-/usr/bin/ln -s /home/almamgr/ /alma/
+/usr/bin/ln -s /home/almamgr/ /alma
 
 %post
 # Permissions
