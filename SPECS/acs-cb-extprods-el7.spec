@@ -89,13 +89,9 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 %setup -T -D -a 1
 %setup -T -D -a 2
 # builddir = /home/user/rpmbuild/BUILDDIR
-%build
-#Create basic folder and symlink
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-# Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
-cd %{_builddir}/%{name}-%{version}/INSTALL/
+#%build
 
+%install
 # Declare Global Variables for scripts in ExtProds/INSTALL/
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
@@ -105,23 +101,20 @@ export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
 export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
+#Create basic folder and symlink
+mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
+ln -s %{buildroot}/home/almamgr %{buildroot}/alma
+# Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
+cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
 # Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
-#sed -i 's/make install/make DESTDIR= install/g' buildTcltk
 #./buildTcltk # Uses gcc, make, tar
-# Move to temp, install section errases on start of section
-#mv %{buildroot}/alma/ACS-%{version}/tcltk %{_buildrootdir}
 #./buildMico # Uses gcc, make , tar
 #./buildJacORB # Depends on TAO and Maven, which are rpms
 
-%install
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-#mv %{_buildrootdir}/tcltk %{buildroot}/alma/ACS-%{version}/tcltk
-
 echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
@@ -222,8 +215,8 @@ userdel -r almamgr
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
-#%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
-#%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
