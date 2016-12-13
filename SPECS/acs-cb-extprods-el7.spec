@@ -76,6 +76,8 @@ Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
 
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
+# Other Dependecies for stuff through pip
+Requires: libxslt-devel
 
 %description
 RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
