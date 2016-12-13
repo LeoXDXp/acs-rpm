@@ -88,6 +88,7 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 %setup -q
 %setup -T -D -a 1
 %setup -T -D -a 2
+%setup -T -D -a 3
 # builddir = /home/user/rpmbuild/BUILDDIR
 #%build
 
@@ -136,6 +137,7 @@ echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/p
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/%{name}-%{version}/tctlk/    %{buildroot}/home/almamgr/ACS-%{version}/
 cp -r %{_builddir}/%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
 cp -r %{_builddir}/%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
