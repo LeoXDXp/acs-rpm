@@ -201,7 +201,7 @@ userdel -r almamgr
 /usr/bin/unlink /alma
 
 %files
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/*
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
