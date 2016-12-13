@@ -88,10 +88,14 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 %setup -q
 #%setup -T -D -a 1
 #%setup -T -D -a 2
-# builddir = /home/user/rpmbuild/BUILDDIR # setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
-#%build
+# builddir = /home/user/rpmbuild/BUILDDIR
+%build
+#Create basic folder and symlink
+mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
+ln -s %{buildroot}/home/almamgr %{buildroot}/alma
+# Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
+cd %{_builddir}/%{name}-%{version}/INSTALL/
 
-%install
 # Declare Global Variables for scripts in ExtProds/INSTALL/
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
@@ -101,17 +105,16 @@ export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
 export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
-#Create basic folder and symlink
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-# Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
-cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
 # Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
-#./buildTcltk # Uses gcc, make, tar
+sed -i 's/make install/make DESTDIR=%{buildroot} install/g' buildTcltk
+./buildTcltk # Uses gcc, make, tar
 #./buildMico # Uses gcc, make , tar
 #./buildJacORB # Depends on TAO and Maven, which are rpms
+
+
+%install
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
