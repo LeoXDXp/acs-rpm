@@ -8,6 +8,7 @@ Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
 URL:		http://acs-community.github.io/
+AutoReq:	no
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
 # Ant for EL7 is up to 1.9.2. ACS uses 1.9.3. Provided in F21  
@@ -35,9 +36,14 @@ BuildRequires: epel-release git wget unzip tar bzip2 patch
 BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER} 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
-# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl
-#BuildRequires: tk iwidgets tclx tcllib blt tktable expect tkcon
-BuildRequires: ant >= 1.9.2
+# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
+BuildRequires: tk iwidgets tclx tcllib blt tktable expect
+%ifarch x86_64
+BuildRequires: ant == 1.9.3
+%endif
+%ifarch aarch64 armv8 arm64
+BuildRequires: ant == 1.9.2
+%endif
 
 # ACE + TAO + ACS  Patches
 Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER}
@@ -45,13 +51,8 @@ Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl
-
-%ifarch x86_64
-BuildRequires: ant == 1.9.3
-
-%ifarch aarch64 armv8 arm64
-BuildRequires: ant == 1.9.2
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl gcc
+Requires: ant >= 1.9.2
 
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
 Requires: python-coverage == 3.7.1, python-linecache2 == 1.0.0, python2-traceback2 == 1.4.0, scipy == 0.12.1, python-six == 1.9.0, pexpect, python-matplotlib == 1.2.0
@@ -68,11 +69,14 @@ Requires: python-sphinx_rtd_theme python-unittest2 python-suds pychecker gnuplot
 # PyModules from rpms of F21 to F24 symlinked in acs-cb-extprod repo
 # Exact version
 # Pylint 1.4.3. F24 has 1.5.5
-Requires: numpy == 1.9.2, python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1.3, python-logilab-common == 0.63.2, python-astroid == 1.3.6, pylint == 1.4.3, python2-snowballstemmer == 1.2.0, python-numeric == 24.2
+Requires: python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1.3, python-logilab-common == 0.63.2, python-astroid == 1.3.6, pylint == 1.4.3, python2-snowballstemmer == 1.2.0, python-numeric == 24.2, numpy == 1:1.9.2
 # Nose. Diference 1.3.6 - 1.3.7 does not apply to linux http://nose.readthedocs.io/en/latest/news.html
 # Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 features. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
 Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
+
+# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
+Requires: tk iwidgets tclx tcllib blt tktable expect
 
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
@@ -84,7 +88,10 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 
 %prep
 %setup -q
-# builddir = /home/user/rpmbuild/BUILDDIR # setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
+%setup -T -D -a 1
+%setup -T -D -a 2
+%setup -T -D -a 3
+# builddir = /home/user/rpmbuild/BUILDDIR
 #%build
 
 %install
@@ -92,10 +99,10 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
-#export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
-#export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-#export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
-#export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
+export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
+export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
+export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
+export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -104,6 +111,7 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
+# Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
 #./buildTcltk # Uses gcc, make, tar
 #./buildMico # Uses gcc, make , tar
 #./buildJacORB # Depends on TAO and Maven, which are rpms
@@ -114,15 +122,26 @@ echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconf
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
 echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "OMNI_ROOT=/usr/share/idl/omniORB" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "export OMNI_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
+echo "ANT_HOME=/usr/share/ant" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
+echo "export ANT_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
+
 echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ALMASW_RELEASE=ACS-OCT2016" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-#echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk"
+echo 'CLASSPATH="$JACORB_HOME/lib/jacorb-3.6.1.jar:$JACORB_HOME/lib/jacorb-services-3.6.1.jar:$JACORB_HOME/lib/idl.jar:$ANT_HOME/lib/ant.jar" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+#CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
-install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
-install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
-install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
+echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
+#install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/%{name}-%{version}/tcltk/    %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
 # removing objects
 cd %{buildroot}/alma/ACS-%{version}
@@ -134,12 +153,6 @@ find -name "*.o" | xargs rm -rf
 %clean
 
 %pre
-# Install epel-maven repo
-curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
-yum -y install epel-release
-# Install acs-cb and acs-cb extprod repo #
-curl http://repo.csrg.cl/acs-cb.repo -o %{_sysconfdir}/yum.repos.d/acs-cb.repo
-
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
 # Necesita: tex(upquote.sty)
@@ -187,7 +200,7 @@ enabled=0
 
 #Local users
 useradd -u 550 -U almamgr
-/usr/bin/ln -s /home/almamgr/ /alma/
+/usr/bin/ln -s /home/almamgr/ /alma
 
 %post
 # Permissions
@@ -203,7 +216,11 @@ userdel -r almamgr
 /usr/bin/unlink /alma
 
 %files
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/*
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
