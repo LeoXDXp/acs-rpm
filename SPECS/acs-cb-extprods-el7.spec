@@ -17,17 +17,17 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 # Small ifarch hack for x86_64 and aarch64 arch 
-%ifarch x86_64
-Source1:        mico-2.3.13.%{ALTVER}.tar.gz
-Source2:        JacORB-3.6.1.%{ALTVER}.tar.gz
-Source3:        tctlk-8.5.15.%{ALTVER}.tar.gz
-%endif
+#%ifarch x86_64
+#Source1:        mico-2.3.13.%{ALTVER}.tar.gz
+#Source2:        JacORB-3.6.1.%{ALTVER}.tar.gz
+#Source3:        tctlk-8.5.15.%{ALTVER}.tar.gz
+#%endif
 
-%ifarch aarch64 armv8 arm64
-Source1:	mico-2.3.13.%{ALTVER}-aarch64.tar.gz
-Source2:	JacORB-3.6.1.%{ALTVER}-aarch64.tar.gz
-Source3:	tctlk-8.5.15.%{ALTVER}-aarch64.tar.gz
-%endif
+#%ifarch aarch64 armv8 arm64
+#Source1:	mico-2.3.13.%{ALTVER}-aarch64.tar.gz
+#Source2:	JacORB-3.6.1.%{ALTVER}-aarch64.tar.gz
+#Source3:	tctlk-8.5.15.%{ALTVER}-aarch64.tar.gz
+#%endif
 
 BuildArch: x86_64 aarch64
 # Base tools
@@ -86,6 +86,8 @@ RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Pat
 
 %prep
 %setup -q
+#%setup -T -D -a 1
+#%setup -T -D -a 2
 # builddir = /home/user/rpmbuild/BUILDDIR # setup -q = {builddir}/ACS-ExtProds-2016.6/ExtProds/{PRODUCTS,INSTALL}
 #%build
 
@@ -106,6 +108,7 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
+# Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
 #./buildTcltk # Uses gcc, make, tar
 #./buildMico # Uses gcc, make , tar
 #./buildJacORB # Depends on TAO and Maven, which are rpms
@@ -132,9 +135,9 @@ echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
-install -m 0755 -D -p %{SOURCE2} %{buildroot}/home/almamgr/ACS-%{version}/
-install -m 0755 -D -p %{SOURCE3} %{buildroot}/home/almamgr/ACS-%{version}/
+#install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
+#cp -r %{_builddir}%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
+#cp -r %{_builddir}%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
 # removing objects
 cd %{buildroot}/alma/ACS-%{version}
@@ -209,7 +212,11 @@ userdel -r almamgr
 /usr/bin/unlink /alma
 
 %files
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/*
+#%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
+%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
+#%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
+#%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
 
 %changelog
