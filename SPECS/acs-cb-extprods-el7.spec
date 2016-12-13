@@ -86,6 +86,13 @@ Requires: libxslt-devel sqlite-devel openldap-devel libxml2-devel
 %description
 RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
 
+#%package devel
+#Summary: ACS CB ExtProd Source files for {?dist}
+#License: LGPL
+
+#%description devel
+#Source files to compile ExtProds for ACS CB %{version} for {?dist}
+
 %prep
 %setup -q
 %setup -T -D -a 1
@@ -258,6 +265,8 @@ pip uninstall gcovr -y
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
+
+#%files devel
 
 %changelog
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
