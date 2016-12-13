@@ -137,7 +137,7 @@ echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/p
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
-cp -r %{_builddir}/%{name}-%{version}/tctlk/    %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/%{name}-%{version}/tcltk/    %{buildroot}/home/almamgr/ACS-%{version}/
 cp -r %{_builddir}/%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
 cp -r %{_builddir}/%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
