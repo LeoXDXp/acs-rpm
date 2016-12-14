@@ -31,7 +31,7 @@ Source3:	tctlk-8.5.15.%{ALTVER}-aarch64.tar.gz
 
 BuildArch: x86_64 aarch64
 # Base tools
-BuildRequires: epel-release git wget unzip tar bzip2 patch
+BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
 # ACE + TAO + ACS  Patches
 BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER} 
 # Java and Others
@@ -51,9 +51,9 @@ Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, antlr-tool python-virtualenv epel-release python-pip centos-release-scl gcc
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl
 Requires: ant >= 1.9.2
-
+Requires: gcc
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
 Requires: python-coverage == 3.7.1, python-linecache2 == 1.0.0, python2-traceback2 == 1.4.0, scipy == 0.12.1, python-six == 1.9.0, pexpect, python-matplotlib == 1.2.0
 
