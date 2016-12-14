@@ -6,7 +6,7 @@ Release:	1%{?dist}
 Summary:	ACS CB for CentOS 7	
 License:	LGPL
 URL:		http://acs-community.github.io/
-Source0:	%{name}-%{version}.tar.gz #LGPL, Readme*, License, Documents, ACS*, Makefile. RPM, Benchmark
+Source0:	%{name}-%{version}.tar.gz 
 Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py
 
 BuildArch: x86_64 aarch64
@@ -172,7 +172,7 @@ After=multi-user.target
 [Service]
 Type=forking
 Environment=INTROOT='/home/almaproc/introot/'
-EnvironmentFile=-/etc/acs/bash_profile.acs
+#EnvironmentFile=-/etc/acs/bash_profile.acs
 User=almamgr
 ExecPreStart=killACS -q
 ExecStart=acsStart
@@ -198,7 +198,7 @@ After=multi-user.target
 Type=forking
 Environment=INTROOT='/home/almaproc/introot/'
 # EnvFile to later be a conf file
-EnvironmentFile=-/etc/acs/bash_profile.acs
+#EnvironmentFile=-/etc/acs/bash_profile.acs
 User=almamgr
 #ExecPreStart=killACS -q
 ExecStart=acsdaemonStartAcs
