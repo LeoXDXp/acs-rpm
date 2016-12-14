@@ -8,14 +8,11 @@ License:	LGPL
 URL:		http://acs-community.github.io/
 Source0:	%{name}-%{version}.tar.gz #LGPL, Readme*, License, Documents, ACS*, Makefile. RPM, Benchmark
 Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py
-#Source2:	%{name}-%{version}-devel.tar.gz # Benchmark, RPM (non related, unused folder) could be here
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
-# Packages
 BuildRequires: ACS-ExtProds >= %{version}
-# Tools
-# Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
+# Tools: Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
 # astyle 1.15 - 2.05 in repos
 # getopt in repos, check version
 BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3
@@ -49,11 +46,10 @@ Source files to compile ACS CB %{version} for {?dist}
 
 %prep
 %setup -q
-#%setup -T -D -a 1
+#%build
 
-%build
-# ALMASW_ROOTDIR, ALMASW_RELEASE, CLASSPATH and JAVA_HOME (OpenJDK 1.8) exported by ACS-ExtProd
-# Env Vars for compilation
+%install
+# Env Vars for installing. ALMASW_ROOTDIR, ALMASW_RELEASE, CLASSPATH and JAVA_HOME (OpenJDK 1.8) exported by ACS-ExtProd
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ACSDATA/config/defaultCDB"
@@ -66,26 +62,16 @@ export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvc
 # DDS not added to LD PATH. Python, boost and omni all in lib64
 export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
 #LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
+
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
+# make of LGPL, creates ACSSW and acsdata in buildroot. Benchmark also has 2 products
 make
 #make install #DESTDIR=%{buildroot}
-
-%install
-# Env Vars for installing
-export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
-export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-export ACS_CDB="$ACSDATA/config/defaultCDB"
-export ACS_INSTANCE="0"
-export ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
-# hostname has to be short, or can be fqdn
-export ACS_TMP="$ACSDATA/tmp/$HOSTNAME"
-export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
-export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
 
 # Env Vars to profile.d
 echo "ACSDATA=$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -107,42 +93,52 @@ echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 mkdir -p  %{buildroot}/home/almamgr
-# /usr/local
+# /usr/local. Symlink binaries to here
 mkdir -p %{buildroot}%{_usr}/local/bin/
-mkdir -p %{buildroot}%{_usr}/local/lib64/
-mkdir -p %{buildroot}%{_usr}/local/include/
-mkdir -p %{buildroot}%{_usr}/local/share/
-# /var/run/
-mkdir -p %{buildroot}%{_var}/run/acscb/
-# /etc
-mkdir -p %{buildroot}%{_sysconfdir}/acscb/
-# Place to create files for variable exporting on boot
-mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-#Source0 LGPL
-cp -r %{_builddir}%{name}-%{version}/    %{buildroot}/home/almamgr/
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
-
-cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
-# Shared Objects
-ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
-# Every python lib is installed through pip, rpm or as a rpm source.
-unlink /usr/local/lib64/python
-# Pythfilter
-install -m 0640 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/
-#Binaries ln
 ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
 
-#Libs in include. Seems there is no need for this
+# Symlink Shared Objects to lib64, except python. Every python lib is installed through pip, rpm or as a rpm source.
+#mkdir -p %{buildroot}%{_usr}/local/lib64/
+#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
+#unlink /usr/local/lib64/python
+#Symlink Libs in include. Seems there is no need for this
+#mkdir -p %{buildroot}%{_usr}/local/include/
 #ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
-# Mans
-ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/* /usr/local/share/man/man1/
-ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/* /usr/local/share/man/man3/
-mkdir -p  %{buildroot}/home/almaproc/introot
 
+# Move ACS Mans to here
+mkdir -p %{buildroot}%{_usr}/local/share/
+mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/ /usr/local/share/man/
+mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/ /usr/local/share/man/
+# Documentation
+mkdir -p %{buildroot}%{_usr}/local/acscb/
+mv %{_builddir}/%{name}-%{version}/README* %{buildroot}%{_usr}/local/acscb/
+mv %{_builddir}/%{name}-%{version}/LICENSE.md %{buildroot}%{_usr}/local/acscb/
+mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}%{_usr}/local/acscb/
+mv %{_builddir}/%{name}-%{version}/Documents/ %{buildroot}%{_usr}/local/acscb/
+# /var/run/
+mkdir -p %{buildroot}%{_var}/run/acscb/
+# /etc. Hoping to have acsdata only on etc in the future
+mkdir -p %{buildroot}%{_sysconfdir}/acscb/
+cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
+# Place to create files for variable exporting on boot
+mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
+# Symlinks
+ln -s %{buildroot}/home/almamgr %{buildroot}/alma
+ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
+# Pythfilter
+install -m 0640 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/
+# Introot for development
+mkdir -p  %{buildroot}/home/almaproc/introot
 # Destroy Symlink in buildroot
 /usr/bin/unlink %{buildroot}/alma
+
+# Devel folders: RPM, Makefile, LGPL, Benchmark
+mkdir -p  %{buildroot}/home/almaproc/acscb-devel/
+mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almaproc/acscb-devel/
+mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almaproc/acscb-devel/
+mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almaproc/acscb-devel/
+mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almaproc/acscb-devel/
+
 %clean
 
 %pre
@@ -233,24 +229,23 @@ userdel -r almaproc
 # ACSSW, acsdata, READMEs, LICENSE, ACS_VERSION, ACS_PATCH_LEVEL
 %config %{_sysconfdir}/systemd/system/acscb.service
 %config %{_sysconfdir}/systemd/system/acscbremote.service
-%config %{_sysconfdir}/acscb/*
-%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW
-%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/*
-%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata
+%config %{_sysconfdir}/acscb/
+%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/
+%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/
+%attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata/
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
-%{_usr}/local/bin/*
-%{_usr}/local/lib/*
+%{_usr}/local/bin/
+%{_usr}/local/lib/
 %license /home/almamgr/%{name}-%{version}/LICENSE.md
-%doc %{_usr}/local/share/man/man*
-%doc /home/almamgr/%{name}-%{version}/README /home/almamgr/%{name}-%{version}/README-new-release
+%docdir %{_usr}/local/share/man/
+%{_usr}/local/share/man/
+%docdir %{_usr}/local/acscb/
+%{_usr}/local/acscb/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
 
 %files devel
 # LGPL, Benchmark, Makefile, RPM
-/home/almamgr/%{name}-%{version}/LGPL/
-/home/almamgr/%{name}-%{version}/Benchmark/
-/home/almamgr/%{name}-%{version}/Makefile
-/home/almamgr/%{name}-%{version}/RPM/
+%attr(0705,almaproc,almaproc) /home/almaproc/acscb-devel/
 
 %changelog
 * Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
