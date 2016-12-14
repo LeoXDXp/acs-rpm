@@ -80,9 +80,18 @@ Requires: tk iwidgets tclx tcllib blt tktable expect
 
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
+# Other Dependecies for stuff through pip
+Requires: libxslt-devel sqlite-devel openldap-devel libxml2-devel
 
 %description
 RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
+
+#%package devel
+#Summary: ACS CB ExtProd Source files for {?dist}
+#License: LGPL
+
+#%description devel
+#Source files to compile ExtProds for ACS CB %{version} for {?dist}
 
 %prep
 %setup -q
@@ -151,6 +160,27 @@ find -name "*.o" | xargs rm -rf
 %clean
 
 %pre
+
+# ACE-TAO RPM from OpenSUSE
+echo "
+[ace-tao_opensuse]
+name=Latest ACE micro release (CentOS_7)
+type=rpm-md
+baseurl=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7/
+gpgcheck=1
+gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7//repodata/repomd.xml.key
+enabled=0
+" > /etc/yum.repos.d/ace-tao.repo
+
+#Local users
+useradd -u 550 -U almamgr
+/usr/bin/ln -s /home/almamgr/ /alma
+
+%post
+# Permissions
+chown -R almamgr:almamgr /home/almamgr/
+chmod 0705 /home/almamgr/
+
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
 # Necesita: tex(upquote.sty)
@@ -185,33 +215,48 @@ pip install Twisted==10.1.0
 # Gcovr
 pip install gcovr --no-dependencies
 
-# ACE-TAO RPM from OpenSUSE
-echo "
-[ace-tao_opensuse]
-name=Latest ACE micro release (CentOS_7)
-type=rpm-md
-baseurl=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7/
-gpgcheck=1
-gpgkey=http://download.opensuse.org/repositories/devel:/libraries:/ACE:/micro/CentOS_7//repodata/repomd.xml.key
-enabled=0
-" > /etc/yum.repos.d/ace-tao.repo
-
-#Local users
-useradd -u 550 -U almamgr
-/usr/bin/ln -s /home/almamgr/ /alma
-
-%post
-# Permissions
-chown -R almamgr:almamgr /home/almamgr/
-chmod 0705 /home/almamgr/
-
 %preun
  
+
 %postun
 # Al user processes must be killed before userdel
 pkill -u almamgr
 userdel -r almamgr
 /usr/bin/unlink /alma
+
+## PyModules in acs.req file
+# Sphinx 1.2.3 (Requires 1.3.1)
+# Necesita: tex(upquote.sty)
+#yum -y install http://ftp.inf.utfsm.cl/fedora/linux/releases/22/Everything/x86_64/os/Packages/p/python-sphinx-1.2.3-1.fc22.noarch.rpm
+pip uninstall Sphinx -y
+# Argparse
+pip uninstall argparse -y
+# Distribute
+pip uninstall distribute -y
+# iPython OLD 1.2.1
+pip uninstall ipython -y
+# Logilab astng
+pip uninstall logilab-astng -y
+# Lxml OLD (Version 2.2 is for EL5)
+pip uninstall lxml -y
+# mock. EL7 has 1.0.1
+pip uninstall mock -y
+# PyOpenSSL. EL7 has 0.13
+pip uninstall pyOpenSSL -y
+# Pysnmp. EL7 has 4.2.5
+pip uninstall pysnmp -y
+# Pysqlite
+pip uninstall pysqlite -y
+# Python-ldap. EL7 has 2.4.15
+pip uninstall python-ldap -y
+# pythonscope
+pip uninstall pythoscope -y
+# snakefood
+pip uninstall snakefood -y
+# Twisted. Dependencies: zope, setuptools
+pip uninstall Twisted -y
+# Gcovr
+pip uninstall gcovr -y
 
 %files
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
@@ -220,6 +265,8 @@ userdel -r almamgr
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
+
+#%files devel
 
 %changelog
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1

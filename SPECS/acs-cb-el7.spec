@@ -38,6 +38,13 @@ Requires: gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk
 %description
 RPM Installer of ACS-CB %{version}. It takes the compiled files and installs it on /home/almamgr/. 
 
+#%package devel
+#Summary: ACS CB Source files for {?dist} 
+#License: LGPL
+
+#%description devel
+#Source files to compile ACS CB %{version} for {?dist}
+
 %prep
 %setup -q
 
@@ -217,15 +224,21 @@ userdel -r almamgr
 userdel -r almaproc
 
 %files
+# ACSSW, acsdata, READMEs, LICENSE, ACS_VERSION, ACS_PATCH_LEVEL
 %config %{_sysconfdir}/systemd/system/acscb.service
 %config %{_sysconfdir}/systemd/system/acscbremote.service
 %config %{_sysconfdir}/acscb/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW
 %attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/*
+%attr(0705,almagr,almamgr) /home/almamgr/%{name}-%{version}/acsdata
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
 %{_usr}/local/bin/*
 %{_usr}/local/lib/*
 %doc %{_usr}/local/share/man/man*
 %attr(0755,almagr,almamgr) %{_var}/run/acscb/
+
+#%files devel
+# LGPL, Benchmark, Makefile, RPM
 
 %changelog
 * Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
