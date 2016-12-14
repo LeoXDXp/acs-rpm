@@ -1,9 +1,9 @@
 #%define _sbindir /sbin
 #%define _libdir  /%{_lib}
-%define ALTVER 2016.10
+#%define ALTVER 2016.10
 
 Name:		ACS-ExtProds
-Version:	OCT2016
+Version:	2016.10
 Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
@@ -18,22 +18,22 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 # Small ifarch hack for x86_64 and aarch64 arch 
 %ifarch x86_64
-Source1:        mico-2.3.13.%{ALTVER}.tar.gz
-Source2:        JacORB-3.6.1.%{ALTVER}.tar.gz
-Source3:        tctlk-8.5.15.%{ALTVER}.tar.gz
+Source1:        mico-2.3.13.%{version}.tar.gz
+Source2:        JacORB-3.6.1.%{version}.tar.gz
+Source3:        tctlk-8.5.15.%{version}.tar.gz
 %endif
 
 %ifarch aarch64 armv8 arm64
-Source1:	mico-2.3.13.%{ALTVER}-aarch64.tar.gz
-Source2:	JacORB-3.6.1.%{ALTVER}-aarch64.tar.gz
-Source3:	tctlk-8.5.15.%{ALTVER}-aarch64.tar.gz
+Source1:	mico-2.3.13.%{version}-aarch64.tar.gz
+Source2:	JacORB-3.6.1.%{version}-aarch64.tar.gz
+Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
 %endif
 
 BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
 # ACE + TAO + ACS  Patches
-BuildRequires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER} 
+BuildRequires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version} 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
@@ -46,7 +46,7 @@ BuildRequires: ant == 1.9.2
 %endif
 
 # ACE + TAO + ACS  Patches
-Requires: ace == 6.3.0.%{ALTVER}, ace-devel == 6.3.0.%{ALTVER}, ace-xml == 6.3.0.%{ALTVER}, ace-gperf == 6.3.0.%{ALTVER}, ace-xml-devel == 6.3.0.%{ALTVER}, ace-kokyu == 6.3.0.%{ALTVER}, ace-kokyu-devel == 6.3.0.%{ALTVER}, mpc == 6.3.0.%{ALTVER}, tao == 2.3.0.%{ALTVER}, tao-devel == 2.3.0.%{ALTVER}, tao-utils == 2.3.0.%{ALTVER}, tao-cosnaming == 2.3.0.%{ALTVER}, tao-cosevent == 2.3.0.%{ALTVER}, tao-cosnotification == 2.3.0.%{ALTVER}, tao-costrading == 2.3.0.%{ALTVER}, tao-rtevent == 2.3.0.%{ALTVER}, tao-cosconcurrency == 2.3.0.%{ALTVER}, ace-tao-debuginfo == 6.3.0.%{ALTVER}
+Requires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version}
 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
