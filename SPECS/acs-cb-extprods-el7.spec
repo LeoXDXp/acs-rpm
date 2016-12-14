@@ -259,11 +259,11 @@ pip uninstall Twisted -y
 pip uninstall gcovr -y
 
 %files
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/mico/
-%attr(0705,almagr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/*
 
 #%files devel
