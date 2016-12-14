@@ -46,10 +46,18 @@ Source files to compile ACS CB %{version} for {?dist}
 
 %prep
 %setup -q
-#%build
+%build
+# Replace LGPL/Tools/extpy/src/Pythfilter  with SOURCE1 pythfilter.
+mv -f %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
 
 %install
-# Env Vars for installing. ALMASW_ROOTDIR, ALMASW_RELEASE, CLASSPATH and JAVA_HOME (OpenJDK 1.8) exported by ACS-ExtProd
+# Basic paths and symlinks
+mkdir -p  %{buildroot}/home/almamgr
+ln -s %{buildroot}/home/almamgr %{buildroot}/alma
+ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
+# Env Vars for installing. 
+export ALMASW_ROOTDIR=%{buildroot}/alma
+export ALMASW_RELEASE=ACS-%{version}
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ACSDATA/config/defaultCDB"
@@ -62,6 +70,15 @@ export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvc
 # DDS not added to LD PATH. Python, boost and omni all in lib64
 export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
 #LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+# Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
+sh %{_sysconfdir}/profile.d/mico.sh
+sh %{_sysconfdir}/profile.d/jacorb.sh
+sh %{_sysconfdir}/profile.d/ant.sh
+sh %{_sysconfdir}/profile.d/ace-devel.sh
+sh %{_sysconfdir}/profile.d/apache-maven.sh
+sh %{_sysconfdir}/profile.d/mpc.sh
+sh %{_sysconfdir}/profile.d/tao-devel.sh
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -92,7 +109,6 @@ echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-mkdir -p  %{buildroot}/home/almamgr
 # /usr/local. Symlink binaries to here
 mkdir -p %{buildroot}%{_usr}/local/bin/
 ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
@@ -122,11 +138,6 @@ mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 # Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-# Symlinks
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
-# Pythfilter
-install -m 0640 -D -p %{SOURCE1} %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/bin/
 # Introot for development
 mkdir -p  %{buildroot}/home/almaproc/introot
 # Destroy Symlink in buildroot
