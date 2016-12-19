@@ -263,5 +263,5 @@ userdel -r almaproc
 %attr(0705,almaproc,almaproc) /home/almaproc/acscb-devel/
 
 %changelog
-* Mon Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+* Fri Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
