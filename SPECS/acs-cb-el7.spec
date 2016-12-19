@@ -112,20 +112,20 @@ echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 # /usr/local. Symlink binaries to here
 mkdir -p %{buildroot}%{_usr}/local/bin/
-ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* /usr/local/bin/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* %{buildroot}%{_usr}/local/bin/
 
 # Symlink Shared Objects to lib64, except python. Every python lib is installed through pip, rpm or as a rpm source.
 #mkdir -p %{buildroot}%{_usr}/local/lib64/
-#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* /usr/local/lib64/
-#unlink /usr/local/lib64/python
+#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* %{buildroot}%{_usr}/local/lib64/
+#unlink {buildroot}%{_usr}/local/lib64/python
 #Symlink Libs in include. Seems there is no need for this
 #mkdir -p %{buildroot}%{_usr}/local/include/
-#ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* /usr/local/include/
+#ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
 mkdir -p %{buildroot}%{_usr}/local/share/
-mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/ /usr/local/share/man/
-mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/ /usr/local/share/man/
+mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/ %{buildroot}%{_usr}/local/share/man/
+mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/ %{buildroot}%{_usr}/local/share/man/
 # Documentation
 mkdir -p %{buildroot}%{_usr}/local/acscb/
 mv %{_builddir}/%{name}-%{version}/README* %{buildroot}%{_usr}/local/acscb/
