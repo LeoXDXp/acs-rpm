@@ -54,7 +54,7 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
 # Basic paths and symlinks
 mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ %{buildroot}/home/almamgr%{name}-current/
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ %{buildroot}/home/almamgr/%{name}-current/
 # Env Vars for installing. 
 export ALMASW_ROOTDIR=%{buildroot}/alma
 export ALMASW_RELEASE=ACS-%{version}
@@ -142,6 +142,7 @@ mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 mkdir -p  %{buildroot}/home/almaproc/introot
 # Destroy Symlink in buildroot
 /usr/bin/unlink %{buildroot}/alma
+/usr/bin/unlink %{buildroot}/home/almamgr/%{name}-current/
 
 # Devel folders: RPM, Makefile, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almaproc/acscb-devel/
