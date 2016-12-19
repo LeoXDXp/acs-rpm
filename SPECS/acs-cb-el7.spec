@@ -48,7 +48,7 @@ Source files to compile ACS CB %{version} for {?dist}
 %setup -q
 %build
 # Replace LGPL/Tools/extpy/src/Pythfilter  with SOURCE1 pythfilter.
-cp %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
+cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
 
 %install
 # Basic paths and symlinks
