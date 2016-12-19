@@ -86,6 +86,8 @@ export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
+# mkdir of ACSSW
+mkdir -p %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/
 # make of LGPL, creates ACSSW and acsdata in buildroot. Benchmark also has 2 products
 make
 #make install #DESTDIR=%{buildroot}
