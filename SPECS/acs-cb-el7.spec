@@ -72,7 +72,7 @@ export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
 #LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
-export TCLTK_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/tctlk"
+export TCLTK_ROOT="/alma/$ALMASW_RELEASE/tctlk"
 
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 sh %{_sysconfdir}/profile.d/mico.sh
