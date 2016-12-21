@@ -90,6 +90,12 @@ sh %{_sysconfdir}/profile.d/apache-maven.sh
 sh %{_sysconfdir}/profile.d/mpc.sh
 sh %{_sysconfdir}/profile.d/tao-devel.sh
 
+export ACE_ROOT
+#ACE_ROOT="/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux"
+export ACE_ROOT_DIR
+#ACE_ROOT_DIR="/alma/ACS-OCT2016/TAO/ACE_wrappers/build"
+
+
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
