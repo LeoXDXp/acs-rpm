@@ -53,7 +53,7 @@ Source files to compile ACS CB %{version} for {?dist}
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
 
 %install
-source %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
+source %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
 # Basic paths and symlinks
 mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
