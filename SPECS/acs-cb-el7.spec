@@ -119,9 +119,9 @@ echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 
-# /usr/local. Symlink binaries to here
-mkdir -p %{buildroot}%{_usr}/local/bin/
-ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* %{buildroot}%{_usr}/local/bin/
+# /usr/local. Symlink binaries to here. Not needed due to extended PATH
+#mkdir -p %{buildroot}%{_usr}/local/bin/
+#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* %{buildroot}%{_usr}/local/bin/
 
 # Symlink Shared Objects to lib64, except python. Every python lib is installed through pip, rpm or as a rpm source.
 #mkdir -p %{buildroot}%{_usr}/local/lib64/
@@ -256,8 +256,8 @@ userdel -r almaproc
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata/
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
-%{_usr}/local/bin/
-%{_usr}/local/lib/
+#%{_usr}/local/bin/
+#%{_usr}/local/lib/
 %license /home/almamgr/%{name}-%{version}/LICENSE.md
 %docdir %{_usr}/local/share/man/
 %{_usr}/local/share/man/
