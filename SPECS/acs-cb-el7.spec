@@ -78,7 +78,7 @@ export TCLTK_ROOT="/alma/%{name}-%{version}/tctlk"
 export PYTHONPATH="/usr/lib64/python2.7/site-packages"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
-export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:/alma/%{name}-%{version}/ACSSW/bin"
+export PATH="/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:/alma/%{name}-%{version}/ACSSW/bin:$PATH"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 sh %{_sysconfdir}/profile.d/mico.sh
@@ -100,7 +100,8 @@ mkdir -p %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/
 # Symlink of Python's compilelall for hardcoded path in make files
 mkdir -p %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
-
+# Symlink for searchFile
+ln -s %{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/acs/src/searchFile %{_usr}/local/bin/
 # make of LGPL, creates ACSSW and acsdata in buildroot. Benchmark also has 2 products
 make
 #make install #DESTDIR=%{buildroot}
@@ -168,9 +169,10 @@ mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 # Introot for development
 mkdir -p  %{buildroot}/home/almaproc/introot
 # Destroy Symlink in buildroot
-/usr/bin/unlink %{buildroot}/alma
-/usr/bin/unlink %{buildroot}/home/almamgr/%{name}-current
-
+%{_usr}/bin/unlink %{buildroot}/alma
+%{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-current
+%{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
+%{_usr}/bin/unlink %{_usr}/local/bin/searchFile
 # Devel folders: RPM, Makefile, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almaproc/acscb-devel/
 mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almaproc/acscb-devel/
@@ -189,6 +191,9 @@ echo new2me | echo new2me | passwd --stdin almaproc
 chown -R almamgr:almamgr /home/almamgr/
 chown almamgr:almamgr %{_var}/run/acscb/
 chown almaproc:almaproc /home/almaproc/introot/
+mkdir -p /home/almamgr/%{name}-%{version}/Python/lib/python2.7/
+ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
+
 
 # Create systemd services
 echo "
