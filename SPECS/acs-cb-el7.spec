@@ -16,7 +16,9 @@ BuildRequires: ACS-ExtProds >= %{version}
 # astyle 1.15 - 2.05 in repos
 # getopt in repos, check version
 BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3
-
+# Consoles that should be unified
+BuildRequires: ksh
+BuildRequires: time 
 # ExtPy Module: PyXB: Required: 1.1.2. Repos: 1.2.4. 
 # Pmw 1.2 vs 1.3.2: Only Change: In module PmwBase.py: An explicit cast is now required from exception to string (str) . http://pmw.sourceforge.net/doc/changes.html
 # PyXML only available at acs-cb repo (repo.csrg.cl)
@@ -57,7 +59,7 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 ln -s %{buildroot}/home/almamgr/%{name}-%{version} %{buildroot}/home/almamgr/%{name}-current
 # Env Vars for installing. 
 export ALMASW_ROOTDIR=%{buildroot}/alma
-export ALMASW_RELEASE=ACS-%{version}
+export ALMASW_RELEASE=%{name}-%{version}
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ACSDATA/config/defaultCDB"
@@ -72,8 +74,12 @@ export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib"
 #LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
-export TCLTK_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/tctlk"
-
+export TCLTK_ROOT="/alma/%{name}-%{version}/tctlk"
+export PYTHONPATH="/usr/lib64/python2.7/site-packages"
+export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
+# PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
+export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:/alma/%{name}-%{version}/ACSSW/bin"
+# PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 sh %{_sysconfdir}/profile.d/mico.sh
 sh %{_sysconfdir}/profile.d/jacorb.sh
@@ -91,12 +97,17 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/
+# Symlink of Python's compilelall for hardcoded path in make files
+mkdir -p %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/
+ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
+
 # make of LGPL, creates ACSSW and acsdata in buildroot. Benchmark also has 2 products
 make
 #make install #DESTDIR=%{buildroot}
 
 # Env Vars to profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
+export ALMASW_ROOTDIR="/alma"
 echo "ACSDATA=$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACSROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACS_CDB=$ACSDATA/config/defaultCDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
@@ -107,6 +118,9 @@ echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs
 echo "LD_LIBRARY_PATH=$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
+echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo 'PYTHON_ROOT=%{buildroot}/$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -118,6 +132,9 @@ echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
+echo "export PYTHONPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 # /usr/local. Symlink binaries to here. Not needed due to extended PATH
 #mkdir -p %{buildroot}%{_usr}/local/bin/
