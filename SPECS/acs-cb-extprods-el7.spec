@@ -29,6 +29,14 @@ Source2:	JacORB-3.6.1.%{version}-aarch64.tar.gz
 Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
 %endif
 Source4:	searchFile
+Source5:	JacPrep
+Source6:	acsMakeCopySources
+Source7:	acsMakeTclScript
+Source8:	acsMakeJavaClasspath
+Source9:	acserrGenIDL
+Source10:	acserrGenCpp
+Source11:	acserrGenCheckXML
+Source12:	generateTmcdbSchemas
 
 BuildArch: x86_64 aarch64
 # Base tools
@@ -162,7 +170,14 @@ find -name "*.o" | xargs rm -rf
 mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almamgr/ACS-%{version}/
 mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almamgr/ACS-%{version}/
 mkdir -p %{buildroot}%{_usr}/local/bin
-cp %{SOURCE4} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE4} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE5} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE6} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE7} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE8} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE9} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE10} %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE11} %{buildroot}%{_usr}/local/bin/
 %clean
 
 %pre
@@ -186,6 +201,14 @@ useradd -u 550 -U almamgr
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chmod 0705 /home/almamgr/
+# tclCheck symlink to /usr/local/bin
+ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tclCheck %{_usr}/local/bin/
+# Symlink of tao_idl because hardcoded path
+mkdir -p /usr/share/tao/TAO_IDL
+ln -s /usr/bin/tao_idl /usr/share/tao/TAO_IDL/
+# Pyxbgen symlink to /usr/local/bin
+ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
+
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
@@ -271,7 +294,7 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
-%{_usr}/local/bin/searchFile
+%{_usr}/local/bin/
 #%files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
