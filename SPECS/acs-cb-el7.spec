@@ -85,16 +85,14 @@ export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 sh %{_sysconfdir}/profile.d/mico.sh
 sh %{_sysconfdir}/profile.d/jacorb.sh
 sh %{_sysconfdir}/profile.d/ant.sh
-sh %{_sysconfdir}/profile.d/ace-devel.sh
+sh %{_sysconfdir}/profile.d/ace-devel.sh # overrides ACE_ROOT
 sh %{_sysconfdir}/profile.d/apache-maven.sh
 sh %{_sysconfdir}/profile.d/mpc.sh
 sh %{_sysconfdir}/profile.d/tao-devel.sh
 
-export ACE_ROOT
-#ACE_ROOT="/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux"
-export ACE_ROOT_DIR
+unset ACE_ROOT_DIR
 #ACE_ROOT_DIR="/alma/ACS-OCT2016/TAO/ACE_wrappers/build"
-
+unset OMNIORB_CONFIG
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
