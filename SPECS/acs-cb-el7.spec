@@ -53,7 +53,6 @@ Source files to compile ACS CB %{version} for {?dist}
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/
 
 %install
-source %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs
 # Basic paths and symlinks
 mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
@@ -90,9 +89,6 @@ sh %{_sysconfdir}/profile.d/apache-maven.sh
 sh %{_sysconfdir}/profile.d/mpc.sh
 sh %{_sysconfdir}/profile.d/tao-devel.sh
 
-unset ACE_ROOT_DIR
-#ACE_ROOT_DIR="/alma/ACS-OCT2016/TAO/ACE_wrappers/build"
-unset OMNIORB_CONFIG
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
