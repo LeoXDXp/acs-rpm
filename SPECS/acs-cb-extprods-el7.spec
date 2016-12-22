@@ -28,6 +28,7 @@ Source1:	mico-2.3.13.%{version}-aarch64.tar.gz
 Source2:	JacORB-3.6.1.%{version}-aarch64.tar.gz
 Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
 %endif
+Source4:	searchFile
 
 BuildArch: x86_64 aarch64
 # Base tools
@@ -160,6 +161,8 @@ find -name "*.o" | xargs rm -rf
 # INSTALL and PRODUCTS to buildroot for devel package
 mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almamgr/ACS-%{version}/
 mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almamgr/ACS-%{version}/
+mkdir -p %{buildroot}%{_usr}/local/bin
+cp %{SOURCE4} %{buildroot}%{_usr}/local/bin/
 %clean
 
 %pre
@@ -268,7 +271,7 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
-
+%{_usr}/local/bin/searchFile
 #%files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
