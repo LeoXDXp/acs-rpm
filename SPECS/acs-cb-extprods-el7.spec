@@ -294,7 +294,7 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
-%{_usr}/local/bin/
+%attr(0645,-,-) %{_usr}/local/bin/
 #%files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
