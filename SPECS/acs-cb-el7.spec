@@ -27,13 +27,16 @@ BuildRequires: time
 BuildRequires: rh-java-common-PyXB python-pmw == 1.3.2 pexpect PyXML
 # Pychecker 0.8.14 vs 0.8.19. Changelog: http://pychecker.cvs.sourceforge.net/viewvc/pychecker/pychecker/?pathrev=HEAD
 BuildRequires: pychecker
+# Other java packages requires
+BuildRequires: apache-commons-lang junit
 
-#BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc ime rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
+#BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc time rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
 BuildRequires: procmail
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
-# No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel ime libpng10-devel expat21
-Requires: procmail lockfile-progs net-tools xterm man ACS-ExtProds == %{version}
+# No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel time libpng10-devel expat21
+Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds == %{version}
+Requires: apache-commons-lang junit
 # X Packages
 Requires: gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
 Requires: gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo
@@ -257,6 +260,9 @@ setenforce 1
 
 # /etc/hosts
 #echo "" >> /etc/hosts
+
+# Reload Python modules. Avoids the error: from omniORB import CORBA \n omniORB not found
+python -c "help('modules')"
 
 %preun
 systemctl stop acscb.service
