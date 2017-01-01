@@ -244,6 +244,9 @@ pip install Twisted==10.1.0
 # Gcovr
 pip install gcovr --no-dependencies
 
+# Reload Python modules. Avoids the error: from omniORB import CORBA \n omniORB not found
+python -c "help('modules')"
+
 %preun
  
 
