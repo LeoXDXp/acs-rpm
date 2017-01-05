@@ -156,7 +156,7 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 #unlink {buildroot}%{_usr}/local/lib64/python
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
 mkdir -p %{buildroot}%{_usr}/local/include/
-ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
+#ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
 mkdir -p %{buildroot}%{_usr}/local/share/
