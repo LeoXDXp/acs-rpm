@@ -204,11 +204,12 @@ chmod 0705 /home/almamgr/
 # tclCheck symlink to /usr/local/bin
 ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tclCheck %{_usr}/local/bin/
 # Symlink of tao_idl because hardcoded path
-mkdir -p /usr/share/tao/TAO_IDL
-ln -s /usr/bin/tao_idl /usr/share/tao/TAO_IDL/
+mkdir -p %{_usr}share/tao/TAO_IDL
+ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
 # Pyxbgen symlink to /usr/local/bin
 ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
-
+# CosProperty.idl not found, so let's put it in a default path
+ln -s %{_usr}/include/orbsvcs/CosProperty.idl %{_usr}/local/include/
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
