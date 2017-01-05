@@ -178,6 +178,10 @@ cp -f %{SOURCE8} %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE9} %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/bin/
+
+mkdir -p %{_usr}/local/include
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acstime/ws/object/acstimeC.* %{_usr}/local/include
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acstime/ws/object/ACSTimeError.h %{_usr}/local/include
 %clean
 
 %pre
@@ -208,8 +212,25 @@ mkdir -p %{_usr}share/tao/TAO_IDL
 ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
 # Pyxbgen symlink to /usr/local/bin
 ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
+# ACSnc Build has trouble finding the following files
 # CosProperty.idl not found, so let's put it in a default path
 ln -s %{_usr}/include/orbsvcs/CosProperty.idl %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/DsLogAdminC.* %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/DsLogAdminS.h %{_usr}/local/include/
+mkdir -p %{_usr}/local/include/orbsvcs/orbsvcs
+ln -s %{_usr}/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs/DsLogAdminC.h %{_usr}/local/include/orbsvcs/orbsvcs/
+ln -s %{_usr}/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs/CosNamingC.* %{_usr}/local/include/orbsvcs/orbsvcs/
+ln -s %{_usr}/include/orbsvcs/CosNotificationC.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosNotifyCommC.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/NotifyExtC.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosPropertyC.* %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosNotificationS.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosNotifyCommS.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/NotifyExtS.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosPropertyS.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminS.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminC.h %{_usr}/local/include/
+ln -s %{_usr}/include/orbsvcs/* %{_usr}/local/include/
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
@@ -299,7 +320,8 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
 %attr(0645,-,-) %{_usr}/local/bin/
-#%files devel
+%{_usr}/local/include/
+%files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
 
