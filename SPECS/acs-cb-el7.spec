@@ -83,6 +83,7 @@ export GNU_ROOT=%{_usr}
 export TCLTK_ROOT="/alma/%{name}-%{version}/tctlk"
 export PYTHONPATH="/usr/lib64/python2.7/site-packages"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
+export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
 #export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:/alma/%{name}-%{version}/ACSSW/bin:%{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/acs/bin/"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
@@ -126,6 +127,8 @@ echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHON_ROOT=%{buildroot}/$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+
 echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -140,6 +143,7 @@ echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo "export PYTHONPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 # /usr/local. Symlink binaries to here. Not needed due to extended PATH
@@ -150,9 +154,9 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 #mkdir -p %{buildroot}%{_usr}/local/lib64/
 #ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* %{buildroot}%{_usr}/local/lib64/
 #unlink {buildroot}%{_usr}/local/lib64/python
-#Symlink Libs in include. Seems there is no need for this
-#mkdir -p %{buildroot}%{_usr}/local/include/
-#ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
+#Symlink Libs in include. Very useful when building, because it's in gcc's default path
+mkdir -p %{buildroot}%{_usr}/local/include/
+ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
 mkdir -p %{buildroot}%{_usr}/local/share/
