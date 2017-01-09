@@ -267,7 +267,7 @@ pip install Twisted==10.1.0
 pip install gcovr --no-dependencies
 
 # Reload Python modules. Avoids the error: from omniORB import CORBA \n omniORB not found
-python -c "help('modules')"
+#python -c "help('modules')"
 
 %preun
  
@@ -320,7 +320,6 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
 %attr(0645,-,-) %{_usr}/local/bin/
-%{_usr}/local/include/
 %files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
