@@ -31,11 +31,11 @@ BuildRequires: pychecker
 BuildRequires: apache-commons-lang junit
 
 #BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc time rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
-BuildRequires: procmail
+BuildRequires: procmail tkinter
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel time libpng10-devel expat21
-Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds == %{version}
+Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds == %{version} tkinter
 Requires: apache-commons-lang junit
 # X Packages
 Requires: gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
