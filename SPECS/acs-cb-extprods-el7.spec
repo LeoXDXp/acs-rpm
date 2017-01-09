@@ -231,6 +231,7 @@ ln -s %{_usr}/include/orbsvcs/CosPropertyS.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminS.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminC.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/* %{_usr}/local/include/
+ln -s %{_usr}/include/tao/Profile.h %{_usr}/local/include/
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
