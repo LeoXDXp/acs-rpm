@@ -85,7 +85,7 @@ export PYTHONPATH="/usr/lib64/python2.7/site-packages"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
-#export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:/alma/%{name}-%{version}/ACSSW/bin:%{buildroot}/home/almamgr/%{name}-%{version}/LGPL/Kit/acs/bin/"
+export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:$GNU_ROOT/bin"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 sh %{_sysconfdir}/profile.d/mico.sh
