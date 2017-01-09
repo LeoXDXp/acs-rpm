@@ -169,15 +169,15 @@ find -name "*.o" | xargs rm -rf
 # INSTALL and PRODUCTS to buildroot for devel package
 mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almamgr/ACS-%{version}/
 mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almamgr/ACS-%{version}/
-mkdir -p %{buildroot}%{_usr}/local/bin
-cp -f %{SOURCE4} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE5} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE6} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE7} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE8} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE9} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE10} %{buildroot}%{_usr}/local/bin/
-cp -f %{SOURCE11} %{buildroot}%{_usr}/local/bin/
+mkdir -p %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE4} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE5} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE6} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE7} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE8} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
 
 %clean
 
@@ -231,6 +231,8 @@ ln -s %{_usr}/include/orbsvcs/* %{_usr}/local/include/
 ln -s %{_usr}/include/tao/* %{_usr}/local/include/
 unlink %{_usr}/local/include/PortableServer
 ln -s %{_usr}/include/tao/PortableServer/PortableServer.h %{_usr}/local/include/
+
+ln -s  %{_usr}/local/acs/*  %{_usr}/local/bin/
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
@@ -319,7 +321,7 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
-%attr(0645,-,-) %{_usr}/local/bin/
+%attr(0645,-,-) %{_usr}/local/acs/
 %files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
