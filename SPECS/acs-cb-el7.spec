@@ -10,6 +10,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py
 Source2:	ACSSW-%{version}.tar.gz
 Source3:	acsdata-%{version}.tar.gz
+Source4:	tao_ifr_service
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
@@ -146,8 +147,9 @@ echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.s
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-# /usr/local. Symlink binaries to here. Not needed due to extended PATH
-#mkdir -p %{buildroot}%{_usr}/local/bin/
+# /usr/local/bin. Source4 here
+mkdir -p %{buildroot}%{_usr}/local/bin/
+cp -f %{SOURCE4} %{buildroot}%{_usr}/local/bin/
 #ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* %{buildroot}%{_usr}/local/bin/
 
 # Symlink Shared Objects to lib64, except python. Every python lib is installed through pip, rpm or as a rpm source.
@@ -289,7 +291,7 @@ userdel -r almaproc
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata/
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
-#%{_usr}/local/bin/
+%{_usr}/local/bin/
 #%{_usr}/local/lib/
 %license /home/almamgr/%{name}-%{version}/LICENSE.md
 %docdir %{_usr}/local/share/man/
