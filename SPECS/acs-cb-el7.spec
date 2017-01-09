@@ -129,7 +129,7 @@ echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages"' >> %{buildroot}%{_sysconf
 echo 'PYTHON_ROOT=%{buildroot}/$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 
-echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:$GNU_ROOT/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
