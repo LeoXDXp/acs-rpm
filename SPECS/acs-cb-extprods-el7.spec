@@ -179,9 +179,6 @@ cp -f %{SOURCE9} %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/bin/
 
-mkdir -p %{_usr}/local/include
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acstime/ws/object/acstimeC.* %{_usr}/local/include
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acstime/ws/object/ACSTimeError.h %{_usr}/local/include
 %clean
 
 %pre
