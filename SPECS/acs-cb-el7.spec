@@ -162,8 +162,8 @@ mkdir -p %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
 mkdir -p %{buildroot}%{_usr}/local/share/
-mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/ %{buildroot}%{_usr}/local/share/man/
-mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/ %{buildroot}%{_usr}/local/share/man/
+#mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man1/ %{buildroot}%{_usr}/local/share/man/
+#mv %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/share/man/man3/ %{buildroot}%{_usr}/local/share/man/
 # Documentation
 mkdir -p %{buildroot}%{_usr}/local/acscb/
 mv %{_builddir}/%{name}-%{version}/README* %{buildroot}%{_usr}/local/acscb/
