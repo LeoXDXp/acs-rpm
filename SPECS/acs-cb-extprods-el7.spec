@@ -38,6 +38,7 @@ Source10:	acserrGenCpp
 Source11:	acserrGenCheckXML
 Source12:	generateTmcdbSchemas
 
+#Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
@@ -107,6 +108,7 @@ Source files to compile ExtProds for ACS CB %{version} for {?dist}
 %setup -T -D -a 1
 %setup -T -D -a 2
 %setup -T -D -a 3
+#%patch0 -p2
 # builddir = /home/user/rpmbuild/BUILDDIR
 #%build
 
@@ -270,7 +272,8 @@ pip install gcovr --no-dependencies
 
 # Reload Python modules. Avoids the error: from omniORB import CORBA \n omniORB not found
 #python -c "help('modules')"
-
+# Updating SecurityReplaceable.idl with 2008a Changelog of TAO
+sed -i 's/IOP::TaggedComponentList create_ior_components/IOP::TaggedComponentSeq create_ior_components/g' /usr/include/orbsvcs/SecurityReplaceable.idl
 %preun
  
 
