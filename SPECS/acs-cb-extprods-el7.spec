@@ -207,7 +207,7 @@ chmod 0705 /home/almamgr/
 # tclCheck symlink to /usr/local/bin
 ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tclCheck %{_usr}/local/bin/
 # Symlink of tao_idl because hardcoded path
-mkdir -p %{_usr}share/tao/TAO_IDL
+mkdir -p %{_usr}/share/tao/TAO_IDL
 ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
 # Pyxbgen symlink to /usr/local/bin
 ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
