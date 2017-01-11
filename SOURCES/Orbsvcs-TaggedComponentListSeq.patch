@@ -1,0 +1,12 @@
+diff -rupN /usr/include/orbsvcs/SecurityReplaceable-.idl /usr/include/orbsvcs/SecurityReplaceable.idl
+--- /usr/include/orbsvcs/SecurityReplaceable.idl	2017-01-10 18:17:18.876770120 +0000
++++ /usr/include/orbsvcs/SecurityReplaceable.idl	2017-01-10 18:17:26.667904137 +0000
+@@ -47,7 +47,7 @@ module SecurityReplaceable {
+       out  any                                 auth_specific_data
+     );
+ 
+-    IOP::TaggedComponentList create_ior_components(
++    IOP::TaggedComponentSeq create_ior_components(
+       in   SecurityLevel2::Credentials         creds_list
+     );
+ 

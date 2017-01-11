@@ -37,6 +37,10 @@ Source9:	acserrGenIDL
 Source10:	acserrGenCpp
 Source11:	acserrGenCheckXML
 Source12:	generateTmcdbSchemas
+Source13:	generateXsdPythonBinding
+Source14:	loggingtsGenH
+Source15:	loggingtsGenCheckXML
+Source16:	acsStartJava
 
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 BuildArch: x86_64 aarch64
@@ -180,7 +184,11 @@ cp -f %{SOURCE8} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
-
+cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE13} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE16} %{buildroot}%{_usr}/local/acs/
 %clean
 
 %pre
@@ -235,6 +243,8 @@ unlink %{_usr}/local/include/PortableServer
 ln -s %{_usr}/include/tao/PortableServer/PortableServer.h %{_usr}/local/include/
 
 ln -s  %{_usr}/local/acs/*  %{_usr}/local/bin/
+
+ln -s 
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
