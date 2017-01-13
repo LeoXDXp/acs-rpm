@@ -65,7 +65,7 @@ Requires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl maven-local
 Requires: ant >= 1.9.2
 Requires: gcc
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
@@ -153,7 +153,7 @@ echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo 'CLASSPATH="$JACORB_HOME/lib/jacorb-3.6.1.jar:$JACORB_HOME/lib/jacorb-services-3.6.1.jar:$JACORB_HOME/lib/idl.jar:$ANT_HOME/lib/ant.jar" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'CLASSPATH="/usr/share/java/:$JACORB_HOME/lib/jacorb-3.6.1.jar:$JACORB_HOME/lib/jacorb-services-3.6.1.jar:$JACORB_HOME/lib/idl.jar:$ANT_HOME/lib/ant.jar:$M2_HOME" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
@@ -214,6 +214,7 @@ chown -R almamgr:almamgr /home/almamgr/
 chmod 0705 /home/almamgr/
 # tclCheck symlink to /usr/local/bin
 ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tclCheck %{_usr}/local/bin/
+ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tcl %{_usr}/local/bin/
 # Symlink of tao_idl because hardcoded path
 mkdir -p %{_usr}/share/tao/TAO_IDL
 ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
@@ -243,8 +244,6 @@ unlink %{_usr}/local/include/PortableServer
 ln -s %{_usr}/include/tao/PortableServer/PortableServer.h %{_usr}/local/include/
 
 ln -s  %{_usr}/local/acs/*  %{_usr}/local/bin/
-
-ln -s 
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
