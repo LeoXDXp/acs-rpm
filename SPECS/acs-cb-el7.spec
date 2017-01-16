@@ -179,6 +179,11 @@ cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 # Introot for development
 mkdir -p  %{buildroot}/home/almaproc/introot
+
+# Remove objects
+cd %{buildroot}/alma/ACS-%{version}/ACSSW/
+find -name "*.o" | xargs rm -rf
+
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{buildroot}/alma
 %{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-current
