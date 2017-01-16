@@ -116,18 +116,18 @@ make
 # Env Vars to profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 export ALMASW_ROOTDIR="/alma"
-echo "ACSDATA=$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ACSROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ACS_CDB=$ACSDATA/config/defaultCDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
+echo "ACSDATA=$ALMASW_ROOTDIR/%{name}-%{version}/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACSROOT=$ALMASW_ROOTDIR/%{name}-%{version}/ACSSW" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_CDB=$ALMASW_ROOTDIR/%{name}-%{version}/config/defaultCDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
 echo "ACS_INSTANCE=0" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACS_STARTUP_TIMEOUT_MULTIPLIER=2" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ACS_TMP=$ACSDATA/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_TMP=$ALMASW_ROOTDIR/%{name}-%{version}/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "LD_LIBRARY_PATH=$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "LD_LIBRARY_PATH=$ALMASW_ROOTDIR/%{name}-%{version}/idl:/usr/lib64/:$ALMASW_ROOTDIR/%{name}-%{version}/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
-echo 'PYTHON_ROOT=%{buildroot}/$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo "PYTHON_ROOT=$ALMASW_ROOTDIR/%{name}-%{version}/Python" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 
 echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:$GNU_ROOT/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
