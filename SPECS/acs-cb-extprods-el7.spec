@@ -153,7 +153,7 @@ echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo 'CLASSPATH="/usr/share/java/:$JACORB_HOME/lib/jacorb-3.6.1.jar:$JACORB_HOME/lib/jacorb-services-3.6.1.jar:$JACORB_HOME/lib/idl.jar:$ANT_HOME/lib/ant.jar:$M2_HOME" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'CLASSPATH="/usr/share/java/:$JACORB_HOME/lib:$ANT_HOME/lib:$M2_HOME/lib" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
