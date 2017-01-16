@@ -82,7 +82,7 @@ export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/l
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
 export TCLTK_ROOT="/alma/%{name}-%{version}/tctlk"
-export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/"
+export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/python/site-packages:"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
@@ -126,7 +126,7 @@ echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs
 echo "LD_LIBRARY_PATH=$ALMASW_ROOTDIR/%{name}-%{version}/idl:/usr/lib64/:$ALMASW_ROOTDIR/%{name}-%{version}/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
-echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo "PYTHONPATH=/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:$ALMASW_ROOTDIR/%{name}-%{version}/ACSSW/lib/python/site-packages/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "PYTHON_ROOT=$ALMASW_ROOTDIR/%{name}-%{version}/Python" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 
@@ -152,10 +152,6 @@ mkdir -p %{buildroot}%{_usr}/local/bin/
 cp -f %{SOURCE4} %{buildroot}%{_usr}/local/bin/
 #ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/bin/* %{buildroot}%{_usr}/local/bin/
 
-# Symlink Shared Objects to lib64, except python. Every python lib is installed through pip, rpm or as a rpm source.
-#mkdir -p %{buildroot}%{_usr}/local/lib64/
-#ln -s %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/* %{buildroot}%{_usr}/local/lib64/
-#unlink {buildroot}%{_usr}/local/lib64/python
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
 mkdir -p %{buildroot}%{_usr}/local/include/
 #ln -s %{buildroot}/home/almamgr%{name}-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
