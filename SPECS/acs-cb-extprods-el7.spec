@@ -42,6 +42,7 @@ Source14:	loggingtsGenH
 Source15:	loggingtsGenCheckXML
 Source16:	acsStartJava
 Source17:	acs_python.py
+Source18:	acsMakeCheckUnresolvedSymbols
 
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 BuildArch: x86_64 aarch64
@@ -190,6 +191,7 @@ cp -f %{SOURCE13} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE16} %{buildroot}%{_usr}/local/acs/
+cp -f %{SOURCE18} %{buildroot}%{_usr}/local/acs/
 # ACS's Python libs
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
