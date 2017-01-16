@@ -87,6 +87,8 @@ export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
 export PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:$GNU_ROOT/bin"
+echo "CLASSPATH"
+echo "$CLASSPATH"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 sh %{_sysconfdir}/profile.d/mico.sh
@@ -112,6 +114,11 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{buildroot}/home/almamgr/%{name}-
 # make of LGPL, creates ACSSW and acsdata in buildroot. Benchmark also has 2 products
 make
 #make install #DESTDIR=%{buildroot}
+
+# To allow the extraction of debug info
+chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libacserrStubs.so
+chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libACSIRSentinelStubs.so
+chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libacscomponentStubs.so
 
 # Env Vars to profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -204,7 +211,10 @@ chown almamgr:almamgr %{_var}/run/acscb/
 chown almaproc:almaproc /home/almaproc/introot/
 mkdir -p /home/almamgr/%{name}-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
-
+# Fixing chmod done for debug info extraction
+chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libacserrStubs.so
+chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libACSIRSentinelStubs.so
+chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libacscomponentStubs.so
 
 # Create systemd services
 echo "
@@ -292,8 +302,8 @@ userdel -r almaproc
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata/
 %attr(-,almaproc,almaproc)/home/almaproc/introot/
-%{_usr}/local/bin/
-#%{_usr}/local/lib/
+%{_usr}/local/bin
+%{_usr}/local/lib
 %license /home/almamgr/%{name}-%{version}/LICENSE.md
 %docdir %{_usr}/local/share/man/
 %{_usr}/local/share/man/
