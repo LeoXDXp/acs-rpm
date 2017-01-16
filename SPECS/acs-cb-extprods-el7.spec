@@ -41,6 +41,7 @@ Source13:	generateXsdPythonBinding
 Source14:	loggingtsGenH
 Source15:	loggingtsGenCheckXML
 Source16:	acsStartJava
+Source17:	acs_python.py
 
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 BuildArch: x86_64 aarch64
@@ -189,6 +190,9 @@ cp -f %{SOURCE13} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE16} %{buildroot}%{_usr}/local/acs/
+# ACS's Python libs
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
 %clean
 
 %pre
@@ -334,6 +338,7 @@ pip uninstall gcovr -y
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
 %attr(0645,-,-) %{_usr}/local/acs/
+/usr/local/lib/python/site-packages/
 %files devel
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
