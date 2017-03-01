@@ -1,13 +1,13 @@
 #%define _sbindir /sbin
 #%define _libdir  /%{_lib}
-#%define ALTVER 2016.10
+%define oldVersion 2016.10
 
 Name:		ACS-ExtProds
-Version:	2016.10
+Version:	2017.02
 Release:	1%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
-URL:		http://acs-community.github.io/
+URL:		http://csrg-utfsm.github.io/
 AutoReq:	no
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
@@ -49,7 +49,7 @@ BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
 # ACE + TAO + ACS  Patches
-BuildRequires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version} 
+BuildRequires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion} 
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven == 3.2.5, boost148
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
@@ -62,7 +62,7 @@ BuildRequires: ant == 1.9.2
 %endif
 
 # ACE + TAO + ACS  Patches
-Requires: ace == 6.3.0.%{version}, ace-devel == 6.3.0.%{version}, ace-xml == 6.3.0.%{version}, ace-gperf == 6.3.0.%{version}, ace-xml-devel == 6.3.0.%{version}, ace-kokyu == 6.3.0.%{version}, ace-kokyu-devel == 6.3.0.%{version}, mpc == 6.3.0.%{version}, tao == 2.3.0.%{version}, tao-devel == 2.3.0.%{version}, tao-utils == 2.3.0.%{version}, tao-cosnaming == 2.3.0.%{version}, tao-cosevent == 2.3.0.%{version}, tao-cosnotification == 2.3.0.%{version}, tao-costrading == 2.3.0.%{version}, tao-rtevent == 2.3.0.%{version}, tao-cosconcurrency == 2.3.0.%{version}, ace-tao-debuginfo == 6.3.0.%{version}
+Requires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion} 
 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
