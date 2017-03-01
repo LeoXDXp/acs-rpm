@@ -1,7 +1,7 @@
 #%define ALTVER 2016.10
 
 Name:		ACS
-Version:	2016.10
+Version:	2017.02
 Release:	1%{?dist}
 Summary:	ACS CB for CentOS 7	
 License:	LGPL
