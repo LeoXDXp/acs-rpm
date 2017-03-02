@@ -100,7 +100,7 @@ Requires: tk iwidgets tclx tcllib blt tktable expect
 Requires: libxslt-devel sqlite-devel openldap-devel libxml2-devel
 
 %description
-RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 3 and 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
+RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
 
 %package devel
 Summary: ACS CB ExtProd Source files for {?dist}
@@ -197,6 +197,8 @@ cp -f %{SOURCE18} %{buildroot}%{_usr}/local/acs/
 # ACS's Python libs
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
+# Delete old Eclipse folder
+rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 %clean
 
 %pre
@@ -342,7 +344,6 @@ userdel -r almadevel
 
 %files
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
