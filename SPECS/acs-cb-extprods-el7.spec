@@ -176,9 +176,9 @@ find -name "*.o" | xargs rm -rf
 /usr/bin/unlink %{buildroot}/alma
 
 # INSTALL and PRODUCTS to buildroot for devel package
-mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/
+mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
+mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
+mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 mkdir -p %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE4} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE5} %{buildroot}%{_usr}/local/acs/
