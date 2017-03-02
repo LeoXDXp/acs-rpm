@@ -176,8 +176,9 @@ find -name "*.o" | xargs rm -rf
 /usr/bin/unlink %{buildroot}/alma
 
 # INSTALL and PRODUCTS to buildroot for devel package
-mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almamgr/ACS-%{version}/
+mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/
 mkdir -p %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE4} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE5} %{buildroot}%{_usr}/local/acs/
@@ -199,7 +200,6 @@ cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
 %clean
 
 %pre
-
 # ACE-TAO RPM from OpenSUSE
 echo "
 [ace-tao_opensuse]
@@ -214,6 +214,9 @@ enabled=0
 #Local users
 useradd -u 550 -U almamgr
 /usr/bin/ln -s /home/almamgr/ /alma
+
+%pre devel
+useradd -U almadevel
 
 %post
 # Permissions
@@ -333,6 +336,10 @@ pip uninstall Twisted -y
 # Gcovr
 pip uninstall gcovr -y
 
+%postun devel
+pkill -u almadevel
+userdel -r almadevel
+
 %files
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse/
@@ -343,8 +350,7 @@ pip uninstall gcovr -y
 %attr(0645,-,-) %{_usr}/local/acs/
 /usr/local/lib/python/site-packages/
 %files devel
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/INSTALL/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/PRODUCTS/
+%attr(0705,almadevel,almadevel) /home/almadevel/ACS-%{version}/ExtProd/
 
 %changelog
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
