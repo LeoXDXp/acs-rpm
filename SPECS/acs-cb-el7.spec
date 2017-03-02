@@ -48,7 +48,7 @@ RPM Installer of ACS-CB %{version}. Installs ACS CB in /home/almamgr/, leaving e
 %package devel
 Summary: ACS CB Benchmark files for {?dist} 
 License: LGPL
-Requires: ACS-ExtProds >= %{version}
+#Requires: ACS-ExtProds >= %{version}
 
 %description devel
 Source files to compile ACS CB %{version} for {?dist}
@@ -190,18 +190,24 @@ find -name "*.o" | xargs rm -rf
 %{_usr}/bin/unlink %{buildroot}/alma
 %{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-current
 %{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
-# Devel folders: RPM, Makefile, LGPL, Benchmark
-mkdir -p  %{buildroot}/home/almaproc/acscb-devel/
-mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almaproc/acscb-devel/
-mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almaproc/acscb-devel/
-mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almaproc/acscb-devel/
-mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almaproc/acscb-devel/
 
 %clean
+
+# Devel folders: RPM, Makefile, LGPL, Benchmark
+%install devel
+mkdir -p  %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/
+
 
 %pre
 useradd -U almaproc
 echo new2me | echo new2me | passwd --stdin almaproc
+
+%pre devel
+useradd -U almadevel
 
 %post
 # Permissions
@@ -292,6 +298,10 @@ pkill -u almamgr
 userdel -r almamgr
 userdel -r almaproc
 
+%postun devel
+pkill -u almadevel
+userdel -r almadevel
+
 %files
 # ACSSW, acsdata, READMEs, LICENSE, ACS_VERSION, ACS_PATCH_LEVEL
 %config %{_sysconfdir}/systemd/system/acscb.service
@@ -312,7 +322,7 @@ userdel -r almaproc
 
 %files devel
 # LGPL, Benchmark, Makefile, RPM
-%attr(0705,almaproc,almaproc) /home/almaproc/acscb-devel/
+%attr(0705,almadevel,almadevel) /home/almadevel/
 
 %changelog
 * Fri Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
