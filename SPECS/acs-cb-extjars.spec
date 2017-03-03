@@ -26,9 +26,9 @@ mv %{_builddir}/%{name}-%{version}/* %{buildroot}%{_prefix}/local/share/java/
 
 %files
 %doc README
-%attr{645,-,-}%{_prefix}/local/share/java/
+%attr(645,-,-) %{_prefix}/local/share/java/
 
 
 %changelog
-* Wed Mar 03 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+* Fri Mar 03 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
