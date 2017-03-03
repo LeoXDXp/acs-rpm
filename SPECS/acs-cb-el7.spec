@@ -14,7 +14,7 @@ Source4:	tao_ifr_service
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
-BuildRequires: ACS-ExtProds >= %{version}
+BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version}
 # Tools: Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
 # astyle 1.15 - 2.05 in repos
 # getopt in repos, check version. Only needed by Sun OS, Ignoring.
