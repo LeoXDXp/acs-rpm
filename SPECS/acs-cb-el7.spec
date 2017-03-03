@@ -17,8 +17,9 @@ BuildArch: x86_64 aarch64
 BuildRequires: ACS-ExtProds >= %{version}
 # Tools: Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
 # astyle 1.15 - 2.05 in repos
-# getopt in repos, check version
-BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3
+# getopt in repos, check version. Only needed by Sun OS, Ignoring.
+# xsd-doc seems to be different than xsddoc (part of xframe)
+BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 
 # Consoles that should be unified
 BuildRequires: ksh
 BuildRequires: time 
