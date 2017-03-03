@@ -25,7 +25,6 @@ mkdir -p %{buildroot}%{_prefix}/local/share/java/
 mv %{_builddir}/%{name}-%{version}/* %{buildroot}%{_prefix}/local/share/java/
 
 %files
-%doc README
 %attr(645,-,-) %{_prefix}/local/share/java/
 
 
