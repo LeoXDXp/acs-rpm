@@ -103,7 +103,7 @@ Requires: libxslt-devel sqlite-devel openldap-devel libxml2-devel
 RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
 
 %package devel
-Summary: ACS CB ExtProd Source files for {?dist}
+Summary: ACS CB ExtProd Source files for %{?dist}
 License: LGPL
 
 %description devel
@@ -155,9 +155,12 @@ echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ALMASW_RELEASE=ACS-%{version}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-#echo 'CLASSPATH="/usr/share/java/:$JACORB_HOME/lib:$ANT_HOME/lib:$M2_HOME/lib" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "CLASSPATH=/usr/share/java/:/home/almamgr/ACS-2016.10/JacORB/lib:/usr/share/ant/lib:/usr/share/maven/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
+#echo 'CLASSPATH="/usr/share/java/:/usr/local/share/java/:$JACORB_HOME/lib:$ANT_HOME/lib:$M2_HOME/lib" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
+echo "CLASSPATH=/usr/share/java/:/usr/local/share/java:/home/almamgr/ACS-2016.10/JacORB/lib:/usr/share/ant/lib:/usr/share/maven/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
 echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
