@@ -29,8 +29,8 @@ BuildRequires: time
 BuildRequires: rh-java-common-PyXB python-pmw == 1.3.2 pexpect PyXML
 # Pychecker 0.8.14 vs 0.8.19. Changelog: http://pychecker.cvs.sourceforge.net/viewvc/pychecker/pychecker/?pathrev=HEAD
 BuildRequires: pychecker
-# Other java packages requires
-BuildRequires: apache-commons-lang junit
+# Other java packages requires. Such as ExtJars
+BuildRequires: apache-commons-lang junit javassist geronimo-jta mockito mysql-connector-java objenesis xmlunit
 
 #BuildRequires: blas-devel expat-devel libX11-devel ncurses-devel readline gdbm gdbm-devel bzip2-devel zlib-devel sqlite-devel openssl-devel openldap-devel freetype-devel libpng-devel libxml2-devel libxslt-devel gsl-devel autoconf213 autoconf util-linux-ng unzip time log4cpp expat cppunit cppunit-devel swig xterm lpr ant centos-release asciidoc xmlto cvs openldap-devel bc time rsync openssh-server autoconf automake binutils bison flex gcc gcc-c++ gettext gcc-gfortran make byacc patch libtool pkgconfig redhat-rpm-config rpm-build rpm-sign cscope ctags diffstat doxygen elfutils indent intltool patchutils rcs  swig systemtap xz libdb-devel
 BuildRequires: procmail tkinter
