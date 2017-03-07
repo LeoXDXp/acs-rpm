@@ -150,6 +150,8 @@ echo "OMNI_ROOT=/usr/share/idl/omniORB" >> %{buildroot}%{_sysconfdir}/profile.d/
 echo "export OMNI_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "ANT_HOME=/usr/share/ant" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
 echo "export ANT_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
+echo "SWIG_ROOT=/usr/share/swig/" >> %{buildroot}%{_sysconfdir}/profile.d/swig.sh
+echo "export SWIG_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/swig.sh
 
 echo "ALMASW_ROOTDIR=/alma" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ALMASW_ROOTDIR" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
