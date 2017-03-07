@@ -113,28 +113,35 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{buildroot}/home/almamgr/%{name}-
 # Manuall make of LGPL/Kit
 make
 #make install #DESTDIR=%{buildroot}
-cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/
-make clean
-make install
+#cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/
+#make clean
+#make install
 
-cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acstempl/src/
-make
+#cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acstempl/src/
+#make
 
-cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acsutilpy/src/
-make
+#cd %{_builddir}/%{name}-%{version}/LGPL/Kit/acsutilpy/src/
+#make
 # Manual make of LGPL/Tools
-cd %{_builddir}/%{name}-%{version}/LGPL
+#cd %{_builddir}/%{name}-%{version}/LGPL
 
 
 # Manual make of LGPL/CommonSoftware
-cd %{_builddir}/%{name}-%{version}/
-make
+#cd %{_builddir}/%{name}-%{version}/
+#make
 
 
 # To allow the extraction of debug info
 chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libacserrStubs.so
 chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libACSIRSentinelStubs.so
 chmod +w %{buildroot}/home/almamgr/%{name}-%{version}/ACSSW/lib/libacscomponentStubs.so
+
+# Devel folders: RPM, Makefile, LGPL, Benchmark
+mkdir -p  %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 # Env Vars to profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -151,7 +158,7 @@ echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
 echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo "PYTHONPATH=/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_usr}/local/lib/python/site-packages/:$ALMASW_ROOTDIR/%{name}-%{version}/ACSSW/lib/python/site-packages/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "PYTHON_ROOT=$ALMASW_ROOTDIR/%{name}-%{version}/Python" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
-echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
+echo 'PYTHONINC=/usr/include/python2.7' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 
 echo 'PATH="$PATH:/alma/%{name}-%{version}/tctlk/bin:/alma/%{name}-%{version}/JacORB/bin:$GNU_ROOT/bin:/alma/%{name}-%{version}/ACSSW/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
@@ -209,14 +216,6 @@ find -name "*.o" | xargs rm -rf
 %{_usr}/bin/unlink %{buildroot}/home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
 
 %clean
-
-# Devel folders: RPM, Makefile, LGPL, Benchmark
-%install devel
-mkdir -p  %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 
 %pre
