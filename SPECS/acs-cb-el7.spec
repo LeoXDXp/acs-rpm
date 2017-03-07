@@ -200,7 +200,7 @@ mkdir -p  %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/Makefile %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 
 %pre
@@ -322,7 +322,7 @@ userdel -r almadevel
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
 
 %files devel
-# LGPL, Benchmark, Makefile, RPM
+# LGPL, Benchmark, Makefile, RPM-legacy
 %attr(0705,almadevel,almadevel) /home/almadevel/
 
 %changelog
