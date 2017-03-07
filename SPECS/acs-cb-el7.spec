@@ -1,4 +1,4 @@
-#%define ALTVER 2016.10
+%define ALTVER FEB2017
 
 Name:		ACS
 Version:	2017.02
@@ -216,6 +216,8 @@ chown -R almamgr:almamgr /home/almamgr/
 chown almamgr:almamgr %{_var}/run/acscb/
 chown almaproc:almaproc /home/almaproc/introot/
 mkdir -p /home/almamgr/%{name}-%{version}/Python/lib/python2.7/
+ln -s /home/almamgr/%{name}-%{version}/ /home/almamgr/%{ALTVER}
+ln -s /home/almamgr/%{name}-%{version}/ /home/almamgr/%{name}-latest
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/%{name}-%{version}/Python/lib/python2.7/compileall.py
 # Fixing chmod done for debug info extraction
 chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libacserrStubs.so
