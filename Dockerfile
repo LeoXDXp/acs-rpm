@@ -22,8 +22,8 @@ USER rpm
 #Download rpm repo
 RUN git clone -b master --depth 1 https://github.com/LeoXDXp/acs-rpm.git ~/rpmbuild
 # Create Source0
-RUN cd ~/rpmbuild/SOURCES/ && git clone -b master --depth 1 https://github.com/csrg-utfsm/acscb.git
-RUN tar czvf ACS-2017.02.tar.gz ACS* Benchmark Documents L* Makefile R*
+RUN cd ~/rpmbuild/SOURCES/ && git clone -b master --depth 1 https://github.com/csrg-utfsm/acscb.git ACS-2017.02/
+RUN tar czvf ACS-2017.02.tar.gz ACS-2017.02/ACS* ACS-2017.02/Benchmark ACS-2017.02/Documents ACS-2017.02/L* ACS-2017.02/Makefile ACS-2017.02/R*
 
 ENV MAKE_VERBOSE=on
 RUN cd ~/rpmbuild && rpmbuild -ba SPECS/acs-cb-el7-full.spec
