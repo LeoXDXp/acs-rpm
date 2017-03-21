@@ -11,7 +11,7 @@ RUN yum -y install epel-release centos-release-scl
 RUN yum install -y ACS-ExtProds ACS-ExtJars
 RUN yum install -y rpm-build tar
 RUN yum install -y gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 time ksh rh-java-common-PyXB python-pmw-1.3.2 pexpect PyXML pychecker apache-commons-lang junit javassist geronimo-jta mockito mysql-connector-java objenesis xmlunit procmail tkinter
-
+RUN yum install -y git
 # Might need to source new files in profile.d if source within
 
 #Creating rpm user
