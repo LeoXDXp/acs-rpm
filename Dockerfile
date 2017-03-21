@@ -6,6 +6,7 @@ MAINTAINER CSRG <leonardo.pizarro@usm.cl>
 #Installing dependencies
 RUN yum update -y
 RUN curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
+RUN curl http://repo.csrg.cl/acs-cb.repo -o /etc/yum.repos.d/acs-cb.repo
 RUN yum -y install epel-release centos-release-scl
 RUN yum install -y ACS-ExtProds ACS-ExtJars
 RUN yum install -y rpm-build tar
