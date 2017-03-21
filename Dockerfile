@@ -24,6 +24,7 @@ RUN git clone -b master --depth 1 https://github.com/LeoXDXp/acs-rpm.git ~/rpmbu
 RUN cd ~/rpmbuild/SOURCES/ && git clone -b master --depth 1 https://github.com/csrg-utfsm/acscb.git
 RUN tar czvf ACS-2017.02.tar.gz ACS* Benchmark Documents L* Makefile R*
 
+ENV MAKE_VERBOSE=on
 RUN cd ~/rpmbuild && rpmbuild -ba SPECS/acs-cb-el7-full.spec
 
 #ENV MAKE_NOSTATIC=yes
