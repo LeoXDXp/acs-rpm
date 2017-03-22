@@ -1,23 +1,60 @@
 # DockerFile to compile ACS 2017.02 using ExtProd and Tools from RPMs
 FROM centos:centos7
 
-MAINTAINER CSRG <camilo.valenzuela@alumnos.usm.cl>
+MAINTAINER CSRG <leonardo.pizarro@usm.cl>
 
 #Installing dependencies
-RUN yum update -y
 RUN curl https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -o /etc/yum.repos.d/epel-apache-maven.repo
+RUN curl http://repo.csrg.cl/acs-cb.repo -o /etc/yum.repos.d/acs-cb.repo
 RUN yum -y install epel-release centos-release-scl
 RUN yum install -y ACS-ExtProds ACS-ExtJars
-RUN yum install -y rpm-build tar
 RUN yum install -y gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 time ksh rh-java-common-PyXB python-pmw-1.3.2 pexpect PyXML pychecker apache-commons-lang junit javassist geronimo-jta mockito mysql-connector-java objenesis xmlunit procmail tkinter
-
-# Might need to source new files in profile.d if source within
+RUN yum install -y git rpm-build tar
 
 #Creating rpm user
 RUN adduser -U almabuild
 USER almabuild
 
 #Download rpm repo
-RUN git clone -b merges https://github.com/csrg-utfsm/acscb.git
+RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ACS-2017.02/
+# pythfilter, aka SOURCE1
+RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/
+# Copy tao_ifr_service
+# RUN ... /usr/local/bin/
+# Source bash_profile.acs
+
+RUN export
+# Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
+RUN source /etc/profile.d/mico.sh
+RUN source /etc/profile.d/jacorb.sh
+RUN source /etc/profile.d/ant.sh
+RUN source /etc/profile.d/ace-devel.sh # overrides ACE_ROOT
+RUN source /etc/profile.d/apache-maven.sh
+RUN source /etc/profile.d/mpc.sh
+RUN source /etc/profile.d/tao-devel.sh
+ENV SWIG_ROOT="/usr/share/swig"
+# Source other stuff to clean more what bash_profile has done
+# CHECK CLASSPATH
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+ENV ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
+ENV ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
+ENV ACS_CDB="$ACSDATA/config/defaultCDB"
+ENV ACS_INSTANCE="0"
+ENV ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
+ENV ACS_TMP="$ACSDATA/tmp/$HOSTNAME" # It should be just /tmp
+ENV IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
+ENV LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"
+ENV GNU_ROOT="/usr"
+ENV PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/$ALMASW_RELEASE/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"
+ENV PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
+ENV PYTHONINC="/usr/include/python2.7"
+ENV PATH="$PATH:/alma/$ALMASW_RELEASE/tctlk/bin:/alma/$ALMASW_RELEASE/JacORB/bin:$GNU_ROOT/bin:/alma/$ALMASW_RELEASE/ACSSW/bin"
 
 ENV MAKE_NOSTATIC=yes
+ENV MAKE_NOIFR_CHECK=on
+ENV MAKE_PARS=" -j 2 -l 2 "
+RUN export
+
+RUN make
+# Clean
+RUN cd $ACSROOT && find -name "*.o" | xargs rm -rf
