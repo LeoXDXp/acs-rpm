@@ -18,8 +18,8 @@ RUN adduser -U rpm
 USER rpm
 
 #Download rpm repo, Create Source0
-RUN git clone -b master --depth 1 https://github.com/LeoXDXp/acs-rpm.git ~/rpmbuild && ls -la
-RUN cd ~/rpmbuild/SOURCES/ && git clone -b master --depth 1 https://github.com/csrg-utfsm/acscb.git ACS-2017.0/
+RUN git clone -b master --depth 1 https://github.com/LeoXDXp/acs-rpm.git ~/rpmbuild
+RUN cd ~/rpmbuild/SOURCES/ && git clone -b master --depth 1 https://github.com/csrg-utfsm/acscb.git ACS-2017.02/ && ls -la
 RUN cd ~/rpmbuild/SOURCES/ && tar czvf ACS-2017.02.tar.gz ACS-2017.02/ACS* ACS-2017.02/Benchmark ACS-2017.02/Documents ACS-2017.02/L* ACS-2017.02/Makefile ACS-2017.02/R*
 
 ENV MAKE_VERBOSE=on
