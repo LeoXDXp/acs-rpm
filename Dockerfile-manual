@@ -22,7 +22,7 @@ RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> /
 USER almabuild
 
 #Download rpm repo
-RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ACS-2017.02/
+RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ~/ACS-2017.02/
 # pythfilter, aka SOURCE1
 RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/
 RUN export
