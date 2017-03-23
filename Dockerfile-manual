@@ -11,18 +11,20 @@ RUN yum install -y ACS-ExtProds ACS-ExtJars
 RUN yum install -y gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 time ksh rh-java-common-PyXB python-pmw-1.3.2 pexpect PyXML pychecker apache-commons-lang junit javassist geronimo-jta mockito mysql-connector-java objenesis xmlunit procmail tkinter
 RUN yum install -y git rpm-build tar
 
+# Copy tao_ifr_service
+RUN curl http://repo.csrg.cl/Sources/tao_ifr_service -o /usr/local/bin/tao_ifr_service
+
 #Creating rpm user
 RUN adduser -U almabuild
+# Add bash_profile to bashrc
+RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> /home/almabuild/.bashrc
+
 USER almabuild
 
 #Download rpm repo
 RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ACS-2017.02/
 # pythfilter, aka SOURCE1
 RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/
-# Copy tao_ifr_service
-# RUN ... /usr/local/bin/
-# Source bash_profile.acs
-RUN source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs
 RUN export
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
 RUN source /etc/profile.d/mico.sh
