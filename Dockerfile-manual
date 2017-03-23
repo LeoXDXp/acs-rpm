@@ -38,19 +38,20 @@ ENV SWIG_ROOT="/usr/share/swig"
 # Source other stuff to clean more what bash_profile has done
 # CHECK CLASSPATH
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
-ENV ACSDATA="/alma/2017.02/acsdata"
-ENV ACSROOT="/alma/2017.02/ACSSW"
-ENV ACS_CDB="/alma/2017.02/acsdata/config/defaultCDB"
+ENV ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
+ENV ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
+ENV ACS_CDB="$ACSDATA/config/defaultCDB"
 ENV ACS_INSTANCE="0"
 ENV ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
-ENV ACS_TMP="/alma/2017.02/acsdata/tmp/$HOSTNAME" # It should be just /tmp
-ENV IDL_PATH="-I/alma/2017.02/ACSSW/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
-ENV LD_LIBRARY_PATH="/alma/2017.02/ACSSW/idl:/usr/lib64/:/alma/2017.02/ACSSW/tcltk/lib:/usr/local/lib64:/usr/local/lib"
+# It should be just /tmp
+ENV ACS_TMP="$ACSDATA/tmp/$HOSTNAME"
+ENV IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
+ENV LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"
 ENV GNU_ROOT="/usr"
-ENV PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/2017.02/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"
-ENV PYTHON_ROOT="/alma/2017.02/Python"
+ENV PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/$ALMASW_RELEASE/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"
+ENV PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 ENV PYTHONINC="/usr/include/python2.7"
-ENV PATH="$PATH:/alma/2017.02/tctlk/bin:/alma/2017.02/JacORB/bin:$GNU_ROOT/bin:/alma/2017.02/ACSSW/bin"
+ENV PATH="$PATH:/alma/$ALMASW_RELEASE/tctlk/bin:/alma/$ALMASW_RELEASE/JacORB/bin:$GNU_ROOT/bin:/alma/$ALMASW_RELEASE/ACSSW/bin"
 
 ENV MAKE_NOSTATIC=yes
 ENV MAKE_NOIFR_CHECK=on
