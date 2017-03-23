@@ -22,7 +22,7 @@ RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythf
 # Copy tao_ifr_service
 # RUN ... /usr/local/bin/
 # Source bash_profile.acs
-
+RUN source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs
 RUN export
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
 RUN source /etc/profile.d/mico.sh
@@ -54,7 +54,9 @@ ENV MAKE_NOSTATIC=yes
 ENV MAKE_NOIFR_CHECK=on
 ENV MAKE_PARS=" -j 2 -l 2 "
 RUN export
+# clean before
+RUN cd $ACSROOT && find -name "*.o" | xargs rm -rf
 
-RUN make
+RUN cd ~/ACS-2017.02/ && make
 # Clean
 RUN cd $ACSROOT && find -name "*.o" | xargs rm -rf
