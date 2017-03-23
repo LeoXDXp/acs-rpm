@@ -13,27 +13,25 @@ RUN yum install -y git rpm-build tar
 
 # Copy tao_ifr_service
 RUN curl http://repo.csrg.cl/Sources/tao_ifr_service -o /usr/local/bin/tao_ifr_service
-
 #Creating rpm user
 RUN adduser -U almabuild
-# Add bash_profile to bashrc
-RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> /home/almabuild/.bashrc
-
 USER almabuild
 
 #Download rpm repo
 RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ~/ACS-2017.02/
 # pythfilter, aka SOURCE1
 RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
-RUN export
+# Add bash_profile to bashrc
+RUN /bin/bash -c "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs"
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
-RUN source /etc/profile.d/mico.sh
-RUN source /etc/profile.d/jacorb.sh
-RUN source /etc/profile.d/ant.sh
-RUN source /etc/profile.d/ace-devel.sh # overrides ACE_ROOT
-RUN source /etc/profile.d/apache-maven.sh
-RUN source /etc/profile.d/mpc.sh
-RUN source /etc/profile.d/tao-devel.sh
+RUN /bin/bash -c "source /etc/profile.d/mico.sh"
+RUN /bin/bash -c "source /etc/profile.d/jacorb.sh"
+RUN /bin/bash -c "source /etc/profile.d/ant.sh"
+# overrides ACE_ROOT
+RUN /bin/bash -c "source /etc/profile.d/ace-devel.sh"
+RUN /bin/bash -c "source /etc/profile.d/apache-maven.sh"
+RUN /bin/bash -c "source /etc/profile.d/mpc.sh"
+RUN /bin/bash -c "source /etc/profile.d/tao-devel.sh"
 ENV SWIG_ROOT="/usr/share/swig"
 # Source other stuff to clean more what bash_profile has done
 # CHECK CLASSPATH
