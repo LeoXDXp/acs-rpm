@@ -24,7 +24,7 @@ USER almabuild
 #Download rpm repo
 RUN git clone --depth 1 -b merges https://github.com/csrg-utfsm/acscb.git ~/ACS-2017.02/
 # pythfilter, aka SOURCE1
-RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/
+RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
 RUN export
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
 RUN source /etc/profile.d/mico.sh
