@@ -24,32 +24,32 @@ RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythf
 # Add bash_profile to bashrc
 RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> ~/.bashrc
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
-RUN echo "source /etc/profile.d/mico.sh" >> ~/.bashrc
-RUN echo "source /etc/profile.d/jacorb.sh" >> ~/.bashrc
-RUN echo "source /etc/profile.d/ant.sh" >> ~/.bashrc
+RUN echo "source /etc/profile.d/mico.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/jacorb.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/ant.sh" >> ~/.bashrc &&\
 # overrides ACE_ROOT
-RUN echo "source /etc/profile.d/ace-devel.sh" >> ~/.bashrc
-RUN echo "source /etc/profile.d/apache-maven.sh" >> ~/.bashrc
-RUN echo "source /etc/profile.d/mpc.sh" >> ~/.bashrc
-RUN echo "source /etc/profile.d/tao-devel.sh" >> ~/.bashrc
-RUN echo 'SWIG_ROOT="/usr/share/swig" ' >> ~/.bashrc
+    echo "source /etc/profile.d/ace-devel.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/apache-maven.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/mpc.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/tao-devel.sh" >> ~/.bashrc &&\
+    echo 'SWIG_ROOT="/usr/share/swig" ' >> ~/.bashrc &&\
 # Source other stuff to clean more what bash_profile has done
 # CHECK CLASSPATH
-RUN echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bashrc
-RUN echo 'ACSDATA="/alma/2017.02/acsdata"'
-RUN echo 'ACSROOT="/alma/2017.02/ACSSW"'
-RUN echo 'ACS_CDB="$ACSDATA/config/defaultCDB"'
-RUN echo 'ACS_INSTANCE="0"'
-RUN echo 'ACS_STARTUP_TIMEOUT_MULTIPLIER="2"'
+RUN echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bashrc &&\
+    echo 'ACSDATA="/alma/2017.02/acsdata"'  >> ~/.bashrc &&\
+    echo 'ACSROOT="/alma/2017.02/ACSSW"' >> ~/.bashrc &&\
+    echo 'ACS_CDB="$ACSDATA/config/defaultCDB"' >> ~/.bashrc &&\
+    echo 'ACS_INSTANCE="0"' >> ~/.bashrc &&\
+    echo 'ACS_STARTUP_TIMEOUT_MULTIPLIER="2"' >> ~/.bashrc
 # It should be just /tmp
-RUN echo 'ACS_TMP="/alma/2017.02/acsdata/tmp/$HOSTNAME"' >> ~/.bashrc
-RUN echo 'IDL_PATH="-I/alma/2017.02/ACSSW/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao" ' >> ~/.bashrc
-RUN echo 'LD_LIBRARY_PATH="/alma/2017.02/ACSSW/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"' >> ~/.bashrc
-RUN echo 'GNU_ROOT="/usr"' >> ~/.bashrc
-RUN echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/2017.02/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"' >> ~/.bashrc
-RUN echo 'PYTHON_ROOT="/alma/2017.02/Python"' >> ~/.bashrc
-RUN echo 'PYTHONINC="/usr/include/python2.7"' >> ~/.bashrc
-RUN echo 'PATH="$PATH:/alma/2017.02/tctlk/bin:/alma/2017.02/JacORB/bin:$GNU_ROOT/bin:/alma/2017.02/ACSSW/bin"' >> ~/.bashrc
+RUN echo 'ACS_TMP="/alma/2017.02/acsdata/tmp/$HOSTNAME"' >> ~/.bashrc &&\
+    echo 'IDL_PATH="-I/alma/2017.02/ACSSW/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao" ' >> ~/.bashrc &&\
+    echo 'LD_LIBRARY_PATH="/alma/2017.02/ACSSW/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"' >> ~/.bashrc &&\
+    echo 'GNU_ROOT="/usr"' >> ~/.bashrc &&\
+    echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/2017.02/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"' >> ~/.bashrc &&\
+    echo 'PYTHON_ROOT="/alma/2017.02/Python"' >> ~/.bashrc &&\
+    echo 'PYTHONINC="/usr/include/python2.7"' >> ~/.bashrc &&\
+    echo 'PATH="$PATH:/alma/2017.02/tctlk/bin:/alma/2017.02/JacORB/bin:$GNU_ROOT/bin:/alma/2017.02/ACSSW/bin"' >> ~/.bashrc
 
 ENV MAKE_NOSTATIC=yes
 ENV MAKE_NOIFR_CHECK=on
