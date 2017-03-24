@@ -9,7 +9,7 @@ RUN curl http://repo.csrg.cl/acs-cb.repo -o /etc/yum.repos.d/acs-cb.repo
 RUN yum -y install epel-release centos-release-scl
 RUN yum install -y ACS-ExtProds ACS-ExtJars
 RUN yum install -y gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 time ksh rh-java-common-PyXB python-pmw-1.3.2 pexpect PyXML pychecker apache-commons-lang junit javassist geronimo-jta mockito mysql-connector-java objenesis xmlunit procmail tkinter
-RUN yum install -y git rpm-build tar svn
+RUN yum install -y git rpm-build tar svn vim
 
 # Copy tao_ifr_service
 RUN curl http://repo.csrg.cl/Sources/tao_ifr_service -o /usr/local/bin/tao_ifr_service
@@ -24,7 +24,8 @@ RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythf
 # Add bash_profile to bashrc
 RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> ~/.bashrc
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
-RUN echo "source /etc/profile.d/mico.sh" >> ~/.bashrc &&\
+RUN echo "source /etc/profile.d/acscb.sh" >> ~/.bashrc &&\
+    echo "source /etc/profile.d/mico.sh" >> ~/.bashrc &&\
     echo "source /etc/profile.d/jacorb.sh" >> ~/.bashrc &&\
     echo "source /etc/profile.d/ant.sh" >> ~/.bashrc &&\
 # overrides ACE_ROOT
@@ -60,3 +61,4 @@ RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs r
 #RUN /bin/bash -c "source ~/.bashrc" && cd ~/ACS-2017.02/ && make
 # Clean
 #RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs rm -rf
+USER root
