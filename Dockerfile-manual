@@ -1,4 +1,4 @@
-# DockerFile to compile ACS 2017.02 using ExtProd and Tools from RPMs
+# DockerFile to compile ACS ACS-2017.02 using ExtProd and Tools from RPMs
 FROM centos:centos7
 
 MAINTAINER CSRG <leonardo.pizarro@usm.cl>
@@ -13,14 +13,19 @@ RUN yum install -y git rpm-build tar svn vim
 
 # Copy tao_ifr_service
 RUN curl http://repo.csrg.cl/Sources/tao_ifr_service -o /usr/local/bin/tao_ifr_service
+
+RUN chgrp almabuild /alma/ACS-2017.02/
+USER almamgr
+RUN chown g+w ~/ACS-2017.02/ 
+USER root
 #Creating rpm user
 RUN adduser -U almabuild
 USER almabuild
 
 #Download rpm repo
-RUN git clone --depth 1 -b master https://github.com/csrg-utfsm/acscb.git ~/ACS-2017.02/
+RUN git clone --depth 1 -b master https://github.com/csrg-utfsm/acscb.git ~/ACS-ACS-2017.02/
 # pythfilter, aka SOURCE1
-RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
+RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
 # Add bash_profile to bashrc
 RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> ~/.bashrc
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
@@ -37,21 +42,21 @@ RUN echo "source /etc/profile.d/acscb.sh" >> ~/.bashrc &&\
 # Source other stuff to clean more what bash_profile has done
 # CHECK CLASSPATH
 RUN echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bashrc &&\
-    echo 'ACSDATA="/alma/2017.02/acsdata"'  >> ~/.bashrc &&\
-    echo 'ACSROOT="/alma/2017.02/ACSSW"' >> ~/.bashrc &&\
-    echo 'ALMASW_INSTDIR="/alma/ACS-2017.02' >> ~/.bashrc &&\
+    echo 'ACSDATA="/alma/ACS-2017.02/acsdata"'  >> ~/.bashrc &&\
+    echo 'ACSROOT="/alma/ACS-2017.02/ACSSW"' >> ~/.bashrc &&\
+    echo 'ALMASW_INSTDIR="/alma/ACS-ACS-2017.02' >> ~/.bashrc &&\
     echo 'ACS_CDB="$ACSDATA/config/defaultCDB"' >> ~/.bashrc &&\
     echo 'ACS_INSTANCE="0"' >> ~/.bashrc &&\
     echo 'ACS_STARTUP_TIMEOUT_MULTIPLIER="2"' >> ~/.bashrc
 # It should be just /tmp
-RUN echo 'ACS_TMP="/alma/2017.02/acsdata/tmp/$HOSTNAME"' >> ~/.bashrc &&\
-    echo 'IDL_PATH="-I/alma/2017.02/ACSSW/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao" ' >> ~/.bashrc &&\
-    echo 'LD_LIBRARY_PATH="/alma/2017.02/ACSSW/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"' >> ~/.bashrc &&\
+RUN echo 'ACS_TMP="/alma/ACS-2017.02/acsdata/tmp/$HOSTNAME"' >> ~/.bashrc &&\
+    echo 'IDL_PATH="-I/alma/ACS-2017.02/ACSSW/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao" ' >> ~/.bashrc &&\
+    echo 'LD_LIBRARY_PATH="/alma/ACS-2017.02/ACSSW/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/lib"' >> ~/.bashrc &&\
     echo 'GNU_ROOT="/usr"' >> ~/.bashrc &&\
-    echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/2017.02/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"' >> ~/.bashrc &&\
-    echo 'PYTHON_ROOT="/alma/2017.02/Python"' >> ~/.bashrc &&\
+    echo 'PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:/home/almamgr/ACS-2017.02/ACSSW/lib/python/site-packages:/usr/local/lib/python/site-packages/"' >> ~/.bashrc &&\
+    echo 'PYTHON_ROOT="/alma/ACS-2017.02/Python"' >> ~/.bashrc &&\
     echo 'PYTHONINC="/usr/include/python2.7"' >> ~/.bashrc &&\
-    echo 'PATH="$PATH:/alma/2017.02/tctlk/bin:/alma/2017.02/JacORB/bin:$GNU_ROOT/bin:/alma/2017.02/ACSSW/bin"' >> ~/.bashrc
+    echo 'PATH="$PATH:/alma/ACS-2017.02/tctlk/bin:/alma/ACS-2017.02/JacORB/bin:$GNU_ROOT/bin:/alma/ACS-2017.02/ACSSW/bin"' >> ~/.bashrc
 
 ENV MAKE_NOSTATIC=yes
 ENV MAKE_NOIFR_CHECK=on
@@ -59,7 +64,7 @@ ENV MAKE_PARS=" -j 2 -l 2 "
 # clean before
 RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs rm -rf
 
-#RUN /bin/bash -c "source ~/.bashrc" && cd ~/ACS-2017.02/ && make
+#RUN /bin/bash -c "source ~/.bashrc" && cd ~/ACS-ACS-2017.02/ && make
 # Clean
 #RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs rm -rf
 USER root
