@@ -32,7 +32,7 @@ RUN echo "source /etc/profile.d/mico.sh" >> ~/.bashrc &&\
     echo "source /etc/profile.d/apache-maven.sh" >> ~/.bashrc &&\
     echo "source /etc/profile.d/mpc.sh" >> ~/.bashrc &&\
     echo "source /etc/profile.d/tao-devel.sh" >> ~/.bashrc &&\
-    echo 'SWIG_ROOT="/usr/share/swig" ' >> ~/.bashrc &&\
+    echo 'SWIG_ROOT="/usr/share/swig" ' >> ~/.bashrc
 # Source other stuff to clean more what bash_profile has done
 # CHECK CLASSPATH
 RUN echo 'JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk' >> ~/.bashrc &&\
