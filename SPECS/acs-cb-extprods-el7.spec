@@ -80,7 +80,7 @@ Requires: pytz python-jinja2 python-docutils
 # Pychecker required 0.8.17, Epel provides 0.8.19. Gnuplot 1.8 required by ACS not found. Base provides 4.6.2. 
 # Diference between python-sphinx_rtd_theme 0.1.7 and 0.1.8: 4 features: https://github.com/snide/sphinx_rtd_theme#v0-1-8
 # python-ipython could be here: repo 3.2.1 vs acs.req 1.2.1
-Requires: python-sphinx_rtd_theme python-unittest2 python-suds pychecker gnuplot
+Requires: python-sphinx_rtd_theme python-unittest2 python-suds pychecker gnuplot man
 
 # PyModules from rpms of F21 to F24 symlinked in acs-cb-extprod repo
 # Exact version
