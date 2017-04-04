@@ -15,6 +15,10 @@ RUN yum install -y git rpm-build tar svn vim
 RUN curl http://repo.csrg.cl/Sources/tao_ifr_service -o /usr/local/bin/tao_ifr_service
 
 RUN chgrp almabuild /alma/ACS-2017.02/
+# Compileall symlink
+RUN mkdir -p /alma/ACS-2017.02/Python/lib/python2.7/
+RUN ln -s /usr/lib64/python2.7/compileall.py /alma/ACS-2017.02/Python/lib/python2.7/compileall.py
+
 USER almamgr
 RUN chown g+w ~/ACS-2017.02/ 
 USER root
@@ -23,9 +27,9 @@ RUN adduser -U almabuild
 USER almabuild
 
 #Download rpm repo
-RUN git clone --depth 1 -b master https://github.com/csrg-utfsm/acscb.git ~/ACS-ACS-2017.02/
+RUN git clone --depth 1 -b master https://github.com/csrg-utfsm/acscb.git ~/ACS-2017.02/
 # pythfilter, aka SOURCE1
-RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
+RUN curl https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py -o ~/ACS-2017.02/LGPL/Tools/extpy/src/pythfilter.py
 # Add bash_profile to bashrc
 RUN echo "source ~/ACS-2017.02/LGPL/acsBUILD/config/.acs/.bash_profile.acs" >> ~/.bashrc
 # Source env vars installed by ExtProds RPM in profile.d to "clean" values set by bash_profile.acs
@@ -63,7 +67,6 @@ ENV MAKE_NOIFR_CHECK=on
 ENV MAKE_PARS=" -j 2 -l 2 "
 # clean before
 RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs rm -rf
-
 #RUN /bin/bash -c "source ~/.bashrc" && cd ~/ACS-ACS-2017.02/ && make
 # Clean
 #RUN /bin/bash -c "source ~/.bashrc" && cd $ACSROOT && find -name "*.o" | xargs rm -rf
