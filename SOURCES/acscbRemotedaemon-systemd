@@ -1,0 +1,21 @@
+[Unit]
+Description=ACS Remote Management Daemon
+#Documentation=man:sshd(8) man:sshd_config(5)
+After=multi-user.target
+
+[Service]
+Type=forking
+Environment=INTROOT='/home/almaproc/introot/'
+# EnvFile to later be a conf file
+#EnvironmentFile=-/etc/acs/bash_profile.acs
+User=almamgr
+#ExecPreStart=killACS -q
+ExecStart=acsdaemonStartAcs
+ExecStop=acsdaemonStopAcs && acsdataClean --all
+ExecReload=cdbjDALClearCache
+KillMode=process
+#Restart=on-failure
+#RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
