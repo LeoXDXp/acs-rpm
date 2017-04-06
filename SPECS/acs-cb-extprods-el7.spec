@@ -232,8 +232,8 @@ useradd -U almadevel
 chown -R almamgr:almamgr /home/almamgr/
 chmod 0705 /home/almamgr/
 # tclCheck symlink to /usr/local/bin
-ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tclCheck %{_usr}/local/bin/
-ln -s /home/almamgr/ACS-%{version}/tctlk/bin/tcl %{_usr}/local/bin/
+ln -s /home/almamgr/ACS-%{version}/tcllk/bin/tclCheck %{_usr}/local/bin/
+ln -s /home/almamgr/ACS-%{version}/tcltk/bin/tcl %{_usr}/local/bin/
 # Symlink of tao_idl because hardcoded path
 mkdir -p %{_usr}/share/tao/TAO_IDL
 ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
