@@ -8,7 +8,7 @@ License:	LGPL
 URL:		http://acs-community.github.io/
 Source0:	%{name}-%{version}.tar.gz 
 # Modified Makefile to compile only Tools, Kit and Benchmark
-Source1:	Makefile
+Source1:	Makefile-TKB
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
