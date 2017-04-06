@@ -11,6 +11,8 @@ Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythf
 Source2:	tao_ifr_service
 # Modified Makefile to compile only ACS core Modules
 Source3:	Makefile-Core
+Source4:	acscbdaemon-systemd
+Source5:	acscbRemotedaemon-systemd
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
@@ -31,6 +33,12 @@ cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 ln -s %{buildroot}/home/almamgr/%{name}-%{version} %{buildroot}/home/almamgr/%{name}-current
+
+# Source 4,5 SystemD daemons
+mkdir -p %{buildroot}%{_sysconfdir}/systemd/system/
+cp -f %{SOURCE4} %{buildroot}%{_sysconfdir}/systemd/system/acscb.service
+cp -f %{SOURCE5} %{buildroot}%{_sysconfdir}/systemd/system/acscbremote.service
+
 # Env Vars for installing. 
 export ALMASW_ROOTDIR=%{buildroot}/alma
 export ALMASW_RELEASE=%{name}-%{version}
@@ -95,8 +103,6 @@ mv %{_builddir}/%{name}-%{version}/Documents/ %{buildroot}%{_usr}/local/acscb/
 # /etc. Hoping to have acsdata only on etc in the future
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
-# Place to create files for variable exporting on boot
-mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 # Introot for development
 mkdir -p  %{buildroot}/home/almaproc/introot
 
@@ -124,58 +130,9 @@ chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libacserrStubs.so
 chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libACSIRSentinelStubs.so
 chmod -w /home/almamgr/%{name}-%{version}/ACSSW/lib/libacscomponentStubs.so
 
-# Create systemd services
-echo "
-[Unit]
-Description=ACS Core Service
-#Documentation=man:sshd(8) man:sshd_config(5)
-After=multi-user.target
-
-[Service]
-Type=forking
-Environment=INTROOT='/home/almaproc/introot/'
-#EnvironmentFile=-/etc/acs/bash_profile.acs
-User=almamgr
-ExecPreStart=killACS -q
-ExecStart=acsStart
-ExecStop=acsStop && acsdataClean --all
-ExecReload=cdbjDALClearCache
-KillMode=process
-#Restart=on-failure
-#RestartSec=10s
-
-[Install]
-WantedBy=multi-user.target
-
-" > %{_sysconfdir}/systemd/system/acscb.service
+# Enable systemd services
 systemctl enable acscb.service
-
-echo "
-[Unit]
-Description=ACS Remote Management Daemon
-#Documentation=man:sshd(8) man:sshd_config(5)
-After=multi-user.target
-
-[Service]
-Type=forking
-Environment=INTROOT='/home/almaproc/introot/'
-# EnvFile to later be a conf file
-#EnvironmentFile=-/etc/acs/bash_profile.acs
-User=almamgr
-#ExecPreStart=killACS -q
-ExecStart=acsdaemonStartAcs
-ExecStop=acsdaemonStopAcs && acsdataClean --all
-ExecReload=cdbjDALClearCache
-KillMode=process
-#Restart=on-failure
-#RestartSec=10s
-
-[Install]
-WantedBy=multi-user.target
-
-" > %{_sysconfdir}/systemd/system/acscbremote.service
 systemctl enable acscbremote.service
-
 systemctl daemon-reload
 
 # Reload Python modules. Avoids the error: from omniORB import CORBA \n omniORB not found
