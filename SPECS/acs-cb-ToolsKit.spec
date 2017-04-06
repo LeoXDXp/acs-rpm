@@ -58,8 +58,6 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 # Basic paths and symlinks
 mkdir -p  %{buildroot}/home/almamgr
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-# Bash profile. Needed for do_all and *_all make instructions :(
-source %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/config/.acs/.bash_profile.acs 
 # Env Vars for installing. 
 export ALMASW_ROOTDIR=%{buildroot}/alma
 export ALMASW_RELEASE=%{name}-%{version}
