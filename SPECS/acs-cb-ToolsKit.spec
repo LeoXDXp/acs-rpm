@@ -52,7 +52,7 @@ Source files to compile ACS CB Tools, Kit and Benchmark %{version} for {?dist}
 %prep
 %setup -q
 %build
-cp -f %{SOURCE1} %{_builddir}/ACS-%{version}/Makefile
+cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 
 %install
 # Basic paths and symlinks
@@ -76,7 +76,7 @@ export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/l
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
 export TCLTK_ROOT="/alma/ACS-%{version}/tcltk"
-export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/ACS-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
+export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
@@ -96,7 +96,7 @@ export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
-cd %{_builddir}/ACS-%{version}/
+cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/
 # Symlink of Python's compilelall for hardcoded path in make files
@@ -107,9 +107,9 @@ make
 
 # Devel folders: RPM, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almadevel/
-mv %{_builddir}/ACS-%{version}/LGPL/ %{buildroot}/home/almadevel/
-mv %{_builddir}/ACS-%{version}/Benchmark/ %{buildroot}/home/almadevel/
-mv %{_builddir}/ACS-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
+mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
+mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 # Env Vars to profile.d
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
