@@ -10,7 +10,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	https://raw.githubusercontent.com/tmbdev/pylinda/master/linda/doc/pythfilter.py
 Source2:	tao_ifr_service
 # Modified Makefile to compile only ACS core Modules
-Source3:	Makefile
+Source3:	Makefile-Core
 
 BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
