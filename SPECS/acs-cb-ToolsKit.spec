@@ -32,7 +32,7 @@ BuildRequires: procmail tkinter
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel time libpng10-devel expat21
-Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds == %{version} tkinter
+Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds >= %{version} tkinter
 Requires: apache-commons-lang junit
 # X Packages
 Requires: gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
@@ -162,8 +162,6 @@ mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{buildroot}/home/almamgr/%{name}-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 # Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-# Introot for development
-mkdir -p  %{buildroot}/home/almaproc/introot
 
 # Remove objects
 cd %{buildroot}/alma/ACS-%{version}/ACSSW/
@@ -197,8 +195,6 @@ ln -s /home/almamgr/%{name}-%{version}/ /home/almamgr/%{name}-latest
 %postun
 # Al user processes must be killed before userdel
 pkill -u almaproc
-pkill -u almamgr
-userdel -r almamgr
 userdel -r almaproc
 
 %postun devel
@@ -211,7 +207,6 @@ userdel -r almadevel
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/ACSSW/bin/
 %attr(0705,almamgr,almamgr) /home/almamgr/%{name}-%{version}/acsdata/
-%attr(-,almaproc,almaproc)/home/almaproc/introot/
 %{_usr}/local/bin
 %{_usr}/local/lib
 %docdir %{_usr}/local/share/man/
