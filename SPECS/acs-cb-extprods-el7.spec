@@ -56,10 +56,10 @@ BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-de
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
 BuildRequires: tk iwidgets tclx tcllib blt tktable expect
 %ifarch x86_64
-BuildRequires: ant == 1.9.3
+BuildRequires: ant >= 1.9.2
 %endif
 %ifarch aarch64 armv8 arm64
-BuildRequires: ant == 1.9.2
+BuildRequires: ant >= 1.9.2
 %endif
 
 # ACE + TAO + ACS  Patches
