@@ -53,6 +53,9 @@ Source files to compile ACS CB Tools, Kit and Benchmark %{version} for {?dist}
 %setup -q
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
+# Deleting harcoded paths for ant.jar and xalan.jar
+sed -i '6d' %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/.classpath
+sed -i '6d' %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/.classpath
 
 %install
 # Basic paths and symlinks
