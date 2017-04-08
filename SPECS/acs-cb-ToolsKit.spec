@@ -53,10 +53,6 @@ Source files to compile ACS CB Tools, Kit and Benchmark %{version} for {?dist}
 %setup -q
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
-# Deleting harcoded paths for ant.jar and xalan.jar
-sed -i 's/ECLIPSE_HOME\/plugins\/org\.apache\.ant_1.6.5\/lib/\/usr\/share\/java/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/.classpath
-sed -i 's/ACSROOT\/lib\/xalan\.jar/\/usr\/share\/java\/xalan-j2.jar/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/.classpath
-sed -i 's/var/lib/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/.classpath
 
 %install
 # Basic paths and symlinks
@@ -95,6 +91,8 @@ source %{_sysconfdir}/profile.d/apache-maven.sh
 source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
 
+# Temp CLASSPATH for xsddoc and extidl
+export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:"
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
