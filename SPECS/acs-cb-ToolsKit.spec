@@ -92,7 +92,7 @@ source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
 
 # Temp CLASSPATH for xsddoc and extidl
-export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:"
+export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:%{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/Monitor_Types.jar"
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
