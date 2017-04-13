@@ -257,6 +257,7 @@ ln -s %{_usr}/include/orbsvcs/NotifyExtS.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/CosPropertyS.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminS.h %{_usr}/local/include/
 ln -s %{_usr}/include/orbsvcs/CosNotifyChannelAdminC.h %{_usr}/local/include/
+# Could refine in the future
 ln -s %{_usr}/include/orbsvcs/* %{_usr}/local/include/
 ln -s %{_usr}/include/tao/* %{_usr}/local/include/
 unlink %{_usr}/local/include/PortableServer
