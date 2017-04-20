@@ -43,7 +43,7 @@ endef
 #
 HAS_BENCHMARK = $(shell if [ -d Benchmark ]; then echo "TRUE"; else echo "FALSE"; fi)
 ifeq ($(HAS_BENCHMARK),TRUE)
-   MODULES_BENCHMARK = util analyzer
+   MODULES_BENCHMARK = # util analyzer
 endif
 
 MODULES =  $(foreach kit, $(MODULES_KIT), $(MODULE_PREFIX)/Kit/$(kit)) \
