@@ -115,12 +115,12 @@ find -name "*.o" | xargs rm -rf
 
 %install
 # Copy {_builddir}/home/almamgr/ to %{buildroot}/home/almamgr/
-mkdir -p  %{buildroot}/home/almamgr/
-cp -r %{_builddir}/home/almamgr/ACSSW %{buildroot}/home/almamgr/
-cp -r %{_builddir}/home/almamgr/acsdata %{buildroot}/home/almamgr/
-mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/
-mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/
-mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/
+mkdir -p  %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/ACS-%{version}/README* %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/ACS-%{version}/LICENSE* %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/ACS-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
 
 # /etc. Hoping to have acsdata only on etc in the future
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
