@@ -51,15 +51,14 @@ Source files to compile ACS CB Tools, Kit and Benchmark %{version} for {?dist}
 
 %prep
 %setup -q
+
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
-
-%install
 # Basic paths and symlinks
-mkdir -p  %{buildroot}/home/almamgr
-ln -s %{buildroot}/home/almamgr %{buildroot}/alma
+mkdir -p  %{_builddir}/home/almamgr
+ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Env Vars for installing. 
-export ALMASW_ROOTDIR=%{buildroot}/alma
+export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
@@ -76,7 +75,7 @@ export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/lib64/:$ACSROOT/tcltk/lib:/usr/local/l
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
 export TCLTK_ROOT="/alma/ACS-%{version}/tcltk"
-export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
+export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
@@ -100,12 +99,32 @@ export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/
+mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 # Symlink of Python's compilelall for hardcoded path in make files
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
-ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{buildroot}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
+mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
+ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 
 make
+
+# Destroy Symlink in buildroot
+%{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
+
+# Remove objects
+cd %{_builddir}/alma/ACS-%{version}/ACSSW/
+find -name "*.o" | xargs rm -rf
+
+%install
+# Copy {_builddir}/home/almamgr/ to %{buildroot}/home/almamgr/
+mkdir -p  %{buildroot}/home/almamgr/
+cp -r %{_builddir}/home/almamgr/ACSSW %{buildroot}/home/almamgr/
+cp -r %{_builddir}/home/almamgr/acsdata %{buildroot}/home/almamgr/
+mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/
+mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/
+mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/
+
+# /etc. Hoping to have acsdata only on etc in the future
+mkdir -p %{buildroot}%{_sysconfdir}/acscb/
+cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
 
 # Devel folders: RPM, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almadevel/
@@ -113,7 +132,7 @@ mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
-# Env Vars to profile.d
+# Env Vars to profile.d. Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 export ALMASW_ROOTDIR="/alma"
 echo "ACSDATA=$ALMASW_ROOTDIR/ACS-%{version}/acsdata" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -149,29 +168,16 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #mkdir -p %{buildroot}%{_usr}/local/bin/
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
-mkdir -p %{buildroot}%{_usr}/local/include/
+#mkdir -p %{buildroot}%{_usr}/local/include/
 #ln -s %{buildroot}/home/almamgrACS-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
-mkdir -p %{buildroot}%{_usr}/local/share/
+#mkdir -p %{buildroot}%{_usr}/local/share/
 #mv %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/share/man/man1/ %{buildroot}%{_usr}/local/share/man/
 #mv %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/share/man/man3/ %{buildroot}%{_usr}/local/share/man/
 
 # /var/run/
 mkdir -p %{buildroot}%{_var}/run/acscb/
-# /etc. Hoping to have acsdata only on etc in the future
-mkdir -p %{buildroot}%{_sysconfdir}/acscb/
-cp -r %{buildroot}/home/almamgr/ACS-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
-# Place to create files for variable exporting on boot
-mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-
-# Remove objects
-cd %{buildroot}/alma/ACS-%{version}/ACSSW/
-find -name "*.o" | xargs rm -rf
-
-# Destroy Symlink in buildroot
-%{_usr}/bin/unlink %{buildroot}/alma
-%{_usr}/bin/unlink %{buildroot}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 
 %clean
 
@@ -191,7 +197,7 @@ mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
-
+# ln -s /home/almamgr /alma
 %preun
  
 %postun
@@ -206,14 +212,15 @@ userdel -r almadevel
 %files
 # ACSSW, acsdata, READMEs, LICENSE, ACS_VERSION, ACS_PATCH_LEVEL
 %config %{_sysconfdir}/acscb/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/ACSSW/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/ACSSW/bin/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/acsdata/
-%{_usr}/local/bin
-%{_usr}/local/lib
-%docdir %{_usr}/local/share/man/
-%{_usr}/local/share/man/
+%config %{_sysconfdir}/profile.d/
+%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/
+#%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/ACSSW/bin/
+#%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/acsdata/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
+#%{_usr}/local/bin
+#%{_usr}/local/lib
+#%docdir %{_usr}/local/share/man/
+#%{_usr}/local/share/man/
 
 %files devel
 # LGPL, Benchmark, RPM-legacy
