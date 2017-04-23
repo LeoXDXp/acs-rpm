@@ -34,8 +34,8 @@ BuildRequires: procmail tkinter
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel time libpng10-devel expat21
 Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds >= %{version} tkinter
 Requires: apache-commons-lang junit
-# X Packages
-Requires: gnome-classic-session gnome-terminal nautilus-open-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
+# X Packages: nautilus-open-terminal not yet in EL7
+Requires: gnome-classic-session gnome-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
 Requires: gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo
 
 %description
