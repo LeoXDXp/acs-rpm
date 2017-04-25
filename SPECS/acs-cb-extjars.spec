@@ -1,6 +1,6 @@
 Name:	ACS-ExtJars
 Version:	2017.02
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	External Jar files for ACS CB
 
 #Group:		
@@ -9,7 +9,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 
 #BuildRequires:	
-#Requires:	
+Requires: ant devtoolset-4-eclipse-emf-core devtoolset-4-eclipse-emf-runtime
 
 %description
 The following Jar files for ACS: activation.jar, (apache-)common-math.jar, (apache-)common-xml-resolver, ehcache-core, jackarta-regexp (deprecated by apache), jchart2d, junit-dep, prevayler, sqltool.
