@@ -9,7 +9,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 
 #BuildRequires:	
-#Requires:
+Requires: ant-antunit
 
 %description
 Handles requirements of ACS-Tools-Kit of java dependencies such as osgi(org.eclipse.uml2.uml.ecore.importer)
