@@ -27,6 +27,7 @@ mv %{_builddir}/%{name}-%{version}/ant-*.jar %{buildroot}%{_prefix}/local/share/
 
 %files
 %attr(645,-,-) %{_prefix}/local/share/eclipse
+%{_prefix}/local/share/java
 
 
 %changelog
