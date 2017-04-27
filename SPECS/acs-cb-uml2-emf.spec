@@ -12,7 +12,7 @@ Source0:	%{name}-%{version}.tar.gz
 Requires: ant-antunit
 
 %description
-Packaging runtime (jars) of eclipse mdt-uml2 and emf
+Packaging runtime (jars) of eclipse mdt-uml2, emf and emf-validation. Also ant-core jar is provided.
 
 %prep
 %setup -q
@@ -21,6 +21,9 @@ Packaging runtime (jars) of eclipse mdt-uml2 and emf
 #%make_install
 mkdir -p %{buildroot}%{_prefix}/local/share/eclipse/
 mv %{_builddir}/%{name}-%{version}/eclipse/* %{buildroot}%{_prefix}/local/share/eclipse/
+
+mkdir -p %{buildroot}%{_prefix}/local/share/java
+mv %{_builddir}/%{name}-%{version}/ant-*.jar %{buildroot}%{_prefix}/local/share/java/
 
 %files
 %attr(645,-,-) %{_prefix}/local/share/eclipse
