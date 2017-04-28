@@ -1,4 +1,4 @@
-Name:		ACS-uml2-emf
+Name:		ACS-eclipse-plugins
 Version:	2017.02
 Release:	1%{?dist}
 Summary:	Eclipse's MDT-UML2/OCF, EMF, EMF-Validation and Ant-core Jar files for ACS-Tools-Kit Package
