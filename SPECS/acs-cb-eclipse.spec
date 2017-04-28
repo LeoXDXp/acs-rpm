@@ -1,7 +1,7 @@
 Name:		ACS-eclipse-plugins
 Version:	2017.02
 Release:	1%{?dist}
-Summary:	Eclipse's MDT-UML2/OCF, EMF, EMF-Validation and Ant-core Jar files for ACS-Tools-Kit Package
+Summary:	Eclipse's MDT-UML2/OCF, EMF, EMF-Validation, XSD, Draw2 and Ant-core Jar files for ACS-Tools-Kit Package
 
 #Group:		
 License:	LGPL
@@ -12,7 +12,7 @@ Source0:	%{name}-%{version}.tar.gz
 Requires: ant-antunit
 
 %description
-Packaging runtime (jars) of eclipse mdt-uml2/ocl, emf and emf-validation. Also ant-core jar is provided.
+Packaging runtime (jars) of eclipse mdt-uml2/ocl, xsd, emf and emf-validation. Also ant-core jar is provided.
 
 %prep
 %setup -q
