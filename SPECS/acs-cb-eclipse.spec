@@ -1,8 +1,3 @@
-# See fedora-devel-java-list discussion in September 2008.
-#
-# Prevent brp-java-repack-jars from being run.
-%define __jar_repack %{nil}
-
 Name:		ACS-eclipse-plugins
 Version:	2017.02
 Release:	1%{?dist}
@@ -15,7 +10,7 @@ Source0:	%{name}-%{version}.tar.gz
 
 #BuildRequires:	
 Requires: ant-antunit
-
+AutoReq: no
 %description
 Packaging runtime (jars) of eclipse mdt-uml2/ocl, xsd, emf and emf-validation. Also ant-core jar is provided.
 
