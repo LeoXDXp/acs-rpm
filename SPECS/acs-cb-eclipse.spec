@@ -1,3 +1,8 @@
+# See fedora-devel-java-list discussion in September 2008.
+#
+# Prevent brp-java-repack-jars from being run.
+%define __jar_repack %{nil}
+
 Name:		ACS-eclipse-plugins
 Version:	2017.02
 Release:	1%{?dist}
