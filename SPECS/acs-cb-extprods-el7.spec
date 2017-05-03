@@ -90,7 +90,7 @@ Requires: python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1
 # Nose. Diference 1.3.6 - 1.3.7 does not apply to linux http://nose.readthedocs.io/en/latest/news.html
 # Pyephem 3.7.5.3 (Req 3.7.5.1) Diference: 5 Bugfixes, 3 features. http://rhodesmill.org/pyephem/CHANGELOG.html#version-3-7-5-1-2011-november-24
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
-Requires: python-nose == 1.3.7, pyephem == 3.7.5.3
+Requires: python-nose == 1.3.7, pyephem >= 3.7.5.3
 
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
 Requires: tk iwidgets tclx tcllib blt tktable expect
