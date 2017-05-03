@@ -8,6 +8,9 @@ A repo (and the .repo file for /etc/yum.repos.d/) can be found in http://repo.cs
 It contains the exact version packages required in ACS and ExtProd in the form of rpms, which have been colected
 from Fedora 21 to 24, OpenSuse and JPP6 (JPackage Project), among other rpm sources.
 
+#Jenkins CI
+http://buildfarm.csrg.cl/
+
 #Issues
 - Some issues in ACS ExtProd with Rpaths due to Eclipse libs. Both leave libs on "non-system" folders.
 https://fedoraproject.org/wiki/RPath_Packaging_Draft 
