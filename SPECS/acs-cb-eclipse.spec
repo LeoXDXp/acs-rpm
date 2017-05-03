@@ -10,7 +10,7 @@ Source0:	%{name}-%{version}.tar.gz
 
 #BuildRequires:	
 Requires: ant-antunit
-
+AutoReq: no
 %description
 Packaging runtime (jars) of eclipse mdt-uml2/ocl, xsd, emf and emf-validation. Also ant-core jar is provided.
 
