@@ -5,17 +5,17 @@
 Name:		ACS-ExtProds
 Version:	2017.02
 Release:	1%{?dist}
-Summary:	ACS CB ExtProds for CentOS 7	
+Summary:	ACS CB ExtProds for Fedora 25	
 License:	LGPL
 URL:		http://csrg-utfsm.github.io/
 AutoReq:	no
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
-# Ant for EL7 is up to 1.9.2. ACS uses 1.9.3. Provided in F21  
-# Boost for ACS is 1.41. Epel provides 1.48. Changes should not affect ACS: http://www.boost.org/doc/libs/1_53_0/doc/html/hash/changes.html
+# Ant for F25 is up to 1.9.6. ACS uses 1.9.3
+# Boost for ACS is 1.41. Epel provides 1.6. Changes should not affect ACS: http://www.boost.org/doc/libs/1_53_0/doc/html/hash/changes.html
 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
-# ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
+# ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.10
 # Small ifarch hack for x86_64 and aarch64 arch 
 %ifarch x86_64
 Source1:        mico-2.3.13.%{version}.tar.gz
@@ -48,11 +48,11 @@ Source19:	acsMakeTclLib
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 BuildArch: x86_64 aarch64
 # Base tools
-BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
+BuildRequires: git wget unzip tar bzip2 patch gcc
 # ACE + TAO + ACS  Patches. Not needed until JacORB is built inside this RPM
 #BuildRequires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion} 
 # Java and Others
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
 BuildRequires: tk iwidgets tclx tcllib blt tktable expect
 %ifarch x86_64
@@ -68,7 +68,7 @@ Requires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl maven-local
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost antlr-tool python-virtualenv python-pip maven-local
 Requires: ant >= 1.9.2
 Requires: gcc
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,

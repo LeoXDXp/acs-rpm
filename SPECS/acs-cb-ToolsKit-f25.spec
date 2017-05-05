@@ -3,7 +3,7 @@
 Name:		ACS-Tools-Kit-Benchmark
 Version:	2017.02
 Release:	1%{?dist}
-Summary:	ACS CB Tools and Kit Module for CentOS 7	
+Summary:	ACS CB Tools and Kit Module for Fedora 25	
 License:	LGPL
 URL:		http://acs-community.github.io/
 Source0:	%{name}-%{version}.tar.gz 
