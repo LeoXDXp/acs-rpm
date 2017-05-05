@@ -166,6 +166,7 @@ echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.s
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
+mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb2.sh
 #mkdir -p %{buildroot}%{_usr}/local/bin/
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
 #mkdir -p %{buildroot}%{_usr}/local/include/
@@ -197,7 +198,8 @@ mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
-# ln -s /home/almamgr /alma	
+# ln -s /home/almamgr /alma
+cat %{_sysconfdir}/profile.d/acscb2.sh >> %{_sysconfdir}/profile.d/acscb.sh
 %post devel
 # Re-enabling the syntax error for testing
 sed -i 's/#skdfksdllk = \$\$\$\$/skdfksdllk = \$\$\$\$/g' /home/almadevel/LGPL/Kit/acs/test/AcsPyTestPkg1/A.py
