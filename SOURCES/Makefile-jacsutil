@@ -12,7 +12,7 @@ os     = $(shell uname)
 # Modules in the various ACS sub-packages.    #
 ###############################################
 
-MODULE_PREFIX = /home/almadevel/LGPL
+MODULE_PREFIX = LGPL
 #!#MODULES_KIT = vlt doc acs acstempl
 MODULES_KIT =  #doc acs acstempl acsutilpy
 
