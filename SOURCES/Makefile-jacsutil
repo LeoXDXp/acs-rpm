@@ -46,7 +46,8 @@ ifeq ($(HAS_BENCHMARK),TRUE)
    MODULES_BENCHMARK = # util analyzer
 endif
 
-MODULES =  $(foreach kit, $(MODULES_KIT), $(MODULE_PREFIX)/Kit/$(kit)) \
+MODULES =  $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs))
+	   #$(foreach kit, $(MODULES_KIT), $(MODULE_PREFIX)/Kit/$(kit)) \
            $(MODULE_PREFIX)/Tools \
            $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs)) \
 	   $(foreach bm, $(MODULES_BENCHMARK), Benchmark/$(bm)) \
@@ -107,14 +108,14 @@ define canned
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
 		    $(ECHO) "############ $${member}" ;\
 		    if [ ! -d $${member} ]; then \
-                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a build.log;\
+                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
                     fi;\
 		    if [ -f $${member}/src/Makefile ]; then \
 			$(MAKE) $(MAKE_FLAGS) -C $${member}/src/ $@ || break ;\
 		    elif [ -f $${member}/ws/src/Makefile ]; then \
 			$(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ $@ || break ;\
 		    elif [ -f $${member}/Makefile ]; then \
-			$(MAKE) $(MAKE_FLAGS) -C $${member}/ $@ | tee -a build.log;\
+			$(MAKE) $(MAKE_FLAGS) -C $${member}/ $@ | tee -a ${ALMASW_ROOTDIR}/build.log ;\
 		    fi;\
 		done
 endef
@@ -160,9 +161,9 @@ rebuild:	svn-tag clean_log update
 	@$(ECHO) "... done"
 
 clean_log:
-	@$(ECHO) "############ Clean Build Log File: build.log #################"
-	@rm -f build.log
-	@touch build.log
+	@$(ECHO) "############ Clean Build Log File: ${ALMASW_ROOTDIR}/build.log  #################"
+	@rm -f ${ALMASW_ROOTDIR}/build.log 
+	@touch ${ALMASW_ROOTDIR}/build.log 
 
 clean_test_log:
 	@$(ECHO) "############ Clean Test Log File: test.log #################"
@@ -173,22 +174,22 @@ clean_test_log:
 # Check module tree
 #
 checkModuleTree:	
-	@$(ECHO) "############ Check directory tree for modules  #################"| tee -a build.log
+	@$(ECHO) "############ Check directory tree for modules  #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
 		    if [ ! -d $${member} ]; then \
-                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a build.log;\
+                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
                     fi;\
                     if [ -f $${member}/Makefile ]; then \
-                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member} >> build.log 2>& 1;\
+                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member} >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
 		    fi;\
 		    if [ -f $${member}/src/Makefile ]; then \
-                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member} >> build.log 2>& 1;\
+                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member} >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
 		    fi;\
 		    if [ -f $${member}/ws/src/Makefile ]; then \
-                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member}/ws >> build.log 2>& 1;\
+                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member}/ws >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
 		    fi;\
 		    if [ -f $${member}/lcu/src/Makefile ]; then \
-                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member}/lcu >> build.log 2>& 1;\
+                         $(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDCheckModuleTree.sh $${member}/lcu >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
 		    fi;\
 		done
 
@@ -201,11 +202,11 @@ checkModuleTree:
 #   and therefore they are built "ad hoc" by the prepare kit script
 # - doxygen
 prepare:	
-	@$(ECHO) "############ Prepare installation areas      #################" | tee -a build.log
+	@$(ECHO) "############ Prepare installation areas      #################" | tee -a ${ALMASW_ROOTDIR}/build.log 
 	@cd $(MODULE_PREFIX); $(SHELL) acsBUILD/src/acsBUILDPrepareKit.sh >> ../build.log 2>& 1
-	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Kit/acs/src/ all install clean >> build.log 2>& 1 || echo "### ==> FAILED! " | tee -a build.log
-	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Kit/acstempl/src/ all install clean >> build.log 2>& 1 || echo "### ==> FAILED! " | tee -a build.log
-#	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Tools/doxygen/src/ all install clean >> build.log 2>& 1 || echo "### ==> Doxygen FAILED! " | tee -a build.log
+	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Kit/acs/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
+	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Kit/acstempl/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
+#	@$(MAKE) $(MAKE_FLAGS) -C $(MODULE_PREFIX)/Tools/doxygen/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> Doxygen FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Update of all core components
@@ -217,29 +218,29 @@ prepare:
 #
 
 update:	checkModuleTree
-	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a build.log
+	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
 		    if [ ! -d $${member} ]; then \
-                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a build.log;\
+                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
                     fi;\
 		    if [ -f $${member}/src/Makefile ]; then \
-		         $(ECHO) "############ $${member} SRC" | tee -a build.log;\
+		         $(ECHO) "############ $${member} SRC" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
                          $(call makeItAux,$${member}/src,clean,build.log,$${member}/src/NORM-BUILD-OUTPUT) \
                          $(call makeIt,$${member}/src,all,build.log,$${member}/src/NORM-BUILD-OUTPUT) \
 			 $(call makeItAux,$${member}/src,install,build.log,$${member}/src/NORM-BUILD-OUTPUT) \
                     elif [ -f $${member}/ws/src/Makefile ]; then \
-		         $(ECHO) "############ $${member} WS" | tee -a build.log;\
+		         $(ECHO) "############ $${member} WS" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
 			 $(call makeItAux,$${member}/ws/src,clean,build.log,$${member}/ws/src/NORM-BUILD-OUTPUT) \
                          $(call makeIt,$${member}/ws/src,all,build.log,$${member}/ws/src/NORM-BUILD-OUTPUT) \
 			 $(call makeItAux,$${member}/ws/src,install,build.log,$${member}/ws/src/NORM-BUILD-OUTPUT) \
 		    elif [ -f $${member}/Makefile ]; then \
-		         $(ECHO) "############ $${member} MAIN" | tee -a build.log;\
-		         $(MAKE) $(MAKE_FLAGS) -C $${member}/ -s $@  2>&1 || echo "### ==> FAILED all ! " | (tee -a build.log | tee $${member}/NORM-BUILD-OUTPUT) \
+		         $(ECHO) "############ $${member} MAIN" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
+		         $(MAKE) $(MAKE_FLAGS) -C $${member}/ -s $@  2>&1 || echo "### ==> FAILED all ! " | (tee -a ${ALMASW_ROOTDIR}/build.log  | tee $${member}/NORM-BUILD-OUTPUT) \
 		    fi;\
 		done;\
          true;
-	@$(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> build.log 2>& 1
-	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a build.log
+	@$(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
+	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Update of all core components
@@ -249,34 +250,34 @@ update:	checkModuleTree
 
 define update-clean-one-module
 		    if [ ! -d $${member} ]; then \
-                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a build.log;\
+                         echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
                     fi;\
 		    if [ -f $${member}/src/Makefile ]; then \
-		         $(ECHO) "############ $${member} SRC" | tee -a build.log;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ clean >> build.log 2>& 1;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ all >> build.log 2>& 1 || echo "### ==> FAILED all ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ man >> build.log 2>& 1 || echo "### ==> FAILED man ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ install >> build.log 2>& 1 || echo "### ==> FAILED install ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ clean >> build.log 2>& 1 || echo "### ==> FAILED clean ! " | tee -a build.log; \
+		         $(ECHO) "############ $${member} SRC" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ all >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED all ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ man >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED man ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ install >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED install ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED clean ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
 		    elif [ -f $${member}/ws/src/Makefile ]; then \
-		         $(ECHO) "############ $${member} WS" | tee -a build.log;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ clean >> build.log 2>& 1;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ all >> build.log 2>& 1 || echo "### ==> FAILED all ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ man >> build.log 2>& 1 || echo "### ==> FAILED man ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ install >> build.log 2>& 1 || echo "### ==> FAILED install ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ clean >> build.log 2>& 1 || echo "### ==> FAILED clean ! " | tee -a build.log; \
+		         $(ECHO) "############ $${member} WS" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ all >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED all ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ man >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED man ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ install >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED install ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ws/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED clean ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
 		    elif [ -f $${member}/Makefile ]; then \
-			  $(ECHO) "############ $${member} MAIN" | tee -a build.log;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ -s $@  || echo "### ==> FAILED all ! " | tee -a build.log;\
+			  $(ECHO) "############ $${member} MAIN" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/ -s $@  || echo "### ==> FAILED all ! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
 		    fi;\
 		    if [ "$(VXWORKS_RTOS)" == "YES" ]; then \
 			if [ -f $${member}/lcu/src/Makefile ]; then \
-			 $(ECHO) "############ $${member} LCU" | tee -a build.log;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ clean >> build.log 2>& 1;\
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ all >> build.log 2>& 1 || echo "### ==> FAILED all ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ man >> build.log 2>& 1 || echo "### ==> FAILED man ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ install >> build.log 2>& 1 || echo "### ==> FAILED install ! " | tee -a build.log; \
-                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ clean >> build.log 2>& 1 || echo "### ==> FAILED clean ! " | tee -a build.log; \
+			 $(ECHO) "############ $${member} LCU" | tee -a ${ALMASW_ROOTDIR}/build.log ;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1;\
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ all >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED all ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ man >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED man ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ install >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED install ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
+                         $(MAKE) $(MAKE_FLAGS) -C $${member}/lcu/src/ clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED clean ! " | tee -a ${ALMASW_ROOTDIR}/build.log ; \
 			fi;\
 		    fi
 endef
@@ -288,13 +289,13 @@ endef
 #   that is the LAST module fails the whole Make does not fail
 #
 update_clean:	checkModuleTree
-	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a build.log
+	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
                    $(update-clean-one-module);\
 		done;\
          true;
-	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> build.log 2>& 1
-	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a build.log
+	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
+	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Test target
@@ -379,14 +380,14 @@ $(Test): clean_test_log $(ACCDB_CONFIG)
 
 
 update_clean_test: clean_test_log $(ACCDB_CONFIG)
-	@$(ECHO) "############ UPDATE and TEST ACS Software #################"| tee -a build.log
+	@$(ECHO) "############ UPDATE and TEST ACS Software #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in $(foreach name,$(MODULES),$(name)); do\
                    $(update-clean-one-module);\
                    $(test-one-module);\
 	done;\
         true;
-	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> build.log 2>& 1
-	@$(ECHO) "############ DONE UPDATE and TEST ACS Software    #################"| tee -a build.log
+	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
+	@$(ECHO) "############ DONE UPDATE and TEST ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 
 #
