@@ -21,6 +21,8 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/
 # Basic path
 mkdir -p  %{_builddir}/home/almamgr
+# Symlink for build log
+ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Env Vars for installing. Assume rest of env vars ready by Tools-Kit-Benchmark package 
 source %{_sysconfdir}/profile.d/acscb.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
