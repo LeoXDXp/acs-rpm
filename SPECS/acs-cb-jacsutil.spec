@@ -27,7 +27,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 #export CLASSPATH="/usr/share/java/:/usr/share/local/java/:/usr/share/java/ant.jar:/alma/ACS-%{version}/ACSSW/lib/"
-export CLASSPATH="/usr/share/java/apache-commons-lang.jar:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-2.b11.el7_3.x86_64/jre/lib/rt.jar:/usr/share/java/junit.jar:/usr/share/java/hibernate3/hibernate-core-3.jar:%{_builddir}/%{name}-%{version}/%{SOURCE2}"
+export CLASSPATH="/usr/share/java/apache-commons-lang.jar:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-2.b11.el7_3.x86_64/jre/lib/rt.jar:/usr/share/java/junit.jar:/home/almadevel/LGPL/Tools/hibernate/lib/hibernate-core-4.3.11.Final.jar:%{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -49,11 +49,11 @@ find -name "*.o" | xargs rm -rf
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/
 mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/ACSSW
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
-cp %{_builddir}/%{name}-%{version}/%{SOURCE2} %{buildroot}/%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
 %files
 %attr(645,-,-) /home/almamgr/ACS-%{version}/ACSSW/lib/
-%{_usr}/local/share/java/%{SOURCE2}
+%{_usr}/local/share/java/javahelp-2.0.05.jar
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
