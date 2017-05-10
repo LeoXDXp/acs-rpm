@@ -23,8 +23,9 @@ cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-# Env Vars for installing. Assume rest of env vars ready by Tools-Kit-Benchmark package 
+# Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
+source %{_sysconfdir}/profile.d/acscb-gnu.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
