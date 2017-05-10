@@ -53,6 +53,9 @@ mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
+# Clean symlink in builddir
+unlink %{_builddir}/alma
+
 %files
 %attr(645,-,-) /home/almamgr/ACS-%{version}/ACSSW/lib/jACSUtil.jar
 /home/almamgr/ACS-%{version}/ACSSW/lib/jhall-2.0_05.jar
