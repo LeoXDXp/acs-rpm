@@ -46,7 +46,8 @@ ifeq ($(HAS_BENCHMARK),TRUE)
    MODULES_BENCHMARK = # util analyzer
 endif
 
-MODULES =  $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs))
+MODULES =  $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs)) \
+	   $(MODULE_PREFIX)/acsBUILD
 	   #$(foreach kit, $(MODULES_KIT), $(MODULE_PREFIX)/Kit/$(kit)) \
            $(MODULE_PREFIX)/Tools \
            $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs)) \
