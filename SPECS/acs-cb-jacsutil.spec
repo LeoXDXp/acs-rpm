@@ -52,8 +52,8 @@ find -name "*.o" | xargs rm -rf
 
 %install
 
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
+mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
