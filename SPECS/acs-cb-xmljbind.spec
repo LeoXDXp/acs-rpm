@@ -6,8 +6,8 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-xmljbind
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
-Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-jacsutil >= %{version}
+Requires:	ACS-Tools-Kit-Benchmark >= %{version} ACS-jacsutil >= %{version}
 
 %description
 ACS Community Branch Java interface for XML
@@ -30,7 +30,7 @@ source %{_sysconfdir}/profile.d/ant.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-#export CLASSPATH="/usr/share/java/:/usr/share/local/java/:/usr/share/java/ant.jar:/alma/ACS-%{version}/ACSSW/lib/"
+export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/castor/castor-xml.jar:/home/almamgr/ACS-2017.02/ACSSW/lib/"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
