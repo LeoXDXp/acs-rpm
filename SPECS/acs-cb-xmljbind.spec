@@ -30,7 +30,7 @@ source %{_sysconfdir}/profile.d/ant.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-codegen.jar:/home/almamgr/ACS-2017.02/ACSSW/lib/jACSutil.jar:"
+export CLASSPATH="/usr/share/java/ant.jar:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-xml-schema.jar:/usr/share/java/castor/castor-codegen.jar:/home/almamgr/ACS-2017.02/ACSSW/lib/jACSUtil.jar:"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
