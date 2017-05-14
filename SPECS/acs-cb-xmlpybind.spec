@@ -51,14 +51,19 @@ find -name "*.o" | xargs rm -rf
 
 %install
 
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib
-#mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/
+mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
+# Copy Build log as evidence
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
+# Copy EntitybuilderSettings.py
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
 %files
-#/home/almamgr/ACS-%{version}/ACSSW/lib/jhall-2.0_05.jar
+/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT
+/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/EntitybuilderSettings.py
+/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/__init__.py
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
