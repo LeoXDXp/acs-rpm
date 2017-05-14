@@ -54,7 +54,7 @@ find -name "*.o" | xargs rm -rf
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
 # Copy Build log as evidence
 mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
-# Copy EntitybuilderSettings.py
+# Copy EntitybuilderSettings.py and __init__
 mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
 
 # Clean symlink in builddir
@@ -62,8 +62,8 @@ unlink %{_builddir}/alma
 
 %files
 /home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT
-/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/EntitybuilderSettings.py
-/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/__init__.py
+/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/EntitybuilderSettings.py*
+/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/__init__.py*
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
