@@ -1,7 +1,7 @@
 Name:		ACS-xmljbind
 Version:	2017.02
 Release:	1%{?dist}
-Summary:	Java ACS util
+Summary:	ACS XML Java Interface
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
