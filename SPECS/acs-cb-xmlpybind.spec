@@ -45,6 +45,10 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
+# TAT Stuff. Symlink to libtatlib.tcl/ folder
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/xmlpybind/lib/
+make test
+
 # Remove objects
 cd %{_builddir}/alma/ACS-%{version}/ACSSW/
 find -name "*.o" | xargs rm -rf
