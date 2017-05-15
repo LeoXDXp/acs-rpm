@@ -67,8 +67,9 @@ find -name "*.o" | xargs rm -rf
 
 %install
 
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib/
+#mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib
+mkdir -p %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/%{_usr}/local/share/java/
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
@@ -76,8 +77,8 @@ cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/loca
 unlink %{_builddir}/alma
 
 %files
-/home/almamgr/ACS-%{version}/ACSSW/lib/jACSUtil*.jar
-/home/almamgr/ACS-%{version}/ACSSW/lib/jhall-2.0_05.jar
+%{buildroot}/%{_usr}/local/share/java/jACSUtil*.jar
+%{buildroot}/%{_usr}/local/share/java/jhall-2.0_05.jar
 %{_usr}/local/share/java/javahelp-2.0.05.jar
 
 %changelog
