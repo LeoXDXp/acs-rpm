@@ -47,6 +47,9 @@ make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
 ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/test/
+export HOST="$HOSTNAME"
+export VLTDATA=""
 make test
 
 # Remove objects
