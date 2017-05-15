@@ -54,6 +54,8 @@ export OSYSTEM="Linux"
 export CYGWIN_VER=""
 #Needed to find nosetests, which is in /usr/bin/nosetests
 export PYTHON_ROOT="/usr"
+#Extending PythonPath to find own products. Can be expanded to <acs-core-component>/src or <acs-core-component>/lib/python/site-packages/
+export PYTHONPATH="$PYTHONPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/"
 make test
 
 # Remove objects
@@ -62,19 +64,20 @@ find -name "*.o" | xargs rm -rf
 
 %install
 
-mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
-# Copy Build log as evidence
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
+#mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
+mkdir -p %{buildroot}/%{_usr}/local/lib/python/site-packages/
 # Copy EntitybuilderSettings.py and __init__
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/  %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
+# Copy Build log as evidence
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT %{buildroot}/%{_usr}/local/lib/python/site-packages/xmlpybind/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
 %files
-/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT
-/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/EntitybuilderSettings.py*
-/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/__init__.py*
+%{_usr}/local/lib/python/site-packages/xmlpybind/NORM-BUILD-OUTPUT
+%{_usr}/local/lib/python/site-packages/xmlpybind/EntitybuilderSettings.py
+%{_usr}/local/lib/python/site-packages/xmlpybind/__init__.py
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
