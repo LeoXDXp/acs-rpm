@@ -76,7 +76,7 @@ cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/loca
 unlink %{_builddir}/alma
 
 %files
-%attr(645,-,-) /home/almamgr/ACS-%{version}/ACSSW/lib/jACSUtil.jar
+/home/almamgr/ACS-%{version}/ACSSW/lib/jACSUtil*.jar
 /home/almamgr/ACS-%{version}/ACSSW/lib/jhall-2.0_05.jar
 %{_usr}/local/share/java/javahelp-2.0.05.jar
 
