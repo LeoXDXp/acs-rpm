@@ -52,6 +52,8 @@ export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
+#Needed to find nosetests, which is in /usr/bin/nosetests
+export PYTHON_ROOT="/usr"
 make test
 
 # Remove objects
