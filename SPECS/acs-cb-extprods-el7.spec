@@ -195,7 +195,6 @@ cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE13} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE16} %{buildroot}%{_usr}/local/acs/
@@ -204,6 +203,7 @@ cp -f %{SOURCE19} %{buildroot}%{_usr}/local/acs/
 # ACS's Python libs
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{SOURCE13} %{buildroot}%{_usr}/local/lib/python/site-packages/generateXsdPythonBinding.py
 # Delete old Eclipse folder
 rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 %clean
