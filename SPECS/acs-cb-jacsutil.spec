@@ -47,7 +47,7 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/
 ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
