@@ -10,7 +10,7 @@ BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
-ACS Error IDL
+ACS Error IDL Java (Jar), C++ (Shared Object) and Python Interfaces
 
 %prep
 %setup -q
@@ -45,35 +45,31 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
-# TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/lib/
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
-export HOST="$HOSTNAME"
-export VLTDATA=""
-export OSYSTEM="Linux"
-export CYGWIN_VER=""
-make test
-
 # Remove objects
 cd %{_builddir}/alma/ACS-%{version}/ACSSW/
 find -name "*.o" | xargs rm -rf
 
 %install
-
-#mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
+# Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
+# ACSErr and ACSErr__POA folders, and acserr_idl.py
 mkdir -p %{buildroot}/%{_usr}/local/lib/python/site-packages/
-# Copy EntitybuilderSettings.py and __init__
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
-# Copy Build log as evidence
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT %{buildroot}/%{_usr}/local/lib/python/site-packages/xmlpybind/
+mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
+
+mkdir -p %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}/%{_usr}/local/share/java/
+
+mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
+mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}/%{_usr}/local/%{_lib}/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
 %files
-%{_usr}/local/lib/python/site-packages/xmlpybind/NORM-BUILD-OUTPUT
-%{_usr}/local/lib/python/site-packages/xmlpybind/EntitybuilderSettings.py
-%{_usr}/local/lib/python/site-packages/xmlpybind/__init__.py
+%{_usr}/local/lib/python/site-packages/ACSErr/
+%{_usr}/local/lib/python/site-packages/ACSErr__POA/
+%{_usr}/local/lib/python/site-packages/acserr_idl.py
+%{_usr}/local/share/java/acserr.jar
+%{_usr}/local/%{_lib}/libacserrStubs.so
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
