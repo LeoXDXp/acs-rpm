@@ -50,6 +50,7 @@ ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}
 ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/test/
 export HOST="$HOSTNAME"
 export VLTDATA=""
+export OSYSTEM="Linux"
 make test
 
 # Remove objects
