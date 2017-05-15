@@ -53,7 +53,7 @@ export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
 # Classpath for the compilation of jACSutilTest.jar
-export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:"
+export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar"
 make test
 
 
