@@ -58,18 +58,18 @@ export PYTHON_ROOT="/usr"
 export PYTHONPATH="$PYTHONPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/"
 make test
 
-# Remove objects
-cd %{_builddir}/alma/ACS-%{version}/ACSSW/
-find -name "*.o" | xargs rm -rf
-
 %install
 
 #mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
-mkdir -p %{buildroot}/%{_usr}/local/lib/python/site-packages/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 # Copy EntitybuilderSettings.py and __init__
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 # Copy Build log as evidence
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/NORM-BUILD-OUTPUT %{buildroot}/%{_usr}/local/lib/python/site-packages/xmlpybind/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/NORM-BUILD-OUTPUT %{buildroot}%{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
+
+# Remove objects
+cd 
+find -name "*.o" | xargs rm -rf
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
