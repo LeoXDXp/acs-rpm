@@ -26,7 +26,7 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-#source %{_sysconfdir}/profile.d/ant.sh
+source %{_sysconfdir}/profile.d/acscb-python.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
