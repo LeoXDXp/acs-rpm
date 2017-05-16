@@ -61,7 +61,7 @@ mkdir -p %{buildroot}%{_usr}/local/share/java/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-mv %{_builddir}%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
