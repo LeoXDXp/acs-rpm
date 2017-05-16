@@ -53,10 +53,9 @@ find -name "*.o" | xargs rm -rf
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 # ACSErr and ACSErr__POA folders, and acserr_idl.py
 mkdir -p %{buildroot}/%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.py %{buildroot}/%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.pyc %{buildroot}/%{_usr}/local/lib/python/site-packages/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}/%{_usr}/local/share/java/
@@ -70,7 +69,7 @@ unlink %{_builddir}/alma
 %files
 %{_usr}/local/lib/python/site-packages/ACSErr/
 %{_usr}/local/lib/python/site-packages/ACSErr__POA/
-%{_usr}/local/lib/python/site-packages/acserr_idl.pyc
+%{_usr}/local/lib/python/site-packages/acserr_idl.py
 %{_usr}/local/share/java/acserr.jar
 %{_usr}/local/%{_lib}/libacserrStubs.so
 
