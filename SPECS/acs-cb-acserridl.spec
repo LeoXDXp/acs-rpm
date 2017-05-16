@@ -53,13 +53,13 @@ find -name "*.o" | xargs rm -rf
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 # ACSErr and ACSErr__POA folders, and acserr_idl.py
 mkdir -p %{buildroot}/%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ %{buildroot}/%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}/%{_usr}/local/share/java/
 
 mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
-mv %{_builddir}/home/almamgr/ACS-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}/%{_usr}/local/%{_lib}/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}/%{_usr}/local/%{_lib}/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
