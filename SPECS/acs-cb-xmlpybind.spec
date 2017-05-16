@@ -75,7 +75,7 @@ find -name "*.o" | xargs rm -rf
 unlink %{_builddir}/alma
 
 %files
-%{_usr}/local/lib/python/site-packages/xmlpybind/NORM-BUILD-OUTPUT
+%{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
 %{_usr}/local/lib/python/site-packages/xmlpybind/EntitybuilderSettings.py
 %{_usr}/local/lib/python/site-packages/xmlpybind/__init__.py
 
