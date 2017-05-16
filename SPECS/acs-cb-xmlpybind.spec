@@ -65,7 +65,7 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 # Copy EntitybuilderSettings.py and __init__
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 # Copy Build log as evidence
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/NORM-BUILD-OUTPUT %{buildroot}%{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/src/NORM-BUILD-OUTPUT %{buildroot}%{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
 
 # Remove objects
 cd 
