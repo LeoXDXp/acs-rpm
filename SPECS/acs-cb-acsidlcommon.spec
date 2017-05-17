@@ -5,7 +5,7 @@ Summary:	ACS Common IDL Declarations
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
-Source1:	Makefile-acserridl
+Source1:	Makefile-acsidlcommon
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
