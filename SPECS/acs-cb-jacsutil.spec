@@ -62,14 +62,14 @@ make test
 
 
 # Remove objects
-cd %{_builddir}/alma/ACS-%{version}/ACSSW/
-find -name "*.o" | xargs rm -rf
+#cd %{_builddir}/alma/ACS-%{version}/ACSSW/
+#find -name "*.o" | xargs rm -rf
 
 %install
 
 #mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/lib
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/*.jar %{buildroot}/%{_usr}/local/share/java/
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
@@ -77,7 +77,8 @@ cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/loca
 unlink %{_builddir}/alma
 
 %files
-%{buildroot}/%{_usr}/local/share/java/jACSUtil*.jar
+%{buildroot}/%{_usr}/local/share/java/jACSUtil.jar
+%{buildroot}/%{_usr}/local/share/java/jACSUtilTest.jar
 %{buildroot}/%{_usr}/local/share/java/jhall-2.0_05.jar
 %{_usr}/local/share/java/javahelp-2.0.05.jar
 
