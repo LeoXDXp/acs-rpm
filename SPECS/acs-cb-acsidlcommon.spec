@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsidlcommon
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-xmlpybind >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -22,6 +22,10 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
+# Symlink acserr.idl to idl folder in acsidlcommon
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
+# Symlink acserr.jar to lib folder in acsidlcommon
+ln -s %{_usr}/local/share/java/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -34,7 +38,6 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 #export CLASSPATH="/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-xml-schema.jar:/usr/share/java/castor/castor-codegen.jar:/usr/share/java/castor/castor-core.jar"
-export IDL_PATH="$IDL_PATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
