@@ -46,6 +46,10 @@ cd %{_builddir}/%{name}-%{version}/
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
+# TAT Stuff
+
+make test
+
 
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
