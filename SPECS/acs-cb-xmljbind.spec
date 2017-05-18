@@ -17,8 +17,8 @@ ACS Community Branch Java interface for XML
 
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
-# FieldInfoFactory inside folder patch
-sed -i 's/org\.exolab\.castor\.builder\.FieldInfoFactory/org\.exolab\.castor\.builder\.factory\.FieldInfoFactory/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/src/alma/tools/entitybuilder/CastorBuilder.java
+# FieldInfoFactory inside folder patch.
+#sed -i 's/org\.exolab\.castor\.builder\.FieldInfoFactory/org\.exolab\.castor\.builder\.factory\.FieldInfoFactory/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/src/alma/tools/entitybuilder/CastorBuilder.java
 
 # Basic path
 mkdir -p  %{_builddir}/home/almamgr
@@ -34,7 +34,8 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH="/usr/share/java/ant.jar:%{_usr}/local/share/java/jACSUtil.jar:%{_usr}/local/share/java/castor-ACS.jar"
+export CLASSPATH=":/usr/share/java/ant.jar:/usr/local/share/java/jACSUtil.jar:/usr/local/share/java/castor-ACS.jar"
+#export CLASSPATH=":/usr/share/java/ant.jar:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-xml-schema.jar:/usr/share/java/castor/castor-codegen.jar:/usr/share/java/castor/castor-core.jar:%{_usr}/local/share/java/jACSUtil.jar:"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
