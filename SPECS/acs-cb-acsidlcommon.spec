@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsidlcommon
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -35,7 +35,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH=":/usr/local/share/java/acserr.jar:/usr/local/share/java/xmljbind.jar"
+export CLASSPATH=":/usr/local/share/java/acserr.jar:/usr/local/share/java/xmljbind.jar:/usr/local/share/java/jACSUtil.jar:/usr/share/java/castor/castor-xml.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
