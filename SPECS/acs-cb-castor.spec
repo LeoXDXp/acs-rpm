@@ -18,7 +18,7 @@ Castor package patched for ACS
 
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
-cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/Tools/
+cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
 # Basic path
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
