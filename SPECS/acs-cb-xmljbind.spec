@@ -55,13 +55,13 @@ find -name "*.o" | xargs rm -rf
 %install
 
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/*.jar %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xmljbind.jar %{buildroot}/%{_usr}/local/share/java/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
 %files
-#%{_usr}/local/share/java/
+%{_usr}/local/share/java/xmljbind.jar
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
