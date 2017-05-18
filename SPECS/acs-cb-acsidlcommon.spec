@@ -24,8 +24,6 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Symlink acserr.idl to idl folder in acsidlcommon
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
-# Symlink acserr.jar to lib folder in acsidlcommon
-ln -s %{_usr}/local/share/java/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
