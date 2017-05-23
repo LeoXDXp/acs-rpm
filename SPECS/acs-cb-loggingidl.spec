@@ -7,6 +7,7 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-loggingidl
 Source2:    DsLogAdmin.jar
+Source3:    TimeBase.jar
 
 %description
 ACS logging idl.
