@@ -46,6 +46,37 @@ cd %{_builddir}/%{name}-%{version}/
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
+
+%install
+mkdir -p %{buildroot}/%{_usr}/local/share/java/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
+
+#python files
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/python/site-packages/* %{buildroot}%{_usr}/local/lib/python/site-packages/
+#java files
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
+#lib
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+
+#unlink
+unlink %{_builddir}/alma
+
+%files
+%{_usr}/local/lib/python/site-packages/ACSLoggingLog/
+%{_usr}/local/lib/python/site-packages/ACSLoggingLog__POA/
+%{_usr}/local/lib/python/site-packages/AcsLogLevels/
+%{_usr}/local/lib/python/site-packages/AcsLogLevels__POA/
+%{_usr}/local/lib/python/site-packages/Logging/
+%{_usr}/local/lib/python/site-packages/Logging__POA/
+%{_usr}/local/lib/python/site-packages/logging_idl_idl.py*
+
+%{_usr}/local/share/java/DsLogAdmin.jar
+%{_usr}/local/share/java/logging_idl.jar
+
+%{_usr}/local/%{_lib}/liblogging_idlStubs.so
+
 %changelog
 * Sat May 23 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
 Initial Packaging
