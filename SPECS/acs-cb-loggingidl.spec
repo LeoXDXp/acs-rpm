@@ -59,6 +59,7 @@ cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAd
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
 #lib
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+chmod +x %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
 
 #unlink
 unlink %{_builddir}/alma
