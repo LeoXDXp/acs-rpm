@@ -31,8 +31,8 @@ source %{_sysconfdir}/profile.d/acscb-tcltk.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
 #source %{_sysconfdir}/profile.d/jacorb.sh
 
-mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/
-ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/
+mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
