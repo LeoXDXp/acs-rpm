@@ -6,6 +6,7 @@ License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-loggingidl
+Source2:    DsLogAdmin.jar
 
 %description
 ACS logging idl.
@@ -23,6 +24,8 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
 ln -s /usr/share/tao/tao/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
+cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
