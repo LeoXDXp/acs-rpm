@@ -54,6 +54,9 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
+# Clean symlink in builddir
+unlink %{_builddir}/alma
+
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 # ACSErr and ACSErr__POA folders, and acserr_idl.py
@@ -70,9 +73,6 @@ mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacser
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
-
-# Clean symlink in builddir
-unlink %{_builddir}/alma
 
 %files
 %{_usr}/local/lib/python/site-packages/ACSErr/
