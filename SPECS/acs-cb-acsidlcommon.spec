@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsidlcommon
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-acserridl-devel >= %{version}  ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -33,6 +33,9 @@ source %{_sysconfdir}/profile.d/acscb-python.sh
 
 mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+
+mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
+ln -s /usr/local/include/acserrC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
