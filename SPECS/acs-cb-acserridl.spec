@@ -12,6 +12,13 @@ Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 %description
 ACS Error IDL Java (Jar), C++ (Shared Object) and Python Interfaces
 
+%package devel
+Summary:	ACS Error IDL Objects
+License:	LGPL
+
+%description devel
+IDL object output: .h,.cpp,.inl,.o Stubs and Skeletons
+
 %prep
 %setup -q
 
@@ -63,6 +70,13 @@ mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.j
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+
+# Devel Stuff
+mkdir -p %{buildroot}%{_usr}/local/include/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
@@ -76,6 +90,13 @@ unlink %{_builddir}/alma
 %{_usr}/local/lib/python/site-packages/acserr_idl.py*
 %{_usr}/local/share/java/acserr.jar
 %{_usr}/local/%{_lib}/libacserrStubs.so
+
+%files devel
+%{_usr}/local/include/acserrC.cpp
+%{_usr}/local/include/acserrC.h
+%{_usr}/local/include/acserrC.inl
+%{_usr}/local/include/acserrS.cpp
+%{_usr}/local/include/acserrS.h
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
