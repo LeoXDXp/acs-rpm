@@ -37,6 +37,8 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
+source %{_sysconfdir}/profile.d/ace-devel.sh
+
 
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
