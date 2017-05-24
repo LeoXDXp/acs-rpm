@@ -83,5 +83,5 @@ unlink %{_builddir}/alma
 %{_usr}/local/%{_lib}/liblogging_idlStubs.so
 
 %changelog
-* Sat May 23 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
+* Wed May 24 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
 Initial Packaging
