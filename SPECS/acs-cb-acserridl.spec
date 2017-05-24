@@ -63,19 +63,21 @@ find -name "*.o" | xargs rm -rf
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
 
+# For Objcopy
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.h %{buildroot}%{_usr}/local/include/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
