@@ -32,21 +32,19 @@ mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/t
 cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
 cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
 
-source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/acscb-tcltk.sh
 source %{_sysconfdir}/profile.d/ace-devel.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
 source %{_sysconfdir}/profile.d/jacorb.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
-source %{_sysconfdir}/profile.d/acscb.sh
-
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
+export IDL_PATH="/usr/include/orbsvcs/" 
 
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
