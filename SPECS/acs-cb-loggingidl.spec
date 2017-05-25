@@ -53,6 +53,8 @@ cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
+export CLASSPATH="/usr/share/java/*:/usr/local/share/java/*:/home/almamgr/ACS-2017.02/JacORB/lib/*:/usr/share/java/*/*"
+
 make
 
 %install
