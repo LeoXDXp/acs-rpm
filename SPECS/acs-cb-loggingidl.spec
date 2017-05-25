@@ -100,6 +100,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*
 %{_usr}/local/lib/python/site-packages/Logging/
 %{_usr}/local/lib/python/site-packages/Logging__POA/
 %{_usr}/local/lib/python/site-packages/logging_idl_idl.py*
+%{_usr}/local/share/java/logging_idl.jar
 %{_usr}/local/share/java/DsLogAdmin.jar
 %{_usr}/local/%{_lib}/liblogging_idlStubs.so
 
