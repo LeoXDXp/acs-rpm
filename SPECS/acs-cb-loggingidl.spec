@@ -40,6 +40,7 @@ export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 source %{_sysconfdir}/profile.d/ace-devel.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
+source %{_sysconfdir}/profile.d/acscb-tcltk.sh
 
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
