@@ -23,9 +23,12 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-cp -f /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
+ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
 ln -s /usr/share/tao/tao/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
-#
+
+# Small hack, due to Jenkins not finding <DsLogAdmin.idl>
+sed -i 's/<DsLogAdmin.idl>/\"DsLogAdmin.idl\"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/logging_idl.idl
+
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/
 
