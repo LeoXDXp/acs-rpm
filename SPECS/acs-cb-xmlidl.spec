@@ -20,30 +20,32 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
-ln -s /usr/share/tao/tao/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
+#ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/lowxmwgingidl/ws/idl/
+#ln -s /usr/share/tao/tao/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
 
 #
-mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
-mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/
+#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
+#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/
 
-cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
-cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
+#cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
+#cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
 
-source %{_sysconfdir}/profile.d/acscb.sh
-source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-source %{_sysconfdir}/profile.d/ace-devel.sh
-source %{_sysconfdir}/profile.d/acscb-python.sh
-source %{_sysconfdir}/profile.d/jacorb.sh
-source %{_sysconfdir}/profile.d/tao-devel.sh
+#source %{_sysconfdir}/profile.d/acscb.sh
+#source %{_sysconfdir}/profile.d/acscb-gnu.sh
+#source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+#source %{_sysconfdir}/profile.d/ace-devel.sh
+#source %{_sysconfdir}/profile.d/acscb-python.sh
+#source %{_sysconfdir}/profile.d/jacorb.sh
+#source %{_sysconfdir}/profile.d/tao-devel.sh
 
+# standard.
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 
+# standard.
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
@@ -53,7 +55,7 @@ cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
-export CLASSPATH="/usr/share/java/*:/usr/local/share/java/*:/home/almamgr/ACS-2017.02/JacORB/lib/*:/usr/share/java/*/*"
+#export CLASSPATH="/usr/share/java/*:/usr/local/share/java/*:/home/almamgr/ACS-2017.02/JacORB/lib/*:/usr/share/java/*/*"
 
 make
 
