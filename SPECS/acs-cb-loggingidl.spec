@@ -9,8 +9,11 @@ Source1:    Makefile-loggingidl
 Source2:    DsLogAdmin.jar
 Source3:    TimeBase.jar
 
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version}
+Requires:       ACS-Tools-Kit-Benchmark >= %{version}
+
 %description
-ACS logging idl.
+ACS Logging IDL Interfaces.
 
 %prep
 %setup -q
