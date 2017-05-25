@@ -94,6 +94,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/ac
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/libacscommonStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacscommonStubs.so
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
