@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsidlcommon
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version}  ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-acserridl-devel >= %{version}  ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
