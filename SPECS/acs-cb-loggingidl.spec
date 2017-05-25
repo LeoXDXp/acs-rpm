@@ -39,7 +39,6 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 
-source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/acscb-tcltk.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
@@ -55,6 +54,9 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
+#unlink
+unlink %{_builddir}/alma
+
 %install
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
@@ -68,9 +70,6 @@ cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging
 #lib
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
-
-#unlink
-unlink %{_builddir}/alma
 
 %files
 %{_usr}/local/lib/python/site-packages/ACSLoggingLog/
