@@ -69,9 +69,9 @@ mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
 
 # For Objcopy
-chmod +x %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacserrStubs.so
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
