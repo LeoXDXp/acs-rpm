@@ -88,9 +88,9 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsloggingidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsloggingidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsloggingidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
 %{_usr}/local/lib/python/site-packages/ACSLoggingLog/
