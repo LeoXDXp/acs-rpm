@@ -5,7 +5,7 @@ Summary:    ACS Logging
 License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
-Source1:    Makefile-loggingidl
+Source1:    Makefile-logging
 
 %description
 ACS logging.
