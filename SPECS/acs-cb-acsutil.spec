@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsutil
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version} ACS-baciidl >= %{version}  ACS-baciidl-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -22,9 +22,10 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-# Symlink for libacscommonStubs.so required to create libacsutil.so
+# Symlink for libacscommonStubs.so required to create libacsutil.so. libbaciStubs for testAnyAide
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 ln -s  %{_usr}/local/%{_lib}/libacscommonStubs.so  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
+ln -s  %{_usr}/local/%{_lib}/libbaciStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -79,6 +80,11 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/bin/* %{b
 %{_usr}/local/bin/acsutilTATEpilogue
 %{_usr}/local/bin/acsutilTATPrologue
 %{_usr}/local/bin/acsutilTATTestRunner
+%{_usr}/local/bin/testacsutilBlock
+%{_usr}/local/bin/testFindFile
+%{_usr}/local/bin/testLLU
+%{_usr}/local/bin/testPorts
+%{_usr}/local/bin/testTmp
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
