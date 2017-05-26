@@ -28,13 +28,13 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-source %{_sysconfdir}/profile.d/acscb-python.sh
-#source %{_sysconfdir}/profile.d/jacorb.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
+
+export CPATH="/home/almadevel/LGPL/Tools/loki/ws/include/"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
