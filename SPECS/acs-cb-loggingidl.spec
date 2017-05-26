@@ -9,8 +9,18 @@ Source1:    Makefile-loggingidl
 Source2:    DsLogAdmin.jar
 Source3:    TimeBase.jar
 
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version}
+Requires:       ACS-Tools-Kit-Benchmark >= %{version}
+
 %description
-ACS logging idl.
+ACS Logging IDL Interfaces.
+
+%package devel
+Summary:        ACS Logging IDL Objects
+License:        LGPL
+
+%description devel
+IDL object output: .h,.cpp,.inl,.o Stubs and Skeletons
 
 %prep
 %setup -q
@@ -25,21 +35,22 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
 ln -s /usr/share/tao/tao/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
-#
+
+# Small hack, due to Jenkins not finding <DsLogAdmin.idl>
+sed -i 's/<DsLogAdmin.idl>/\"DsLogAdmin.idl\"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/logging_idl.idl
+
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/
 
 cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
 cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
 
-source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/acscb-tcltk.sh
 source %{_sysconfdir}/profile.d/ace-devel.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
 source %{_sysconfdir}/profile.d/jacorb.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
-
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
@@ -75,6 +86,12 @@ cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
 
+# Devel Stuff
+mkdir -p %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+
 %files
 %{_usr}/local/lib/python/site-packages/ACSLoggingLog/
 %{_usr}/local/lib/python/site-packages/ACSLoggingLog__POA/
@@ -83,11 +100,16 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
 %{_usr}/local/lib/python/site-packages/Logging/
 %{_usr}/local/lib/python/site-packages/Logging__POA/
 %{_usr}/local/lib/python/site-packages/logging_idl_idl.py*
-
-%{_usr}/local/share/java/DsLogAdmin.jar
 %{_usr}/local/share/java/logging_idl.jar
-
+%{_usr}/local/share/java/DsLogAdmin.jar
 %{_usr}/local/%{_lib}/liblogging_idlStubs.so
+
+%files devel
+%{_usr}/local/include/logging_idlC.cpp
+%{_usr}/local/include/logging_idlC.h
+%{_usr}/local/include/logging_idlC.inl
+%{_usr}/local/include/logging_idlS.cpp
+%{_usr}/local/include/logging_idlS.h
 
 %changelog
 * Wed May 24 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
