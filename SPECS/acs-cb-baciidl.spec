@@ -30,26 +30,26 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Symlink acserr.idl to idl folder in acsidlcommon
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
+#ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
 # Env Vars for installing. 
-source %{_sysconfdir}/profile.d/acscb.sh
-source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-source %{_sysconfdir}/profile.d/acscb-python.sh
+#source %{_sysconfdir}/profile.d/acscb.sh
+#source %{_sysconfdir}/profile.d/acscb-gnu.sh
+#source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+#source %{_sysconfdir}/profile.d/acscb-python.sh
 #source %{_sysconfdir}/profile.d/jacorb.sh
 # Required for compilation
-mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
-ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
-ln -s /usr/local/lib64/libacserrStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+#ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+#ln -s /usr/local/lib64/libacserrStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 
-mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
-ln -s /usr/local/include/acserrC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
+#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
+#ln -s /usr/local/include/acserrC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH=":/usr/local/share/java/acserr.jar:/usr/local/share/java/xmljbind.jar:/usr/local/share/java/jACSUtil.jar:/usr/local/share/java/castor-ACS.jar:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar"
+export CLASSPATH=":/usr/share/java/xalan-j2.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -64,8 +64,8 @@ make
 
 #Install will declared failed. We repair it :D
 # Required to create commontypes.wxs manually
-mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/
-pyxbgen  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/commontypes.xsd --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/commontypes.wxs
+#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/
+#pyxbgen  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/commontypes.xsd --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/commontypes.wxs
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
