@@ -48,7 +48,7 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
@@ -62,13 +62,23 @@ unlink %{_builddir}/alma
 
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
-
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacsutil.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacsutil.so %{buildroot}%{_usr}/local/%{_lib}/
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacsutil.so
+
+mkdir -p %{buildroot}%{_usr}/local/bin/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/bin/* %{buildroot}%{_usr}/local/bin/
 
 %files
-%{_usr}/local/share/java/acserr.jar
 %{_usr}/local/%{_lib}/libacsutil.so
+%{_usr}/local/bin/acsutilAwaitContainerStart
+%{_usr}/local/bin/acsutilBlock
+%{_usr}/local/bin/acsutilDiffTrap
+%{_usr}/local/bin/acsutilProfiler
+%{_usr}/local/bin/acsutilRedo
+%{_usr}/local/bin/acsutilTATEpilogue
+%{_usr}/local/bin/acsutilTATPrologue
+%{_usr}/local/bin/acsutilTATTestRunner
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
