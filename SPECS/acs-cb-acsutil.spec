@@ -22,8 +22,8 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-# Symlink for acscommon libraries required by acs util
-#ln -s  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/
+# Symlink for libacscommonStubs.so required to create libacsutil.so
+ln -s  %{_usr}/local/%{_lib}/libacscommonStubs.so  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -33,7 +33,6 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}"
 export CPATH="/home/almadevel/LGPL/Tools/loki/ws/include/"
 
 # Compilation specific env vars
@@ -54,8 +53,7 @@ export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
-# Classpath for the compilation of xmljbindTest.jar
-#export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtilTest.jar:"
+
 make test
 
 # Clean symlink in builddir
@@ -63,15 +61,13 @@ unlink %{_builddir}/alma
 
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
-mkdir -p %{buildroot}%{_usr}/local/share/java/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacsutil.so %{buildroot}%{_usr}/local/%{_lib}/
 
 %files
 %{_usr}/local/share/java/acserr.jar
-%{_usr}/local/%{_lib}/libacserrStubs.so
+%{_usr}/local/%{_lib}/libacsutil.so
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
