@@ -23,6 +23,7 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Symlink for libacscommonStubs.so required to create libacsutil.so
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 ln -s  %{_usr}/local/%{_lib}/libacscommonStubs.so  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
