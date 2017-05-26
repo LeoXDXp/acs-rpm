@@ -39,6 +39,9 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/lib/
 
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/src/
+ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
+
 ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
 make
 
