@@ -33,7 +33,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}"
 export CPATH="/home/almadevel/LGPL/Tools/loki/ws/include/"
 
 # Compilation specific env vars
@@ -58,31 +58,18 @@ export CYGWIN_VER=""
 #export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtilTest.jar:"
 make test
 
+# Clean symlink in builddir
+unlink %{_builddir}/alma
 
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
-# ACSErr and ACSErr__POA folders, and acserr_idl.py
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/python/site-packages/acserr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/acserr.jar %{buildroot}%{_usr}/local/share/java/
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacserrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-# Clean
-cd %{buildroot}%{_usr}/local/lib/python/site-packages/
-find -name "*.pyo" | xargs rm -rf
-
-# Clean symlink in builddir
-unlink %{_builddir}/alma
 
 %files
-%{_usr}/local/lib/python/site-packages/ACSErr/
-%{_usr}/local/lib/python/site-packages/ACSErr__POA/
-%{_usr}/local/lib/python/site-packages/acserr_idl.py*
 %{_usr}/local/share/java/acserr.jar
 %{_usr}/local/%{_lib}/libacserrStubs.so
 
