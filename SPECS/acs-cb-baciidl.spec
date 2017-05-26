@@ -29,6 +29,8 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
+# Hack inner Makefile to make it CLASSPATH aware
+sed -i '/JARFILES=/ a CLASSPATH := $(CLASSPATH)' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/src/Makefile
 # Symlink acserr.idl to idl folder in acsidlcommon
 #ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
 # Env Vars for installing. 
