@@ -36,7 +36,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH=":/usr/share/java/xalan-j2.jar"
+export CLASSPATH="/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -47,8 +47,9 @@ cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 # symlink of xalan so acsMakefileDefinitions.mk can find it through XSDDEPLIST (not nice)
-ln -s %{_usr}/share/java/xalan-j2.jar %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xalan.jar
-ln -s %{_usr}/share/java/xalan-j2-serializer.jar %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xalan_serializer.jar
+#sed -i 's/$(ACSROOT)\/lib\/xalan\.jar$(PATH_SEP)$(ACSROOT)\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+sed -i 's/$(ACSROOT)\/lib\/xalan\.jar$(PATH_SEP)$(ACSROOT)\/lib\/xalan_serializer\.jar/$(CLASSPATH)/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+
 
 make
 
