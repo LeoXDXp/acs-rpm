@@ -194,10 +194,10 @@ cp -f %{SOURCE7} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE8} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
 # Fix xalan hardcoded path
-sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' /usr/local/acs/acserrGenIDL
+sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{buildroot}%{_usr}/local/acs/acserrGenIDL
 
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
-sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' /usr/local/acs/acserrGenCpp
+sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{buildroot}%{_usr}/local/acs/acserrGenCpp
 
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
