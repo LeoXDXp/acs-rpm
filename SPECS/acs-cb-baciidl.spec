@@ -36,7 +36,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH="/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
+#export CLASSPATH="/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -46,13 +46,13 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
-# symlink of xalan so acsMakefileDefinitions.mk can find it through XSDDEPLIST (not nice)
-#sed -i 's/$(ACSROOT)\/lib\/xalan\.jar$(PATH_SEP)$(ACSROOT)\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-sed -i 's/$(ACSROOT)\/lib\/xalan\.jar$(PATH_SEP)$(ACSROOT)\/lib\/xalan_serializer\.jar/$(CLASSPATH)/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-
+# Commenting out XSDDEPLIST in acsMakefileDefinition.mk as it neves finds the class even with the packages in -cp
+# And when manually executed, the outcome was 5 empty lines
+# Manual line is java -cp /usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar org.apache.xalan.xslt.Process -XSL /home/acs.node/rpmbuild/BUILD/ACS-baciidl-2017.02/LGPL/Kit/acs/config/XSDIncludeDependencies.xml -IN baciErrTypeDevIO.xml
+# Ejecuted in /home/acs.node/rpmbuild/BUILD/ACS-baciidl-2017.02/LGPL/CommonSoftware/baciidl/ws/idl
+sed -i 's/XSDDEPLIST/#XSDDEPLIST/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 
 make
-
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
