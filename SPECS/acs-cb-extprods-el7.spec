@@ -4,7 +4,7 @@
 
 Name:		ACS-ExtProds
 Version:	2017.02
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
 URL:		http://csrg-utfsm.github.io/
@@ -162,7 +162,7 @@ echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #echo 'CLASSPATH="/usr/share/java/:/usr/local/share/java/:$JACORB_HOME/lib:$ANT_HOME/lib:$M2_HOME/lib" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-echo "CLASSPATH=/usr/share/java/*:/usr/local/share/java/*:/home/almamgr/ACS-2017.02/JacORB/lib/*:/usr/share/java/*/*" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "CLASSPATH=/usr/share/java/:/usr/local/share/java/:/home/almamgr/ACS-2017.02/JacORB/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
@@ -193,7 +193,12 @@ cp -f %{SOURCE6} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE7} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE8} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
+# Fix xalan hardcoded path
+sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' /usr/local/acs/acserrGenIDL
+
 cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
+sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' /usr/local/acs/acserrGenCpp
+
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
@@ -363,5 +368,7 @@ userdel -r almadevel
 %attr(0705,almadevel,almadevel) /home/almadevel/ACS-%{version}/ExtProd/
 
 %changelog
+* Sun May 28 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-2
+Fixing hardcoded xalan classpath
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
