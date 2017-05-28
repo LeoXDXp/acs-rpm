@@ -29,23 +29,8 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-# Hack inner Makefile to make it CLASSPATH aware
-sed -i '/JARFILES=/ a CLASSPATH := $(CLASSPATH)' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/src/Makefile
-# Symlink acserr.idl to idl folder in acsidlcommon
-#ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/
-# Env Vars for installing. 
-#source %{_sysconfdir}/profile.d/acscb.sh
-#source %{_sysconfdir}/profile.d/acscb-gnu.sh
-#source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-#source %{_sysconfdir}/profile.d/acscb-python.sh
-#source %{_sysconfdir}/profile.d/jacorb.sh
-# Required for compilation
-#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
-#ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
-#ln -s /usr/local/lib64/libacserrStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
+# Hack acsMakefileDefinitions.mk to make ....
 
-#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
-#ln -s /usr/local/include/acserrC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
@@ -61,13 +46,12 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
+# symlink of xalan so acsMakefileDefinitions.mk can find it through XSDDEPLIST (not nice)
+ln -s %{_usr}/share/java/xalan-j2.jar %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xalan.jar
+ln -s %{_usr}/share/java/xalan-j2-serializer.jar %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xalan_serializer.jar
 
 make
 
-#Install will declared failed. We repair it :D
-# Required to create commontypes.wxs manually
-#mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/
-#pyxbgen  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/commontypes.xsd --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/commontypes.wxs
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
