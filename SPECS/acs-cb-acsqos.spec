@@ -22,28 +22,38 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
+#### custom ####
+
+#xsd files needed by acsqos
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+
+# IDL files needed by acsQoS
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/idl/acscomponent.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+
+sed -i 's/\$(ACE\_ROOT)\/TAO\/orbsvcs\/orbsvcs\// ..\/idl\/ /g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/src/Makefile
+
+### end custom ###
+
+#general Compilation
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH=":/usr/share/java/xalan-j2.jar"
+#export CLASSPATH=":/usr/share/java/:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
+export IDL_PATH="$IDL_PATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/"
 
+# Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
-
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
-mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/lib/
 
-mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
-ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
-
-make
-
+make 
 %install
 
 #unlink
