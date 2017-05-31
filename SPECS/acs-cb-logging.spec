@@ -23,7 +23,7 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
 # Include acsutil
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/*.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
