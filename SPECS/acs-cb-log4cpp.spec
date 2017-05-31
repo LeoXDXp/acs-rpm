@@ -72,7 +72,7 @@ chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.la
 # Devel Stuff
 mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp/threading
 cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/*.h* %{buildroot}/%{_usr}/local/include/log4cpp/
-cp -rf %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/threading/ %{buildroot}/%{_usr}/local/include/log4cpp/threading/
+cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/threading/*.h* %{buildroot}/%{_usr}/local/include/log4cpp/threading/
 
 %post
 
