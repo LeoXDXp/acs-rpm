@@ -36,11 +36,12 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2C
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2H.xslt %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/config/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 
-# Modification of USER_IDL in Makefile-baciidl to use {_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
+# Modification of USER_IDL in baciidl/src/Makefile to use {_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
+cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/src/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/idl/acscomponent.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 
-sed -i 's/$(ACE_ROOT)\/TAO\/orbsvcs\/orbsvcs\// %{_builddir}\/%{name}-%{version}\/LGPL\/CommonSoftware\/baciidl\/ws\/idl\/ /g' %{_builddir}/%{name}-%{version}/Makefile
+sed -i 's/\$(ACE\_ROOT)\/TAO\/orbsvcs\/orbsvcs\// ..\/idl\/ /g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/src/Makefile
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
