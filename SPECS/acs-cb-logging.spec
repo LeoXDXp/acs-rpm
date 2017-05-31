@@ -7,13 +7,14 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-logging
 
+BuildRequires: ACS-loggingidl-devel >= %{version} log4cpp-ACS >= %{version}
+
 %description
 ACS logging.
 
 %prep
 %setup -q
 
-#cambiar el makefile solo para el modulo
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 
@@ -21,15 +22,9 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
-#ln -s /usr/include/orbsvcs/DsLogAdmin.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/
 
-#source %{_sysconfdir}/profile.d/acscb.sh
-#source %{_sysconfdir}/profile.d/acscb-gnu.sh
-#source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-#source %{_sysconfdir}/profile.d/ace-devel.sh
-#source %{_sysconfdir}/profile.d/acscb-python.sh
-#source %{_sysconfdir}/profile.d/jacorb.sh
-#source %{_sysconfdir}/profile.d/tao-devel.sh
+# Include acsutil
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/*.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
