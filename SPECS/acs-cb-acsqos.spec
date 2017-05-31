@@ -39,11 +39,12 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/lib/
 
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
-ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
 
-sed -i 's/$(ACE_ROOT)\/TAO\/orbsvcs\/orbsvcs\// %{_builddir}\/%{name}-%{version}\/LGPL\/CommonSoftware\/acsQoS\/ws\/idl\/ /g' %{_builddir}/%{name}-%{version}/Makefile
+
+
+export IDL_PATH="$IDL_PATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/"
 
 make
 
