@@ -61,9 +61,6 @@ unlink %{_builddir}/alma
 #mkdir -p %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
 #cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/log4cpp/src/log4cpp-1.0/{AUTHORS,COPYING,INSTALL,NEWS,README,THANKS,ChangeLog} %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
 
-mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp
-mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp/threading
-
 #
 mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.a %{buildroot}/%{_usr}/local/%{_lib}/
@@ -73,9 +70,9 @@ chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.so.4.0.6
 chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.la
 
 # Devel Stuff
-mkdir -p %{buildroot}/%{_usr}/local/include/
-cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/*.h* %{buildroot}/%{_usr}/local/include/
-cp -rf %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/threading/ %{buildroot}/%{_usr}/local/include/
+mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp/threading
+cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/*.h* %{buildroot}/%{_usr}/local/include/log4cpp/
+cp -rf %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/include/log4cpp/threading/ %{buildroot}/%{_usr}/local/include/log4cpp/threading/
 
 %post
 
