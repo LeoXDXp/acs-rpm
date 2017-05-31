@@ -45,32 +45,28 @@ make
 unlink %{_builddir}/alma
 
 %install
-mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
-mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/libacscomponentStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
-# python files
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/python/site-packages/* %{buildroot}%{_usr}/local/lib/python/site-packages/
-# java files
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
-# lib
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/python/site-packages/acscomponent_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/acscomponent.jar %{buildroot}%{_usr}/local/share/java/
 
 %files
-%{_usr}/local/lib/python/site-packages/ACSLoggingLog/
-%{_usr}/local/lib/python/site-packages/ACSLoggingLog__POA/
-%{_usr}/local/lib/python/site-packages/AcsLogLevels/
-%{_usr}/local/lib/python/site-packages/AcsLogLevels__POA/
-%{_usr}/local/lib/python/site-packages/Logging/
-%{_usr}/local/lib/python/site-packages/Logging__POA/
-%{_usr}/local/lib/python/site-packages/logging_idl_idl.py*
+%{_usr}/local/lib/python/site-packages/ACS/
+%{_usr}/local/lib/python/site-packages/ACS__POA/
+%{_usr}/local/lib/python/site-packages/acscomponent_idl.py*
+%{_usr}/local/lib/libacscomponentStubs.so
+%{_usr}/local/lib/acscomponent.jar
 
-%{_usr}/local/share/java/DsLogAdmin.jar
-%{_usr}/local/share/java/logging_idl.jar
-
-%{_usr}/local/%{_lib}/liblogging_idlStubs.so
+%files devel
+%{_usr}/local/include/acscomponentC.h
+%{_usr}/local/include/acscomponentS.h
+%{_usr}/local/include/acscomponentC.cpp
+%{_usr}/local/include/acscomponentS.cpp
+%{_usr}/local/include/acscomponentC.inl
 
 %changelog
 * Wed May 31 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
