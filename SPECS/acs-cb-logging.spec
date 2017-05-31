@@ -7,13 +7,14 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-logging
 
+BuildRequires: ACS-loggingidl-devel >= %{version} log4cpp-ACS >= %{version}
+
 %description
 ACS logging.
 
 %prep
 %setup -q
 
-#cambiar el makefile solo para el modulo
 %build
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 
