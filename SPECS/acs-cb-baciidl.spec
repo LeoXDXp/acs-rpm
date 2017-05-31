@@ -48,7 +48,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 #export CLASSPATH=":/usr/share/java/:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
-export IDL_PATH="$IDL_PATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/"
+#export IDL_PATH="$IDL_PATH:-I%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
