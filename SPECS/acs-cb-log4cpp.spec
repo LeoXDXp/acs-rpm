@@ -22,15 +22,13 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Env Vars for installing. 
-source %{_sysconfdir}/profile.d/acscb.sh
-source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
-source %{_sysconfdir}/profile.d/ant.sh
+#source %{_sysconfdir}/profile.d/acscb.sh
+#source %{_sysconfdir}/profile.d/acscb-gnu.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-export CLASSPATH="$CLASSPATH:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar:/usr/share/java/jakarta-oro.jar"
+export OSYSTEM="Linux"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
