@@ -40,6 +40,8 @@ mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/lib/
 
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
 ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/lib/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+
 make
 
 %install
