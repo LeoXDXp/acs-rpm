@@ -58,8 +58,8 @@ unlink %{_builddir}/alma
 
 %install
 # Docs
-mkdir -p %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/log4cpp/src/log4cpp-1.0/{AUTHORS,COPYING,INSTALL,NEWS,README,THANKS,ChangeLog} %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
+#mkdir -p %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
+#cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/log4cpp/src/log4cpp-1.0/{AUTHORS,COPYING,INSTALL,NEWS,README,THANKS,ChangeLog} %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
 
 # 
 mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
@@ -86,7 +86,7 @@ unlink %{_usr}/local/%{_lib}/liblog4cpp.so.4
 
 %files
 %attr(755,root,root) %{_usr}/local/%{_lib}/liblog4cpp.so.4.0.6
-%doc %{_usr}/local/share/doc/log4cpp-ACS/
+#%doc %{_usr}/local/share/doc/log4cpp-ACS/
 
 %files devel
 #%defattr(-,root,root,755)
