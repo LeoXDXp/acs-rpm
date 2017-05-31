@@ -200,6 +200,8 @@ cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
 sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{buildroot}%{_usr}/local/acs/acserrGenCpp
 
 cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
+sed -i 's/`searchFile \/idl\/ACSError\.xsd`/\.\./g' %{buildroot}%{_usr}/local/acs/acserrGenCheckXML
+
 cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
 cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
