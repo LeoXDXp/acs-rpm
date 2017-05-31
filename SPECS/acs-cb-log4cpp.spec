@@ -61,8 +61,8 @@ unlink %{_builddir}/alma
 #mkdir -p %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
 #cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/log4cpp/src/log4cpp-1.0/{AUTHORS,COPYING,INSTALL,NEWS,README,THANKS,ChangeLog} %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
 
-mkdir -p %{_usr}/local/include/log4cpp
-mkdir -p %{_usr}/local/include/log4cpp/threading
+mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp
+mkdir -p %{buildroot}/%{_usr}/local/include/log4cpp/threading
 
 #
 mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
