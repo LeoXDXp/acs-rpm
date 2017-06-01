@@ -29,12 +29,15 @@ cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
+# Symlink for xalan
+ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+#ln -s /usr/share/java/xalan-j2.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/xalan.jar
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-#export CLASSPATH=":/usr/share/java/:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
+export CLASSPATH=":/usr/share/java/:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -75,9 +78,6 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/ac
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/libacscommonStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacscommonStubs.so
-# Clean
-cd %{buildroot}%{_usr}/local/lib/python/site-packages/
-find -name "*.pyo" | xargs rm -rf
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
