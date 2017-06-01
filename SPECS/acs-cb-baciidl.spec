@@ -37,7 +37,7 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2H
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 
 # IDL files needed by baciidl
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/idl/acscomponent.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 # Hack to look inside the same folder. acserr seems not needed to be installed on the end system as its only for development
