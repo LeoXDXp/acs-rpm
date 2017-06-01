@@ -37,6 +37,10 @@ sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.j
 sed -i 's/`searchFile \/idl\/ACSError\.xsd`/\.\./g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCheckXML
 sed -i 's/$ACSROOT\/lib/\/usr\/local\/share\/java/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCheckXML
 
+# Hack to look inside the same folder. acserr cant be in a system path if its not yet installed
+sed -i 's/<acserr.idl>/\"acserr.idl\"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserrHandlersErr.idl
+sed -i 's/<acserr.idl>/\"acserr.idl\"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ErrorSystemErrType.idl
+
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
