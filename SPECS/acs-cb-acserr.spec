@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserr
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -40,13 +40,14 @@ sed -i 's/$ACSROOT\/lib/\/usr\/local\/share\/java/g' %{_builddir}/%{name}-%{vers
 # Hack to look inside the same folder. acserr cant be in a system path if its not yet installed
 sed -i 's/&lt;acserr.idl&gt/"acserr.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2IDL.xslt
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/
-
+# Changing and extending classpath
+sed -i 's/$(ACSROOT)\/lib\/xalan\.jar$(PATH_SEP)$(ACSROOT)\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar:\/usr\/local\/share\/java\/castor-ACS\.jar/g' %{_builddir}/%{name}-%{version}/alma/ACS-%{version}/ACSSW/include/acsMakefileCore.mk 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH=":/usr/share/java/:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar"
+#export CLASSPATH=":/usr/local/share/java/castor-ACS.jar:/usr/share/java/xalan-j2.jar:/usr/share/java/xalan-j2-serializer.jar:"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
