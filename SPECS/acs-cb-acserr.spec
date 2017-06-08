@@ -1,7 +1,7 @@
-Name:		ACS-acserr
+Name:		ACS-acserr-1
 Version:	2017.02
 Release:	1%{?dist}
-Summary:	ACS Error Core
+Summary:	ACS Error Core 1/2
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
@@ -10,14 +10,16 @@ BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserr
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
-ACS Error Core
+ACS Error Core 1/2. Provides acserrHandlersErr.jar, acserrj.jar, ACSError.jar, ErrorSystemErrType.jar, xmlvalidator.jar. Also, partial acserrHandlersErr and ErrorSystemErrType python products
+libacserrHandlersErrStubs.so  libacserr.so  libErrorSystemErrTypeStubs.so, Python's ACSError, ACSErrorChecker can be found on ACS-acserr-2. 
+Package cut in half due to circular dependencies  (acserr->logging->acsutil->baciidl->acserr)
 
 %package devel
 Summary: ACS Error Objects
 License: LGPL
 
 %description devel
-Object output: *.h,*.cpp
+Object output: Stub and Skeleton .h, .cpp and .inl for acserrHandlersErr and ErrorSystemErrType
 
 %prep
 %setup -q
@@ -101,7 +103,7 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/log
 # loggingCacheLogger.h
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/loggingCacheLogger.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/ 
 # liblogging_idlStubs.so
-ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+#ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 
 # lokiSmrtPnter
 ln -s /home/almadevel/LGPL/Tools/loki/ws/include/lokiSmartPtr.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
@@ -150,58 +152,55 @@ unlink %{_builddir}/alma
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 # ACSErr and ACSErr__POA folders, and acserr_idl.py
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+#ACSErr and ACSErr__POA provided by ACS-acserridl
+#cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+#cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/log_audience/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/log_audience__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/ACS/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/ACS__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-# The result of using pyxbgen is bindings.py, which is renamed to commontypes.py for ACS.
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/
-cp -f %{_builddir}/%{name}-%{version}/binding.py %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/commontypes.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/acscommon.jar %{buildroot}%{_usr}/local/share/java/
-
-mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/libacscommonStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacscommonStubs.so
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrHandlersErr.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSError.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ErrorSystemErrType.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/xmlvalidator.jar %{buildroot}%{_usr}/local/share/java/
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
-# unlink acserrC.h
-unlink %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/acserrC.h
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.h %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
-%{_usr}/local/lib/python/site-packages/acscommon/
-%{_usr}/local/lib/python/site-packages/acscommon__POA/
-%{_usr}/local/lib/python/site-packages/acscommon_idl.py*
-%{_usr}/local/lib/python/site-packages/log_audience/
-%{_usr}/local/lib/python/site-packages/log_audience__POA/
-%{_usr}/local/lib/python/site-packages/ACS/
-%{_usr}/local/lib/python/site-packages/ACS__POA/
-%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py*
+%{_usr}/local/lib/python/site-packages/acserrHandlersErr_idl.py
+%{_usr}/local/lib/python/site-packages/acserrHandlersErr/
+%{_usr}/local/lib/python/site-packages/acserrHandlersErr__POA/
+%{_usr}/local/lib/python/site-packages/ErrorSystemErrType_idl.py
+%{_usr}/local/lib/python/site-packages/ErrorSystemErrType/
+%{_usr}/local/lib/python/site-packages/ErrorSystemErrType__POA/
 
-%{_usr}/local/share/java/commontypes.jar
-%{_usr}/local/share/java/acscommon.jar
-%{_usr}/local/%{_lib}/libacscommonStubs.so
+%{_usr}/local/share/java/acserrHandlersErr.jar
+%{_usr}/local/share/java/acserrj.jar
+%{_usr}/local/share/java/ACSError.jar
+%{_usr}/local/share/java/ErrorSystemErrType.jar
+%{_usr}/local/share/java/xmlvalidator.jar
 
 %files devel
-%{_usr}/local/include/acscommonC.cpp
-%{_usr}/local/include/acscommonC.h
-%{_usr}/local/include/acscommonC.inl
-%{_usr}/local/include/acscommonS.cpp
-%{_usr}/local/include/acscommonS.h
-%{_usr}/local/include/acscommonS_T.cpp
-%{_usr}/local/include/acscommonS_T.h
+%{_usr}/local/include/acserrHandlersErrC.cpp
+%{_usr}/local/include/acserrHandlersErrC.h
+%{_usr}/local/include/acserrHandlersErrC.inl
+%{_usr}/local/include/acserrHandlersErrS.cpp
+%{_usr}/local/include/acserrHandlersErrS.h
+%{_usr}/local/include/ErrorSystemErrTypeC.cpp
+%{_usr}/local/include/ErrorSystemErrTypeC.h
+%{_usr}/local/include/ErrorSystemErrTypeC.inl
+%{_usr}/local/include/ErrorSystemErrTypeS.cpp
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
