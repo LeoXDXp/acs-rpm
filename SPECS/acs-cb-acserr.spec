@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserr
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -62,7 +62,6 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/acs
 # acsutilFindFile.h
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/acsutilFindFile.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
 
-
 # logging.h
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/logging.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
 # loggingGetLogger.h
@@ -101,6 +100,8 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/log
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/loggingACSLogger.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
 # loggingCacheLogger.h
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/loggingCacheLogger.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/ 
+# liblogging_idlStubs.so
+ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 
 # lokiSmrtPnter
 ln -s /home/almadevel/LGPL/Tools/loki/ws/include/lokiSmartPtr.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
