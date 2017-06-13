@@ -147,6 +147,22 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
+# TAT Stuff. Symlink to libtatlib.tcl/ folder
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+export HOST="$HOSTNAME"
+export VLTDATA=""
+export OSYSTEM="Linux"
+export CYGWIN_VER=""
+# Classpath for the compilation of jACSutilTest.jar
+#export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtilTest.jar:"
+# PATH_SEP variable is useless and needs replacement. Setting Classpath where not very useful function was. Better to centraly manage dependencies
+#sed -i 's/`getJarFile jACSUtil.jar`/${CLASSPATH}/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
+#sed -i 's/${PATH_SEP}/:/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
+# seems make test can be replaced with sh doAllTest in %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/ directly
+make test
+
+
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
