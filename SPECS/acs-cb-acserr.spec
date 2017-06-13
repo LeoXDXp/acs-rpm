@@ -158,6 +158,10 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 #cp -rf %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 #cp -rf %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
+# Remove objects
+cd %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
+find -name "*.pyo" | xargs rm -rf
+
 cp -rf %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -rf %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
@@ -180,10 +184,10 @@ cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.
 cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
-%{_usr}/local/lib/python/site-packages/acserrHandlersErr_idl.py
+%{_usr}/local/lib/python/site-packages/acserrHandlersErr_idl.py*
 %{_usr}/local/lib/python/site-packages/acserrHandlersErr/
 %{_usr}/local/lib/python/site-packages/acserrHandlersErr__POA/
-%{_usr}/local/lib/python/site-packages/ErrorSystemErrType_idl.py
+%{_usr}/local/lib/python/site-packages/ErrorSystemErrType_idl.py*
 %{_usr}/local/lib/python/site-packages/ErrorSystemErrType/
 %{_usr}/local/lib/python/site-packages/ErrorSystemErrType__POA/
 
@@ -203,6 +207,7 @@ cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.
 %{_usr}/local/include/ErrorSystemErrTypeC.h
 %{_usr}/local/include/ErrorSystemErrTypeC.inl
 %{_usr}/local/include/ErrorSystemErrTypeS.cpp
+%{_usr}/local/include/ErrorSystemErrTypeS.h
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
