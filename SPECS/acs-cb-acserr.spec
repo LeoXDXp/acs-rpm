@@ -17,7 +17,7 @@ libacserrHandlersErrStubs.so  libacserr.so  libErrorSystemErrTypeStubs.so, Pytho
 Package cut in half due to circular dependencies  (acserr->logging->acsutil->baciidl->acserr)
 
 %package devel
-NAME:	%{altname}-%{version}
+Name:	%{altname}
 Summary: ACS Error Objects
 License: LGPL
 
