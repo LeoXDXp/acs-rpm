@@ -43,7 +43,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/ac
 # Hack to look inside the same folder. acserr seems not needed to be installed on the end system as its only for development
 sed -i 's/<acserr.idl>/\"acserr.idl\"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/acscommon.idl
 # Similar Hack of AES2IDL
-sed -i 's/&lt;acserr.idl&gt;/"acserr.idl"/g' %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/baciidl/ws/config/AES2IDL.xslt
+sed -i 's/&lt;acserr.idl&gt;/"acserr.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/config/AES2IDL.xslt
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
