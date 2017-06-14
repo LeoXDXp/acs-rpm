@@ -39,7 +39,7 @@ sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.j
 
 sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCpp
 
-sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava
+sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar:\/usr\/local\/share\/java\/castor-ACS\.jar/g' %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava
 
 sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython
 
@@ -179,6 +179,11 @@ cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSEr
 cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ErrorSystemErrType.jar %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/xmlvalidator.jar %{buildroot}%{_usr}/local/share/java/
 
+# acserrGen Scripts not installed by ACS-Tools
+mkdir -p %{buildroot}%{_usr}/local/bin
+cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava %{buildroot}%{_usr}/local/bin/
+cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
+
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.h %{buildroot}%{_usr}/local/include/
@@ -198,6 +203,9 @@ cp -f %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.
 %{_usr}/local/share/java/ACSError.jar
 %{_usr}/local/share/java/ErrorSystemErrType.jar
 %{_usr}/local/share/java/xmlvalidator.jar
+
+%{_usr}/local/bin/acserrGenJava
+%{_usr}/local/bin/acserrGenPython
 
 %files devel
 %{_usr}/local/include/acserrHandlersErrC.cpp
