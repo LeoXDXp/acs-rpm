@@ -8,8 +8,8 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{altname}-%{version}.tar.gz
 Source1:	Makefile-acserr
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-logging >= %{version}
-Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-logging >= %{version} ACS-acserr-1 >= %{version}
+Requires:	ACS-Tools-Kit-Benchmark >= %{version} 
 
 %description
 ACS Error Core 2/2. Provides libacserrHandlersErrStubs.so  libacserr.so  libErrorSystemErrTypeStubs.so, Python's ACSError, ACSErrorChecker.
