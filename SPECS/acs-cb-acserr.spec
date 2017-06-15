@@ -108,6 +108,8 @@ ln -s %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 # liblogging.so
 #ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 cp -f %{SOURCE2} %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+# 
+ln -s /usr/%{_lib}/libloki.so.0 %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 
 # lokiSmrtPnter
 ln -s /home/almadevel/LGPL/Tools/loki/ws/include/lokiSmartPtr.h %{_builddir}/%{altname}-%{version}/LGPL/CommonSoftware/acserr/ws/include/
