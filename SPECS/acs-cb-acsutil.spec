@@ -68,11 +68,11 @@ unlink %{_builddir}/alma
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/lib/libacsutil.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/libacsutil.so %{buildroot}%{_usr}/local/%{_lib}/
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacsutil.so
 
 mkdir -p %{buildroot}%{_usr}/local/bin/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/bin/* %{buildroot}%{_usr}/local/bin/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/bin/* %{buildroot}%{_usr}/local/bin/
 
 %files
 %{_usr}/local/%{_lib}/libacsutil.so
