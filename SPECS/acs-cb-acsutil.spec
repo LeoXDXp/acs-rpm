@@ -6,7 +6,8 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsutil
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version} ACS-baciidl >= %{version}  ACS-baciidl-devel >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version} 
+# ACS-baciidl >= %{version}  ACS-baciidl-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -25,7 +26,7 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Symlink for libacscommonStubs.so required to create libacsutil.so. libbaciStubs for testAnyAide
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 ln -s  %{_usr}/local/%{_lib}/libacscommonStubs.so  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
-ln -s  %{_usr}/local/%{_lib}/libbaciStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
+#ln -s  %{_usr}/local/%{_lib}/libbaciStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -56,7 +57,10 @@ export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
 
-make test
+# Replace to "". Its not system available
+#sed -i 's/<baciC.h>/"baciC.h"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/test/testAnyAide.cpp
+
+#make test
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
