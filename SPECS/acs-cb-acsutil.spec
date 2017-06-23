@@ -84,11 +84,11 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/bin/* %{bui
 %{_usr}/local/bin/acsutilTATEpilogue
 %{_usr}/local/bin/acsutilTATPrologue
 %{_usr}/local/bin/acsutilTATTestRunner
-%{_usr}/local/bin/testacsutilBlock
-%{_usr}/local/bin/testFindFile
-%{_usr}/local/bin/testLLU
-%{_usr}/local/bin/testPorts
-%{_usr}/local/bin/testTmp
+#%{_usr}/local/bin/testacsutilBlock
+#%{_usr}/local/bin/testFindFile
+#%{_usr}/local/bin/testLLU
+#%{_usr}/local/bin/testPorts
+#%{_usr}/local/bin/testTmp
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
