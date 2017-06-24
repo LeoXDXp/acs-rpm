@@ -26,7 +26,8 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Include acsutil
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/*.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 # acsutil.so
-ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
+ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
