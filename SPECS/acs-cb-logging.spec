@@ -34,7 +34,7 @@ ln -s /usr/%{_lib}/libloki.so.0 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftw
 # Testing with normal log4cpp
 ln -s /usr/%{_lib}/liblog4cpp.so.5 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/liblog4cpp.so
 # liblogging_idlStubs.so
-ln -s /usr/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
+ln -s /usr/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
