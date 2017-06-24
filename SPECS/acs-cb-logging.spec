@@ -7,7 +7,7 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-logging
 
-BuildRequires: ACS-loggingidl-devel >= %{version} log4cpp-ACS-devel >= 1.0.%{version}
+BuildRequires: ACS-loggingidl-devel >= %{version} log4cpp-ACS-devel >= 1.0.%{version} ACS-acsutil >= %{version}
 
 %description
 ACS logging.
@@ -26,7 +26,7 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Include acsutil
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/*.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 # acsutil.so
-#ln -s %{_usr}/local/%{_lib}/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
