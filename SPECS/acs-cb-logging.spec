@@ -57,36 +57,39 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
+# TAT Stuff. Symlink to libtatlib.tcl/ folder
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+export HOST="$HOSTNAME"
+export VLTDATA=""
+export OSYSTEM="Linux"
+export CYGWIN_VER=""
+
+make test
+
 #unlink
 unlink %{_builddir}/alma
 
 %install
-mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+#mkdir -p %{buildroot}/%{_usr}/local/share/java/
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 
-#python files
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/python/site-packages/* %{buildroot}%{_usr}/local/lib/python/site-packages/
 #java files
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
+#cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
+#cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
 #lib
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging_idlStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging_idlStubs.so
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/libbaselogging.so %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/libbaselogging.a %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging.so %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging.a %{buildroot}%{_usr}/local/%{_lib}/
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaselogging.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 
 %files
-%{_usr}/local/lib/python/site-packages/ACSLoggingLog/
-%{_usr}/local/lib/python/site-packages/ACSLoggingLog__POA/
-%{_usr}/local/lib/python/site-packages/AcsLogLevels/
-%{_usr}/local/lib/python/site-packages/AcsLogLevels__POA/
-%{_usr}/local/lib/python/site-packages/Logging/
-%{_usr}/local/lib/python/site-packages/Logging__POA/
-%{_usr}/local/lib/python/site-packages/logging_idl_idl.py*
+#%{_usr}/local/share/java/logging_idl.jar
 
-%{_usr}/local/share/java/DsLogAdmin.jar
-%{_usr}/local/share/java/logging_idl.jar
-
-%{_usr}/local/%{_lib}/liblogging_idlStubs.so
+%{_usr}/local/%{_lib}/libbaselogging.so
+%{_usr}/local/%{_lib}/liblogging.so
 
 %changelog
 * Wed May 24 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
