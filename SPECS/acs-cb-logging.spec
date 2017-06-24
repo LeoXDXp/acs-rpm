@@ -7,7 +7,8 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-logging
 
-BuildRequires: ACS-loggingidl-devel >= %{version} log4cpp-ACS-devel >= 1.0.%{version} ACS-acsutil >= %{version}
+BuildRequires: ACS-loggingidl-devel >= %{version} ACS-loggingidl >= %{version}  log4cpp log4cpp-ACS-devel >= 1.0.%{version} ACS-acsutil >= %{version}
+# log4cpp-ACS >= 1.0.%{version}
 
 %description
 ACS logging.
@@ -30,6 +31,10 @@ mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 # loki
 ln -s /usr/%{_lib}/libloki.so.0 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/libloki.so
+# Testing with normal log4cpp
+ln -s /usr/%{_lib}/liblog4cpp.so.5 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/liblog4cpp.so
+# liblogging_idlStubs.so
+ln -s /usr/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
