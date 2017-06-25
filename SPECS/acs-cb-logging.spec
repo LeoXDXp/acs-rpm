@@ -70,6 +70,8 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciSi
 #sed -i 's/<maciSimpleClient.h>/"maciSimpleClient.h"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 # maciSimpleClientThreadHook.h
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciSimpleClientThreadHook.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+# maciClientExport.h
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciClientExport.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
 make test
 
