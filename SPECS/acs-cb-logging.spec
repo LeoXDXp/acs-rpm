@@ -73,7 +73,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciSi
 # maciClientExport.h
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciClientExport.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
-make test
+#make test
 
 #unlink
 unlink %{_builddir}/alma
