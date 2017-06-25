@@ -20,6 +20,7 @@ ACS logging.
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 
 # Basic path
+rm -rf %{_builddir}/home/almamgr/
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
