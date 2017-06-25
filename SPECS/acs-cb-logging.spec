@@ -87,10 +87,10 @@ mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 #cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
 #cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
 #lib
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/libbaselogging.so %{buildroot}%{_usr}/local/%{_lib}/
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/libbaselogging.a %{buildroot}%{_usr}/local/%{_lib}/
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging.so %{buildroot}%{_usr}/local/%{_lib}/
-cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/liblogging.a %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/libbaselogging.so %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/libbaselogging.a %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/liblogging.so %{buildroot}%{_usr}/local/%{_lib}/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/liblogging.a %{buildroot}%{_usr}/local/%{_lib}/
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaselogging.so
 chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 
