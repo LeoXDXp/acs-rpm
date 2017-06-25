@@ -67,7 +67,9 @@ export CYGWIN_VER=""
 
 # maciSimpleClient.h
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciSimpleClient.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
-sed -i 's/<maciSimpleClient.h>/"maciSimpleClient.h"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+#sed -i 's/<maciSimpleClient.h>/"maciSimpleClient.h"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+# maciSimpleClientThreadHook.h
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciSimpleClientThreadHook.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 
 make test
 
