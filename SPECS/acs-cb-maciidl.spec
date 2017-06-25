@@ -6,7 +6,8 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-maciidl
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-loggingidl >= %{version} ACS-acsidlcommon >= %{version} 
+# ACS-acserrtypes >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -26,15 +27,20 @@ IDL object output: .h,.cpp,.inl,.o Stubs and Skeletons
 cp -f %{SOURCE1} %{_builddir}/%{name}-%{version}/Makefile
 
 # Basic path
+rm -f %{_builddir}/home/almamgr
 mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
-# xml.xsd
-cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/xercesj/config/CDB/schemas/xml.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/
+# Makefile tries to get xml.xsd from ACSSW
+cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/xercesj/config/CDB/schemas/xml.xsd %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/config/CDB/schemas/
 
+# Needed libs: logging_idlStubs
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
+ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
+# acscommonStubs
+ln -s %{_usr}/local/%{_lib}/libacscommonStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
 
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
