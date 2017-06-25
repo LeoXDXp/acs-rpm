@@ -30,7 +30,11 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
-#mkdir -p 
+# xml.xsd
+cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/xercesj/config/CDB/schemas/xml.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/
+
+
+#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
