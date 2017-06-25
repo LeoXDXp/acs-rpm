@@ -99,6 +99,8 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 
 %{_usr}/local/%{_lib}/libbaselogging.so
 %{_usr}/local/%{_lib}/liblogging.so
+%{_usr}/local/%{_lib}/libbaselogging.a
+%{_usr}/local/%{_lib}/liblogging.a
 
 %changelog
 * Wed May 24 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
