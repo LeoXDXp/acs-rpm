@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-baciidl
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr-2 >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
