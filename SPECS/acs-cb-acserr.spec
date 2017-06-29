@@ -132,6 +132,10 @@ ln -s  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/ac
 # acsutil.so
 ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 
+#Pyxbgen
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
+pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
+
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
@@ -147,6 +151,8 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
+# Add debug to vpath in acsMakefile line 1810+
+#sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist. LIB_PATH_LIST a $(LIB_PATH_LIST) " ; exit 1 /g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 make
 
@@ -157,12 +163,9 @@ export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
-# Classpath for the compilation of jACSutilTest.jar
-#export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtilTest.jar:"
-# PATH_SEP variable is useless and needs replacement. Setting Classpath where not very useful function was. Better to centraly manage dependencies
-#sed -i 's/`getJarFile jACSUtil.jar`/${CLASSPATH}/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
-#sed -i 's/${PATH_SEP}/:/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
-# seems make test can be replaced with sh doAllTest in %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/ directly
+# Classpath: makes ACSErrTypeTest.jar available
+export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar"
+
 make test
 
 
