@@ -198,6 +198,24 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/s
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/Subsystem.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
 
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrTypeImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/_GlobalIDL/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/_GlobalIDL__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/test_AES2Py.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+
+# Old 
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrOldTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrOldTypeTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+# Test
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTestImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrHandlersErr.jar %{buildroot}%{_usr}/local/share/java/
@@ -205,6 +223,13 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSError.jar %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ErrorSystemErrType.jar %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/xmlvalidator.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar %{buildroot}%{_usr}/local/share/java/
+# UnitTest jar files
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrjTest.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrOldTest.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrOldTypeTest.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrTest.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar %{buildroot}%{_usr}/local/share/java/
 
 # acserrGen Scripts not installed by ACS-Tools
 mkdir -p %{buildroot}%{_usr}/local/bin
@@ -212,13 +237,30 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGe
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrType.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrTypeStubs.so %{_usr}/local/%{_lib}/
+
+# Old stuff
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.so %{_usr}/local/%{_lib}/
+# Test stuff
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.so %{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.so %{_usr}/local/%{_lib}/
 
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrType.so 
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrTypeStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.so
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
@@ -237,6 +279,22 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorDefinition.py
 %{_usr}/local/lib/python/site-packages/ACSErrorChecker/Subsystem.py
 %{_usr}/local/lib/python/site-packages/ACSErrorChecker/__init__.py
+%{_usr}/local/lib/python/site-packages/ExmplErrType/
+%{_usr}/local/lib/python/site-packages/ExmplErrType_idl.py*
+%{_usr}/local/lib/python/site-packages/ExmplErrTypeImpl.py*
+%{_usr}/local/lib/python/site-packages/ExmplErrType__POA/
+%{_usr}/local/lib/python/site-packages/_GlobalIDL/
+%{_usr}/local/lib/python/site-packages/_GlobalIDL__POA/
+%{_usr}/local/lib/python/site-packages/test_AES2Py.py*
+
+%{_usr}/local/lib/python/site-packages/acserrOldTest_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrOldTypeTest_idl.py*
+
+%{_usr}/local/lib/python/site-packages/acserrTest_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeTest/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeTest_idl.py
+%{_usr}/local/lib/python/site-packages/ACSErrTypeTestImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeTest__POA/
 
 %{_usr}/local/share/java/acserrHandlersErr.jar
 %{_usr}/local/share/java/acserrj.jar
@@ -262,6 +320,13 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/include/ErrorSystemErrTypeC.inl
 %{_usr}/local/include/ErrorSystemErrTypeS.cpp
 %{_usr}/local/include/ErrorSystemErrTypeS.h
+
+%{_usr}/local/%{_lib}/libacserrHandlersErrStubs.a
+%{_usr}/local/%{_lib}/libacserrOldTestStubs.a
+%{_usr}/local/%{_lib}/libACSErrOldTypeTestStubs.a
+%{_usr}/local/%{_lib}/libacserrTestStubs.a
+%{_usr}/local/%{_lib}/libACSErrTypeTest.a
+%{_usr}/local/%{_lib}/libACSErrTypeTestStubs.a
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
