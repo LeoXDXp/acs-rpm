@@ -153,7 +153,7 @@ cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 # Add debug to vpath in acsMakefile line 1810+
-#sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist. LIB_PATH_LIST a $(LIB_PATH_LIST) " ; exit 1 /g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
+sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist./g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 make
 
