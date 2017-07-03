@@ -142,7 +142,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
-# Somehow, classpath breaks things, and still gets ignored
+export CLASSPATH="$CLASSPATH:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-core.jar:/usr/local/share/java/commontypes.jar:/usr/local/share/java/acserr.jar:"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
