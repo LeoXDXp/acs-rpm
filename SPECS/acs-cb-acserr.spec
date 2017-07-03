@@ -217,6 +217,11 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/s
 
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 
+# Remove objects
+cd %{buildroot}%{_usr}/local/lib/python/site-packages/
+find -name "*.pyo" | xargs rm -rf
+
+
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrHandlersErr.jar %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar %{buildroot}%{_usr}/local/share/java/
@@ -285,10 +290,10 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/lib/python/site-packages/ErrorSystemErrType_idl.py*
 %{_usr}/local/lib/python/site-packages/ErrorSystemErrType/
 %{_usr}/local/lib/python/site-packages/ErrorSystemErrType__POA/
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorChecker.py
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorDefinition.py
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/Subsystem.py
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/__init__.py
+%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorChecker.py*
+%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorDefinition.py*
+%{_usr}/local/lib/python/site-packages/ACSErrorChecker/Subsystem.py*
+%{_usr}/local/lib/python/site-packages/ACSErrorChecker/__init__.py*
 %{_usr}/local/lib/python/site-packages/ExmplErrType/
 %{_usr}/local/lib/python/site-packages/ExmplErrType_idl.py*
 %{_usr}/local/lib/python/site-packages/ExmplErrTypeImpl.py*
@@ -302,7 +307,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 
 %{_usr}/local/lib/python/site-packages/acserrTest_idl.py*
 %{_usr}/local/lib/python/site-packages/ACSErrTypeTest/
-%{_usr}/local/lib/python/site-packages/ACSErrTypeTest_idl.py
+%{_usr}/local/lib/python/site-packages/ACSErrTypeTest_idl.py*
 %{_usr}/local/lib/python/site-packages/ACSErrTypeTestImpl.py*
 %{_usr}/local/lib/python/site-packages/ACSErrTypeTest__POA/
 
@@ -311,10 +316,23 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/share/java/ACSError.jar
 %{_usr}/local/share/java/ErrorSystemErrType.jar
 %{_usr}/local/share/java/xmlvalidator.jar
+%{_usr}/local/share/java/ACSErrOldTypeTest.jar
+%{_usr}/local/share/java/ACSErrTypeTest.jar
+%{_usr}/local/share/java/ExmplErrType.jar
+%{_usr}/local/share/java/acserrOldTest.jar
+%{_usr}/local/share/java/acserrTest.jar
+%{_usr}/local/share/java/acserrjTest.jar
 
 %{_usr}/local/%{_lib}/libacserrHandlersErrStubs.so
 %{_usr}/local/%{_lib}/libacserr.so
 %{_usr}/local/%{_lib}/libErrorSystemErrTypeStubs.so
+%{_usr}/local/%{_lib}/libACSErrOldTypeTestStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeTest.so
+%{_usr}/local/%{_lib}/libACSErrTypeTestStubs.so
+%{_usr}/local/%{_lib}/libExmplErrType.so
+%{_usr}/local/%{_lib}/libExmplErrTypeStubs.so
+%{_usr}/local/%{_lib}/libacserrOldTestStubs.so
+%{_usr}/local/%{_lib}/libacserrTestStubs.so
 
 %{_usr}/local/bin/acserrGenJava
 %{_usr}/local/bin/acserrGenPython
@@ -330,6 +348,35 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/include/ErrorSystemErrTypeC.inl
 %{_usr}/local/include/ErrorSystemErrTypeS.cpp
 %{_usr}/local/include/ErrorSystemErrTypeS.h
+%{_usr}/local/include/ACSErrOldTypeTestC.cpp
+%{_usr}/local/include/ACSErrOldTypeTestC.h
+%{_usr}/local/include/ACSErrOldTypeTestC.inl
+%{_usr}/local/include/ACSErrOldTypeTestS.cpp
+%{_usr}/local/include/ACSErrOldTypeTestS.h
+%{_usr}/local/include/ACSErrTypeTest.cpp
+%{_usr}/local/include/ACSErrTypeTest.h
+%{_usr}/local/include/ACSErrTypeTestC.cpp
+%{_usr}/local/include/ACSErrTypeTestC.h
+%{_usr}/local/include/ACSErrTypeTestC.inl
+%{_usr}/local/include/ACSErrTypeTestS.cpp
+%{_usr}/local/include/ACSErrTypeTestS.h
+%{_usr}/local/include/ExmplErrType.cpp
+%{_usr}/local/include/ExmplErrType.h
+%{_usr}/local/include/ExmplErrTypeC.cpp
+%{_usr}/local/include/ExmplErrTypeC.h
+%{_usr}/local/include/ExmplErrTypeC.inl
+%{_usr}/local/include/ExmplErrTypeS.cpp
+%{_usr}/local/include/ExmplErrTypeS.h
+%{_usr}/local/include/acserrOldTestC.cpp
+%{_usr}/local/include/acserrOldTestC.h
+%{_usr}/local/include/acserrOldTestC.inl
+%{_usr}/local/include/acserrOldTestS.cpp
+%{_usr}/local/include/acserrOldTestS.h
+%{_usr}/local/include/acserrTestC.cpp
+%{_usr}/local/include/acserrTestC.h
+%{_usr}/local/include/acserrTestC.inl
+%{_usr}/local/include/acserrTestS.cpp
+%{_usr}/local/include/acserrTestS.h
 
 %{_usr}/local/%{_lib}/libacserrHandlersErrStubs.a
 %{_usr}/local/%{_lib}/libacserrOldTestStubs.a
