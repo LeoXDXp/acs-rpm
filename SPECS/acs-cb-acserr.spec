@@ -165,7 +165,7 @@ export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
 # Classpath: makes ACSErrTypeTest.jar available
-export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar:"
+export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar:/usr/share/java/junit.jar:"
 
 make test
 
