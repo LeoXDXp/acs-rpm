@@ -251,6 +251,16 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacser
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.so %{buildroot}%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
+#.a 
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+# Old .a
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+# Test .a
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.a %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so
