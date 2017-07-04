@@ -221,8 +221,6 @@ cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
-
-
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrHandlersErr.jar %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar %{buildroot}%{_usr}/local/share/java/
@@ -238,8 +236,6 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrTe
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar %{buildroot}%{_usr}/local/share/java/
 
 # acserrGen Scripts not installed by ACS-Tools
-chmod o+x %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava
-chmod o+x %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython
 mkdir -p %{buildroot}%{_usr}/local/bin
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava %{buildroot}%{_usr}/local/bin/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
@@ -337,8 +333,8 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/%{_lib}/libacserrOldTestStubs.so
 %{_usr}/local/%{_lib}/libacserrTestStubs.so
 
-%{_usr}/local/bin/acserrGenJava
-%{_usr}/local/bin/acserrGenPython
+%attr(645,-,-) %{_usr}/local/bin/acserrGenJava
+%attr(645,-,-) %{_usr}/local/bin/acserrGenPython
 
 %files devel
 %{_usr}/local/include/acserrHandlersErrC.cpp
