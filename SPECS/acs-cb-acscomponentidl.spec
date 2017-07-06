@@ -76,8 +76,8 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib
 #%{_usr}/local/lib/python/site-packages/ACS/
 #%{_usr}/local/lib/python/site-packages/ACS__POA/
 %{_usr}/local/lib/python/site-packages/acscomponent_idl.py*
-%{_usr}/local/lib/libacscomponentStubs.so
-%{_usr}/local/lib/acscomponent.jar
+%{_usr}/local/%{_lib}/libacscomponentStubs.so
+%{_usr}/local/share/java/acscomponent.jar
 
 %files devel
 %{_usr}/local/include/acscomponentC.h
