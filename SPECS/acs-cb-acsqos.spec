@@ -6,6 +6,8 @@ License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-acsqos
+BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version}
+
 
 %description
 ACS QOS.
@@ -22,18 +24,12 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
+# Env Vars for installing. 
+source %{_sysconfdir}/profile.d/acscb.sh
+source %{_sysconfdir}/profile.d/acscb-gnu.sh
+source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+source %{_sysconfdir}/profile.d/acscb-python.sh
 #### custom ####
-
-#xsd files needed by acsqos
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
-
-# IDL files needed by acsQoS
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/idl/acscomponent.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
-ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
-
-sed -i 's/\$(ACE\_ROOT)\/TAO\/orbsvcs\/orbsvcs\// ..\/idl\/ /g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/src/Makefile
-
 ### end custom ###
 
 #general Compilation
@@ -47,6 +43,14 @@ export IDL_PATH="$IDL_PATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/a
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
+
+#xsd files needed by acsqos
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/idl/acscomponent.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/idl/
+sed -i 's/\$(ACE\_ROOT)\/TAO\/orbsvcs\/orbsvcs\// ..\/idl\/ /g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsQoS/ws/src/Makefile
+
 
 #sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenIDL
 #sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCpp
