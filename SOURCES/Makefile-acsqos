@@ -21,9 +21,9 @@ MODULES_TOOLS =  #Tools
 # I skip doxygen, that should be after compat and before tat,
 # because it is already built in the prepare phase.
 #
+#
+MODULES_ACS = acsQoS # jacsutil xmljbind xmlpybind acserridl acsidlcommon acsutil acsstartup loggingidl logging acserr acserrTypes acsQoS acsthread acscomponentidl cdbidl maciidl baciidl acsncidl acsjlog repeatGuard loggingts loggingtsTypes jacsutil2 cdb cdbChecker codegen cdb_rdb acsalarmidl acsalarm acsContainerServices acscomponent recovery basenc archiveevents parameter baci enumprop acscallbacks acsdaemonidl jacsalarm jmanager maci task acstime acsnc acsdaemon acslog acstestcompcpp acsexmpl jlogEngine acspycommon acsalarmpy acspy comphelpgen XmlIdl define acstestentities jcont jcontnc nsStatisticsService jacsalarmtest jcontexmpl jbaci monitoring acssamp mastercomp acspyexmpl nctest acscommandcenter acssim bulkDataNT bulkData containerTests acscourse ACSLaser acsGUIs acsExtras
 
-MODULES_ACS = acsQoS
-#acsthread acscomponentidl cdbidl maciidl baciidl acsncidl acsjlog repeatGuard loggingts loggingtsTypes jacsutil2 cdb cdbChecker codegen cdb_rdb acsalarmidl acsalarm acsContainerServices acscomponent recovery basenc archiveevents parameter baci enumprop acscallbacks acsdaemonidl jacsalarm jmanager maci task acstime acsnc acsdaemon acslog acstestcompcpp acsexmpl jlogEngine acspycommon acsalarmpy acspy comphelpgen XmlIdl define acstestentities jcont jcontnc nsStatisticsService jacsalarmtest jcontexmpl jbaci monitoring acssamp mastercomp acspyexmpl nctest acscommandcenter acssim bulkDataNT bulkData containerTests acscourse ACSLaser acsGUIs acsExtras
 ######## end Modules ###########################
 
 ###############################################
@@ -40,7 +40,7 @@ endef
 ###############################################
 
 #
-# Try to build BENCHMARK modules only if they are part of the distribution
+# Try to build BENCHMARK modules only if they are part of the distribution 
 #
 HAS_BENCHMARK = $(shell if [ -d Benchmark ]; then echo "TRUE"; else echo "FALSE"; fi)
 ifeq ($(HAS_BENCHMARK),TRUE)
@@ -61,7 +61,7 @@ MODULES =  $(foreach acs, $(MODULES_ACS), $(MODULE_PREFIX)/CommonSoftware/$(acs)
 #!## No VLT Central Common Software (CCS) is available.
 #!## Some modules in the KIT and TOOLS sub-packages
 #!## come from the VLT CCS and use the NOCCS flag to
-#!## compile when the core of CCS is not available
+#!## compile when the core of CCS is not available 
 #!##
 #!#
 #!## Commented out empty MAKE_FLAGS, because it does not work on SUN
@@ -75,7 +75,7 @@ SHELL=/bin/ksh
 ECHO=echo
 
 ifdef MAKE_VERBOSE
-    AT =
+    AT = 
     OUTPUT =
 else
     AT = @
@@ -94,7 +94,7 @@ startupDir = $(shell pwd)
 # o   recognize if you live on SunOS
 #     and set the compiler accordingly
 #     (that's already done at local Makefile level)
-# o   turn verbose on and off
+# o   turn verbose on and off 
 # o   have logging into some well defined place
 # o   set specialized variables for CXX/CC/JAVA
 #
@@ -123,7 +123,7 @@ define canned
 endef
 
 #
-# This target builds and installs the complete ACS
+# This target builds and installs the complete ACS 
 # on a clean directory structure.
 # Per each module it executes:
 #    make clean all install
@@ -132,7 +132,7 @@ build: 	clean_log checkModuleTree prepare update
 	@$(ECHO) "... done"
 
 #
-# This target builds and installs the complete ACS
+# This target builds and installs the complete ACS 
 # on a clean directory structure.
 # Per each module it executes:
 #    make clean all man install clean
@@ -141,7 +141,7 @@ build_clean:   	svn-tag clean_log checkModuleTree prepare update_clean
 	@$(ECHO) "... done"
 
 #
-# This target builds and installs the complete ACS
+# This target builds and installs the complete ACS 
 # on a clean directory structure.
 # Per each module it executes:
 #    make clean all man install clean
@@ -154,7 +154,7 @@ build_clean_test:   	svn-tag clean_log checkModuleTree prepare update_clean_test
 	@$(ECHO) "... done"
 
 #
-# This target re-builds and installs the complete ACS
+# This target re-builds and installs the complete ACS 
 # on an existing directory structure.
 # Per each module it executes:
 #    make clean all man install clean
@@ -164,8 +164,8 @@ rebuild:	svn-tag clean_log update
 
 clean_log:
 	@$(ECHO) "############ Clean Build Log File: ${ALMASW_ROOTDIR}/build.log  #################"
-	@rm -f ${ALMASW_ROOTDIR}/build.log
-	@touch ${ALMASW_ROOTDIR}/build.log
+	@rm -f ${ALMASW_ROOTDIR}/build.log 
+	@touch ${ALMASW_ROOTDIR}/build.log 
 
 clean_test_log:
 	@$(ECHO) "############ Clean Test Log File: test.log #################"
@@ -175,8 +175,8 @@ clean_test_log:
 #
 # Check module tree
 #
-checkModuleTree:
-	@$(ECHO) "############ Check directory tree for modules  #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+checkModuleTree:	
+	@$(ECHO) "############ Check directory tree for modules  #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
 		    if [ ! -d $${member} ]; then \
                          echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
@@ -203,12 +203,12 @@ checkModuleTree:
 #   Notice that vlt and doc have a circular dependency
 #   and therefore they are built "ad hoc" by the prepare kit script
 # - doxygen
-prepare:
-	@$(ECHO) "############ Prepare installation areas      #################" | tee -a ${ALMASW_ROOTDIR}/build.log
+prepare:	
+	@$(ECHO) "############ Prepare installation areas      #################" | tee -a ${ALMASW_ROOTDIR}/build.log 
 	@cd $(MODULE_PREFIX); $(SHELL) acsBUILD/src/acsBUILDPrepareKit.sh >> ../build.log 2>& 1
-	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Kit/acs/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log
-	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Kit/acstempl/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log
-#	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Tools/doxygen/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> Doxygen FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Kit/acs/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
+	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Kit/acstempl/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
+#	@$(MAKE) $(MAKE_FLAGS) --debug=m -C $(MODULE_PREFIX)/Tools/doxygen/src/ all install clean >> ${ALMASW_ROOTDIR}/build.log  2>& 1 || echo "### ==> Doxygen FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Update of all core components
@@ -220,7 +220,7 @@ prepare:
 #
 
 update:	checkModuleTree
-	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
 		    if [ ! -d $${member} ]; then \
                          echo "######## ==> $${member} MODULE NOT FOUND! FAILED! " | tee -a ${ALMASW_ROOTDIR}/build.log ;\
@@ -242,7 +242,7 @@ update:	checkModuleTree
 		done;\
          true;
 	@$(SHELL) $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
-	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Update of all core components
@@ -291,13 +291,13 @@ endef
 #   that is the LAST module fails the whole Make does not fail
 #
 update_clean:	checkModuleTree
-	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ (Re-)build ACS Software         #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in  $(foreach name, $(MODULES), $(name) ) ; do \
                    $(update-clean-one-module);\
 		done;\
          true;
 	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
-	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ DONE (Re-)build ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 #
 # Test target
@@ -382,14 +382,14 @@ $(Test): clean_test_log $(ACCDB_CONFIG)
 
 
 update_clean_test: clean_test_log $(ACCDB_CONFIG)
-	@$(ECHO) "############ UPDATE and TEST ACS Software #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ UPDATE and TEST ACS Software #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 	@for member in $(foreach name,$(MODULES),$(name)); do\
                    $(update-clean-one-module);\
                    $(test-one-module);\
 	done;\
         true;
 	@$(SHELL)  $(MODULE_PREFIX)/acsBUILD/src/acsBUILDAfterBuildMod.sh >> ${ALMASW_ROOTDIR}/build.log  2>& 1
-	@$(ECHO) "############ DONE UPDATE and TEST ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log
+	@$(ECHO) "############ DONE UPDATE and TEST ACS Software    #################"| tee -a ${ALMASW_ROOTDIR}/build.log 
 
 
 #
@@ -407,11 +407,11 @@ accdb_config:
 # with the current setup
 #
 show_modules:
-	@$(ECHO) "Modules in build list are:"
+	@$(ECHO) "Modules in build list are:" 
 	@$(ECHO) ${MODULES}
 
 #
-# This target gets from SVN all files needed for an LGPL distribution
+# This target gets from SVN all files needed for an LGPL distribution 
 #
 LGPL_FILES=README README-new-release LGPL
 svn-get-lgpl: svn-tag svn-get-version
@@ -426,11 +426,11 @@ svn-get-lgpl: svn-tag svn-get-version
 #
 # Standard targets
 #
-clean:
+clean:	
 	$(canned)
-all:
+all:	
 	$(canned)
-install:
+install:	
 	$(canned)
 
 man:
