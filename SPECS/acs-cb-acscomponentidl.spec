@@ -10,6 +10,13 @@ Source1:    Makefile-acscomponentidl
 %description
 ACS Component IDL.
 
+%package devel
+Summary: ACS Component IDL Objects (Stubs-Skeletons)
+License: LGPL
+
+%description devel
+IDL object output: .h,.cpp,.inl,.o Stubs and Skeletons
+
 %prep
 %setup -q
 
