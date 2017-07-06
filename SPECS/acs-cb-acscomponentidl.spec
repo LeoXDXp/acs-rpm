@@ -57,13 +57,17 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/obj
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/libacscomponentStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/python/site-packages/acscomponent_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+# Clean
+cd %{buildroot}%{_usr}/local/lib/python/site-packages/
+find -name "*.pyo" | xargs rm -rf
 
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/acscomponent.jar %{buildroot}%{_usr}/local/share/java/
 
 %files
-%{_usr}/local/lib/python/site-packages/ACS/
-%{_usr}/local/lib/python/site-packages/ACS__POA/
+#%{_usr}/local/lib/python/site-packages/ACS/
+#%{_usr}/local/lib/python/site-packages/ACS__POA/
 %{_usr}/local/lib/python/site-packages/acscomponent_idl.py*
 %{_usr}/local/lib/libacscomponentStubs.so
 %{_usr}/local/lib/acscomponent.jar
