@@ -52,10 +52,13 @@ make
 unlink %{_builddir}/alma
 
 %install
+# Devel stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+
+mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acscomponentidl/ws/lib/libacscomponentStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
 # ACS and ACS__POA already provided by ACS Common IDL 
