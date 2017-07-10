@@ -33,6 +33,7 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
 # Makefile tries to get xml.xsd from ACSSW
+mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/config/CDB/schemas/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/xercesj/config/CDB/schemas/xml.xsd %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/config/CDB/schemas/
 
 # Needed libs: logging_idlStubs
