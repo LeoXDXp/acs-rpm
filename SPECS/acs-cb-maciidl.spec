@@ -36,6 +36,9 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 sed -i 's/@cp/#@cp/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/src/Makefile
 cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/xercesj/config/CDB/schemas/xml.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/
 
+# AES2IDL.xslt
+ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2IDL.xslt %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/
+
 # Needed libs: logging_idlStubs
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
 ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
