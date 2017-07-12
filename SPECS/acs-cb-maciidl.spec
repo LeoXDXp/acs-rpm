@@ -45,6 +45,10 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2H
 sed -i 's/<acscommon.idl>/"acscommon.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/maci.idl
 sed -i 's/&lt;acserr.idl&gt;/"acserr.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/AES2IDL.xslt
 
+# IDLs
+%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/
+%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/
+
 # Needed libs: logging_idlStubs
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
 ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
