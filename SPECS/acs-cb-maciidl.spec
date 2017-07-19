@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-maciidl
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-loggingidl >= %{version} ACS-acsidlcommon >= %{version} 
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-loggingidl >= %{version} ACS-acsidlcommon >= %{version} ACS-acserrTypes >= %{version}
 # ACS-acserrtypes >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
@@ -44,12 +44,15 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/config/AES2H
 # Fixes
 sed -i 's/<acscommon.idl>/"acscommon.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/maci.idl
 sed -i 's/<logging_idl.idl>/"logging_idl.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/maci.idl
+sed -i 's/<ACSErrTypeCommon.idl>/"ACSErrTypeCommon.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/maci.idl
+sed -i 's/<maciErrType.idl>/"maciErrType.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/maci.idl
 sed -i 's/&lt;acserr.idl&gt;/"acserr.idl"/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/config/AES2IDL.xslt
 
 # IDLs
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/acscommon.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/idl/logging_idl.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/idl/
+#ACSErrTypeCommon.idl
 
 # Needed libs: logging_idlStubs
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maciidl/ws/lib/
