@@ -56,6 +56,9 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acse
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acserrACSbaseExImpl.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acserr.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acserrLegacy.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acserrGenExport.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
+#cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
+
 
 # ACScomponentIDL stuff
 cp -f %{_usr}/local/include/acscomponentC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
