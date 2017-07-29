@@ -41,7 +41,7 @@ sed -i 's/<DsLogAdmin.idl>/\"DsLogAdmin.idl\"/g' %{_builddir}/%{name}-%{version}
 
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/
-
+# jar cvf DsLogAdmin.jar org/omg/DsLogAdmin/*.class
 cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar
 cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
 
