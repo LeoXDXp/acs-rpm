@@ -6,6 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-baciidl
+Source2:	CosProperty.jar
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version} ACS-acscomponentidl-devel >= %{version} ACS-acscomponentidl >= %{version} ACS-acsidlcommon >= %{version} 
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
@@ -111,6 +112,8 @@ ln -s  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/ac
 ln -s %{_usr}/local/share/java/acscommon.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
 # CosProperty.idl
 ln -s %{_usr}/include/orbsvcs/CosProperty.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
+# CosProperty.jar: Manually created: jar cvf CosProperty.jar org/omg/CosPropertyService/*.class
+cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/CosProperty.jar
 
 # The result of using pyxbgen is bindings.py, which is renamed to commontypes.py for ACS.
 #pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
