@@ -109,6 +109,8 @@ ln -s /home/almadevel/LGPL/Tools/loki/ws/include/lokiConstPolicy.h %{_builddir}/
 ln -s  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/acsutil.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
 # acscommon.jar
 ln -s %{_usr}/local/share/java/acscommon.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
+# CosProperty.idl
+ln -s %{_usr}/include/orbsvcs/CosProperty.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
 
 # The result of using pyxbgen is bindings.py, which is renamed to commontypes.py for ACS.
 #pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
