@@ -123,6 +123,7 @@ sed -i 's/export CLASSPATH="`acsMakeJavaClasspath`$(PATH_SEP).";//g' %{_builddir
 #sed -i 's/export CLASSPATH=`acsMakeJavaClasspath`$(PATH_SEP)";//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 #sed -i 's/export CLASSPATH=`acsMakeJavaClasspath`;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 sed -i 's/export CLASSPATH;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+sed -i 's/export CLASSPATH=/CLASSPATH=/g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
