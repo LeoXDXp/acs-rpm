@@ -120,23 +120,20 @@ cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/
 
 # Delete use of acsMakeJavaClasspath on acsMakefileDefinitions.mk, lines 312, and 2 more. Classpath is static and global here
 sed -i 's/export CLASSPATH="`acsMakeJavaClasspath`$(PATH_SEP).";//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-#sed -i 's/export CLASSPATH=`acsMakeJavaClasspath`$(PATH_SEP)";//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-#sed -i 's/export CLASSPATH=`acsMakeJavaClasspath`;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-sed -i 's/export CLASSPATH;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-sed -i 's/export CLASSPATH=//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+#sed -i 's/export CLASSPATH;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+#sed -i 's/export CLASSPATH=//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar:$CLASSPATH"
-#export IDL_PATH="$IDL_PATH:-I%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/"
+export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar:/usr/local/share/java/acserr.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
-#export MAKE_PARS=" -j 2 -l 2 "
+export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
