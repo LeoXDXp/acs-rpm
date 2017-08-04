@@ -136,7 +136,7 @@ export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
-export MAKE_PARS=" -j 2 -l 2 "
+#export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
@@ -151,8 +151,7 @@ export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
-make test
-
+#make test
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
