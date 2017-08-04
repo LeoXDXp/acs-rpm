@@ -15,9 +15,9 @@ Source2:	MakefileTools-tcltk
 #Group: Development/Libraries
 #Requires: %name = %version
 
-%description devel
-The %{name}-devel package contains the static libraries and header files
-needed for development with %{name}.
+#%description devel
+#The %{name}-devel package contains the static libraries and header files
+#needed for development with %{name}.
 
 %prep
 %setup -q
