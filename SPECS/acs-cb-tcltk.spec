@@ -22,7 +22,7 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
-export ALMASW_RELEASE=ACS-%{version}
+export ALMASW_RELEASE=%{name}-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
 export TCLTK_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk"
