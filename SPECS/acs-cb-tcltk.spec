@@ -25,7 +25,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
 
-cd %{_builddir}/%{name}-%{version}/ExtProds/INSTALL
+cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 
 sh buildTcltk
 
