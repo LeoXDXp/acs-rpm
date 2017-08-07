@@ -128,7 +128,6 @@ export ALMASW_RELEASE="ACS-%{version}"
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
-#export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -138,7 +137,6 @@ cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
 # Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
-#./buildTcltk # Uses gcc, make, tar
 #./buildMico # Uses gcc, make , tar
 #./buildJacORB # Depends on TAO and Maven, which are rpms
 
@@ -171,7 +169,6 @@ echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/p
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/tcltk/    %{buildroot}/home/almamgr/ACS-%{version}/
 mv %{_builddir}/%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
 mv %{_builddir}/%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
@@ -240,9 +237,6 @@ useradd -U almadevel
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chmod 0705 /home/almamgr/
-# tclCheck symlink to /usr/local/bin
-ln -s /home/almamgr/ACS-%{version}/tcllk/bin/tclCheck %{_usr}/local/bin/
-ln -s /home/almamgr/ACS-%{version}/tcltk/bin/tcl %{_usr}/local/bin/
 # Symlink of tao_idl because hardcoded path
 mkdir -p %{_usr}/share/tao/TAO_IDL
 ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
@@ -360,7 +354,6 @@ pkill -u almadevel
 userdel -r almadevel
 
 %files
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/tcltk/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
