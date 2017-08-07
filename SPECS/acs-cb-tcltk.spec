@@ -5,11 +5,12 @@ Summary:	Tcl with 1 ACS patch, and other packages
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
-BuildRequires:	ksh
+#Source1:	buildTclTk-OCT2013
+BuildRequires:	ksh, libX11-devel
 Requires:	expect tk iwidgets tclx tcllib blt tktable
 
 %description
-Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack
+Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack, tkcon
 
 %prep
 %setup -q
@@ -29,8 +30,6 @@ export TCLTK_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk"
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 
 sh buildTcltk
-
-#sh checkTcltk
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
