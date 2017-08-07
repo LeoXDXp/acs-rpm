@@ -7,7 +7,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 #Source1:	buildTclTk-OCT2013
 BuildRequires:	ksh, libX11-devel
-Requires:	expect tk iwidgets tclx tcllib blt tktable
+#Requires:	expect tk iwidgets tclx tcllib blt tktable
 
 %description
 Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack, tkcon
@@ -36,23 +36,32 @@ unlink %{_builddir}/alma
 
 %install
 # Docs
-#mkdir -p %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
-#cp -f %{_builddir}/%{name}-%{version}/LGPL/Tools/log4cpp/src/log4cpp-1.0/{AUTHORS,COPYING,INSTALL,NEWS,README,THANKS,ChangeLog} %{buildroot}/%{_usr}/local/share/doc/log4cpp-ACS/
+#mkdir -p %{buildroot}/%{_usr}/local/share/doc/%{name}/
+#cp -rf %{_builddir}/%{name}-%{version}/tcltk/doc/tkcon/ %{buildroot}/%{_usr}/local/share/doc/%{name}/
 
-#
-mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.a %{buildroot}/%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.la %{buildroot}/%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.so.4.0.6 %{buildroot}/%{_usr}/local/%{_lib}/
-chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.so.4.0.6
-chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.la
+mkdir -p %{buildroot}/home/acs-tcltk/
+cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/tcltk/ %{buildroot}/home/acs-tcltk/
 
-%post
+echo "TCLTK_ROOT=/home/acs-tcltk/tcltk/" >> %{_sysconfdir}/profile.d/tcltk-acs.sh
+echo "export TCLTK_ROOT" >> %{_sysconfdir}/profile.d/tcltk-acs.sh
+chmod bin
+chmod so
 
-%preun
+#mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
+#cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.a %{buildroot}/%{_usr}/local/%{_lib}/
+#chmod 755 %{buildroot}/%{_usr}/local/%{_lib}/liblog4cpp.so.4.0.6
+
+%pre
+useradd -U acs-tcltk
+
+%postun
+# Al user processes must be killed before userdel
+pkill -u acs-tcltk
+userdel -r acs-tcltk
 
 %files
-%attr(755,root,root) %{_usr}/local/%{_lib}/liblog4cpp.so.4.0.6
+%attr(755,acs-tcltk,acs-tcltk) /home/acs-tcltk/tcltk/
+%{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 1.0-1
