@@ -6,10 +6,10 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	ksh
-Requires:	expect
+Requires:	expect tk iwidgets tclx tcllib blt tktable
 
 %description
-Tcl, tk, mini SQL, tklib, tclCheck, tclx, iwidgets, tkman, TKtable, tkimg, tcllib, blt, itcl, rman, snack
+Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack
 
 %prep
 %setup -q
