@@ -24,10 +24,11 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
+export TCLTK_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk"
 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 
-ksh buildTcltk
+sh buildTcltk
 
 #sh checkTcltk
 
