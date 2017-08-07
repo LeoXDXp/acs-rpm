@@ -5,7 +5,7 @@ Summary:	Tcl with 1 ACS patch, and other packages
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
-#BuildRequires:	ksh
+BuildRequires:	ksh
 Requires:	expect
 
 %description
@@ -27,7 +27,7 @@ export OSYSTEM="Linux"
 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 
-sh buildTcltk
+ksh buildTcltk
 
 #sh checkTcltk
 
