@@ -1,0 +1,301 @@
+#!/bin/bash
+#
+# Sample installation script for Tcl/Tk.
+#
+# Remark that the Tcl/Tk source directory should be a sibbling of
+# the directory containing this file, whereby this subdir name is
+# derived from this file's name (i.e. it is the part coming after
+# the dash).
+#
+# The following environment variables need to be set:
+# proper installation:
+#    - PREFIX : dirpath where the lib/ bin/ man/ files must be installed
+#               (this directory and necessary subdirs will be created if
+#               they do not yet exist).
+#    - TCL_MEM_DEBUG: set to CFGLAGS=-DTCL_MEM_DEBUG if the Tcl memory 
+#               command is needed (optional)
+#
+# EAL 20040719
+#
+#*********************************************
+
+#      product    JUN2011 version     OCT2013 version (if changed)
+#      ======     ===============     ============================
+#    - tcl/tk     8.4.19 patched      8.5.15
+#    - [incr Tcl] 3.4 2008-06-14      (3.4.1) 2011-08-08
+#    - tklib      0.4.1 2008-08-19    0.6
+#    - tkimg      1.3                 1.4
+#    - snack      2.2.10 patched
+#    - tkman      2.2
+#    - rman       3.1
+#
+###############################################################################
+# Function definitions used later in this script.
+###############################################################################
+TCLTK_VERSION=8.5.15
+
+# definition of a function to print the usage statement for this script
+printUsageAndExit ()
+{
+    echo ""
+    echo "Usage: $0 [-d] [-h] [-m] [-v]";
+    echo "Options: "
+    echo "   -d | --debug: echo all commands as they are executed to stdout."
+    echo "   -h | --help: print this usage message and exit."
+    echo "   -m | --msql: include the msql stuff (typically in for an environment"
+    echo "          where VxWorks hosts are managed via vcc/acc"
+    echo "   -v | --versions: print versions of Tcl/Tk and extensions, then exit"
+    echo ""
+    exit $1;
+}
+
+printVersions ()
+{
+    echo ""
+    echo "The following Tcl/Tk components will be built/installed:" 
+    echo "- Tcl/Tk:     ${TCLTK_VERSION}"
+    echo "- [incr Tcl]: 3.4.1 (2011-08-08)"
+    echo "- tklib:      0.6"
+    echo "- tkimg:      1.4"
+    echo "- snack:      2.2.10 (patched)"
+    echo "- tkman:      2.2"
+    echo "- rman:       3.1"
+    if [ "$MSQL" ]
+	then 
+	echo "- msqltcl:    1.99"
+    fi
+    echo ""
+}
+
+echo ""
+echo "Tcl/Tk ${TCLTK_VERSION} build-script runstring (`date +%Y-%m-%dT%H:%M:%S`):"
+echo "    $0 $@"
+echo ""
+
+#
+# These will contain the command line arguments and/or options
+#
+HELP=
+DEBUG=
+MSQL=
+VERSIONS=
+
+#
+# These options can be recognized (longopts comma-separated. Colon means 1 argument is required)
+#
+LONGOPTS=help,debug,msql,versions
+SHORTOPTS=h,d,m,v
+#
+# Run getopt (posixly_correct needed). We run twice:
+# First run is simply to check the commandline for correctness.
+# Second run is does the real work and sets execution flags for this script,
+# as appropriate.
+export POSIXLY_CORRECT=1
+
+getopt -n $MY_NAME -a -l $LONGOPTS $SHORTOPTS "$@" > /dev/null
+if [ $? -ne 0 ] 
+    then 
+    printUsageAndExit 1;
+fi
+
+set -- `getopt -u -a -l $LONGOPTS $SHORTOPTS "$@"`
+
+# Some programs behave differently if POSIXLY_CORRECT is set. In particular
+# the configure/build of TclX and Itcl may fail ...
+unset POSIXLY_CORRECT
+
+#
+# Iterate over getopt's output and set variables accordingly
+#
+while :
+  do
+  case "$1" in
+      -h|--help)       HELP=true ;;
+      -d|--debug)      DEBUG=true ;;
+      -m|--msql)       MSQL=true;;
+      -v|--versions)   VERSIONS=true;;
+      --) break ;;
+  esac
+  shift
+done
+shift
+
+if [ "$HELP" ] ; 
+then
+    printUsageAndExit 0
+fi
+
+if [ "$VERSIONS" ] ; 
+then
+    printVersions
+    exit 0
+fi
+
+# first, verify that the script was invoked without any command-line arguments 
+if [ $# -ne 0 ] ;
+then 
+    printUsageAndExit 1
+fi
+
+if [ "$DEBUG" ]
+then
+    set -x
+fi
+
+# Find out the directory from which this script is running
+# (This also resolves symlinks, aliases, etc)
+DIR="${BASH_SOURCE[0]}"
+SRC="$( dirname "$DIR" )"
+while [ -h "$DIR" ]
+do 
+  DIR="$(readlink "$DIR")"
+  [[ $DIR != /* ]] && DIR="$SRC/$DIR"
+  SRC="$( cd -P "$( dirname "$DIR"  )" && pwd )"
+done
+SRC="$( cd -P "$( dirname "$DIR" )" && pwd )"
+
+echo -e "\nsource directory: $SRC"
+
+echo -e "\ntarget directory defined as: $PREFIX"
+
+if [ ! -d $PREFIX ]
+then
+    echo "but that is not a directory - cannot continue."
+    exit 1
+fi
+
+if [ ! -w $PREFIX ]
+then
+    echo "but that is not a writable directory - cannot continue."
+    exit 1
+fi
+echo " . . . ok"
+
+#
+# when target dir is not /usr/local, delete the current content
+#
+if [ "$PREFIX" != "/usr/local" ]
+then	
+    ##echo "remove ${PREFIX} . . .\c"
+    ##rm -rf $PREFIX
+    mkdir -p $PREFIX/bin $PREFIX/lib $PREFIX/include $PREFIX/man/man1 $PREFIX/man/man3 $PREFIX/man/mann $PREFIX/doc
+    echo " . . . done"
+fi
+#
+# get current operating system
+#
+build_OS=`uname -s`
+build_OSV=`uname -r`
+
+echo $SEPARATOR
+echo " Installing on $build_OS version $build_OSV"
+
+if [     ${build_OS}-${build_OSV} != "Linux-2.6.18-128.4.1-VLT2010" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.18-194.32.1.el5PAE" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-279.14.1.el6.i686" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-279.14.1.el6.x86_64" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-358.el6.i686" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-358.el6.x86_64" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-431.el6.i686" \
+     -a  ${build_OS}-${build_OSV} != "Linux-2.6.32-431.el6.x86_64" \
+   ]
+then
+    echo -e "\n\tWARNING: this procedure has not been tested on this system\n"
+fi
+
+# if LANG is not set to C, you may find compilation error messages with strange chars.
+LANG=C
+export LANG
+# CC should not be defined, in particular for the purposes of SPARTA
+##CC=gcc
+##export CC
+
+# ensure that existing shared libs can be overwritten (on HP)
+find $PREFIX/lib -name "*.sl" -exec chmod 755 {} \;
+
+printVersions
+
+# Remark that configuring itcl fails if srcdir is not given explicitly with
+# an absolute path; otherwise it uses ".", which messes up things.
+cd $SRC
+for dir in tcl${TCLTK_VERSION}/unix tk${TCLTK_VERSION}/unix tclx-2012-12-13 itcl-2011-08-08 ; do \
+    (cd ${dir} ; \
+    echo -e "\n================= Start static build of ${dir} ================="
+    ./configure --prefix=$PREFIX --disable-shared --enable-gcc --enable-threads --srcdir=`pwd`; \
+    make ; make -k install; \
+    make distclean ; \
+    echo -e "\n================= Start shared build of ${dir} ================="
+    ./configure --prefix=$PREFIX --enable-shared --enable-gcc --enable-threads --srcdir=`pwd`; \
+    make; make -k install ) \
+done;
+
+# Link the default shell names to the version specific names
+cd $PREFIX/bin
+rm -f tclsh wish
+ln -s tclsh8.5   tclsh
+ln -s wish8.5    wish
+
+# Link the default library names to the versions under specific subdirs
+SHLIB_EXT=`echo "puts [info sharedlibextension]"|${PREFIX}/bin/tclsh`
+cd $PREFIX/lib
+rm -f libtclx8.4${SHLIB_EXT} libtclx8.4.a
+##ln -s `pwd`/tclx8.4/libtclx8.4${SHLIB_EXT} libtclx8.4${SHLIB_EXT}
+##ln -s `pwd`/tclx8.4/libtclx8.4.a           libtclx8.4.a
+ln -s tclx8.4/libtclx8.4${SHLIB_EXT} libtclx8.4${SHLIB_EXT}
+ln -s tclx8.4/libtclx8.4.a           libtclx8.4.a
+
+# Install the wrapper scripts for the pre-8.4 TclX shells (tcl, wishx)
+cd $SRC
+cp tcl $PREFIX/bin
+cp wishx $PREFIX/bin
+chmod +x $PREFIX/bin/tcl $PREFIX/bin/wishx
+
+echo -e "\n================= Start build of tklib ================="
+cd $SRC/tklib-0.6
+./configure --prefix=$PREFIX
+make -k install
+
+echo -e "\n================= Start build of tkimg ================="
+cd $SRC/tkimg1.4
+# Include --srcdir: see SF bug report 682911 on tkimg
+./configure --prefix=$PREFIX --enable-shared --srcdir=`pwd`
+make
+make -k install
+
+echo -e "\n================= Start build of snack ================="
+cd $SRC/snack2.2.10/unix
+# include --libdir, as configure does not do a proper job, it seems.
+./configure --prefix=$PREFIX --enable-shared --with-tcl=$SRC/tcl${TCLTK_VERSION}/unix --with-tk=$SRC/tk${TCLTK_VERSION}/unix --disable-stubs --libdir=$PREFIX/lib
+make
+make -k install
+
+echo -e "\n================= Start build of rman/tkman ================="
+cd $SRC/rman-3.1
+make
+make -k install
+
+cd $SRC/tkman-2.2
+make 
+make -k install
+
+if [ "$MSQL" ]
+then 
+    echo -e "\n================= Start build of msqltcl ================="
+    # note that this requires libmsql.a and msql.h (usually under $TCLTK_ROOT)
+    cd $SRC/msqltcl-1.99
+    ./configure --prefix=$PREFIX --enable-shared --with-msql-include=$PREFIX/include --with-msql-library=$PREFIX/lib
+    make
+    make -k install
+fi
+
+# According to some older HP documentation ("HP-UX Linker and Libraries 
+# User's Guide", http://docs.hp.com/en/B2355-90655/B2355-90655.pdf, dated
+# November 1997), there is a performance penalty if the shared lib is writable:
+#   "You may get an additional performance gain by ensuring that no shared
+#    libraries have write permissions. Programs that use more than one writable
+#    library can experience significantly degraded loading time." 
+# Not sure this is still applicable, but it doesn't harm to remove write permissions.
+if [ ${SHLIB_EXT} = ".sl" ]
+then
+    find $PREFIX/lib -name "*.sl" -exec chmod 555 {} \;
+fi
