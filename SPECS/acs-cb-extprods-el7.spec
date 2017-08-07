@@ -20,13 +20,13 @@ Source0:	%{name}-%{version}.tar.gz
 %ifarch x86_64
 Source1:        mico-2.3.13.%{version}.tar.gz
 Source2:        JacORB-3.6.1.%{version}.tar.gz
-Source3:        tctlk-8.5.15.%{version}.tar.gz
+#Source3:        tctlk-8.5.15.%{version}.tar.gz
 %endif
 
 %ifarch aarch64 armv8 arm64
 Source1:	mico-2.3.13.%{version}-aarch64.tar.gz
 Source2:	JacORB-3.6.1.%{version}-aarch64.tar.gz
-Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
+#Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
 %endif
 Source4:	searchFile
 Source5:	JacPrep
@@ -54,7 +54,7 @@ BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
 # Java and Others
 BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
-BuildRequires: tk iwidgets tclx tcllib blt tktable expect
+BuildRequires: tcltk-ACS
 %ifarch x86_64
 BuildRequires: ant >= 1.9.2
 %endif
@@ -128,7 +128,7 @@ export ALMASW_RELEASE="ACS-%{version}"
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
 export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
 export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
-export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
+#export TCLTK_ROOT="%{buildroot}/alma/ACS-%{version}/tcltk"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
