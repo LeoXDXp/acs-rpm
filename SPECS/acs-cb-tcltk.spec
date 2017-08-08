@@ -8,6 +8,7 @@ Source0:	%{name}-%{version}.tar.gz
 #Source1:	buildTclTk-OCT2013
 BuildRequires:	ksh, libX11-devel, gcc, make, tar
 #Requires:	expect tk iwidgets tclx tcllib blt tktable
+AutoReq:	no
 
 %description
 Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack, tkcon
