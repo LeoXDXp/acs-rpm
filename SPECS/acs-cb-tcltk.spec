@@ -44,8 +44,8 @@ cd %{_builddir}/home/almamgr/%{name}-%{version}/tcltk/
 find lib/ -name *.so | xargs chmod 755 $1
 cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/tcltk/ %{buildroot}/home/acs-tcltk/
 
-echo "TCLTK_ROOT=/home/acs-tcltk/tcltk/" >> %{_sysconfdir}/profile.d/tcltk-acs.sh
-echo "export TCLTK_ROOT" >> %{_sysconfdir}/profile.d/tcltk-acs.sh
+echo "TCLTK_ROOT=/home/acs-tcltk/tcltk/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
+echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 
 #mkdir -p %{buildroot}/%{_usr}/local/%{_lib}/
 #cp -f %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/liblog4cpp.a %{buildroot}/%{_usr}/local/%{_lib}/
