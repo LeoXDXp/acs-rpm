@@ -6,8 +6,9 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 #Source1:	buildTclTk-OCT2013
-BuildRequires:	ksh, libX11-devel, gcc, make, tar
+BuildRequires:	ksh, libX11, libX11-devel, gcc, make, tar
 #Requires:	expect tk iwidgets tclx tcllib blt tktable
+Requires:	telnet
 AutoReq:	no
 
 %description
