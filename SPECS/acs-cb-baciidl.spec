@@ -124,7 +124,8 @@ cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/
 sed -i 's/export CLASSPATH="`acsMakeJavaClasspath`$(PATH_SEP).";//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 #sed -i 's/export CLASSPATH;//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 #sed -i 's/export CLASSPATH=//g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
-
+# Dont Exit on false fail of libbaciErrTypePropertyStubs.a does not exist, it does
+sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist.";/g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
