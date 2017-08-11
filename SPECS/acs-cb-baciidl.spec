@@ -165,15 +165,15 @@ cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/bin/baciid
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO__POA/
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIOImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypePropertyImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baci_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO__POA/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypePropertyImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty__POA/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baci_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar %{buildroot}%{_usr}/local/share/java/
