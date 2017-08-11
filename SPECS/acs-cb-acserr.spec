@@ -6,7 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserr
-Source2:	liblogging.so
+#Source2:	liblogging.so
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-acsutil >= %{version} ACS-logging >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
