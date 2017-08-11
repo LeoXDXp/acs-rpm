@@ -151,68 +151,113 @@ export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
 export CYGWIN_VER=""
-#make test
+make test
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
 %install
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/acscommon_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+mkdir -p %{buildroot}%{_usr}/local/bin
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/bin/baciidlPy %{buildroot}%{_usr}/local/bin/
 
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/log_audience/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/log_audience__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/ACS/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/python/site-packages/ACS__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/
-cp -f %{_builddir}/%{name}-%{version}/binding.py %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py
+# ACS, ACSErr installed by other acs packages
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO__POA/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIOImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypePropertyImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeProperty__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baci_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/commontypes.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/acscommon.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baci.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/CosProperty.jar %{buildroot}%{_usr}/local/share/java/
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/libacscommonStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libacscommonStubs.so
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciErrTypeDevIO.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciErrTypeDevIOStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciErrTypeProperty.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciErrTypePropertyStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/libbaciErrTypePropertyStubs.a %{buildroot}%{_usr}/local/%{_lib}/
+
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciErrTypeDevIO.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciErrTypeDevIOStubs.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciErrTypeProperty.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciErrTypePropertyStubs.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciStubs.so
+chmod 755 %{buildroot}%{_usr}/local/%{_lib}/libbaciErrTypePropertyStubs.a
+
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
-# unlink acserrC.h
-unlink %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/acserrC.h
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.h %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
-%{_usr}/local/lib/python/site-packages/acscommon/
-%{_usr}/local/lib/python/site-packages/acscommon__POA/
-%{_usr}/local/lib/python/site-packages/acscommon_idl.py*
-%{_usr}/local/lib/python/site-packages/log_audience/
-%{_usr}/local/lib/python/site-packages/log_audience__POA/
-%{_usr}/local/lib/python/site-packages/ACS/
-%{_usr}/local/lib/python/site-packages/ACS__POA/
-%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO/__init__.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO_idl.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeDevIOImpl.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO__POA/__init__.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeProperty/__init__.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeProperty_idl.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypePropertyImpl.py*
+%{_usr}/local/lib/python/site-packages/baciErrTypeProperty__POA/__init__.py*
+%{_usr}/local/lib/python/site-packages/baci_idl.py*
 
-%{_usr}/local/share/java/commontypes.jar
-%{_usr}/local/share/java/acscommon.jar
-%{_usr}/local/%{_lib}/libacscommonStubs.so
+%{_usr}/local/share/java/baciErrTypeDevIO.jar
+%{_usr}/local/share/java/baciErrTypeProperty.jar
+%{_usr}/local/share/java/baci.jar
+%{_usr}/local/share/java/CosProperty.jar
+
+%{_usr}/local/%{_lib}/libbaciErrTypeDevIO.so
+%{_usr}/local/%{_lib}/libbaciErrTypeDevIOStubs.so
+%{_usr}/local/%{_lib}/libbaciErrTypeProperty.so
+%{_usr}/local/%{_lib}/libbaciErrTypePropertyStubs.so
+%{_usr}/local/%{_lib}/libbaciStubs.so
+
+%{_usr}/local/bin/baciidlPy
 
 %files devel
-%{_usr}/local/include/acscommonC.cpp
-%{_usr}/local/include/acscommonC.h
-%{_usr}/local/include/acscommonC.inl
-%{_usr}/local/include/acscommonS.cpp
-%{_usr}/local/include/acscommonS.h
-%{_usr}/local/include/acscommonS_T.cpp
-%{_usr}/local/include/acscommonS_T.h
+%{_usr}/local/include/baciC.cpp
+%{_usr}/local/include/baciC.h
+%{_usr}/local/include/baciC.inl
+%{_usr}/local/include/baciErrTypeDevIOC.cpp
+%{_usr}/local/include/baciErrTypeDevIOC.h
+%{_usr}/local/include/baciErrTypeDevIOC.inl
+%{_usr}/local/include/baciErrTypeDevIO.cpp
+%{_usr}/local/include/baciErrTypeDevIO.h
+%{_usr}/local/include/baciErrTypeDevIOS.cpp
+%{_usr}/local/include/baciErrTypeDevIOS.h
+%{_usr}/local/include/baciErrTypeDevIOS_T.cpp
+%{_usr}/local/include/baciErrTypeDevIOS_T.h
+%{_usr}/local/include/baciErrTypePropertyC.cpp
+%{_usr}/local/include/baciErrTypePropertyC.h
+%{_usr}/local/include/baciErrTypePropertyC.inl
+%{_usr}/local/include/baciErrTypeProperty.cpp
+%{_usr}/local/include/baciErrTypeProperty.h
+%{_usr}/local/include/baciErrTypePropertyS.cpp
+%{_usr}/local/include/baciErrTypePropertyS.h
+%{_usr}/local/include/baciErrTypePropertyS_T.cpp
+%{_usr}/local/include/baciErrTypePropertyS_T.h
+%{_usr}/local/include/baciS.cpp
+%{_usr}/local/include/baciS.h
+%{_usr}/local/include/baciS_T.cpp
+%{_usr}/local/include/baciS_T.h
+
+%{_usr}/local/%{_lib}/libbaciErrTypePropertyStubs.a
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
