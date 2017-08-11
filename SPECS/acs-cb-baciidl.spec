@@ -64,6 +64,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/acse
 # ACScomponentIDL stuff
 cp -f %{_usr}/local/include/acscomponentC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
 ln -s %{_usr}/local/share/java/acscomponent.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
+ln -s %{_usr}/local/%{_lib}/libacscomponentStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
 # Logging Stuff
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/logging.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/loggingGetLogger.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/include/
@@ -128,7 +129,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
-export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/acserrj.jar:/usr/local/share/java/acscommon.jar:/usr/local/share/java/acscomponent.jar"
+export CLASSPATH="/usr/local/share/java/acscomponent.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/acserrj.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/acscomponent.jar:/usr/local/share/java/acscommon.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
