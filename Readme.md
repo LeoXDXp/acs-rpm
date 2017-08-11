@@ -17,10 +17,11 @@ https://fedoraproject.org/wiki/RPath_Packaging_Draft
 A temp fix done for the moment was to comment out the section %__arch_install_post (last 4 lines) 
 in the .rpmmacro file in /home/<user used to build-rebuild rpm>
 
-- Building JacORB, Tctlk and Mico inside the RPM has the problem: 
+- Building JacORB and Mico inside the RPM has the problem: 
 Found '/home/rpm/rpmbuild/BUILDROOT/ACS-ExtProds-OCT2016-1.el7.centos.x86_64' in installed files; aborting
 So, for the moment, this are compiled outside the RPM, through the scripts in LGPL/ExtProd/Install/ and used as sources directly.
 Sources and buildlogs available in http://repo.csrg.cl/Sources/
+## Update: Tcltk is now available independently. Not yet fully integrated to new ACS-Extprods
 
 # Pending:
 - Sign the RPMs: http://giovannitorres.me/how-to-setup-an-rpm-signing-key.html
