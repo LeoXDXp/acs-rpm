@@ -165,6 +165,7 @@ cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/bin/baciid
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO__POA/
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeProperty__POA/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/baciErrTypeDevIO/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIO_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/python/site-packages/baciErrTypeDevIOImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
