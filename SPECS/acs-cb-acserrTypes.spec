@@ -32,6 +32,9 @@ mkdir -p  %{_builddir}/home/almamgr
 # Symlink for build log
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/idl/
+
+
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
@@ -53,7 +56,7 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/
 ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
