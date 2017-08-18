@@ -120,7 +120,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
-#export CLASSPATH="$CLASSPATH:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-core.jar:/usr/local/share/java/commontypes.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/jACSUtil.jar:"
+export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar:"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
