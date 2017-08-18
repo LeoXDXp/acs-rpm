@@ -120,7 +120,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
-export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar:%{_usr}/local/share/java/acserr.jar:%{_usr}/local/share/java/acserrj.jar"
+export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar:%{_usr}/local/share/java/acserr.jar:%{_usr}/local/share/java/acserrj.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeAlarm.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
