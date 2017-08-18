@@ -120,7 +120,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 #export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
-export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar:%{_usr}/local/share/java/acserr.jar:%{_usr}/local/share/java/acserrj.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeAlarm.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCommon.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypePythonNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCppNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeJavaNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCORBA.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeDevIO.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTICS.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTicsTCorr.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmCleared.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmTriggered.jar"
+export CLASSPATH="%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar:%{_usr}/local/share/java/acserr.jar:%{_usr}/local/share/java/acserrj.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeAlarm.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCommon.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypePythonNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCppNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeJavaNative.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCORBA.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeDevIO.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTICS.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTicsTCorr.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmCleared.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmTriggered.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
@@ -130,8 +130,6 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
-# Add debug to vpath in acsMakefile line 1810+
-#sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist.";/g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 make
 
@@ -145,8 +143,7 @@ export CYGWIN_VER=""
 # Classpath: makes ACSErrTypeTest.jar available
 export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar:/usr/share/java/junit.jar:"
 
-#make test
-
+make test
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
