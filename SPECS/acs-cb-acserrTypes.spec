@@ -7,7 +7,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserrTypes
 #Source2:	liblogging.so
-BuildRequires:	ACS-acserr >= %{version}
+BuildRequires:	ACS-acserr >= %{version} ACS-acserridl >= %{version}
 #Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
@@ -60,6 +60,8 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/idl/co
 # acserr.jar
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/
 ln -s %{_usr}/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/
+# acserrStubs
+ln -s %{_usr}/local/%{_lib}/libacserrStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
