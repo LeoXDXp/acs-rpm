@@ -6,7 +6,6 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserrTypes
-#Source2:	liblogging.so
 BuildRequires:	ACS-acserr >= %{version} ACS-acserridl >= %{version}
 #Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
@@ -133,18 +132,6 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 
 make
 
-# TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
-export HOST="$HOSTNAME"
-export VLTDATA=""
-export OSYSTEM="Linux"
-export CYGWIN_VER=""
-# Classpath: makes ACSErrTypeTest.jar available
-export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar:/usr/share/java/junit.jar:"
-
-make test
-
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
@@ -155,99 +142,138 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 #ACSErr and ACSErr__POA provided by ACS-acserridl
 
 # Remove objects
-cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
-find -name "*.pyo" | xargs rm -rf
+cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/
+find -name "*.pyc" | xargs rm -rf
 
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTICS %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTICS__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTicsTCorr %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTicsTCorr__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeAlarm %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeAlarm__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCommon %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCommon__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCORBA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCORBA__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCppNative %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCppNative__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeDevIO %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeDevIO__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeJavaNative %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeJavaNative__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeMonitor %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeMonitor__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeOK %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeOK__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypePythonNative %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypePythonNative__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmCleared %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmCleared__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmTriggered %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmTriggered__POA %{buildroot}%{_usr}/local/lib/python/site-packages/
 
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ErrorSystemErrType__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/ErrorChecker.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/ErrorDefinition.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/Subsystem.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrorChecker/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker/
-
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrTypeImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ExmplErrType__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/_GlobalIDL/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/_GlobalIDL__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/test_AES2Py.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-# Old 
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrOldTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrOldTypeTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-# Test
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTestImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-
-cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErrTypeTest__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTICS_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTICSImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTicsTCorr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTicsTCorrImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeAlarm_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeAlarmImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCommon_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCommonImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCORBA_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCORBAImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCppNative_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeCppNativeImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeDevIO_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeDevIOImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeJavaNative_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeJavaNativeImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeMonitor_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeMonitorImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeOK_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypeOKImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypePythonNative_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/ACSErrTypePythonNativeImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmCleared_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmClearedImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmTriggered_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/python/site-packages/PatternAlarmTriggeredImpl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 # Remove objects
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrHandlersErr.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrj.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSError.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ErrorSystemErrType.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/xmlvalidator.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ExmplErrType.jar %{buildroot}%{_usr}/local/share/java/
-# UnitTest jar files
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrjTest.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrOldTest.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrOldTypeTest.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/acserrTest.jar %{buildroot}%{_usr}/local/share/java/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTypeTest.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTICS.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTicsTCorr.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeAlarm.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCommon.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCORBA.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeCppNative.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeDevIO.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeJavaNative.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeMonitor.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypeOK.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/ACSErrTypePythonNative.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmCleared.jar %{buildroot}%{_usr}/local/share/java/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/PatternAlarmTriggered.jar %{buildroot}%{_usr}/local/share/java/
 
-# acserrGen Scripts not installed by ACS-Tools
-mkdir -p %{buildroot}%{_usr}/local/bin
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava %{buildroot}%{_usr}/local/bin/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
-
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrType.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrTypeStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.so
-chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.so
+# Shared Objects
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTICS.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTICSStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTicsTCorr.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTicsTCorrStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeAlarm.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeAlarmStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCommon.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCommonStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCORBA.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCORBAStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCppNative.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCppNativeStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeDevIO.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeDevIOStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeJavaNative.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeJavaNativeStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeMonitor.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeMonitorStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeOK.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeOKStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypePythonNative.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypePythonNativeStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmCleared.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmClearedStubs.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmTriggered.so
+chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmTriggeredStubs.so
 
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libErrorSystemErrTypeStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrType.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libExmplErrTypeStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTICS.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTICSStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTicsTCorr.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTicsTCorrStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeAlarm.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeAlarmStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCommon.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCommonStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCORBA.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCORBAStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCppNative.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeCppNativeStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeDevIO.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeDevIOStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeJavaNative.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeJavaNativeStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeMonitor.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeMonitorStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeOK.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypeOKStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypePythonNative.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libACSErrTypePythonNativeStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmCleared.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmClearedStubs.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmTriggered.so %{buildroot}%{_usr}/local/%{_lib}/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/libPatternAlarmTriggeredStubs.so %{buildroot}%{_usr}/local/%{_lib}/
 
-# Old stuff
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-# Test stuff
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.so %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.so %{buildroot}%{_usr}/local/%{_lib}/
-
-#.a 
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.a %{buildroot}%{_usr}/local/%{_lib}/
-# Old .a
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrOldTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrOldTypeTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
-# Test .a
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTest.a %{buildroot}%{_usr}/local/%{_lib}/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libACSErrTypeTestStubs.a %{buildroot}%{_usr}/local/%{_lib}/
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
@@ -256,106 +282,195 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.cpp
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
-%{_usr}/local/lib/python/site-packages/acserrHandlersErr_idl.py*
-%{_usr}/local/lib/python/site-packages/acserrHandlersErr/
-%{_usr}/local/lib/python/site-packages/acserrHandlersErr__POA/
-%{_usr}/local/lib/python/site-packages/ErrorSystemErrType_idl.py*
-%{_usr}/local/lib/python/site-packages/ErrorSystemErrType/
-%{_usr}/local/lib/python/site-packages/ErrorSystemErrType__POA/
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorChecker.py*
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/ErrorDefinition.py*
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/Subsystem.py*
-%{_usr}/local/lib/python/site-packages/ACSErrorChecker/__init__.py*
-%{_usr}/local/lib/python/site-packages/ExmplErrType/
-%{_usr}/local/lib/python/site-packages/ExmplErrType_idl.py*
-%{_usr}/local/lib/python/site-packages/ExmplErrTypeImpl.py*
-%{_usr}/local/lib/python/site-packages/ExmplErrType__POA/
-%{_usr}/local/lib/python/site-packages/_GlobalIDL/
-%{_usr}/local/lib/python/site-packages/_GlobalIDL__POA/
-%{_usr}/local/lib/python/site-packages/test_AES2Py.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTICS/
+%{_usr}/local/lib/python/site-packages/ACSErrTICS__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTicsTCorr/
+%{_usr}/local/lib/python/site-packages/ACSErrTicsTCorr__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeAlarm/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeAlarm__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCommon/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCommon__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCORBA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCORBA__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCppNative/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCppNative__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeDevIO/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeDevIO__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeJavaNative/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeJavaNative__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeMonitor/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeMonitor__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeOK/
+%{_usr}/local/lib/python/site-packages/ACSErrTypeOK__POA/
+%{_usr}/local/lib/python/site-packages/ACSErrTypePythonNative/
+%{_usr}/local/lib/python/site-packages/ACSErrTypePythonNative__POA/
+%{_usr}/local/lib/python/site-packages/PatternAlarmCleared/
+%{_usr}/local/lib/python/site-packages/PatternAlarmCleared__POA/
+%{_usr}/local/lib/python/site-packages/PatternAlarmTriggered/
+%{_usr}/local/lib/python/site-packages/PatternAlarmTriggered__POA/
 
-%{_usr}/local/lib/python/site-packages/acserrOldTest_idl.py*
-%{_usr}/local/lib/python/site-packages/ACSErrOldTypeTest_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTICS_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTICSImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTicsTCorr_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTicsTCorrImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeAlarm_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeAlarmImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCommon_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCommonImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCORBA_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCORBAImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCppNative_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeCppNativeImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeDevIO_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeDevIOImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeJavaNative_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeJavaNativeImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeMonitor_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeMonitorImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeOK_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypeOKImpl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypePythonNative_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSErrTypePythonNativeImpl.py*
+%{_usr}/local/lib/python/site-packages/PatternAlarmCleared_idl.py*
+%{_usr}/local/lib/python/site-packages/PatternAlarmClearedImpl.py*
+%{_usr}/local/lib/python/site-packages/PatternAlarmTriggered_idl.py*
+%{_usr}/local/lib/python/site-packages/PatternAlarmTriggeredImpl.py*
+~                                                                        
 
-%{_usr}/local/lib/python/site-packages/acserrTest_idl.py*
-%{_usr}/local/lib/python/site-packages/ACSErrTypeTest/
-%{_usr}/local/lib/python/site-packages/ACSErrTypeTest_idl.py*
-%{_usr}/local/lib/python/site-packages/ACSErrTypeTestImpl.py*
-%{_usr}/local/lib/python/site-packages/ACSErrTypeTest__POA/
+%{_usr}/local/share/java/ACSErrTICS.jar
+%{_usr}/local/share/java/ACSErrTicsTCorr.jar
+%{_usr}/local/share/java/ACSErrTypeAlarm.jar
+%{_usr}/local/share/java/ACSErrTypeCommon.jar
+%{_usr}/local/share/java/ACSErrTypeCORBA.jar
+%{_usr}/local/share/java/ACSErrTypeCppNative.jar
+%{_usr}/local/share/java/ACSErrTypeDevIO.jar
+%{_usr}/local/share/java/ACSErrTypeJavaNative.jar
+%{_usr}/local/share/java/ACSErrTypeMonitor.jar
+%{_usr}/local/share/java/ACSErrTypeOK.jar
+%{_usr}/local/share/java/ACSErrTypePythonNative.jar
+%{_usr}/local/share/java/PatternAlarmCleared.jar
+%{_usr}/local/share/java/PatternAlarmTriggered.jar
 
-%{_usr}/local/share/java/acserrHandlersErr.jar
-%{_usr}/local/share/java/acserrj.jar
-%{_usr}/local/share/java/ACSError.jar
-%{_usr}/local/share/java/ErrorSystemErrType.jar
-%{_usr}/local/share/java/xmlvalidator.jar
-%{_usr}/local/share/java/ACSErrOldTypeTest.jar
-%{_usr}/local/share/java/ACSErrTypeTest.jar
-%{_usr}/local/share/java/ExmplErrType.jar
-%{_usr}/local/share/java/acserrOldTest.jar
-%{_usr}/local/share/java/acserrTest.jar
-%{_usr}/local/share/java/acserrjTest.jar
-
-%{_usr}/local/%{_lib}/libacserrHandlersErrStubs.so
-%{_usr}/local/%{_lib}/libacserr.so
-%{_usr}/local/%{_lib}/libErrorSystemErrTypeStubs.so
-%{_usr}/local/%{_lib}/libACSErrOldTypeTestStubs.so
-%{_usr}/local/%{_lib}/libACSErrTypeTest.so
-%{_usr}/local/%{_lib}/libACSErrTypeTestStubs.so
-%{_usr}/local/%{_lib}/libExmplErrType.so
-%{_usr}/local/%{_lib}/libExmplErrTypeStubs.so
-%{_usr}/local/%{_lib}/libacserrOldTestStubs.so
-%{_usr}/local/%{_lib}/libacserrTestStubs.so
-
-%attr(645,-,-) %{_usr}/local/bin/acserrGenJava
-%attr(645,-,-) %{_usr}/local/bin/acserrGenPython
+%{_usr}/local/%{_lib}/libACSErrTICS.so
+%{_usr}/local/%{_lib}/libACSErrTICSStubs.so
+%{_usr}/local/%{_lib}/libACSErrTicsTCorr.so
+%{_usr}/local/%{_lib}/libACSErrTicsTCorrStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeAlarm.so
+%{_usr}/local/%{_lib}/libACSErrTypeAlarmStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeCommon.so
+%{_usr}/local/%{_lib}/libACSErrTypeCommonStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeCORBA.so
+%{_usr}/local/%{_lib}/libACSErrTypeCORBAStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeCppNative.so
+%{_usr}/local/%{_lib}/libACSErrTypeCppNativeStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeDevIO.so
+%{_usr}/local/%{_lib}/libACSErrTypeDevIOStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeJavaNative.so
+%{_usr}/local/%{_lib}/libACSErrTypeJavaNativeStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeMonitor.so
+%{_usr}/local/%{_lib}/libACSErrTypeMonitorStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypeOK.so
+%{_usr}/local/%{_lib}/libACSErrTypeOKStubs.so
+%{_usr}/local/%{_lib}/libACSErrTypePythonNative.so
+%{_usr}/local/%{_lib}/libACSErrTypePythonNativeStubs.so
+%{_usr}/local/%{_lib}/libPatternAlarmCleared.so
+%{_usr}/local/%{_lib}/libPatternAlarmClearedStubs.so
+%{_usr}/local/%{_lib}/libPatternAlarmTriggered.so
+%{_usr}/local/%{_lib}/libPatternAlarmTriggeredStubs.so
 
 %files devel
-%{_usr}/local/include/acserrHandlersErrC.cpp
-%{_usr}/local/include/acserrHandlersErrC.h
-%{_usr}/local/include/acserrHandlersErrC.inl
-%{_usr}/local/include/acserrHandlersErrS.cpp
-%{_usr}/local/include/acserrHandlersErrS.h
-%{_usr}/local/include/ErrorSystemErrTypeC.cpp
-%{_usr}/local/include/ErrorSystemErrTypeC.h
-%{_usr}/local/include/ErrorSystemErrTypeC.inl
-%{_usr}/local/include/ErrorSystemErrTypeS.cpp
-%{_usr}/local/include/ErrorSystemErrTypeS.h
-%{_usr}/local/include/ACSErrOldTypeTestC.cpp
-%{_usr}/local/include/ACSErrOldTypeTestC.h
-%{_usr}/local/include/ACSErrOldTypeTestC.inl
-%{_usr}/local/include/ACSErrOldTypeTestS.cpp
-%{_usr}/local/include/ACSErrOldTypeTestS.h
-%{_usr}/local/include/ACSErrTypeTest.cpp
-%{_usr}/local/include/ACSErrTypeTest.h
-%{_usr}/local/include/ACSErrTypeTestC.cpp
-%{_usr}/local/include/ACSErrTypeTestC.h
-%{_usr}/local/include/ACSErrTypeTestC.inl
-%{_usr}/local/include/ACSErrTypeTestS.cpp
-%{_usr}/local/include/ACSErrTypeTestS.h
-%{_usr}/local/include/ExmplErrType.cpp
-%{_usr}/local/include/ExmplErrType.h
-%{_usr}/local/include/ExmplErrTypeC.cpp
-%{_usr}/local/include/ExmplErrTypeC.h
-%{_usr}/local/include/ExmplErrTypeC.inl
-%{_usr}/local/include/ExmplErrTypeS.cpp
-%{_usr}/local/include/ExmplErrTypeS.h
-%{_usr}/local/include/acserrOldTestC.cpp
-%{_usr}/local/include/acserrOldTestC.h
-%{_usr}/local/include/acserrOldTestC.inl
-%{_usr}/local/include/acserrOldTestS.cpp
-%{_usr}/local/include/acserrOldTestS.h
-%{_usr}/local/include/acserrTestC.cpp
-%{_usr}/local/include/acserrTestC.h
-%{_usr}/local/include/acserrTestC.inl
-%{_usr}/local/include/acserrTestS.cpp
-%{_usr}/local/include/acserrTestS.h
+%{_usr}/local/include/ACSErrTICSC.cpp
+%{_usr}/local/include/ACSErrTICSC.h
+%{_usr}/local/include/ACSErrTICSC.inl
+%{_usr}/local/include/ACSErrTICS.cpp
+%{_usr}/local/include/ACSErrTICS.h
+%{_usr}/local/include/ACSErrTICSS.cpp
+%{_usr}/local/include/ACSErrTICSS.h
+%{_usr}/local/include/ACSErrTicsTCorrC.cpp
+%{_usr}/local/include/ACSErrTicsTCorrC.h
+%{_usr}/local/include/ACSErrTicsTCorrC.inl
+%{_usr}/local/include/ACSErrTicsTCorr.cpp
+%{_usr}/local/include/ACSErrTicsTCorr.h
+%{_usr}/local/include/ACSErrTicsTCorrS.cpp
+%{_usr}/local/include/ACSErrTicsTCorrS.h
+%{_usr}/local/include/ACSErrTypeAlarmC.cpp
+%{_usr}/local/include/ACSErrTypeAlarmC.h
+%{_usr}/local/include/ACSErrTypeAlarmC.inl
+%{_usr}/local/include/ACSErrTypeAlarm.cpp
+%{_usr}/local/include/ACSErrTypeAlarm.h
+%{_usr}/local/include/ACSErrTypeAlarmS.cpp
+%{_usr}/local/include/ACSErrTypeAlarmS.h
+%{_usr}/local/include/ACSErrTypeCommonC.cpp
+%{_usr}/local/include/ACSErrTypeCommonC.h
+%{_usr}/local/include/ACSErrTypeCommonC.inl
+%{_usr}/local/include/ACSErrTypeCommon.cpp
+%{_usr}/local/include/ACSErrTypeCommon.h
+%{_usr}/local/include/ACSErrTypeCommonS.cpp
+%{_usr}/local/include/ACSErrTypeCommonS.h
+%{_usr}/local/include/ACSErrTypeCORBAC.cpp
+%{_usr}/local/include/ACSErrTypeCORBAC.h
+%{_usr}/local/include/ACSErrTypeCORBAC.inl
+%{_usr}/local/include/ACSErrTypeCORBA.cpp
+%{_usr}/local/include/ACSErrTypeCORBA.h
+%{_usr}/local/include/ACSErrTypeCORBAS.cpp
+%{_usr}/local/include/ACSErrTypeCORBAS.h
+%{_usr}/local/include/ACSErrTypeCppNativeC.cpp
+%{_usr}/local/include/ACSErrTypeCppNativeC.h
+%{_usr}/local/include/ACSErrTypeCppNativeC.inl
+%{_usr}/local/include/ACSErrTypeCppNative.cpp
+%{_usr}/local/include/ACSErrTypeCppNative.h
+%{_usr}/local/include/ACSErrTypeCppNativeS.cpp
+%{_usr}/local/include/ACSErrTypeCppNativeS.h
+%{_usr}/local/include/ACSErrTypeDevIOC.cpp
+%{_usr}/local/include/ACSErrTypeDevIOC.h
+%{_usr}/local/include/ACSErrTypeDevIOC.inl
+%{_usr}/local/include/ACSErrTypeDevIO.cpp
+%{_usr}/local/include/ACSErrTypeDevIO.h
+%{_usr}/local/include/ACSErrTypeDevIOS.cpp
+%{_usr}/local/include/ACSErrTypeDevIOS.h
+%{_usr}/local/include/ACSErrTypeJavaNativeC.cpp
+%{_usr}/local/include/ACSErrTypeJavaNativeC.h
+%{_usr}/local/include/ACSErrTypeJavaNativeC.inl
+%{_usr}/local/include/ACSErrTypeJavaNative.cpp
+%{_usr}/local/include/ACSErrTypeJavaNative.h
+%{_usr}/local/include/ACSErrTypeJavaNativeS.cpp
+%{_usr}/local/include/ACSErrTypeJavaNativeS.h
+%{_usr}/local/include/ACSErrTypeMonitorC.cpp
+%{_usr}/local/include/ACSErrTypeMonitorC.h
+%{_usr}/local/include/ACSErrTypeMonitorC.inl
+%{_usr}/local/include/ACSErrTypeMonitor.cpp
+%{_usr}/local/include/ACSErrTypeMonitor.h
+%{_usr}/local/include/ACSErrTypeMonitorS.cpp
+%{_usr}/local/include/ACSErrTypeMonitorS.h
+%{_usr}/local/include/ACSErrTypeOKC.cpp
+%{_usr}/local/include/ACSErrTypeOKC.h
+%{_usr}/local/include/ACSErrTypeOKC.inl
+%{_usr}/local/include/ACSErrTypeOK.cpp
+%{_usr}/local/include/ACSErrTypeOK.h
+%{_usr}/local/include/ACSErrTypeOKS.cpp
+%{_usr}/local/include/ACSErrTypeOKS.h
+%{_usr}/local/include/ACSErrTypePythonNativeC.cpp
+%{_usr}/local/include/ACSErrTypePythonNativeC.h
+%{_usr}/local/include/ACSErrTypePythonNativeC.inl
+%{_usr}/local/include/ACSErrTypePythonNative.cpp
+%{_usr}/local/include/ACSErrTypePythonNative.h
+%{_usr}/local/include/ACSErrTypePythonNativeS.cpp
+%{_usr}/local/include/ACSErrTypePythonNativeS.h
+%{_usr}/local/include/PatternAlarmClearedC.cpp
+%{_usr}/local/include/PatternAlarmClearedC.h
+%{_usr}/local/include/PatternAlarmClearedC.inl
+%{_usr}/local/include/PatternAlarmCleared.cpp
+%{_usr}/local/include/PatternAlarmCleared.h
+%{_usr}/local/include/PatternAlarmClearedS.cpp
+%{_usr}/local/include/PatternAlarmClearedS.h
+%{_usr}/local/include/PatternAlarmTriggeredC.cpp
+%{_usr}/local/include/PatternAlarmTriggeredC.h
+%{_usr}/local/include/PatternAlarmTriggeredC.inl
+%{_usr}/local/include/PatternAlarmTriggered.cpp
+%{_usr}/local/include/PatternAlarmTriggered.h
+%{_usr}/local/include/PatternAlarmTriggeredS.cpp
+%{_usr}/local/include/PatternAlarmTriggeredS.h
 
-%{_usr}/local/%{_lib}/libacserrHandlersErrStubs.a
-%{_usr}/local/%{_lib}/libacserrOldTestStubs.a
-%{_usr}/local/%{_lib}/libACSErrOldTypeTestStubs.a
-%{_usr}/local/%{_lib}/libacserrTestStubs.a
-%{_usr}/local/%{_lib}/libACSErrTypeTest.a
-%{_usr}/local/%{_lib}/libACSErrTypeTestStubs.a
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
