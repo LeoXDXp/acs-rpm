@@ -335,7 +335,6 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/object/
 %{_usr}/local/lib/python/site-packages/PatternAlarmClearedImpl.py*
 %{_usr}/local/lib/python/site-packages/PatternAlarmTriggered_idl.py*
 %{_usr}/local/lib/python/site-packages/PatternAlarmTriggeredImpl.py*
-~                                                                        
 
 %{_usr}/local/share/java/ACSErrTICS.jar
 %{_usr}/local/share/java/ACSErrTicsTCorr.jar
