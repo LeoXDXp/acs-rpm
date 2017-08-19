@@ -47,6 +47,8 @@ cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/ %{buildroot}/%{_usr}
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 echo "JACORB_HOME=%{_usr}/local/share/JacORB/" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
+echo "CLASSPATH=$CLASSPATH:%{_usr}/local/share/JacORB/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
+echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 
 %files
 %attr(755,-,-) %{_usr}/local/share/JacORB/
