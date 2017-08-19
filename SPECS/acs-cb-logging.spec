@@ -1,5 +1,5 @@
 Name:       ACS-logging
-Version:    2017.02
+Version:    2017.06
 Release:    1%{?dist}
 Summary:    ACS Logging
 License:    LGPL
@@ -105,3 +105,5 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 %changelog
 * Wed May 24 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
 Initial Packaging
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+Updating to 2017.06
