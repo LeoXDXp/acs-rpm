@@ -277,9 +277,9 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/lib/lib
 
 # Devel Stuff
 mkdir -p %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.h %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
-cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/object/*.h %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserrTypes/ws/object/*.inl %{buildroot}%{_usr}/local/include/
 
 %files
 %{_usr}/local/lib/python/site-packages/ACSErrTICS/
