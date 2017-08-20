@@ -1,4 +1,4 @@
-Name:		Mico-ACS
+Name:		mico-ACS
 Version:	2.3.13.2017.06
 Release:	1%{?dist}
 Summary:	Mico 2.3.13 for ACS
