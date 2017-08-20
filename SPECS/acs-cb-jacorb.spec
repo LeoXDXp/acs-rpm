@@ -35,6 +35,15 @@ export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 
 export M2_HOME="%{_usr}/share/apache-maven"
 
+#Modify harcoded paths
+sed -i 's/$ACE_ROOT\/TAO\/orbsvcs\/orbsvcs\/CosProperty.idl/\/usr\/share\/tao\/orbsvcs\/orbsvcs\/CosProperty.idl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
+
+sed -i 's/$ACE_ROOT\/TAO\/orbsvcs\/orbsvcs\/DsLogAdmin.idl/\/usr\/share\/tao\/orbsvcs\/orbsvcs\/DsLogAdmin.idl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
+
+sed -i 's/$ACE_ROOT\/TAO\/orbsvcs\/orbsvcs\/AVStreams.idl/\/usr\/share\/tao\/orbsvcs\/orbsvcs\/AVStreams.idl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
+
+sed -i 's/$ACE_ROOT\/TAO\/tao\/TimeBase.pidl/\/usr\/include\/tao\/TimeBase.pidl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
+
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/jacorb-3.6.1-source.zip http://www.jacorb.org/releases/3.6.1/jacorb-3.6.1-source.zip
 rm -rf %{_builddir}/alma/%{name}-%{version}/JacORB
