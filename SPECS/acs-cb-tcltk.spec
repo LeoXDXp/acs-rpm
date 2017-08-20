@@ -54,10 +54,6 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 #%post
 # /include to usr/local/include. Not yet, as no packages use tcltk headers to compile
 
-# Symlink of tao_idl because hardcoded path
-mkdir -p %{_usr}/share/tao/TAO_IDL
-ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
-
 %files
 %attr(755,-,-) %{_usr}/local/share/tcltk/
 %{_sysconfdir}/profile.d/tcltk-acs.sh
