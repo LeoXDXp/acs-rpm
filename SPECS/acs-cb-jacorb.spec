@@ -44,8 +44,8 @@ unlink %{_builddir}/alma
 
 %install
 mkdir -p %{buildroot}/%{_usr}/local/share/JacORB
-cd %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/
-find lib/ -name *.so | xargs chmod 755 $1
+#cd %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/
+#find lib/ -name *.so | xargs chmod 755 $1
 cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/ %{buildroot}/%{_usr}/local/share/JacORB
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -53,11 +53,13 @@ echo "JACORB_HOME=%{_usr}/local/share/JacORB/" >> %{buildroot}%{_sysconfdir}/pro
 echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 echo "CLASSPATH=$CLASSPATH:%{_usr}/local/share/JacORB/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
+echo "PATH=$PATH:%{_usr}/local/share/JacORB/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
+echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 
 %files
 %attr(755,-,-) %{_usr}/local/share/JacORB/
 %{_sysconfdir}/profile.d/jacorb-acs.sh
 
 %changelog
-* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
 Initial Packaging
