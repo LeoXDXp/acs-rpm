@@ -5,7 +5,7 @@ Summary:	Mico 2.3.13 for ACS
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
-BuildRequires:	gcc, make, tar
+BuildRequires:	gcc, make, tar, wget
 #Requires:	expect tk iwidgets tclx tcllib blt tktable
 #Requires:	telnet, libX11
 #AutoReq:	no
@@ -29,7 +29,7 @@ export OSYSTEM="Linux"
 export MICO_HOME="$ALMASW_ROOTDIR/$ALMASW_RELEASE/mico"
 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
-curl -o %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/mico-2.3.13.tar.gz "http://downloads.sourceforge.net/project/mico/mico%202.3.13/mico-2.3.13.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmico%2F&ts=1405541822&use_mirror=ufpr"
+wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/mico-2.3.13.tar.gz "http://downloads.sourceforge.net/project/mico/mico%202.3.13/mico-2.3.13.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmico%2F&ts=1405541822&use_mirror=ufpr"
 
 sh buildMico
 
