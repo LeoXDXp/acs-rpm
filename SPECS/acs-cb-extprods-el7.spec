@@ -86,9 +86,6 @@ Source files to compile ExtProds for ACS CB %{version} for {?dist}
 
 %prep
 %setup -q
-%setup -T -D -a 1
-%setup -T -D -a 2
-%setup -T -D -a 3
 #%patch0 -p2
 # builddir = /home/user/rpmbuild/BUILDDIR
 #%build
