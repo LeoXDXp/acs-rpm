@@ -1,5 +1,5 @@
 Name:		log4cpp-ACS
-Version:	1.0.2017.02
+Version:	1.0.2017.06
 Release:	1%{?dist}
 Summary:	Old version of log4cpp with ACS patches
 License:	LGPL
@@ -153,5 +153,7 @@ unlink %{_usr}/local/%{_lib}/liblog4cpp.so.4
 #%attr(644,root,root) %prefix/share/aclocal/*.m4
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 1.0.2017.06-1
+Updating version
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 1.0-1
 Initial Packaging
