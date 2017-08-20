@@ -104,7 +104,7 @@ export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, 
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 # Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
-cd %{_builddir}/%{name}-%{version}/INSTALL/
+cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
 
@@ -141,8 +141,8 @@ find -name "*.o" | xargs rm -rf
 
 # INSTALL and PRODUCTS to buildroot for devel package
 mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
-mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
-mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
+mv %{_builddir}/%{name}-%{version}/ExtProd/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
+mv %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 # Delete old Eclipse folder
 rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 %clean
