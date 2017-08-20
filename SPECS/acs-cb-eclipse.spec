@@ -1,5 +1,5 @@
 Name:		ACS-eclipse-plugins
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	Eclipse's MDT-UML2/OCF, EMF, EMF-Validation, XSD, Draw2 and Ant-core Jar files for ACS-Tools-Kit Package
 
@@ -27,5 +27,7 @@ mv %{_builddir}/%{name}-%{version}/eclipse/* %{buildroot}%{_prefix}/local/share/
 
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+Updating version
 * Fri Mar 03 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging

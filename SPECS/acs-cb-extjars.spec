@@ -1,5 +1,5 @@
 Name:	ACS-ExtJars
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	External Jar files for ACS CB
 
@@ -28,5 +28,7 @@ mv %{_builddir}/%{name}-%{version}/* %{buildroot}%{_prefix}/local/share/java/
 
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+Updating version
 * Fri Mar 03 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
