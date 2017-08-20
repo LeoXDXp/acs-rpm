@@ -31,11 +31,14 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
 export JACORB_HOME="$ALMASW_ROOTDIR/$ALMASW_RELEASE/JacORB"
 #export JACORB_HOME=%{_usr}/local/share/JacORB
+export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 
 export M2_HOME="%{_usr}/share/apache-maven"
 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
 wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/jacorb-3.6.1-source.zip http://www.jacorb.org/releases/3.6.1/jacorb-3.6.1-source.zip
+rm -rf %{_builddir}/alma/%{name}-%{version}/JacORB
+mkdir -p %{_builddir}/alma/%{name}-%{version}/JacORB
 
 sh buildJacORB
 
@@ -43,10 +46,10 @@ sh buildJacORB
 unlink %{_builddir}/alma
 
 %install
-mkdir -p %{buildroot}/%{_usr}/local/share/JacORB
+mkdir -p %{buildroot}/%{_usr}/local/share/
 #cd %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/
 #find lib/ -name *.so | xargs chmod 755 $1
-cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/ %{buildroot}/%{_usr}/local/share/JacORB
+cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/JacORB/ %{buildroot}/%{_usr}/local/share/
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
 echo "JACORB_HOME=%{_usr}/local/share/JacORB/" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
