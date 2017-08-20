@@ -1,7 +1,7 @@
-%define ALTVER FEB2017
+%define ALTVER JUN2017
 
 Name:		ACS-Tools-Kit-Benchmark
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	ACS CB Tools and Kit Module for CentOS 7	
 License:	LGPL
@@ -10,7 +10,6 @@ Source0:	%{name}-%{version}.tar.gz
 # Modified Makefile to compile only Tools, Kit and Benchmark
 Source1:	Makefile-TKB
 
-BuildArch: x86_64 aarch64
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version} ACS-eclipse-plugins >= %{version}
 # Tools: Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
@@ -70,20 +69,21 @@ export ACS_TMP="$ACSDATA/tmp/$HOSTNAME"
 export IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"
 #IDL_PATH="-I/alma/ACS-OCT2016/ACSSW/idl -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/orbsvcs/orbsvcs -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/orbsvcs -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO -I/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/TAO/tao"
 # DDS not added to LD PATH. Python, boost and omni all in lib64
-export LD_LIBRARY_PATH="$ACSROOT/idl:/usr/%{_lib}/:$ACSROOT/tcltk/lib:/usr/local/lib64:/usr/local/%{_lib}"
+
+export LD_LIBRARY_PATH="$ACSROOT/idl:%{_usr}/%{_lib}/:%{_usr}/local/%{_lib}"
 #LD_LIBRARY_PATH="/alma/ACS-OCT2016/ACSSW/lib:/alma/ACS-OCT2016/DDS/build/linux/lib:/alma/ACS-OCT2016/TAO/ACE_wrappers/build/linux/lib:/alma/ACS-OCT2016/Python/lib:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/boost/lib:/alma/ACS-OCT2016/tcltk/lib:"
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
 export GNU_ROOT=%{_usr}
-export TCLTK_ROOT="/alma/ACS-%{version}/tcltk"
 export PYTHONPATH="/usr/lib64/python2.7/site-packages:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages:%{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
-export PATH="$PATH:/alma/ACS-%{version}/tcltk/bin:/alma/ACS-%{version}/JacORB/bin:$GNU_ROOT/bin:/alma/ACS-%{version}/ACSSW/bin"
+export PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
-source %{_sysconfdir}/profile.d/mico.sh
-source %{_sysconfdir}/profile.d/jacorb.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
+source %{_sysconfdir}/profile.d/mico-acs.sh
+source %{_sysconfdir}/profile.d/jacorb-acs.sh
 source %{_sysconfdir}/profile.d/ant.sh
 source %{_sysconfdir}/profile.d/ace-devel.sh # overrides ACE_ROOT
 source %{_sysconfdir}/profile.d/apache-maven.sh
@@ -91,7 +91,7 @@ source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
 
 # Temp CLASSPATH for xsddoc and extidl
-export CLASSPATH="/usr/share/java/:/usr/share/local/java/:/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar:/home/almamgr/ACS-2017.02/JacORB/lib/jacorb-services-3.6.1.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar"
+export CLASSPATH="/usr/share/java/:/usr/local/share/java/:/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar:/usr/local/share/JacORB/lib/jacorb-services-3.6.1.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar"
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
@@ -142,14 +142,13 @@ echo "ACS_INSTANCE=0" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACS_STARTUP_TIMEOUT_MULTIPLIER=2" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "LD_LIBRARY_PATH=$ALMASW_ROOTDIR/ACS-%{version}/idl:/usr/lib64/:$ALMASW_ROOTDIR/ACS-%{version}/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ALMASW_ROOTDIR/ACS-%{version}/idl:/usr/lib64/:" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
-echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo "PYTHONPATH=/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_usr}/local/lib/python/site-packages/:$ALMASW_ROOTDIR/ACS-%{version}/ACSSW/lib/python/site-packages/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "PYTHON_ROOT=$ALMASW_ROOTDIR/ACS-%{version}/Python" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHONINC=/usr/include/python2.7' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
-
-echo 'PATH="$PATH:/alma/ACS-%{version}/tctlk/bin:/alma/ACS-%{version}/JacORB/bin:$GNU_ROOT/bin:/alma/ACS-%{version}/ACSSW/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+# $GNU_ROOT/bin is already part of the path
+echo 'PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -160,17 +159,14 @@ echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
-echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
 echo "export PYTHONPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb2.sh
-#mkdir -p %{buildroot}%{_usr}/local/bin/
+#mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb2.sh
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
 #mkdir -p %{buildroot}%{_usr}/local/include/
-#ln -s %{buildroot}/home/almamgrACS-%{version}/ACSSW/include/* %{buildroot}%{_usr}/local/include/
 
 # Move ACS Mans to here
 #mkdir -p %{buildroot}%{_usr}/local/share/
@@ -198,8 +194,7 @@ mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
-# ln -s /home/almamgr /alma
-cat %{_sysconfdir}/profile.d/acscb2.sh >> %{_sysconfdir}/profile.d/acscb.sh
+
 %post devel
 # Re-enabling the syntax error for testing
 sed -i 's/#skdfksdllk = \$\$\$\$/skdfksdllk = \$\$\$\$/g' /home/almadevel/LGPL/Kit/acs/test/AcsPyTestPkg1/A.py
@@ -217,13 +212,11 @@ userdel -r almadevel
 %files
 # ACSSW, acsdata, READMEs, LICENSE, ACS_VERSION, ACS_PATCH_LEVEL
 %config %{_sysconfdir}/acscb/
-%config %{_sysconfdir}/profile.d/
+%config %{_sysconfdir}/profile.d/acscb-gnu.sh
+%config %{_sysconfdir}/profile.d/acscb-python.sh
+%config %{_sysconfdir}/profile.d/acscb.sh
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/
-#%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/ACSSW/bin/
-#%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/acsdata/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
-#%{_usr}/local/bin
-#%{_usr}/local/lib
 #%docdir %{_usr}/local/share/man/
 #%{_usr}/local/share/man/
 
@@ -232,5 +225,7 @@ userdel -r almadevel
 %attr(0705,almadevel,almadevel) /home/almadevel/
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+Updating version
 * Fri Aug 19 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
