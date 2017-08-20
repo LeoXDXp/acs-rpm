@@ -105,6 +105,7 @@ mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 # Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
+export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
 
