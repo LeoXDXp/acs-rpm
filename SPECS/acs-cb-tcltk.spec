@@ -59,7 +59,7 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 %{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %changelog
-* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 8.5.15.2017.06-1
 Updating version
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 1.0-1
 Initial Packaging

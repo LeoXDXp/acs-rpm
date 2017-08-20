@@ -61,5 +61,5 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 %{_sysconfdir}/profile.d/jacorb-acs.sh
 
 %changelog
-* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 3.6.1.2017.06-1
 Initial Packaging

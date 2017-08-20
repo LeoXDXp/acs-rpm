@@ -56,5 +56,5 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 %{_sysconfdir}/profile.d/mico-acs.sh
 
 %changelog
-* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2.3.13.2017.06-1
 Initial Packaging
