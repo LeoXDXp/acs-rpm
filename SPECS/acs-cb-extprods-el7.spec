@@ -1,9 +1,7 @@
-#%define _sbindir /sbin
-#%define _libdir  /%{_lib}
 %define oldVersion 2016.10
 
 Name:		ACS-ExtProds
-Version:	2017.02
+Version:	2017.06
 Release:	2%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
@@ -17,61 +15,39 @@ Source0:	%{name}-%{version}.tar.gz
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 # Small ifarch hack for x86_64 and aarch64 arch 
-%ifarch x86_64
-Source1:        mico-2.3.13.%{version}.tar.gz
-Source2:        JacORB-3.6.1.%{version}.tar.gz
-#Source3:        tctlk-8.5.15.%{version}.tar.gz
-%endif
-
-%ifarch aarch64 armv8 arm64
-Source1:	mico-2.3.13.%{version}-aarch64.tar.gz
-Source2:	JacORB-3.6.1.%{version}-aarch64.tar.gz
-#Source3:	tctlk-8.5.15.%{version}-aarch64.tar.gz
-%endif
-Source4:	searchFile
-Source5:	JacPrep
-Source6:	acsMakeCopySources
-Source7:	acsMakeTclScript
-Source8:	acsMakeJavaClasspath
-Source9:	acserrGenIDL
-Source10:	acserrGenCpp
-Source11:	acserrGenCheckXML
-Source12:	generateTmcdbSchemas
-Source13:	generateXsdPythonBinding
-Source14:	loggingtsGenH
-Source15:	loggingtsGenCheckXML
-Source16:	acsStartJava
-Source17:	acs_python.py
-Source18:	acsMakeCheckUnresolvedSymbols
-Source19:	acsMakeTclLib
+#Source4:	searchFile
+#Source5:	JacPrep
+#Source6:	acsMakeCopySources
+#Source7:	acsMakeTclScript
+#Source8:	acsMakeJavaClasspath
+#Source9:	acserrGenIDL
+#Source10:	acserrGenCpp
+#Source11:	acserrGenCheckXML
+#Source12:	generateTmcdbSchemas
+#Source13:	generateXsdPythonBinding
+#Source14:	loggingtsGenH
+#Source15:	loggingtsGenCheckXML
+#Source16:	acsStartJava
+#Source17:	acs_python.py
+#Source18:	acsMakeCheckUnresolvedSymbols
+#Source19:	acsMakeTclLib
 
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
-BuildArch: x86_64 aarch64
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
-# ACE + TAO + ACS  Patches. Not needed until JacORB is built inside this RPM
-#BuildRequires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion} 
 # Java and Others
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, ant >= 1.9.2
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
-BuildRequires: tcltk-ACS
-%ifarch x86_64
-BuildRequires: ant >= 1.9.2
-%endif
-%ifarch aarch64 armv8 arm64
-BuildRequires: ant >= 1.9.2
-%endif
+BuildRequires: tcltk-ACS JacORB-ACS Mico-ACS
 
-# ACE + TAO + ACS  Patches
-Requires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion} 
+# ACE + TAO + ACS  Patches. Only for Requires. JacORB has own rpm
+Requires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion}
 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1
 # Java and Others
 Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl maven-local
-Requires: ant >= 1.9.2
-Requires: gcc
-Requires: time
+Requires: ant >= 1.9.2, gcc, time
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
 Requires: python-coverage == 3.7.1, python-linecache2 == 1.0.0, python2-traceback2 == 1.4.0, scipy == 0.12.1, python-six == 1.9.0, pexpect, python-matplotlib == 1.2.0
 
@@ -93,16 +69,13 @@ Requires: python-babel == 1.3, python-markupsafe == 0.23, python-pygments == 2.1
 # F24 and EL7 have 3.7.6.0. Dif: 7 more Bugfixes
 Requires: python-nose == 1.3.7, pyephem >= 3.7.5.3
 
-# Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
-Requires: tk iwidgets tclx tcllib blt tktable expect
-
 # Devtoolset eclipse-jdt dependency in SCL
 #Requires: devtoolset-3-eclipse-jdt
 # Other Dependecies for stuff through pip
 Requires: libxslt-devel sqlite-devel openldap-devel libxml2-devel
 
 %description
-RPM Installer of ACS-CB ExtProducts %{version}. It installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 4 old libraries, JacORB, Tctlk and MicoORB. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
+RPM Installer of ACS-CB ExtProducts %{version}. Installs ACE+TAO with ACS Patches, omniORB, Java 1.8 OpenJDK, PyModules needed by ACS, and builds/install Eclipse 4 old libraries. Then, the compiled files are left on /home/almamgr/ACS-version (symlink to /alma). 
 
 %package devel
 Summary: ACS CB ExtProd Source files for %{?dist}
@@ -126,8 +99,6 @@ export ALMASW_ROOTDIR="%{buildroot}/alma"
 export ALMASW_RELEASE="ACS-%{version}"
 
 export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, only after re-login
-export JACORB_HOME="%{buildroot}/alma/ACS-%{version}/JacORB"
-export MICO_HOME="%{buildroot}/alma/ACS-%{version}/mico"
 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
@@ -136,16 +107,9 @@ ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 cd %{_builddir}/%{name}-%{version}/INSTALL/
 # Run scripts
 ./buildEclipse # Libs should be left in system lib folders
-# Modify make install adding DESTDIR=$RPM_BUILD_ROOT to avoid check-buildroot related error
-#./buildMico # Uses gcc, make , tar
-#./buildJacORB # Depends on TAO and Maven, which are rpms
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-echo "JACORB_HOME=/home/almamgr/ACS-%{version}/JacORB" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
-echo "export JACORB_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb.sh
-echo "MICO_HOME=/home/almamgr/ACS-%{version}/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
-echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "OMNI_ROOT=/usr/share/idl/omniORB" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "export OMNI_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/mico.sh
 echo "ANT_HOME=/usr/share/ant" >> %{buildroot}%{_sysconfdir}/profile.d/ant.sh
@@ -160,17 +124,13 @@ echo "export ALMASW_RELEASE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #echo 'CLASSPATH="/usr/share/java/:/usr/local/share/java/:$JACORB_HOME/lib:$ANT_HOME/lib:$M2_HOME/lib" ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
-echo "CLASSPATH=/usr/share/java/:/usr/local/share/java/:/home/almamgr/ACS-2017.02/JacORB/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "CLASSPATH=$CLASSPATH:/usr/share/java/:/usr/local/share/java/:" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
 echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-
-#install -m 0755 -D -p %{SOURCE1} %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/JacORB/    %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/mico/    %{buildroot}/home/almamgr/ACS-%{version}/
 
 # removing objects
 cd %{buildroot}/alma/ACS-%{version}
@@ -183,33 +143,6 @@ find -name "*.o" | xargs rm -rf
 mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 mv %{_builddir}/%{name}-%{version}/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 mv %{_builddir}/%{name}-%{version}/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
-mkdir -p %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE4} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE5} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE6} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE7} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE8} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE9} %{buildroot}%{_usr}/local/acs/
-# Fix xalan hardcoded path
-sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{buildroot}%{_usr}/local/acs/acserrGenIDL
-
-cp -f %{SOURCE10} %{buildroot}%{_usr}/local/acs/
-sed -i 's/$ACSROOT\/lib\/xalan\.jar${PATH_SEP}$ACSROOT\/lib\/xalan_serializer\.jar/\/usr\/share\/java\/xalan-j2\.jar:\/usr\/share\/java\/xalan-j2-serializer\.jar/g' %{buildroot}%{_usr}/local/acs/acserrGenCpp
-
-cp -f %{SOURCE11} %{buildroot}%{_usr}/local/acs/
-sed -i 's/`searchFile \/idl\/ACSError\.xsd`/\.\./g' %{buildroot}%{_usr}/local/acs/acserrGenCheckXML
-sed -i 's/$ACSROOT\/lib/\/usr\/local\/share\/java/g' %{buildroot}%{_usr}/local/acs/acserrGenCheckXML
-
-cp -f %{SOURCE12} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE14} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE15} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE16} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE18} %{buildroot}%{_usr}/local/acs/
-cp -f %{SOURCE19} %{buildroot}%{_usr}/local/acs/
-# ACS's Python libs
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{SOURCE17} %{buildroot}%{_usr}/local/lib/python/site-packages/
-cp -f %{SOURCE13} %{buildroot}%{_usr}/local/lib/python/site-packages/generateXsdPythonBinding.py
 # Delete old Eclipse folder
 rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 %clean
@@ -237,9 +170,6 @@ useradd -U almadevel
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chmod 0705 /home/almamgr/
-# Symlink of tao_idl because hardcoded path
-mkdir -p %{_usr}/share/tao/TAO_IDL
-ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
 # Pyxbgen symlink to /usr/local/bin
 ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
 # ACSnc Build has trouble finding the following files
@@ -266,7 +196,11 @@ ln -s %{_usr}/include/tao/* %{_usr}/local/include/
 unlink %{_usr}/local/include/PortableServer
 ln -s %{_usr}/include/tao/PortableServer/PortableServer.h %{_usr}/local/include/
 
-ln -s  %{_usr}/local/acs/*  %{_usr}/local/bin/
+# Symlink of tao_idl because hardcoded path
+mkdir -p %{_usr}/share/tao/TAO_IDL
+ln -s %{_usr}/bin/tao_idl %{_usr}/share/tao/TAO_IDL/
+
+#ln -s  %{_usr}/local/acs/*  %{_usr}/local/bin/
 
 ## PyModules in acs.req file
 # Sphinx 1.2.3 (Requires 1.3.1)
@@ -355,15 +289,14 @@ userdel -r almadevel
 
 %files
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/mico/
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/JacORB/
 %config %{_sysconfdir}/profile.d/
-%attr(0645,-,-) %{_usr}/local/acs/
-/usr/local/lib/python/site-packages/
+
 %files devel
 %attr(0705,almadevel,almadevel) /home/almadevel/ACS-%{version}/ExtProd/
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+Updating version. Moving code to respective new rpms
 * Sun May 28 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-2
 Fixing hardcoded xalan classpath
 * Wed Oct 26 2016 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
