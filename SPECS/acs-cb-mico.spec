@@ -1,6 +1,6 @@
 Name:		mico-ACS
 Version:	2.3.13.2017.06
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Mico 2.3.13 for ACS
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
@@ -37,7 +37,7 @@ sh buildMico
 unlink %{_builddir}/alma
 
 %install
-mkdir -p %{buildroot}/%{_usr}/local/share/mico
+mkdir -p %{buildroot}/%{_usr}/local/share/
 cd %{_builddir}/home/almamgr/%{name}-%{version}/mico/
 find lib/ -name *.so | xargs chmod 755 $1
 find lib/ -name *.a | xargs chmod 755 $1
@@ -57,5 +57,7 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 %{_sysconfdir}/profile.d/mico-acs.sh
 
 %changelog
+* Sun Aug 20 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2.3.13.2017.06-2
+Fixing extra depth in folder levels
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2.3.13.2017.06-1
 Initial Packaging
