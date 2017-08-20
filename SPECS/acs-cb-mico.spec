@@ -40,6 +40,7 @@ unlink %{_builddir}/alma
 mkdir -p %{buildroot}/%{_usr}/local/share/mico
 cd %{_builddir}/home/almamgr/%{name}-%{version}/mico/
 find lib/ -name *.so | xargs chmod 755 $1
+find lib/ -name *.a | xargs chmod 755 $1
 cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/mico/ %{buildroot}/%{_usr}/local/share/mico
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
