@@ -1,5 +1,5 @@
 Name:		castor-ACS
-Version:	0.9.6.2017.02
+Version:	0.9.6.2017.06
 Release:	1%{?dist}
 Summary:	Old version of Castor with ACS patches
 License:	LGPL
@@ -57,5 +57,7 @@ unlink %{_builddir}/alma
 %{_usr}/local/share/java/castor-ACS.jar
 
 %changelog
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
+Updating version.
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Initial Packaging
