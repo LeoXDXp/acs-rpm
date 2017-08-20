@@ -43,13 +43,18 @@ find lib/ -name *.so | xargs chmod 755 $1
 cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/mico/ %{buildroot}/%{_usr}/local/share/mico
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-echo "MICO_HOME=/usr/local/share/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "MICO_HOME=%{_usr}/local/share/mico" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%{_usr}/local/share/mico/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "PATH=$PATH:%{_usr}/local/share/mico/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 
+# No include symlink to local/include, as no packages use tcltk headers to compile
 %files
 %attr(755,-,-) %{_usr}/local/share/mico
 %{_sysconfdir}/profile.d/mico-acs.sh
 
 %changelog
-* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+* Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
 Initial Packaging
