@@ -120,6 +120,9 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
+#acsBuild searchfile fix
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
+
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
