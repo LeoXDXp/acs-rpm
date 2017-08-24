@@ -118,6 +118,7 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
 sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
@@ -134,6 +135,25 @@ make
 # Remove objects
 cd %{_builddir}/alma/ACS-%{version}/ACSSW/
 find -name "*.o" | xargs rm -rf
+
+# TAT Stuff. Symlink to libtatlib.tcl/ folder
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/Kit/doc/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/Kit/acsutilpy/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/lib/
+ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+export HOST="$HOSTNAME"
+export VLTDATA=""
+export OSYSTEM="Linux"
+export CYGWIN_VER=""
+# Classpath for the compilation of jACSutilTest.jar
+#export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtil.jar:/usr/share/java/hamcrest/all.jar:/usr/share/java/junit.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/jACSUtilTest.jar:"
+# PATH_SEP variable is useless and needs replacement. Setting Classpath where not very useful function was. Better to centraly manage dependencies
+#sed -i 's/`getJarFile jACSUtil.jar`/${CLASSPATH}/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
+#sed -i 's/${PATH_SEP}/:/g' %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/doAllTests
+# seems make test can be replaced with sh doAllTest in %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/test/ directly
+make test
 
 %install
 # Copy {_builddir}/home/almamgr/ to %{buildroot}/home/almamgr/
