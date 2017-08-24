@@ -97,20 +97,16 @@ export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
+# Fixing/replacing searchFile
 #tat xsddoc extidl vtd-xml oAW scxml_apache
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/include/
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/include/
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/include/
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/vtd-xml/include/
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/include/
-#mkdir -p %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/include/
-
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/vtd-xml
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW
-ln -s %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/ %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache
+tempbdir=$( echo %{_builddir} | sed 's/\//\\\//g' )
+sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/vtd-xml/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/src/Makefile
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
