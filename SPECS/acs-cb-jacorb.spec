@@ -34,7 +34,8 @@ export JACORB_HOME="$ALMASW_ROOTDIR/$ALMASW_RELEASE/JacORB"
 export CLASSPATH="$CLASSPATH:%{_usr}/share/java/plexus/classworlds.jar"
 export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
-export M2_HOME="%{_usr}/share/apache-maven"
+#export M2_HOME="%{_usr}/share/apache-maven"
+unset M2_HOME
 
 #Modify harcoded paths
 sed -i 's/$ACE_ROOT\/TAO\/orbsvcs\/orbsvcs\/CosProperty.idl/\/usr\/share\/tao\/orbsvcs\/orbsvcs\/CosProperty.idl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
@@ -53,10 +54,10 @@ mkdir -p %{_builddir}/alma/%{name}-%{version}/JacORB
 
 sh buildJacORB
 
-cd $JACORB_HOME
-mvn clean install -e -X -DskipTests=true -DskipPDFGeneration=true -DskipJavadoc=true -Dmaven.clean.failOnError=false -Dmaven.javadoc.failOnError=false
-mkdir -p $JACORB_HOME/lib/endorsed
-mv $JACORB_HOME/lib/jacorb-omgapi-3.6.1.jar $JACORB_HOME/lib/endorsed
+#cd $JACORB_HOME
+#mvn clean install -e -X -DskipTests=true -DskipPDFGeneration=true -DskipJavadoc=true -Dmaven.clean.failOnError=false -Dmaven.javadoc.failOnError=false
+#mkdir -p $JACORB_HOME/lib/endorsed
+#mv $JACORB_HOME/lib/jacorb-omgapi-3.6.1.jar $JACORB_HOME/lib/endorsed
 
 
 # Clean symlink in builddir
