@@ -127,9 +127,6 @@ echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
-echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-
 # removing objects
 cd %{buildroot}/alma/ACS-%{version}
 find -name "*.o" | xargs rm -rf
