@@ -9,6 +9,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 #Source1:	buildTclTk-OCT2013
 BuildRequires:	gcc, make, tar, wget, apache-maven >= 3.2.5, ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml >= 6.3.0.%{oldVersion}, ace-gperf == 6.3.0.%{oldVersion}, ace-xml-devel >= 6.3.0.%{oldVersion}, ace-kokyu >= 6.3.0.%{oldVersion}, ace-kokyu-devel >= 6.3.0.%{oldVersion}, mpc >= 6.3.0.%{oldVersion}, tao >= 2.3.0.%{oldVersion}, tao-devel >= 2.3.0.%{oldVersion}, tao-utils >= 2.3.0.%{oldVersion}, tao-cosnaming >= 2.3.0.%{oldVersion}, tao-cosevent >= 2.3.0.%{oldVersion}, tao-cosnotification >= 2.3.0.%{oldVersion}, tao-costrading >= 2.3.0.%{oldVersion}, tao-rtevent >= 2.3.0.%{oldVersion}, tao-cosconcurrency >= 2.3.0.%{oldVersion}, ace-tao-debuginfo >= 6.3.0.%{oldVersion}
+BuildRequires:  plexus-classworlds
 # Depends on TAO and Maven
 Requires:	apache-maven >= 3.2.5, maven-local
 #AutoReq:	no
@@ -30,7 +31,7 @@ export ALMASW_RELEASE=%{name}-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
 export JACORB_HOME="$ALMASW_ROOTDIR/$ALMASW_RELEASE/JacORB"
-#export JACORB_HOME=%{_usr}/local/share/JacORB
+export CLASSPATH=$CLASSPATH:%{_usr}/share/java/plexus/classworlds.jar
 export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 
 export M2_HOME="%{_usr}/share/apache-maven"
