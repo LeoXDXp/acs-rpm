@@ -46,16 +46,17 @@ sed -i 's/$ACE_ROOT\/TAO\/orbsvcs\/orbsvcs\/AVStreams.idl/\/usr\/share\/tao\/orb
 sed -i 's/$ACE_ROOT\/TAO\/tao\/TimeBase.pidl/\/usr\/include\/tao\/TimeBase.pidl/g' %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/buildJacORB
 
 cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL
-wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/jacorb-3.6.1-source.zip http://www.jacorb.org/releases/3.6.1/jacorb-3.6.1-source.zip
+#wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/jacorb-3.6.1-source.zip http://www.jacorb.org/releases/3.6.1/jacorb-3.6.1-source.zip
+wget -c -O %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS/jacorb-3.6.1-source.zip http://repo.csrg.cl/Sources/jacorb-3.6.1-source.zip
 rm -rf %{_builddir}/alma/%{name}-%{version}/JacORB
 mkdir -p %{_builddir}/alma/%{name}-%{version}/JacORB
 
 sh buildJacORB
 
-#mvn clean install -e -X -DskipTests=true -DskipPDFGeneration=true -DskipJavadoc=true -Dmaven.clean.failOnError=false -Dmaven.javadoc.failOnError=false
-
-#mkdir -p $JACORB_HOME/lib/endorsed
-#mv $JACORB_HOME/lib/jacorb-omgapi-3.6.1.jar $JACORB_HOME/lib/endorsed
+cd $JACORB_HOME
+mvn clean install -e -X -DskipTests=true -DskipPDFGeneration=true -DskipJavadoc=true -Dmaven.clean.failOnError=false -Dmaven.javadoc.failOnError=false
+mkdir -p $JACORB_HOME/lib/endorsed
+mv $JACORB_HOME/lib/jacorb-omgapi-3.6.1.jar $JACORB_HOME/lib/endorsed
 
 
 # Clean symlink in builddir
