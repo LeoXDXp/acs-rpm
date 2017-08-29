@@ -127,9 +127,6 @@ sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/s
 #acsBuild searchfile fix
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
 
-#Manual creation of extidl jars
-TRT
-
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
@@ -138,6 +135,18 @@ mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 
 make
+
+#Manual creation of extidl jars
+cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
+ln -s  /usr/include/tao/ tao
+idlj Monitor_Types.idl
+idlj Monitor.idl
+idlj NotificationServiceMC.idl
+#NotifyExt
+idlj -i /usr/include/orbsvcs NotifyExt.idl
+idlj NotifyMonitoringExt.idl
+
+
 
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
