@@ -79,6 +79,11 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 
+%preun
+export PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/JacORB\/bin\///g' )
+export CLASSPATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/JacORB\/lib\///g' )
+unset JACORB_HOME
+unset JAVA_HOME
 
 %files
 %attr(755,-,-) %{_usr}/local/share/JacORB/
