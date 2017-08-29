@@ -81,7 +81,7 @@ echo "export JAVA_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/jacorb-acs.sh
 
 %preun
 export PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/JacORB\/bin\///g' )
-export CLASSPATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/JacORB\/lib\///g' )
+export CLASSPATH=$(echo $CLASSPATH | sed 's/\%{_usr}\/local\/share\/JacORB\/lib\///g' )
 unset JACORB_HOME
 unset JAVA_HOME
 
