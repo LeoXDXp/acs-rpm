@@ -51,6 +51,11 @@ echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.s
 echo "PATH=$PATH:%{_usr}/local/share/mico/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 
+%preun
+export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/mico\/lib\///g' )
+export PATH=$(echo $PATH | sed 's/\%{_usr}\/local\/share\/mico\/bin\///g' )
+unset MICO_HOME
+
 # No include symlink to local/include, as no packages use tcltk headers to compile
 %files
 %attr(755,-,-) %{_usr}/local/share/mico
