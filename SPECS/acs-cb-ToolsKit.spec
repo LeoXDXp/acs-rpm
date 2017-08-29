@@ -127,6 +127,9 @@ sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/s
 #acsBuild searchfile fix
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
 
+#Manual creation of extidl jars
+TRT
+
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
@@ -229,6 +232,19 @@ ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
 # Re-enabling the syntax error for testing
 sed -i 's/#skdfksdllk = \$\$\$\$/skdfksdllk = \$\$\$\$/g' /home/almadevel/LGPL/Kit/acs/test/AcsPyTestPkg1/A.py
 %preun
+# Remove env vars
+export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed "s/\$ALMASW_ROOTDIR\/ACS-%{version}\/idl:\/usr\/lib64\/://g" )
+export PATH=$(echo $PATH | sed "s/\/alma\/ACS-%{version}}/ACSSW}/bin//g" )
+export PYTHONPATH=$(echo $PYTHONPATH | sed "s/\/usr\/lib64\/python2.7\/site-packages:\/opt\/rh\/rh-java-common\/root\/usr\/lib\/python2.7\/site-packages\/:\%{_usr}\/local\/lib\/python\/site-packages\/:\$ALMASW_ROOTDIR\/ACS-%{version}\/ACSSW\/lib\/python\/site-packages\///g" )
+unset ACSDATA
+unset ACSROOT
+unset ACS_CDB
+unset ACS_INSTANCE
+unset ACS_STARTUP_TIMEOUT_MULTIPLIER
+unset ACS_TMP
+unset IDL_PATH
+unset GNU_ROOT
+unset PYTHONINC
  
 %postun
 # Al user processes must be killed before userdel
