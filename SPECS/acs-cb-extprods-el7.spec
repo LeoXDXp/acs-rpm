@@ -232,6 +232,14 @@ unlink %{_usr}/local/bin/pyxbgen
 # Symlink of tao_idl because hardcoded path
 unlink %{_usr}/share/tao/TAO_IDL/tao_idl
 
+# remove env vars
+export CLASSPATH=$(echo $CLASSPATH | sed 's/\/usr\/share\/java/:\/usr\/local\/share\/java\///g' )
+unset OMNI_ROOT
+unset ANT_HOME
+unset SWIG_ROOT
+unset ALMASW_ROOTDIR
+unset ALMASW_RELEASE
+
 %postun
 # Al user processes must be killed before userdel
 pkill -u almamgr
