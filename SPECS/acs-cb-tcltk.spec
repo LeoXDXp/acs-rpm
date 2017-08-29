@@ -53,6 +53,10 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 
 #%post
 # /include to usr/local/include. Not yet, as no packages use tcltk headers to compile
+%preun
+export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/lib\///g' )
+export PATH=$( echo $PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/bin\///g' )
+unset TCLTK_ROOT
 
 %files
 %attr(755,-,-) %{_usr}/local/share/tcltk/
