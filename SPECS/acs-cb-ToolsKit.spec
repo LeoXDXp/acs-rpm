@@ -77,9 +77,6 @@ export GNU_ROOT=%{_usr}
 export PYTHONPATH="$PYTHONPATH:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/python/site-packages:%{_usr}/local/lib/python/site-packages/"
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
-# PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
-export PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin"
-# PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/mico-acs.sh
@@ -89,6 +86,8 @@ source %{_sysconfdir}/profile.d/ace-devel.sh # overrides ACE_ROOT
 source %{_sysconfdir}/profile.d/apache-maven.sh
 source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
+
+export PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src:"
 
 # Temp CLASSPATH for xsddoc and extidl
 export CLASSPATH="/usr/share/java/:/usr/local/share/java/:/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar:/usr/local/share/JacORB/lib/jacorb-services-3.6.1.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar"
@@ -114,18 +113,24 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 
 # extidl makefiles
 sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
-sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
+sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
+#sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
 sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
-sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
+sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
+#sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
 sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
-sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
 sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/src\/ -bacs_python/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
 #acsBuild searchfile fix
-sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
+sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileCore.mk $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileDefinitions.mk  /g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
+
+# Temporary for debugging
+#sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
@@ -137,14 +142,19 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{ve
 make
 
 #Manual creation of extidl jars
-cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
-ln -s  /usr/include/tao/ tao
-idlj Monitor_Types.idl
-idlj Monitor.idl
-idlj NotificationServiceMC.idl
+#cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
+#ln -s  /usr/include/tao/ tao
+#idlj Monitor_Types.idl
+#idlj Monitor.idl
+#idlj NotificationServiceMC.idl
 #NotifyExt
-idlj -i /usr/include/orbsvcs NotifyExt.idl
-idlj NotifyMonitoringExt.idl
+#idlj -i /usr/include/orbsvcs NotifyExt.idl
+#idlj NotifyMonitoringExt.idl
+
+#javac Monitor/*.java
+#javac CosNotification/*.java
+
+# Create jars
 
 
 
