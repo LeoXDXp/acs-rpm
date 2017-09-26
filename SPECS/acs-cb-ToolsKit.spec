@@ -130,6 +130,7 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 
 # Remove acsMakeJavaClasspath
 echo "print $ENV{CLASSPATH}\n" > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
