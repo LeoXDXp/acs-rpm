@@ -78,7 +78,6 @@ export PYTHONPATH="$PYTHONPATH:/usr/lib/python2.7/site-packages:/opt/rh/rh-java-
 export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PYTHONINC="/usr/include/python2.7"
 # PYTHONPATH="/alma/ACS-OCT2016/ACSSW/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python:/alma/ACS-OCT2016/Python/omni/lib:/alma/ACS-OCT2016/Python/lib/python2.7/site-packages:/alma/ACS-OCT2016/Python/omni/lib/python/site-packages:/alma/ACS-OCT2016/Python/omni/lib64/python2.7/site-packages"
-export PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin:%{_builddir}/%{name}-%{version}/Kit/acs/bin/"
 # PATH="/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/ACSSW/bin:/usr/java/default/bin:/alma/ACS-OCT2016/ant/bin:/alma/ACS-OCT2016/JacORB/bin:/alma/ACS-OCT2016/Python/bin:/alma/ACS-OCT2016/maven/bin:/alma/ACS-OCT2016/Python/omni/bin:/alma/ACS-OCT2016/tcltk/bin:/usr/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/acs.node/.local/bin:/home/acs.node/bin"
 # Calling Mico, JacORB, ACE+TAO , MPC, Maven env vars PENDING OmniORB 2 paths, Extend PATH, python_root path, manpath , gnu_root maybe?
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
@@ -90,6 +89,7 @@ source %{_sysconfdir}/profile.d/apache-maven.sh
 source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
 
+export PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin:%{_builddir}/%{name}-%{version}/Kit/acs/bin/"
 # Temp CLASSPATH for xsddoc and extidl
 export CLASSPATH="/usr/share/java/:/usr/local/share/java/:/usr/share/java/ant.jar:/usr/share/java/xalan-j2.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar:/usr/local/share/JacORB/lib/jacorb-services-3.6.1.jar:%{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar"
 # Compilation specific env vars
