@@ -112,20 +112,19 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/src/Makefile
 
 # extidl makefiles
-sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
-sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
+#sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
 #sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.c++
-sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
-sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
+#sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
 #sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.java
-sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
-sed -i "s/MAKEDIRTMP :=/MAKEDIRTMP := $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs/g"  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i 's/$(shell searchFile include\/acsMakefile)//g'  %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 #sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
-sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
-sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
-sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/src\/ -bacs_python/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/src\/ -bacs_python/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 
+# Temporary for debugging
+sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
 #acsBuild searchfile fix
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileCore.mk $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileDefinitions.mk  /g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
 
@@ -150,13 +149,6 @@ make
 #NotifyExt
 #idlj -i /usr/include/orbsvcs NotifyExt.idl
 #idlj NotifyMonitoringExt.idl
-
-#javac Monitor/*.java
-#javac CosNotification/*.java
-
-# Create jars
-
-
 
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
