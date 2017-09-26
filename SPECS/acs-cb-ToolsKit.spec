@@ -129,7 +129,7 @@ sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{na
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileCore.mk $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileDefinitions.mk  /g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
 
 # Remove acsMakeJavaClasspath
-echo "print $ENV{CLASSPATH}\n" > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo "#!/usr/bin/env perl \n print $ENV{CLASSPATH}\n" > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
 cd %{_builddir}/%{name}-%{version}/
