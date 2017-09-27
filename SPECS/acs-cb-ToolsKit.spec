@@ -150,6 +150,7 @@ cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor_Types.idl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor.idl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotificationServiceMC.idl
+export PYTHONPATH=%{_usr}/share/idl/omniORB/
 omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ DsLogAdmin.idl
 #NotifyExt
 omniidl -I /usr/share/idl/omniORB/COS/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyExt.idl
