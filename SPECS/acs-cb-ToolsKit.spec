@@ -149,16 +149,16 @@ make
 Manual creation of extidl py
 cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
 #ln -s  /usr/include/tao/ tao
-ln -s /usr/share/idl/omniORB/orb.idl .
+#ln -s /usr/share/idl/omniORB/orb.idl .
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor_Types.idl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor.idl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotificationServiceMC.idl
 omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ DsLogAdmin.idl
 #NotifyExt
 omniidl -I /usr/share/idl/omniORB/COS/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyExt.idl
-#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyMonitoringExt.idl
+omniidl -I /usr/include/ -I /usr/share/idl/omniORB/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyMonitoringExt.idl
 omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ TimeBase.pidl
-omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ StringSeq.pidl
+#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ StringSeq.pidl
 
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
@@ -177,21 +177,39 @@ find -name "*.o" | xargs rm -rf
 #mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
-mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/DsLogAdmin
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/DsLogAdmin__POA
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyExt
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyExt__POA
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt__POA
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase__POA
 mkdir -p %{buildroot}%{_usr}/local/include/
 
 # /etc. Hoping to have acsdata only on etc in the future
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
  
-#Extidl
+#Extidl Java
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar  %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar  %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar  %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar  %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyMonitoringExt.jar  %{buildroot}%{_usr}/local/share/java/
-
-cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/python/site-packages/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+# Extidl Python
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/DsLogAdmin/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/DsLogAdmin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/DsLogAdmin__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/DsLogAdmin__POA/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/DsLogAdmin_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyExt/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyExt/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyExt__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyExt__POA/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyExt_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyMonitoringExt/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyMonitoringExt__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt__POA/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyMonitoringExt_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase__POA/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase_pidl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 
 
 # Devel folders: RPM, LGPL, Benchmark
@@ -298,9 +316,24 @@ userdel -r almadevel
 %config %{_sysconfdir}/profile.d/acscb.sh
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
-%{_usr}/local/share/java/
+%{_usr}/local/share/java/Monitor.jar
+%{_usr}/local/share/java/Monitor_Types.jar
+%{_usr}/local/share/java/NotificationServiceMC.jar
+%{_usr}/local/share/java/NotifyExt.jar
+%{_usr}/local/share/java/NotifyMonitoringExt.jar
 
-%{_usr}/local/lib/python/site-packages/
+%{_usr}/local/lib/python/site-packages/DsLogAdmin/
+%{_usr}/local/lib/python/site-packages/DsLogAdmin__POA/
+%{_usr}/local/lib/python/site-packages/DsLogAdmin_idl.py*
+%{_usr}/local/lib/python/site-packages/NotifyExt/
+%{_usr}/local/lib/python/site-packages/NotifyExt__POA/
+%{_usr}/local/lib/python/site-packages/NotifyExt_idl.py*
+%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt/
+%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt__POA/
+%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt_idl.py*
+%{_usr}/local/lib/python/site-packages/TimeBase/
+%{_usr}/local/lib/python/site-packages/TimeBase__POA/
+%{_usr}/local/lib/python/site-packages/TimeBase_pidl.py*
 
 %{_usr}/local/include/
 
