@@ -122,6 +122,10 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 #sed -i 's/$(OMNI_ROOT)\/idl\//$(OMNI_ROOT)/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 #sed -i 's/$(OMNI_IDL)/\/usr\/bin\/omniidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
 #sed -i "s/ -bacs_python/ -p $tempbdir\/%{name}-%{version}\/LGPL\/Tools\/extpy\/src\/ -bacs_python/g" %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/src/Makefile.python
+#sed -i "s///g" %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+
+# 
+ln -s /usr/share/idl/omniORB/orb.idl %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/
 
 # Temporary for debugging
 sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
@@ -142,15 +146,19 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{ve
 
 make
 
-#Manual creation of extidl jars
-#cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
+Manual creation of extidl py
+cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
 #ln -s  /usr/include/tao/ tao
-#idlj Monitor_Types.idl
-#idlj Monitor.idl
-#idlj NotificationServiceMC.idl
+ln -s /usr/share/idl/omniORB/orb.idl .
+#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor_Types.idl
+#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ Monitor.idl
+#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotificationServiceMC.idl
+omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ DsLogAdmin.idl
 #NotifyExt
-#idlj -i /usr/include/orbsvcs NotifyExt.idl
-#idlj NotifyMonitoringExt.idl
+omniidl -I /usr/share/idl/omniORB/COS/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyExt.idl
+#omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ NotifyMonitoringExt.idl
+omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ TimeBase.pidl
+omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ StringSeq.pidl
 
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
@@ -161,16 +169,30 @@ find -name "*.o" | xargs rm -rf
 
 %install
 # Copy {_builddir}/home/almamgr/ to %{buildroot}/home/almamgr/
-mkdir -p  %{buildroot}/home/almamgr/ACS-%{version}/
-cp -r %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
-cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/ACS-%{version}/
-mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
+#mkdir -p  %{buildroot}/home/almamgr/ACS-%{version}/
+#cp -r %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
+#cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata %{buildroot}/home/almamgr/ACS-%{version}/
+#mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/ACS-%{version}/
+#mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/ACS-%{version}/
+#mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
+
+mkdir -p %{buildroot}%{_usr}/local/share/java/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+mkdir -p %{buildroot}%{_usr}/local/include/
 
 # /etc. Hoping to have acsdata only on etc in the future
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
+ 
+#Extidl
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar  %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar  %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotificationServiceMC.jar  %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyExt.jar  %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/NotifyMonitoringExt.jar  %{buildroot}%{_usr}/local/share/java/
+
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/python/site-packages/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+
 
 # Devel folders: RPM, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almadevel/
@@ -276,8 +298,12 @@ userdel -r almadevel
 %config %{_sysconfdir}/profile.d/acscb.sh
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
-#%docdir %{_usr}/local/share/man/
-#%{_usr}/local/share/man/
+%{_usr}/local/share/java/
+
+%{_usr}/local/lib/python/site-packages/
+
+%{_usr}/local/include/
+
 
 %files devel
 # LGPL, Benchmark, RPM-legacy
