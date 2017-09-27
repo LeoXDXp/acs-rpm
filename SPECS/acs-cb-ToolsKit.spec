@@ -125,7 +125,7 @@ sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs
 #sed -i "s///g" %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 
 # Temporary for debugging
-sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
+#sed -i 's/tat xsddoc extidl vtd-xml oAW scxml_apache/extidl/g' %{_builddir}/%{name}-%{version}/LGPL/Tools/Makefile
 #acsBuild searchfile fix
 sed -i "s/\$(MAKEDIR)\/acsMakefile/$tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefile $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileCore.mk $tempbdir\/%{name}-%{version}\/LGPL\/Kit\/acs\/include\/acsMakefileDefinitions.mk  /g" %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/src/Makefile
 
@@ -143,7 +143,7 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{ve
 
 make
 
-Manual creation of extidl py
+#Manual creation of extidl py
 cd %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl
 #ln -s  /usr/include/tao/ tao
 #ln -s /usr/share/idl/omniORB/orb.idl .
