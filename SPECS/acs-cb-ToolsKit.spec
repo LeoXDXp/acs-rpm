@@ -158,6 +158,8 @@ omniidl -I /usr/include/ -I /usr/share/idl/omniORB/ -bacs_python -p %{_builddir}
 omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ TimeBase.pidl
 #omniidl -I /usr/include/ -bacs_python -p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ StringSeq.pidl
 
+#make test #make: *** No rule to make target `test'.  Stop.
+
 # Destroy Symlink in buildroot
 %{_usr}/bin/unlink %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 
@@ -167,12 +169,12 @@ find -name "*.o" | xargs rm -rf
 
 %install
 # Copy {_builddir}/home/almamgr/ to %{buildroot}/home/almamgr/
-#mkdir -p  %{buildroot}/home/almamgr/ACS-%{version}/
-#cp -r %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
-#cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata %{buildroot}/home/almamgr/ACS-%{version}/
-#mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/ACS-%{version}/
-#mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/ACS-%{version}/
-#mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
+mkdir -p  %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/home/almamgr/ACS-%{version}/ACSSW %{buildroot}/home/almamgr/ACS-%{version}/
+cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/README* %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/LICENSE* %{buildroot}/home/almamgr/ACS-%{version}/
+mv %{_builddir}/%{name}-%{version}/ACS_* %{buildroot}/home/almamgr/ACS-%{version}/
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/DsLogAdmin
@@ -183,12 +185,23 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/NotifyMonitoringExt__POA
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase__POA
-mkdir -p %{buildroot}%{_usr}/local/include/
+#mkdir -p %{buildroot}%{_usr}/local/include/
+mkdir -p %{buildroot}%{_usr}/local/bin/
 
 # /etc. Hoping to have acsdata only on etc in the future
 mkdir -p %{buildroot}%{_sysconfdir}/acscb/
 cp -r %{_builddir}/home/almamgr/ACS-%{version}/acsdata/config/ %{buildroot}%{_sysconfdir}/acscb/
- 
+# TAT bin
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tat %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tatCleanShm %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tatEnvStatus %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tatGetClock %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tatRemExec %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/tat/bin/tatTestSpawner %{buildroot}%{_usr}/local/bin/ 
+# TAT lib - can be recreated. Not packing it
+# xsddoc bin - jar
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/bin/xsddoc %{buildroot}%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/xsddoc/lib/xsddoc.jar %{buildroot}%{_usr}/local/share/java/
 #Extidl Java
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor.jar  %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/lib/Monitor_Types.jar  %{buildroot}%{_usr}/local/share/java/
@@ -208,7 +221,44 @@ cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/NotifyMonitoringExt_
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase__POA/__init__.py %{buildroot}%{_usr}/local/lib/python/site-packages/TimeBase__POA/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/extidl/ws/idl/TimeBase_pidl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
-
+# vtd-xml 
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/vtd-xml/lib/vtd-xml.jar %{buildroot}%{_usr}/local/share/java/
+# oAW
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/antlr-generator-3.0.1.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/com.google.collect_0.8.0.v201008251220.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/com.google.inject_2.0.0.v201003051000.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/com.ibm.icu_4.2.1.v20100412.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/ecj-4.4.2.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.antlr.runtime_3.0.0.v200803061811.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.codegen_2.6.0.v20100914-1218.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.common_2.6.0.v20100914-1218.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.ecore.xmi_2.5.0.v20100521-1846.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.mapping.ecore2xml_2.5.0.v20100521-1847.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.mwe2.runtime_1.0.1.v201008251113.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.mwe.core_1.0.0.v201008251122.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.emf.mwe.utils_1.0.0.v201008251122.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.equinox.common_3.6.0.v20100503.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.text_3.5.0.v20100601-1300.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.uml2.common_1.5.0.v201005031530.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.uml2.uml_3.1.1.v201008191505.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xpand_1.0.1.v201008251147.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtend_1.0.1.v201008251147.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtend.typesystem.emf_1.0.1.v201008251147.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtend.typesystem.uml2_1.0.1.v201008251147.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtend.util.stdlib_1.0.1.v201008251147.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtext_1.0.1.v201008251220.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtext.generator_1.0.1.v201008251220.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtext.util_1.0.1.v201008251220.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/oAW/lib/org.eclipse.xtext.xtend_1.0.1.v201008251220.jar %{buildroot}%{_usr}/local/share/java/
+# scxml_apache
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/commons-el-1.0.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/commons-scxml-0.9.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/jsp-api-2.0.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/myfaces-api-1.1.5.jar %{buildroot}%{_usr}/local/share/java/
+cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/servlet-api-2.4.jar %{buildroot}%{_usr}/local/share/java/
 
 # Devel folders: RPM, LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almadevel/
@@ -263,8 +313,8 @@ mkdir -p %{buildroot}%{_var}/run/acscb/
 %clean
 
 %pre
-useradd -U almaproc
-echo new2me | echo new2me | passwd --stdin almaproc
+#useradd -U almaproc
+#echo new2me | echo new2me | passwd --stdin almaproc
 
 %pre devel
 useradd -U almadevel
@@ -273,7 +323,7 @@ useradd -U almadevel
 # Permissions
 chown -R almamgr:almamgr /home/almamgr/
 chown almamgr:almamgr %{_var}/run/acscb/
-chown almaproc:almaproc /home/almaproc/introot/
+#chown almaproc:almaproc /home/almaproc/introot/
 mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
@@ -299,8 +349,8 @@ unset PYTHONINC
  
 %postun
 # Al user processes must be killed before userdel
-pkill -u almaproc
-userdel -r almaproc
+#pkill -u almaproc
+#userdel -r almaproc
 
 %postun devel
 pkill -u almadevel
@@ -319,6 +369,42 @@ userdel -r almadevel
 %{_usr}/local/share/java/NotificationServiceMC.jar
 %{_usr}/local/share/java/NotifyExt.jar
 %{_usr}/local/share/java/NotifyMonitoringExt.jar
+%{_usr}/local/share/java/xsddoc.jar
+%{_usr}/local/share/java/vtd-xml.jar
+%{_usr}/local/share/java/antlr-generator-3.0.1.jar
+%{_usr}/local/share/java/com.google.collect_0.8.0.v201008251220.jar
+%{_usr}/local/share/java/com.google.inject_2.0.0.v201003051000.jar
+%{_usr}/local/share/java/com.ibm.icu_4.2.1.v20100412.jar
+%{_usr}/local/share/java/ecj-4.4.2.jar
+%{_usr}/local/share/java/org.antlr.runtime_3.0.0.v200803061811.jar
+%{_usr}/local/share/java/org.eclipse.emf.codegen_2.6.0.v20100914-1218.jar
+%{_usr}/local/share/java/org.eclipse.emf.codegen.ecore_2.6.1.v20100914-1218.jar
+%{_usr}/local/share/java/org.eclipse.emf.common_2.6.0.v20100914-1218.jar
+%{_usr}/local/share/java/org.eclipse.emf.ecore_2.6.1.v20100914-1218.jar
+%{_usr}/local/share/java/org.eclipse.emf.ecore.xmi_2.5.0.v20100521-1846.jar
+%{_usr}/local/share/java/org.eclipse.emf.mapping.ecore2xml_2.5.0.v20100521-1847.jar
+%{_usr}/local/share/java/org.eclipse.emf.mwe2.runtime_1.0.1.v201008251113.jar
+%{_usr}/local/share/java/org.eclipse.emf.mwe.core_1.0.0.v201008251122.jar
+%{_usr}/local/share/java/org.eclipse.emf.mwe.utils_1.0.0.v201008251122.jar
+%{_usr}/local/share/java/org.eclipse.equinox.common_3.6.0.v20100503.jar
+%{_usr}/local/share/java/org.eclipse.text_3.5.0.v20100601-1300.jar
+%{_usr}/local/share/java/org.eclipse.uml2.common_1.5.0.v201005031530.jar
+%{_usr}/local/share/java/org.eclipse.uml2.uml_3.1.1.v201008191505.jar
+%{_usr}/local/share/java/org.eclipse.uml2.uml.resources_3.1.1.v201008191505.jar
+%{_usr}/local/share/java/org.eclipse.xpand_1.0.1.v201008251147.jar
+%{_usr}/local/share/java/org.eclipse.xtend_1.0.1.v201008251147.jar
+%{_usr}/local/share/java/org.eclipse.xtend.typesystem.emf_1.0.1.v201008251147.jar
+%{_usr}/local/share/java/org.eclipse.xtend.typesystem.uml2_1.0.1.v201008251147.jar
+%{_usr}/local/share/java/org.eclipse.xtend.util.stdlib_1.0.1.v201008251147.jar
+%{_usr}/local/share/java/org.eclipse.xtext_1.0.1.v201008251220.jar
+%{_usr}/local/share/java/org.eclipse.xtext.generator_1.0.1.v201008251220.jar
+%{_usr}/local/share/java/org.eclipse.xtext.util_1.0.1.v201008251220.jar
+%{_usr}/local/share/java/org.eclipse.xtext.xtend_1.0.1.v201008251220.jar
+%{_usr}/local/share/java/commons-el-1.0.jar
+%{_usr}/local/share/java/commons-scxml-0.9.jar
+%{_usr}/local/share/java/jsp-api-2.0.jar
+%{_usr}/local/share/java/myfaces-api-1.1.5.jar
+%{_usr}/local/share/java/servlet-api-2.4.jar
 
 %{_usr}/local/lib/python/site-packages/DsLogAdmin/
 %{_usr}/local/lib/python/site-packages/DsLogAdmin__POA/
@@ -333,8 +419,13 @@ userdel -r almadevel
 %{_usr}/local/lib/python/site-packages/TimeBase__POA/
 %{_usr}/local/lib/python/site-packages/TimeBase_pidl.py*
 
-%{_usr}/local/include/
-
+%{_usr}/local/bin/tat
+%{_usr}/local/bin/tatCleanShm
+%{_usr}/local/bin/tatEnvStatus
+%{_usr}/local/bin/tatGetClock
+%{_usr}/local/bin/tatRemExec
+%{_usr}/local/bin/tatTestSpawner
+%{_usr}/local/bin/xsddoc
 
 %files devel
 # LGPL, Benchmark, RPM-legacy
