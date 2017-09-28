@@ -29,8 +29,9 @@ ln -s  %{_usr}/local/%{_lib}/libacscommonStubs.so  %{_builddir}/%{name}-%{versio
 #ln -s  %{_usr}/local/%{_lib}/libbaciStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/lib/
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
+source %{_sysconfdir}/profile.d/acscb-toolsKit.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}

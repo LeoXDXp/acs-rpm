@@ -46,7 +46,7 @@ cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/
 cp -f %{SOURCE3} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/tao/TimeBase.jar
 
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/ace-devel.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
 source %{_sysconfdir}/profile.d/jacorb.sh

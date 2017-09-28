@@ -132,7 +132,7 @@ echo "ACS_TMP=$ALMASW_ROOTDIR/%{name}-%{version}/tmp/$HOSTNAME" >> %{buildroot}%
 echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "LD_LIBRARY_PATH=$ALMASW_ROOTDIR/%{name}-%{version}/idl:/usr/lib64/:$ALMASW_ROOTDIR/%{name}-%{version}/tcltk/lib" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
-echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
+echo "TCLTK_ROOT=$ALMASW_ROOTDIR/$ALMASW_RELEASE/tcltk" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "PYTHONPATH=/usr/lib64/python2.7/site-packages:/opt/rh/rh-java-common/root/usr/lib/python2.7/site-packages/:%{_usr}/local/lib/python/site-packages/:$ALMASW_ROOTDIR/%{name}-%{version}/ACSSW/lib/python/site-packages/" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "PYTHON_ROOT=$ALMASW_ROOTDIR/%{name}-%{version}/Python" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo 'PYTHONINC=/usr/include/python2.7 ' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
@@ -148,7 +148,7 @@ echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
-echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-tcltk.sh
+echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export PYTHONPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh

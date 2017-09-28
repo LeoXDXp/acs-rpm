@@ -24,8 +24,9 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 # Env Vars for installing. 
 source %{_sysconfdir}/profile.d/acscb.sh
+source %{_sysconfdir}/profile.d/acscb-toolsKit.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma

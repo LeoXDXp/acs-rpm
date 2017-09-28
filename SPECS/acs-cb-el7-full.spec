@@ -61,7 +61,7 @@ source %{_sysconfdir}/profile.d/ace-devel.sh # overrides ACE_ROOT
 source %{_sysconfdir}/profile.d/apache-maven.sh
 source %{_sysconfdir}/profile.d/mpc.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
-source %{_sysconfdir}/profile.d/acscb-tcltk.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh # PythonPath, PythonInc, PythonRoot
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 
