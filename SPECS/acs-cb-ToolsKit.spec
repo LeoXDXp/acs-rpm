@@ -9,6 +9,7 @@ URL:		http://acs-community.github.io/
 Source0:	%{name}-%{version}.tar.gz 
 # Modified Makefile to compile only Tools, Kit and Benchmark
 Source1:	Makefile-TKB
+AutoReq:	no
 
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
 BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version} ACS-eclipse-plugins >= %{version}
