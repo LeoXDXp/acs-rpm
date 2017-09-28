@@ -321,7 +321,10 @@ mkdir -p %{buildroot}%{_var}/run/acscb/
 #echo new2me | echo new2me | passwd --stdin almaproc
 
 %pre devel
-useradd -U almadevel
+
+if ! id almadevel >/dev/null 2>&1; then
+        useradd -U almadevel
+fi
 
 %post
 # Permissions
