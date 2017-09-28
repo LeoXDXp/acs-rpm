@@ -1,5 +1,5 @@
 Name:		ACS-xmljbind
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	ACS XML Java Interface
 License:	LGPL
