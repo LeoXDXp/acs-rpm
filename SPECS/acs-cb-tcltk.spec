@@ -51,12 +51,17 @@ echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.
 echo "PATH=$PATH:%{_usr}/local/share/tcltk/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 
-#%post
+%post
 # /include to usr/local/include. Not yet, as no packages use tcltk headers to compile
+ln -s /usr/local/share/tcltk/bin/tcl /usr/local/bin/seqSh
+ln -s /usr/bin/wish /usr/local/bin/seqWish
+
 %preun
 export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/lib\///g' )
 export PATH=$( echo $PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/bin\///g' )
 unset TCLTK_ROOT
+unlink /usr/local/bin/seqSh
+unlink /usr/local/bin/seqWish
 
 %files
 %attr(755,-,-) %{_usr}/local/share/tcltk/
