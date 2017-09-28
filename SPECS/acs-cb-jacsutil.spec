@@ -98,6 +98,7 @@ unlink %{_builddir}/alma
 %{_usr}/local/bin/acsJarSignInfo
 %{_usr}/local/bin/acsJarUnsign
 %{_usr}/local/bin/acsJavaHelp
+%{_usr}/local/bin/doAllTests
 
 %changelog
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
