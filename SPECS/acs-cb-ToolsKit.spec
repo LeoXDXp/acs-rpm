@@ -44,6 +44,7 @@ RPM Installer of ACS-CB Tools and Kit %{version}. Installs ACS CB Tools and Kit 
 %package devel
 Summary: ACS CB Benchmark files for {?dist} 
 License: LGPL
+AutoReq: no
 #Requires: ACS-ExtProds >= %{version}
 
 %description devel
