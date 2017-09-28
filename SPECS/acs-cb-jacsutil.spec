@@ -34,6 +34,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export CLASSPATH="/usr/share/java/apache-commons-lang.jar:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-2.b11.el7_3.x86_64/jre/lib/rt.jar:/usr/share/java/junit.jar:/home/almadevel/LGPL/Tools/hibernate/lib/hibernate-core-4.3.11.Final.jar:%{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar"
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
