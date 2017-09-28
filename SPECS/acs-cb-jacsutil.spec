@@ -80,6 +80,9 @@ mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/lib/*.jar %{buil
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/javahelp-2.0.05.jar %{buildroot}/%{_usr}/local/share/java/
 
+mkdir -p %{buildroot}/%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/bin/* %{buildroot}/%{_usr}/local/bin/
+
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
@@ -88,6 +91,13 @@ unlink %{_builddir}/alma
 %{_usr}/local/share/java/jACSUtilTest.jar
 %{_usr}/local/share/java/jhall-2.0_05.jar
 %{_usr}/local/share/java/javahelp-2.0.05.jar
+
+%{_usr}/local/bin/acsExtractJavaSources
+%{_usr}/local/bin/acsJarPackageInfo
+%{_usr}/local/bin/acsJarsearch
+%{_usr}/local/bin/acsJarSignInfo
+%{_usr}/local/bin/acsJarUnsign
+%{_usr}/local/bin/acsJavaHelp
 
 %changelog
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
