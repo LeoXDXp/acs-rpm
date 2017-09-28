@@ -83,7 +83,7 @@ unlink %{_builddir}/alma
 %{_usr}/local/share/java/javahelp-2.0.05.jar
 
 %changelog
-* Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
-Initial Packaging
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Updating version
+* Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
+Initial Packaging
