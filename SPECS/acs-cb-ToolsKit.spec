@@ -299,6 +299,8 @@ echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.s
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
+mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb-toolsKit.sh
+
 #mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb2.sh
 #Symlink Libs in include. Very useful when building, because it's in gcc's default path
 #mkdir -p %{buildroot}%{_usr}/local/include/
@@ -362,7 +364,7 @@ userdel -r almadevel
 %config %{_sysconfdir}/acscb/
 %config %{_sysconfdir}/profile.d/acscb-gnu.sh
 %config %{_sysconfdir}/profile.d/acscb-python.sh
-%config %{_sysconfdir}/profile.d/acscb.sh
+%config %{_sysconfdir}/profile.d/acscb-toolsKit.sh
 %attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/
 %attr(0755,almamgr,almamgr) %{_var}/run/acscb/
 %{_usr}/local/share/java/Monitor.jar
