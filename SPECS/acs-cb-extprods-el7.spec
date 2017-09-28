@@ -155,11 +155,16 @@ enabled=0
 " > /etc/yum.repos.d/ace-tao.repo
 
 #Local users
-useradd -u 550 -U almamgr
-/usr/bin/ln -s /home/almamgr/ /alma
+
+if ! id almamgr >/dev/null 2>&1; then
+        useradd -u 550 -U almamgr
+	usr/bin/ln -s /home/almamgr/ /alma
+fi
 
 %pre devel
-useradd -U almadevel
+if ! id almadevel >/dev/null 2>&1; then
+        useradd -U almadevel
+fi
 
 %post
 # Permissions
