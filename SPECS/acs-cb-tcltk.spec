@@ -1,6 +1,6 @@
 Name:		tcltk-ACS
 Version:	8.5.15.2017.06
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Tcl with 1 ACS patch, and other packages
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
@@ -68,6 +68,7 @@ unlink /usr/local/bin/seqWish
 %{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %changelog
+* Thu Sep 28 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 8.5.15.2017.06-2
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 8.5.15.2017.06-1
 Updating version
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 1.0-1
