@@ -49,7 +49,7 @@ source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/ace-devel.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
-source %{_sysconfdir}/profile.d/jacorb.sh
+source %{_sysconfdir}/profile.d/jacorb-acs.sh
 source %{_sysconfdir}/profile.d/tao-devel.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma

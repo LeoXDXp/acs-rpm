@@ -37,7 +37,7 @@ source %{_sysconfdir}/profile.d/acscb-toolsKit.sh
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
-#source %{_sysconfdir}/profile.d/jacorb.sh
+#source %{_sysconfdir}/profile.d/jacorb-acs.sh
 # Required for compilation
 mkdir -p  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/
 ln -s /usr/local/share/java/acserr.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/

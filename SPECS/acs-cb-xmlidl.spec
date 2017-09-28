@@ -36,7 +36,7 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 #source %{_sysconfdir}/profile.d/tcltk-acs.sh
 #source %{_sysconfdir}/profile.d/ace-devel.sh
 #source %{_sysconfdir}/profile.d/acscb-python.sh
-#source %{_sysconfdir}/profile.d/jacorb.sh
+#source %{_sysconfdir}/profile.d/jacorb-acs.sh
 #source %{_sysconfdir}/profile.d/tao-devel.sh
 
 # standard.
