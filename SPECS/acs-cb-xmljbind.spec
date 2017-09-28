@@ -37,6 +37,12 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export CLASSPATH=":/usr/share/java/ant.jar:/usr/local/share/java/jACSUtil.jar:/usr/local/share/java/castor-ACS.jar"
 #export CLASSPATH=":/usr/share/java/ant.jar:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-xml-schema.jar:/usr/share/java/castor/castor-codegen.jar:/usr/share/java/castor/castor-core.jar:%{_usr}/local/share/java/jACSUtil.jar:"
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/"
+
+# Remove acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
