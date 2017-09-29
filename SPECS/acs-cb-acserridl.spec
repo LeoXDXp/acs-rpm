@@ -45,9 +45,13 @@ export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
 
 # Remove acsMakeJavaClasspath
-#echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
-#echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
-#chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+
+# omniorb acs_python lookup
+#sed -i 's/-bacs_python/-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src\/ -bacs_python /g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+awk '{gsub(/-bacs_python/,"-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ -bacs_python")}' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
