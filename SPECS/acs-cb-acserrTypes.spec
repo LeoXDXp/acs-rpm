@@ -6,8 +6,7 @@ License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserrTypes
-BuildRequires:	ACS-acserr >= %{version} ACS-acserridl >= %{version}
-#Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-acserr >= %{version} ACS-acserridl >= %{version} ACS-Tools-Kit-Benchmark >= %{version}
 
 %description
 ACS Error Types
