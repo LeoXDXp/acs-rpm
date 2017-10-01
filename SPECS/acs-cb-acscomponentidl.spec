@@ -30,6 +30,7 @@ mkdir -p  %{_builddir}/home/almamgr
 ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
