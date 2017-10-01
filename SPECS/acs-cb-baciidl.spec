@@ -1,5 +1,5 @@
 Name:		ACS-baciidl
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	ACS BACI IDL Declarations
 License:	LGPL
