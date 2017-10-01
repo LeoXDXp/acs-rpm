@@ -1,5 +1,5 @@
 Name:       ACS-loggingidl
-Version:    2017.02
+Version:    2017.06
 Release:    1%{?dist}
 Summary:    ACS Logging IDL Declarations
 License:    LGPL
@@ -61,6 +61,13 @@ export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
+
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/"
+
+# Remove acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
 cd %{_builddir}/%{name}-%{version}/
 
