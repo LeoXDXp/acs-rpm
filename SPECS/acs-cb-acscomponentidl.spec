@@ -43,7 +43,7 @@ export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
-export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/"
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/:%{_usr}/local/share/JacORB/bin/"
 
 # Remove acsMakeJavaClasspath
 echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
