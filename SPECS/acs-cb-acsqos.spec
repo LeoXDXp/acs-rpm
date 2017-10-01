@@ -1,12 +1,14 @@
 Name:       ACS-acsqos
-Version:    2017.02
+Version:    2017.06
 Release:    1%{?dist}
 Summary:    ACS QOS Declarations
 License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-acsqos
-BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version}
+#BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version}
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version} ACS-acserridl >= %{version}
+#Requires:       ACS-Tools-Kit-Benchmark >= %{version}
 
 
 %description
