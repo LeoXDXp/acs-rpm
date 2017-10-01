@@ -75,6 +75,7 @@ sed -i 's|-bacs_python|-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ 
 # DsLogAdminC needed
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/include/
 ln -s /usr/include/orbsvcs/DsLogAdminC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/include/
+ln -s /usr/include/orbsvcs/DsLogAdminC.inl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/include/
 
 cd %{_builddir}/%{name}-%{version}/
 
