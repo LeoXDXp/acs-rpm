@@ -69,6 +69,13 @@ echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/ac
 echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
+# omniorb acs_python lookup
+sed -i 's|-bacs_python|-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ -bacs_python |g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+
+# DsLogAdminC needed
+mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/include/
+ln -s /usr/include/orbsvcs/DsLogAdminC.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/include/
+
 cd %{_builddir}/%{name}-%{version}/
 
 # mkdir of ACSSW
