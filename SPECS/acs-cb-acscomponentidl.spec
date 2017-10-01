@@ -32,6 +32,7 @@ ln -s %{_builddir}/home/almamgr %{_builddir}/alma
 source %{_sysconfdir}/profile.d/acscb-gnu.sh
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/acscb-python.sh
+source %{_sysconfdir}/profile.d/jacorb-acs.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
@@ -44,8 +45,8 @@ export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
 export MAKE_PARS=" -j 2 -l 2 "
 
-export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/:%{_usr}/local/share/JacORB/bin/"
-export export PYTHONPATH=$PYTHONPATH:%{_usr}/share/idl/omniORB/
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/"
+export PYTHONPATH=$PYTHONPATH:%{_usr}/share/idl/omniORB/
 
 # Remove acsMakeJavaClasspath
 echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
