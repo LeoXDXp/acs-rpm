@@ -10,7 +10,6 @@ Source1:    Makefile-acsqos
 BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version} ACS-acserridl >= %{version}
 #Requires:       ACS-Tools-Kit-Benchmark >= %{version}
 
-
 %description
 ACS QOS.
 
