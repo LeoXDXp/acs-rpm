@@ -34,6 +34,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export CLASSPATH="$CLASSPATH:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar:/usr/share/java/jakarta-oro.jar"
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
