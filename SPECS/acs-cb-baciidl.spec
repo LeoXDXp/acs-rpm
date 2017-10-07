@@ -133,6 +133,15 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export CLASSPATH="/usr/local/share/java/acscomponent.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeProperty.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/baciErrTypeDevIO.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/acserrj.jar:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/acscomponent.jar:/usr/local/share/java/acscommon.jar"
 
+# Remove acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+
+# omniorb acs_python lookup
+sed -i 's|-bacs_python|-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ -bacs_python |g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+
+
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
