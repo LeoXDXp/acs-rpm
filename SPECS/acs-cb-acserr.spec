@@ -144,6 +144,15 @@ export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
 export CLASSPATH="$CLASSPATH:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-core.jar:/usr/local/share/java/commontypes.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/jACSUtil.jar:"
 
+export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
+
+# Remove acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+# omniorb acs_python lookup
+sed -i 's|-bacs_python|-p %{_builddir}/%{name}-%{version}/LGPL/Tools/extpy/src/ -bacs_python |g' %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefileDefinitions.mk
+
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
