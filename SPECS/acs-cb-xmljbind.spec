@@ -45,7 +45,7 @@ echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src
 chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 
 #Javac: The default classpath (unless there is a CLASSPATH environment variable) is the current directory 
-ln -s %{_usr}/local/share/java/castor-ACS.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/src/alma/tools/entitybuilder/
+#ln -s %{_usr}/local/share/java/castor-ACS.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/src/alma/tools/entitybuilder/
 
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
