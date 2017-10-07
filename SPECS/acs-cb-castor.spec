@@ -35,7 +35,10 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export CLASSPATH="$CLASSPATH:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar:/usr/share/java/jakarta-oro.jar"
 export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
-
+# Remove acsMakeJavaClasspath
+echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+echo 'print $ENV{CLASSPATH}' >> %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
+chmod +x %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
 # Compilation specific env vars
 export MAKE_NOSTATIC=yes
 export MAKE_NOIFR_CHECK=on
