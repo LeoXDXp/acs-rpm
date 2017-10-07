@@ -7,6 +7,7 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-castor
 Source2:	MakefileTools-castor
+BuildRequires:	regexp
 #BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 #Requires:	ACS-Tools-Kit-Benchmark >= %{version}
 
@@ -33,7 +34,7 @@ source %{_sysconfdir}/profile.d/ant.sh
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-export CLASSPATH="$CLASSPATH:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar:/usr/share/java/jakarta-oro.jar"
+export CLASSPATH="$CLASSPATH:/usr/share/java/xerces-j2.jar:/usr/share/java/apache-commons-logging.jar:/usr/share/java/jakarta-oro.jar:/usr/share/java/regexp.jar"
 export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
 # Remove acsMakeJavaClasspath
 echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
