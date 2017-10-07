@@ -82,5 +82,5 @@ unlink %{_builddir}/alma
 %files
 
 %changelog
-* Sat May 23 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
+* Sat May 20 2017 Maximiliano Osorio <mosorio@inf.utfsm.cl> - 0.1-1
 Initial Packaging
