@@ -103,7 +103,7 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 %{_usr}/local/%{_lib}/liblogging.a
 
 %changelog
-* Wed May 24 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
-Initial Packaging
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
 Updating to 2017.06
+* Wed May 24 2017 Marcelo Jara <mijara@alumnos.inf.utfsm.cl> - 0.1-1
+Initial Packaging
