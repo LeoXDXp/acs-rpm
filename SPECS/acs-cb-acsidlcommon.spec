@@ -1,5 +1,5 @@
 Name:		ACS-acsidlcommon
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	ACS Common IDL Declarations
 License:	LGPL
