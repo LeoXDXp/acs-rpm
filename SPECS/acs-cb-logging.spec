@@ -71,7 +71,9 @@ cd %{_builddir}/%{name}-%{version}/
 
 # mkdir of ACSSW
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
-
+# Symlink of Python's compilelall for hardcoded path in make files
+mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
+ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
