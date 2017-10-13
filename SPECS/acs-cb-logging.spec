@@ -42,6 +42,8 @@ ln -s /usr/local/%{_lib}/libacscommonStubs.so %{_builddir}/%{name}-%{version}/LG
 ln -s %{_usr}/include/orbsvcs/DsLogAdminC.h  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 ln -s %{_usr}/include/orbsvcs/DsLogAdminS.h  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 ln -s %{_usr}/include/orbsvcs/DsLogAdminC.inl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+# Compilation cant file libbaselogging.a
+sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist.";/g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
