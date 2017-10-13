@@ -104,7 +104,8 @@ ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/log
 ln -s %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/loggingCacheLogger.h %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/include/ 
 # liblogging.so
 #ln -s %{_usr}/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
-cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+ln -s %{_usr}/local/%{_lib}/liblogging.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+#cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
 # 
 ln -s /usr/%{_lib}/libloki.so.0 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libloki.so
 
