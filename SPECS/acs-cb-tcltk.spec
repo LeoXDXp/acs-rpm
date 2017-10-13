@@ -44,7 +44,7 @@ find lib/ -name *.so | xargs chmod 755 $1
 cp -rf %{_builddir}/home/almamgr/%{name}-%{version}/tcltk/ %{buildroot}/%{_usr}/local/share/
 
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
-echo "TCLTK_ROOT=/home/acs-tcltk/tcltk/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
+echo "TCLTK_ROOT=%{_usr}/local/share/tcltk/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%{_usr}/local/share/tcltk/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
