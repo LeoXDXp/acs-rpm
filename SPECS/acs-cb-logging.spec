@@ -51,7 +51,7 @@ export ALMASW_RELEASE=ACS-%{version}
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
-
+export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export CPATH="%{_builddir}/%{name}-%{version}/LGPL/Tools/loki/ws/include"
 export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
 
