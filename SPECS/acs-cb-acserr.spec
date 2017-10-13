@@ -138,6 +138,7 @@ mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/pytho
 pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
 mv %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/
 
+source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/jacorb-acs.sh
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
