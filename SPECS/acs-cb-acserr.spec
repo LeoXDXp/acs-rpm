@@ -144,8 +144,12 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/config/defaultCDB"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:%{_usr}/local/%{_lib}/"
 export CLASSPATH="$CLASSPATH:/usr/share/java/castor/castor-xml.jar:/usr/share/java/castor/castor-core.jar:/usr/local/share/java/commontypes.jar:/usr/local/share/java/acserr.jar:/usr/local/share/java/jACSUtil.jar:"
-
+export PYTHON_ROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/Python"
 export PATH="$PATH:%{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src"
+
+# Symlink of Python's compilelall for hardcoded path in make files
+mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
+ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 
 # Remove acsMakeJavaClasspath
 echo '#!/usr/bin/env perl' > %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/src/acsMakeJavaClasspath
