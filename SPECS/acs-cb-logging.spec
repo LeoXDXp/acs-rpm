@@ -38,9 +38,11 @@ ln -s /usr/%{_lib}/liblog4cpp.so.5 %{_builddir}/%{name}-%{version}/LGPL/CommonSo
 ln -s /usr/local/%{_lib}/liblogging_idlStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
 # acsidlcommon
 ln -s /usr/local/%{_lib}/libacscommonStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
-#DsLogAdmin{C|S}.h not located by logging_idlC.h
+#DsLogAdmin{C|S}.h, DsLogAdminC.inl not located by logging_idlC.h
 ln -s %{_usr}/include/orbsvcs/DsLogAdminC.h  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
 ln -s %{_usr}/include/orbsvcs/DsLogAdminS.h  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+ln -s %{_usr}/include/orbsvcs/DsLogAdminC.inl  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/include/
+
 
 export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
