@@ -255,6 +255,10 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/ACSErrTy
 
 # acserrGen Scripts not installed by ACS-Tools
 mkdir -p %{buildroot}%{_usr}/local/bin
+
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCheckXML %{buildroot}%{_usr}/local/bin/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenCpp %{buildroot}%{_usr}/local/bin/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenIDL %{buildroot}%{_usr}/local/bin/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava %{buildroot}%{_usr}/local/bin/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
 
@@ -351,6 +355,9 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/%{_lib}/libacserrOldTestStubs.so
 %{_usr}/local/%{_lib}/libacserrTestStubs.so
 
+%attr(645,-,-) %{_usr}/local/bin/acserrGenCheckXML
+%attr(645,-,-) %{_usr}/local/bin/acserrGenCpp
+%attr(645,-,-) %{_usr}/local/bin/acserrGenIDL
 %attr(645,-,-) %{_usr}/local/bin/acserrGenJava
 %attr(645,-,-) %{_usr}/local/bin/acserrGenPython
 
