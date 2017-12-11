@@ -32,7 +32,7 @@ export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
 export OSYSTEM="Linux"
 export JACORB_HOME="$ALMASW_ROOTDIR/$ALMASW_RELEASE/JacORB"
 export CLASSPATH="$CLASSPATH:%{_usr}/share/java/plexus/classworlds.jar"
-export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
+export PATH=$PATH:%{_usr}/bin/:%{_usr}/local/bin:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
 export JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk"
 #export M2_HOME="%{_usr}/share/apache-maven"
 unset M2_HOME

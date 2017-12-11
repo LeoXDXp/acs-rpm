@@ -48,7 +48,7 @@ echo "TCLTK_ROOT=%{_usr}/local/share/tcltk/" >> %{buildroot}%{_sysconfdir}/profi
 echo "export TCLTK_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%{_usr}/local/share/tcltk/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
-echo "PATH=$PATH:%{_usr}/local/share/tcltk/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
+echo "PATH=$PATH:%{_usr}/bin/:%{_usr}/local/bin:%{_usr}/local/share/tcltk/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %post

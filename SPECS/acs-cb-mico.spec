@@ -48,7 +48,7 @@ echo "MICO_HOME=%{_usr}/local/share/mico" >> %{buildroot}%{_sysconfdir}/profile.
 echo "export MICO_HOME" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:%{_usr}/local/share/mico/lib/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
-echo "PATH=$PATH:%{_usr}/local/share/mico/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
+echo "PATH=$PATH:%{_usr}/bin/:%{_usr}/local/bin:%{_usr}/local/share/mico/bin/" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/mico-acs.sh
 
 %preun
