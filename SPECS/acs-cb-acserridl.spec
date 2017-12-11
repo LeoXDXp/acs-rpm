@@ -88,6 +88,7 @@ mkdir -p %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.h %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.cpp %{buildroot}%{_usr}/local/include/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/object/*.inl %{buildroot}%{_usr}/local/include/
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserridl/ws/idl/acserr.idl %{buildroot}%{_usr}/local/include/
 
 # Clean
 cd %{buildroot}%{_usr}/local/lib/python/site-packages/
@@ -109,6 +110,7 @@ unlink %{_builddir}/alma
 %{_usr}/local/include/acserrC.inl
 %{_usr}/local/include/acserrS.cpp
 %{_usr}/local/include/acserrS.h
+%{_usr}/local/include/acserr.idl 
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
