@@ -64,7 +64,7 @@ export ALMASW_ROOTDIR=%{_builddir}/alma
 export ALMASW_RELEASE=ACS-%{version}
 export ACSDATA="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata"
 export ACSROOT="$ALMASW_ROOTDIR/$ALMASW_RELEASE/ACSSW"
-export ACS_CDB="$ACSDATA/config/defaultCDB"
+export ACS_CDB="$ALMASW_ROOTDIR/$ALMASW_RELEASE/acsdata/config/defaultCDB"
 export ACS_INSTANCE="0"
 export ACS_STARTUP_TIMEOUT_MULTIPLIER="2"
 # hostname has to be short, or can be fqdn
