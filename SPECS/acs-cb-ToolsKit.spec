@@ -339,7 +339,7 @@ chown almamgr:almamgr %{_var}/run/acscb/
 #chown almaproc:almaproc /home/almaproc/introot/
 mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
-ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
+ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
 
 echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{_sysconfdir}/profile.d/acscb.sh
