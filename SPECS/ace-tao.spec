@@ -862,6 +862,7 @@ EOF
 
 # Include platform include
 cat >> $ACE_ROOT/ace/config.h << EOF
+#define ACE_GCC_HAS_TEMPLATE_INSTANTIATION_VISIBILITY_ATTRS 1
 #include "ace/config-linux.h"
 EOF
 
@@ -873,9 +874,21 @@ CFLAGS += %optflags
 EOF
 %endif
 
+%iifarch x86_64 ia64 ppc64 s390x ppc64
 cat >> $ACE_ROOT/include/makeinclude/platform_macros.GNU <<EOF
 ssl = 1
 EOF
+%endif
+
+%ifarch %{arm}
+cat >> $ACE_ROOT/include/makeinclude/platform_macros.GNU <<EOF
+ssl = 0
+no_hidden_visibility = 1
+zlib = 1
+static_libs = 1
+shared_libs = 1
+EOF
+%endif
 
 %if %{?_with_inline:1}%{!?_with_inline:0}
 %define inline -D__ACE_INLINE__ -U__ACE_NO_INLINE__
