@@ -277,7 +277,7 @@ echo "ACSROOT=$ALMASW_ROOTDIR/ACS-%{version}/ACSSW" >> %{buildroot}%{_sysconfdir
 echo "ACS_CDB=$ALMASW_ROOTDIR/ACS-%{version}/config/defaultCDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
 echo "ACS_INSTANCE=0" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "ACS_STARTUP_TIMEOUT_MULTIPLIER=2" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+#echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo 'IDL_PATH="-I$ACSROOT/idl -I/usr/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs -I$TAO_ROOT/orbsvcs -I$TAO_ROOT -I/usr/include/orbsvcs -I/usr/include/tao"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ALMASW_ROOTDIR/ACS-%{version}/idl:/usr/lib64/:" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "GNU_ROOT=%{_usr}" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -292,7 +292,7 @@ echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACS_CDB" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh 
 echo "export ACS_INSTANCE" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACS_STARTUP_TIMEOUT_MULTIPLIER" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+#echo "export ACS_TMP" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export IDL_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export LD_LIBRARY_PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export GNU_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-gnu.sh
@@ -336,6 +336,9 @@ mkdir -p /home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
+
+echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{_sysconfdir}/profile.d/acscb.sh
+echo "export ACS_TMP" >> %{_sysconfdir}/profile.d/acscb.sh
 
 %post devel
 # Re-enabling the syntax error for testing
