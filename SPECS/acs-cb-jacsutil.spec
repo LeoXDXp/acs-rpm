@@ -86,6 +86,12 @@ cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/jacsutil/bin/* %{buildroo
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
+%post
+ln -s %{_usr}/local/share/java/jACSUtil.jar ${ACSROOT}/lib/
+
+%preun
+unlink ${ACSROOT}/lib/jACSUtil.jar
+
 %files
 %{_usr}/local/share/java/jACSUtil.jar
 %{_usr}/local/share/java/jACSUtilTest.jar
