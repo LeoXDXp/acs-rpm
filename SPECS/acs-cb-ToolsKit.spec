@@ -287,6 +287,8 @@ echo 'PYTHONINC=/usr/include/python2.7' >> %{buildroot}%{_sysconfdir}/profile.d/
 # $GNU_ROOT/bin is already part of the path
 echo 'PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo 'OSYSTEM=LINUX'  >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo 'CYGWIN_VER="CYGWIN_NT-5.1"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -302,6 +304,7 @@ echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.s
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo 'export OSYSTEM'  >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
+echo "export CYGWIN_VER" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb-toolsKit.sh
 
