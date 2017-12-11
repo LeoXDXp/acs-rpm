@@ -286,7 +286,7 @@ echo "PYTHON_ROOT=$ALMASW_ROOTDIR/ACS-%{version}/Python" >> %{buildroot}%{_sysco
 echo 'PYTHONINC=/usr/include/python2.7' >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 # $GNU_ROOT/bin is already part of the path
 echo 'PATH="$PATH:/alma/ACS-%{version}/ACSSW/bin"' >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo 'OSYSTEM=LINUX'
+echo 'OSYSTEM=LINUX'  >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 echo "export ACSDATA" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 echo "export ACSROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
@@ -301,7 +301,7 @@ echo "export PYTHONPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHON_ROOT" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PYTHONINC" >> %{buildroot}%{_sysconfdir}/profile.d/acscb-python.sh
 echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
-echo 'export OSYSTEM'
+echo 'export OSYSTEM'  >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/profile.d/acscb-toolsKit.sh
 
