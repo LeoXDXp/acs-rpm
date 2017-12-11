@@ -32,11 +32,12 @@ BuildRequires: procmail tkinter
 
 # In epel: log4cpp xemacs xemacs-packages-extra sqlite2-devel
 # No existen en centos 7: perl-ExtUtils MakeMaker libncurses-devel time libpng10-devel expat21
-Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds >= %{version} tkinter ACS-eclipse-plugins >= %{version}
+Requires: procmail python-lockfile net-tools xterm man ACS-ExtProds >= %{version} tkinter ACS-eclipse-plugins >= %{version} ACS-ExtJars >= %{version}
 Requires: apache-commons-lang junit
 # X Packages: nautilus-open-terminal not yet in EL7
 Requires: gnome-classic-session gnome-terminal control-center liberation-mono-fonts setroubleshoot-server glx-utils gdm openbox mesa-dri-drivers plymouth-system-theme spice-vdagent xorg-x11-drivers xorg-x11-server-Xorg xorg-x11-utils xorg-x11-xauth xorg-x11-xinit xvattr xorg-x11-drv-keyboard xorg-x11-drv-mouse
 Requires: gcc-c++ java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo
+Requires: log4cpp-ACS castor-ACS gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib shunit2 hibernate3 xerces-c xerces-c-devel xerces-j2
 
 %description
 RPM Installer of ACS-CB Tools and Kit %{version}. Installs ACS CB Tools and Kit modules in /home/almamgr/ACS-%{version}/ACSSW/, leaving env vars in profile.d and commands symlinked to /usr/local/bin avoiding sourcing of .bash_profile.acs file. It also creates acsdata.
