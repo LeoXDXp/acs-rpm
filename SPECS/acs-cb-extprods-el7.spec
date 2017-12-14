@@ -141,16 +141,6 @@ mv %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS %{buildroot}/home/almadevel/
 # Delete old Eclipse folder
 rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 
-# TAO symlinks
-mkdir -p /usr/share/ace/TAO/utils/nslist/
-mkdir -p /usr/share/ace/TAO/orbsvcs/Notify_Service
-
-ln -s %{_usr}/sbin/tao-cosnaming %{_usr}/sbin/tao_cosnaming
-ln -s %{_usr}/sbin/tao-cosnotification %{_usr}/share/ace/TAO/orbsvcs/Notify_Service/tao_cosnotification
-ln -s %{_usr}/bin/tao_nsadd %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
-ln -s %{_usr}/bin/tao_ifr %{_usr}/share/ace/bin/tao_ifr
-
-
 %clean
 
 %pre
@@ -241,12 +231,27 @@ pip install gcovr --no-dependencies
 python -c "help('modules')"
 # Updating SecurityReplaceable.idl with 2008a Changelog of TAO
 sed -i 's/IOP::TaggedComponentList create_ior_components/IOP::TaggedComponentSeq create_ior_components/g' /usr/include/orbsvcs/SecurityReplaceable.idl
+
+# TAO symlinks
+mkdir -p /usr/share/ace/TAO/utils/nslist/
+mkdir -p /usr/share/ace/TAO/orbsvcs/Notify_Service
+
+ln -s %{_usr}/sbin/tao-cosnaming %{_usr}/sbin/tao_cosnaming
+ln -s %{_usr}/sbin/tao-cosnotification %{_usr}/share/ace/TAO/orbsvcs/Notify_Service/tao_cosnotification
+ln -s %{_usr}/bin/tao_nsadd %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
+ln -s %{_usr}/bin/tao_ifr %{_usr}/share/ace/bin/tao_ifr
+
 %preun
 # Remove symlinks 
 # Pyxbgen symlink to /usr/local/bin
 unlink %{_usr}/local/bin/pyxbgen
 # Symlink of tao_idl because hardcoded path
 unlink %{_usr}/share/tao/TAO_IDL/tao_idl
+
+unlink %{_usr}/sbin/tao_cosnaming
+unlink %{_usr}/share/ace/TAO/orbsvcs/Notify_Service/tao_cosnotification
+unlink %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
+unlink %{_usr}/share/ace/bin/tao_ifr
 
 # remove env vars
 export CLASSPATH=$(echo $CLASSPATH | sed 's/\/usr\/share\/java/:\/usr\/local\/share\/java\///g' )
