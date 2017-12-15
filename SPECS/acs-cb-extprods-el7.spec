@@ -88,7 +88,10 @@ Source files to compile ExtProds for ACS CB %{version} for {?dist}
 %setup -q
 #%patch0 -p2
 # builddir = /home/user/rpmbuild/BUILDDIR
-#%build
+%build
+# Uncompress Eclipse4.2.2 gtk-x86_64
+cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
+
 
 %install
 # Declare Global Variables for scripts in ExtProds/INSTALL/
@@ -100,11 +103,8 @@ export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, 
 #Create basic folder and symlink
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
-# Access and execute scripts. Each script should output the result to %{buildroot}/alma/ACS-%{version}/ 
-cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
-export PATH=$PATH:%{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
-# Run scripts
-./buildEclipse # Libs should be left in system lib folders
+
+mkdir -p %{buildroot}/%{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -127,10 +127,6 @@ echo "export CLASSPATH" >> %{buildroot}%{_sysconfdir}/profile.d/acscb.sh
 
 #CLASSPATH="/alma/ACS-OCT2016/JacORB/lib/jacorb-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/jacorb-services-3.6.1.jar:/alma/ACS-OCT2016/JacORB/lib/idl.jar:/alma/ACS-OCT2016/ant/lib/ant.jar"
 
-# removing objects
-cd %{buildroot}/alma/ACS-%{version}
-find -name "*.o" | xargs rm -rf
-
 # Destroy Symlink
 /usr/bin/unlink %{buildroot}/alma
 
@@ -139,7 +135,7 @@ mkdir -p %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 mv %{_builddir}/%{name}-%{version}/ExtProd/INSTALL %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 mv %{_builddir}/%{name}-%{version}/ExtProd/PRODUCTS %{buildroot}/home/almadevel/ACS-%{version}/ExtProd/
 # Delete old Eclipse folder
-rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
+#rm -rf %{buildroot}/home/almamgr/ACS-%{version}/Eclipse/
 
 %clean
 
@@ -174,20 +170,6 @@ chmod 0705 /home/almamgr/
 # Pyxbgen symlink to /usr/local/bin
 ln -s /opt/rh/rh-java-common/root/usr/bin/pyxbgen %{_usr}/local/bin/
 # ACSnc Build has trouble finding the following files
-# CosProperty.idl not found, so let's put it in a default path
-#mkdir -p %{_usr}/local/include/orbsvcs/orbsvcs
-#ln -s %{_usr}/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs/DsLogAdminC.h %{_usr}/local/include/orbsvcs/orbsvcs/
-#ln -s %{_usr}/src/debug/ACE_wrappers/TAO/orbsvcs/orbsvcs/CosNamingC.* %{_usr}/local/include/orbsvcs/orbsvcs/
-# 
-#for ffile in $(ls %{_usr}/include/orbsvcs/); do
-#  ln -s %{_usr}/include/orbsvcs/$ffile %{_usr}/local/include/
-#done
-#for ffile in $(ls %{_usr}/include/tao/); do
-#  ln -s %{_usr}/include/tao/$ffile %{_usr}/local/include/
-#done
-
-#unlink %{_usr}/local/include/PortableServer
-#ln -s %{_usr}/include/tao/PortableServer/PortableServer.h %{_usr}/local/include/
 
 # Symlink of tao_idl because hardcoded path
 mkdir -p %{_usr}/share/tao/TAO_IDL
@@ -241,6 +223,9 @@ ln -s %{_usr}/sbin/tao-cosnotification %{_usr}/share/ace/TAO/orbsvcs/Notify_Serv
 ln -s %{_usr}/bin/tao_nsadd %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
 ln -s %{_usr}/bin/tao_ifr %{_usr}/share/ace/bin/tao_ifr
 
+# Eclipse4 symlink
+ln -s %{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/ /home/almamgr/ACS-%{version}/Eclipse4/
+
 %preun
 # Remove symlinks 
 # Pyxbgen symlink to /usr/local/bin
@@ -252,6 +237,8 @@ unlink %{_usr}/sbin/tao_cosnaming
 unlink %{_usr}/share/ace/TAO/orbsvcs/Notify_Service/tao_cosnotification
 unlink %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
 unlink %{_usr}/share/ace/bin/tao_ifr
+
+unlink /home/almamgr/ACS-%{version}/Eclipse4/
 
 # remove env vars
 export CLASSPATH=$(echo $CLASSPATH | sed 's/\/usr\/share\/java/:\/usr\/local\/share\/java\///g' )
@@ -306,7 +293,7 @@ pkill -u almadevel
 userdel -r almadevel
 
 %files
-%attr(0705,almamgr,almamgr) /home/almamgr/ACS-%{version}/Eclipse4/
+%attr(0705,-,-) %{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/
 %config %{_sysconfdir}/profile.d/
 
 %files devel
