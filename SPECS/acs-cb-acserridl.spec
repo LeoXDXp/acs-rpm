@@ -8,6 +8,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserridl
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	acserridl
 
 %description
 ACS Error IDL Java (Jar), C++ (Shared Object) and Python Interfaces
