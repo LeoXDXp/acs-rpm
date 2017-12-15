@@ -270,7 +270,7 @@ cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/servlet-api-2.4.j
 mkdir -p  %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
-mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
+#mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 # Env Vars to profile.d. Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -448,7 +448,7 @@ userdel -r almadevel
 %{_usr}/local/bin/xsddoc
 
 %files devel
-# LGPL, Benchmark, RPM-legacy
+# LGPL, Benchmark
 %attr(0705,almadevel,almadevel) /home/almadevel/
 
 %changelog
