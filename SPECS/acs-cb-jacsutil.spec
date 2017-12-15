@@ -9,6 +9,7 @@ Source1:	Makefile-jacsutil
 Source2:	javahelp-2.0.05.jar
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	jacsutil
 
 %description
 ACS Community Branch Java interface for ACS util
