@@ -8,6 +8,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-xmlpybind
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	xmlpybind
 
 %description
 ACS Community Branch Python interface for XML
@@ -68,11 +69,12 @@ make test
 %install
 
 #mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/ACSSW/Sources/xmlpybind/src/xmlpybind/
+mkdir -p %{buildroot}%{_usr}/local/bin
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
 # Copy EntitybuilderSettings.py and __init__
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}%{_usr}/local/lib/python/site-packages/
-# Copy Build log as evidence
-mv %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/src/NORM-BUILD-OUTPUT %{buildroot}%{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
+cp -r %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/lib/python/site-packages/xmlpybind/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+# generateXsdPythonBinding
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmlpybind/bin/generateXsdPythonBinding %{buildroot}%{_usr}/local/bin/
 
 # Remove objects
 cd 
@@ -85,6 +87,7 @@ unlink %{_builddir}/alma
 %{_usr}/local/lib/python/site-packages/xmlpybind/xmlpybind-build.log
 %{_usr}/local/lib/python/site-packages/xmlpybind/EntitybuilderSettings.py*
 %{_usr}/local/lib/python/site-packages/xmlpybind/__init__.py*
+%{_usr}/local/bin/generateXsdPythonBinding
 
 %changelog
 * Sat Apr 22 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-1
