@@ -1,5 +1,5 @@
 Name:		ACS-acserrTypes
-Version:	2017.02
+Version:	2017.06
 Release:	1%{?dist}
 Summary:	ACS Error Core
 License:	LGPL
