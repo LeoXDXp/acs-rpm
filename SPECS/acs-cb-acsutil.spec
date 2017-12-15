@@ -9,6 +9,7 @@ Source1:	Makefile-acsutil
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acsidlcommon >= %{version} ACS-acsidlcommon-devel >= %{version} 
 # ACS-baciidl >= %{version}  ACS-baciidl-devel >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	acsutil
 
 %description
 ACS Util Core functions in C++
