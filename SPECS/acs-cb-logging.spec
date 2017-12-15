@@ -13,6 +13,13 @@ BuildRequires: ACS-loggingidl-devel >= %{version} ACS-loggingidl >= %{version}  
 %description
 ACS logging.
 
+%package devel
+Summary: ACS Logging Devel
+License: LGPL
+
+%description devel
+Contains static .a files
+
 %prep
 %setup -q
 
@@ -98,12 +105,17 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/maci/ws/include/maciCl
 unlink %{_builddir}/alma
 
 %install
-#mkdir -p %{buildroot}/%{_usr}/local/share/java/
+mkdir -p %{buildroot}/%{_usr}/local/bin
 mkdir -p %{buildroot}%{_usr}/local/%{_lib}/
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/
+#bin
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/bin/loggingClient %{buildroot}/%{_usr}/local/bin/
+cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/bin/loggingService %{buildroot}/%{_usr}/local/bin/
 
-#java files
-#cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/DsLogAdmin.jar %{buildroot}/%{_usr}/local/share/java/
-#cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/loggingidl/ws/lib/logging_idl.jar %{buildroot}/%{_usr}/local/share/java/
+#Python
+cp -r %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/wslib/python/site-packages/Logging/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+cp -r %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/wslib/python/site-packages/Logging__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+
 #lib
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/libbaselogging.so %{buildroot}%{_usr}/local/%{_lib}/
 cp %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/libbaselogging.a %{buildroot}%{_usr}/local/%{_lib}/
@@ -117,6 +129,13 @@ chmod 755 %{buildroot}%{_usr}/local/%{_lib}/liblogging.so
 
 %{_usr}/local/%{_lib}/libbaselogging.so
 %{_usr}/local/%{_lib}/liblogging.so
+%{_usr}/local/bin/loggingClient
+%{_usr}/local/bin/loggingService
+# Missing
+%{_usr}/local/lib/python/site-packages/Logging/
+%{_usr}/local/lib/python/site-packages/Logging__POA/
+
+%files devel
 %{_usr}/local/%{_lib}/libbaselogging.a
 %{_usr}/local/%{_lib}/liblogging.a
 
