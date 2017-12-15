@@ -9,6 +9,7 @@ Source1:	Makefile-acserr
 #Source2:	liblogging.so
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-acsutil >= %{version} ACS-logging >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	acserr
 
 %description
 ACS Error Core. Provides acserrHandlersErr.jar, acserrj.jar, ACSError.jar, ErrorSystemErrType.jar, xmlvalidator.jar. Pythons acserrHandlersErr and ErrorSystemErrType ACSError, ACSErrorChecker. Shared objects: libacserrHandlersErrStubs.so  libacserr.so  libErrorSystemErrTypeStubs.so
@@ -203,6 +204,8 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker
 cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
+cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ %{buildroot}%{_usr}/local/lib/python/site-packages/
+touch %{buildroot}%{_usr}/local/lib/python/site-packages/ACSError/__init__.py
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr_idl.py %{buildroot}%{_usr}/local/lib/python/site-packages/
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
@@ -261,6 +264,8 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGe
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenIDL %{buildroot}%{_usr}/local/bin/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenJava %{buildroot}%{_usr}/local/bin/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/acserrGenPython %{buildroot}%{_usr}/local/bin/
+
+cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/src/updateErrDefs.sh %{buildroot}%{_usr}/local/bin/
 
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserrHandlersErrStubs.so
 chmod 755 %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/libacserr.so
@@ -325,6 +330,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 
 %{_usr}/local/lib/python/site-packages/acserrOldTest_idl.py*
 %{_usr}/local/lib/python/site-packages/ACSErrOldTypeTest_idl.py*
+%{_usr}/local/lib/python/site-packages/ACSError/
 
 %{_usr}/local/lib/python/site-packages/acserrTest_idl.py*
 %{_usr}/local/lib/python/site-packages/ACSErrTypeTest/
@@ -401,6 +407,8 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/object/*.inl
 %{_usr}/local/include/acserrTestC.inl
 %{_usr}/local/include/acserrTestS.cpp
 %{_usr}/local/include/acserrTestS.h
+
+%attr(645,-,-) %{_usr}/local/bin/updateErrDefs.sh
 
 %{_usr}/local/%{_lib}/libacserrHandlersErrStubs.a
 %{_usr}/local/%{_lib}/libacserrOldTestStubs.a
