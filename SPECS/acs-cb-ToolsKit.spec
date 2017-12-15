@@ -345,8 +345,8 @@ ln -s %{_usr}/%{_lib}/python2.7/compileall.py /home/almamgr/ACS-%{version}/Pytho
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-%{ALTVER}
 ln -s /home/almamgr/ACS-%{version}/ /home/almamgr/ACS-latest
 
-echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{_sysconfdir}/profile.d/acscb.sh
-echo "export ACS_TMP" >> %{_sysconfdir}/profile.d/acscb.sh
+echo "ACS_TMP=$ALMASW_ROOTDIR/ACS-%{version}/tmp/$HOSTNAME" >> %{_sysconfdir}/profile.d/acscb-toolsKit.sh
+echo "export ACS_TMP" >> %{_sysconfdir}/profile.d/acscb-toolsKit.sh
 
 %post devel
 # Re-enabling the syntax error for testing
