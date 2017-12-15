@@ -9,6 +9,7 @@ Source1:	Makefile-baciidl
 Source2:	CosProperty.jar
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version} ACS-acscomponentidl-devel >= %{version} ACS-acscomponentidl >= %{version} ACS-acsidlcommon >= %{version} 
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	baciidl
 
 %description
 ACS Baci IDL Java (Jar), C++ (Shared Object) and Python Interfaces
