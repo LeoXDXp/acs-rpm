@@ -9,29 +9,15 @@ URL:		http://csrg-utfsm.github.io/
 AutoReq:	no
 # Source0, no need for anything else than ACS/ExtProds folder, with the downloaded sources within
 Source0:	%{name}-%{version}.tar.gz
+Source1:	eclipse-4.2.2-delta-pack.zip
+Source2:	eclipse-SDK-4.2.2-linux-gtk-x86_64.tar.gz
+BuildArch:	x86_64 %{arm} 
 # Ant for EL7 is up to 1.9.2. ACS uses 1.9.3. Provided in F21  
 # Boost for ACS is 1.41. Epel provides 1.48. Changes should not affect ACS: http://www.boost.org/doc/libs/1_53_0/doc/html/hash/changes.html
 # ACS uses omniORB 4.2.1, in F24
 # ACS uses maven 3.2.5. Apache maven repo provides 3.2.5. Installed in pre. 
 # ACS's ACE+TAO is 6.3.0, Opensuse repo has 6.4.1, ACE+TAO source has rpm, and is builded succesfully, ace-tao-6.3.0.2016.6
 # Small ifarch hack for x86_64 and aarch64 arch 
-#Source4:	searchFile
-#Source5:	JacPrep
-#Source6:	acsMakeCopySources
-#Source7:	acsMakeTclScript
-#Source8:	acsMakeJavaClasspath
-#Source9:	acserrGenIDL
-#Source10:	acserrGenCpp
-#Source11:	acserrGenCheckXML
-#Source12:	generateTmcdbSchemas
-#Source13:	generateXsdPythonBinding
-#Source14:	loggingtsGenH
-#Source15:	loggingtsGenCheckXML
-#Source16:	acsStartJava
-#Source17:	acs_python.py
-#Source18:	acsMakeCheckUnresolvedSymbols
-#Source19:	acsMakeTclLib
-
 #Patch0:		Orbsvcs-TaggedComponentListSeq.patch	
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
@@ -86,12 +72,14 @@ Source files to compile ExtProds for ACS CB %{version} for {?dist}
 
 %prep
 %setup -q
+
 #%patch0 -p2
 # builddir = /home/user/rpmbuild/BUILDDIR
 %build
-# Uncompress Eclipse4.2.2 gtk-x86_64
-cd %{_builddir}/%{name}-%{version}/ExtProd/INSTALL/
-
+# Uncompress Eclipse4.2.2 gtk-x86_64 Sources
+mkdir -p %{_builddir}/%{name}-%{version}/Eclipse4/SDKandDeltaPack/
+tar xzvf %{SOURCE2} -C %{_builddir}/%{name}-%{version}/Eclipse4/SDKandDeltaPack/
+unzip -o %{SOURCE1} -d %{_builddir}/%{name}-%{version}/Eclipse4/SDKandDeltaPack/
 
 %install
 # Declare Global Variables for scripts in ExtProds/INSTALL/
@@ -104,7 +92,9 @@ export M2_HOME="%{_usr}/share/apache-maven"  # Exported by apache-maven itself, 
 mkdir -p %{buildroot}/home/almamgr/ACS-%{version}/
 ln -s %{buildroot}/home/almamgr %{buildroot}/alma
 
+# Copy jars and so¿hared objects 
 mkdir -p %{buildroot}/%{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/
+cp -r %{_builddir}/%{name}-%{version}/Eclipse4/SDKandDeltaPack/eclipse/plugins/* %{buildroot}/%{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/
 
 # Self export var through etc profile
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
@@ -224,7 +214,7 @@ ln -s %{_usr}/bin/tao_nsadd %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
 ln -s %{_usr}/bin/tao_ifr %{_usr}/share/ace/bin/tao_ifr
 
 # Eclipse4 symlink
-ln -s %{_usr}/local/share/Eclipse4/SDKandDeltaPack/eclipse/plugins/ /home/almamgr/ACS-%{version}/Eclipse4/
+ln -s %{_usr}/local/share/Eclipse4 /home/almamgr/ACS-%{version}/Eclipse4
 
 %preun
 # Remove symlinks 
@@ -238,7 +228,7 @@ unlink %{_usr}/share/ace/TAO/orbsvcs/Notify_Service/tao_cosnotification
 unlink %{_usr}/share/ace/TAO/utils/nslist/tao_nsadd
 unlink %{_usr}/share/ace/bin/tao_ifr
 
-unlink /home/almamgr/ACS-%{version}/Eclipse4/
+unlink /home/almamgr/ACS-%{version}/Eclipse4
 
 # remove env vars
 export CLASSPATH=$(echo $CLASSPATH | sed 's/\/usr\/share\/java/:\/usr\/local\/share\/java\///g' )
