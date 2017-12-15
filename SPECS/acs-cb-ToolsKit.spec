@@ -266,11 +266,10 @@ cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/jsp-api-2.0.jar %
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/myfaces-api-1.1.5.jar %{buildroot}%{_usr}/local/share/java/
 cp %{_builddir}/%{name}-%{version}/LGPL/Tools/scxml_apache/lib/servlet-api-2.4.jar %{buildroot}%{_usr}/local/share/java/
 
-# Devel folders: RPM, LGPL, Benchmark
+# Devel folders: LGPL, Benchmark
 mkdir -p  %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/LGPL/ %{buildroot}/home/almadevel/
 mv %{_builddir}/%{name}-%{version}/Benchmark/ %{buildroot}/home/almadevel/
-#mv %{_builddir}/%{name}-%{version}/RPM/ %{buildroot}/home/almadevel/RPM-legacy/
 
 # Env Vars to profile.d. Place to create files for variable exporting on boot
 mkdir -p %{buildroot}%{_sysconfdir}/profile.d/
