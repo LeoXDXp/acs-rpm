@@ -11,7 +11,7 @@ Source3:    TimeBase.jar
 
 BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version}
 Requires:       ACS-Tools-Kit-Benchmark >= %{version}
-
+Obsoletes:	loggingidl logging
 %description
 ACS Logging IDL Interfaces.
 
