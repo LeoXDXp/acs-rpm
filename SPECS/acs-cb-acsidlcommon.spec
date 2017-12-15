@@ -8,6 +8,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acsidlcommon
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserridl >= %{version} ACS-acserridl-devel >= %{version}  ACS-xmlpybind >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+Obsoletes:	acsidlcommon
 
 %description
 ACS Common IDL Java (Jar), C++ (Shared Object) and Python Interfaces
@@ -96,6 +97,7 @@ cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/p
 # The result of using pyxbgen is bindings.py, which is renamed to commontypes.py for ACS.
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/
 cp -f %{_builddir}/%{name}-%{version}/binding.py %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py
+touch %{buildroot}%{_usr}/local/lib/python/site-packages/commontypes/__init__.py
 
 mkdir -p %{buildroot}%{_usr}/local/share/java/
 cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/lib/commontypes.jar %{buildroot}%{_usr}/local/share/java/
@@ -124,7 +126,7 @@ cp -f %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsidlcommon/ws/object
 %{_usr}/local/lib/python/site-packages/log_audience__POA/
 %{_usr}/local/lib/python/site-packages/ACS/
 %{_usr}/local/lib/python/site-packages/ACS__POA/
-%{_usr}/local/lib/python/site-packages/commontypes/commontypes.py*
+%{_usr}/local/lib/python/site-packages/commontypes/
 
 %{_usr}/local/share/java/commontypes.jar
 %{_usr}/local/share/java/acscommon.jar
