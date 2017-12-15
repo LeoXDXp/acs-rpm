@@ -10,7 +10,7 @@ BuildRequires:	ksh, libX11-devel, gcc, make, tar
 #Requires:	expect tk iwidgets tclx tcllib blt tktable
 Requires:	telnet, libX11
 AutoReq:	no
-
+Conflicts:	tcl
 %description
 Tcl, mini SQL, tklib, tclCheck, tkman, tkimg,  itcl, rman, snack, tkcon
 
@@ -37,7 +37,7 @@ sh buildTcltk
 unlink %{_builddir}/alma
 
 %install
-
+mkdir -p %{buildroot}%{_usr}/lib/tcl8.5/
 mkdir -p %{buildroot}/%{_usr}/local/share/tcltk
 cd %{_builddir}/home/almamgr/%{name}-%{version}/tcltk/
 find lib/ -name *.so | xargs chmod 755 $1
@@ -53,8 +53,10 @@ echo "export PATH" >> %{buildroot}%{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %post
 # /include to usr/local/include. Not yet, as no packages use tcltk headers to compile
-ln -s /usr/local/share/tcltk/bin/tcl /usr/local/bin/seqSh
-ln -s /usr/bin/wish /usr/local/bin/seqWish
+ln -s %{_usr}/local/share/tcltk/bin/tcl %{_usr}/local/bin/seqSh
+ln -s %{_usr}/bin/wish %{_usr}/local/bin/seqWish
+ln -s %{_usr}/local/share/tcltk/lib/tcl8.5/init.tcl %{_usr}/lib/tcl8.5/init.tcl 
+
 
 %preun
 export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/lib\///g' )
@@ -62,9 +64,11 @@ export PATH=$( echo $PATH | sed 's/\%{_usr}\/local\/share\/tcltk\/bin\///g' )
 unset TCLTK_ROOT
 unlink /usr/local/bin/seqSh
 unlink /usr/local/bin/seqWish
+unlink %{_usr}/lib/tcl8.5/init.tcl
 
 %files
 %attr(755,-,-) %{_usr}/local/share/tcltk/
+%{_usr}/lib/tcl8.5/
 %{_sysconfdir}/profile.d/tcltk-acs.sh
 
 %changelog
