@@ -142,7 +142,10 @@ cd %{_builddir}/%{name}-%{version}/
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
 # Symlink of Python's compilelall for hardcoded path in make files
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
-ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
+# Only if symlink is not already written
+if [ ! -e %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py  ]; then
+  ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
+fi
 
 make
 
