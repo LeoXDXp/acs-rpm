@@ -6,6 +6,7 @@ License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-acscomponentidl
+Obsoletes:  acscomponentidl
 
 %description
 ACS Component IDL.
