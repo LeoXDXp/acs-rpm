@@ -8,6 +8,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-xmljbind
 BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-jacsutil >= %{version} castor-ACS >= 0.9.6.%{version}
 Requires:	ACS-Tools-Kit-Benchmark >= %{version} ACS-jacsutil >= %{version}
+Obsoletes:	xmljbind
 
 %description
 ACS Community Branch Java interface for XML
