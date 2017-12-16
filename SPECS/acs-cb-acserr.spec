@@ -1,5 +1,7 @@
+%define minVersion 2017.06
+
 Name:		ACS-acserr
-Version:	2017.06
+Version:	2017.08
 Release:	1%{?dist}
 Summary:	ACS Error Core
 License:	LGPL
@@ -7,8 +9,8 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserr
 #Source2:	liblogging.so
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-acsutil >= %{version} ACS-logging >= %{version}
-Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{minVersion} castor-ACS ACS-acserridl >= %{version} ACS-xmljbind >= %{version} ACS-jacsutil >= %{version} ACS-loggingidl >= %{version} ACS-acsutil >= %{version} ACS-logging >= %{version}
+Requires:	ACS-Tools-Kit-Benchmark >= %{minVersion}
 Obsoletes:	acserr
 
 %description

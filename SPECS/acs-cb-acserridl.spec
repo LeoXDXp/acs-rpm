@@ -1,13 +1,15 @@
+%define minVersion 2017.06
+
 Name:		ACS-acserridl
-Version:	2017.06
+Version:	2017.08
 Release:	1%{?dist}
 Summary:	ACS Error IDL Declarations
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-acserridl
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version}
-Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{minVersion}
+Requires:	ACS-Tools-Kit-Benchmark >= %{minVersion}
 Obsoletes:	acserridl
 
 %description
