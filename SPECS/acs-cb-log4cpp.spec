@@ -1,5 +1,5 @@
 Name:		log4cpp-ACS
-Version:	1.0.2017.06
+Version:	1.0.2017.08
 Release:	1%{?dist}
 Summary:	Old version of log4cpp with ACS patches
 License:	LGPL
