@@ -1,5 +1,7 @@
+%define minVersion 2017.06
+
 Name:		ACS-baciidl
-Version:	2017.06
+Version:	2017.08
 Release:	1%{?dist}
 Summary:	ACS BACI IDL Declarations
 License:	LGPL
@@ -7,8 +9,8 @@ URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-baciidl
 Source2:	CosProperty.jar
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-acserr >= %{version} ACS-acscomponentidl-devel >= %{version} ACS-acscomponentidl >= %{version} ACS-acsidlcommon >= %{version} 
-Requires:	ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{minVersion} ACS-acserr >= %{version} ACS-acscomponentidl-devel >= %{version} ACS-acscomponentidl >= %{version} ACS-acsidlcommon >= %{version} 
+Requires:	ACS-Tools-Kit-Benchmark >= %{minVersion}
 Obsoletes:	baciidl
 
 %description
