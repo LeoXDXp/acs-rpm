@@ -1,5 +1,5 @@
 Name:		castor-ACS
-Version:	0.9.6.2017.06
+Version:	0.9.6.2017.08
 Release:	1%{?dist}
 Summary:	Old version of Castor with ACS patches
 License:	LGPL
