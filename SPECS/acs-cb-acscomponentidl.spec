@@ -1,11 +1,15 @@
+%define minVersion 2017.06
+
 Name:       ACS-acscomponentidl
-Version:    2017.06
+Version:    2017.08
 Release:    1%{?dist}
 Summary:    ACS Logging
 License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-acscomponentidl
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{minVersion}
+Requires:       ACS-Tools-Kit-Benchmark >= %{minVersion}
 Obsoletes:  acscomponentidl
 
 %description
