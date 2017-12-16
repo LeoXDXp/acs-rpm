@@ -1,5 +1,7 @@
+%define minVersion 2017.06
+
 Name:       ACS-loggingidl
-Version:    2017.06
+Version:    2017.08
 Release:    1%{?dist}
 Summary:    ACS Logging IDL Declarations
 License:    LGPL
@@ -9,8 +11,8 @@ Source1:    Makefile-loggingidl
 Source2:    DsLogAdmin.jar
 Source3:    TimeBase.jar
 
-BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{version}
-Requires:       ACS-Tools-Kit-Benchmark >= %{version}
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{minVersion}
+Requires:       ACS-Tools-Kit-Benchmark >= %{minVersion}
 Obsoletes:	loggingidl logging
 %description
 ACS Logging IDL Interfaces.

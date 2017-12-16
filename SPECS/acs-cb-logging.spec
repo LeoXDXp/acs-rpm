@@ -1,5 +1,7 @@
+%define minVersion 2017.06
+
 Name:       ACS-logging
-Version:    2017.06
+Version:    2017.08
 Release:    1%{?dist}
 Summary:    ACS Logging
 License:    LGPL
@@ -7,8 +9,9 @@ URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-logging
 
-BuildRequires: ACS-loggingidl-devel >= %{version} ACS-loggingidl >= %{version}  log4cpp log4cpp-ACS-devel >= 1.0.%{version} ACS-acsutil >= %{version} ACS-acsidlcommon >= %{version}
+BuildRequires: ACS-Tools-Kit-Benchmark >= %{minVersion} ACS-loggingidl-devel >= %{version} ACS-loggingidl >= %{version}  log4cpp log4cpp-ACS-devel ACS-acsutil >= %{version} ACS-acsidlcommon >= %{version}
 # log4cpp-ACS >= 1.0.%{version}
+Requires:       ACS-Tools-Kit-Benchmark >= %{minVersion}
 
 %description
 ACS logging.
