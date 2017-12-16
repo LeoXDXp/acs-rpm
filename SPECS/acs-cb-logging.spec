@@ -73,15 +73,15 @@ export MAKE_PARS=" -j 2 -l 2 "
 cd %{_builddir}/%{name}-%{version}/
 
 # mkdir of ACSSW
-mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
+mkdir -p %{_builddir}/home/almamgr/ACS-%{minVersion}/ACSSW/
 # Symlink of Python's compilelall for hardcoded path in make files
 mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/
 ln -s %{_usr}/%{_lib}/python2.7/compileall.py %{_builddir}/home/almamgr/ACS-%{version}/Python/lib/python2.7/compileall.py
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/logging/ws/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"

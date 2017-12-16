@@ -172,15 +172,15 @@ export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
-mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
+mkdir -p %{_builddir}/home/almamgr/ACS-%{minVersion}/ACSSW/
 # Add debug to vpath in acsMakefile line 1810+
 sed -i 's/@echo "ERROR: ----> $@  does not exist."; exit 1/@echo "ERROR: ----> $@  does not exist.";/g'  %{_builddir}/%{name}-%{version}/LGPL/Kit/acs/include/acsMakefile
 
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
