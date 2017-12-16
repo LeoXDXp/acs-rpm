@@ -57,13 +57,13 @@ export MAKE_PARS=" -j 2 -l 2 "
 
 cd %{_builddir}/%{name}-%{version}/
 # mkdir of ACSSW
-#mkdir -p %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/
+#mkdir -p %{_builddir}/home/almamgr/ACS-%{minVersion}/ACSSW/
 
 make
 
 # TAT Stuff. Symlink to libtatlib.tcl/ folder
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/lib/
-ln -s /home/almamgr/ACS-%{version}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/xmljbind/lib/
+ln -s /home/almamgr/ACS-%{minVersion}/ACSSW/lib/libtatlib.tcl/ %{_builddir}/%{name}-%{version}/LGPL/acsBUILD/lib/
 export HOST="$HOSTNAME"
 export VLTDATA=""
 export OSYSTEM="Linux"
@@ -76,7 +76,7 @@ make test
 %install
 
 mkdir -p %{buildroot}/%{_usr}/local/share/java/
-mv %{_builddir}/home/almamgr/ACS-%{version}/ACSSW/lib/xmljbind.jar %{buildroot}/%{_usr}/local/share/java/
+mv %{_builddir}/home/almamgr/ACS-%{minVersion}/ACSSW/lib/xmljbind.jar %{buildroot}/%{_usr}/local/share/java/
 
 # Clean symlink in builddir
 unlink %{_builddir}/alma
