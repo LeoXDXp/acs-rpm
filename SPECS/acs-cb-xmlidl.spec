@@ -1,11 +1,15 @@
+%define minVersion 2017.06
+
 Name:       ACS-xmlidl
-Version:    2017.02
+Version:    2017.08
 Release:    1%{?dist}
 Summary:    ACS XML IDL Declarations
 License:    LGPL
 URL:        http://csrg-utfsm.github.io
 Source0:    %{name}-%{version}.tar.gz
 Source1:    Makefile-xmlidl
+BuildRequires:  ACS-Tools-Kit-Benchmark-devel >= %{minVersion}
+Requires:       ACS-Tools-Kit-Benchmark >= %{minVersion}
 
 %description
 ACS xml idl.
