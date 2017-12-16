@@ -1,13 +1,15 @@
+%define minVersion 2017.06
+
 Name:		ACS-xmljbind
-Version:	2017.06
+Version:	2017.08
 Release:	1%{?dist}
 Summary:	ACS XML Java Interface
 License:	LGPL
 URL:		http://csrg-utfsm.github.io
 Source0:	%{name}-%{version}.tar.gz
 Source1:	Makefile-xmljbind
-BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{version} ACS-jacsutil >= %{version} castor-ACS >= 0.9.6.%{version}
-Requires:	ACS-Tools-Kit-Benchmark >= %{version} ACS-jacsutil >= %{version}
+BuildRequires:	ACS-Tools-Kit-Benchmark-devel >= %{minVersion} ACS-jacsutil >= %{version} castor-ACS >= 0.9.6.%{minVersion}
+Requires:	ACS-Tools-Kit-Benchmark >= %{minVersion} ACS-jacsutil >= %{version}
 Obsoletes:	xmljbind
 
 %description
