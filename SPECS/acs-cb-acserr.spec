@@ -139,7 +139,7 @@ ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/C
 #Pyxbgen
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/
 pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
-mv %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ACSError.py
+#cp %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ACSError.py
 
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/jacorb-acs.sh
@@ -190,7 +190,6 @@ export CLASSPATH="$CLASSPATH:%{_builddir}/%{name}-%{version}/LGPL/CommonSoftware
 
 make test
 
-
 # Clean symlink in builddir
 unlink %{_builddir}/alma
 
@@ -198,6 +197,7 @@ unlink %{_builddir}/alma
 # Instalation on usr local, if python, then python/site-packages, if C/C++, then include, if Java, then share/java 
 # ACSErr and ACSErr__POA folders, and acserr_idl.py
 mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker
+mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/ACSError
 #ACSErr and ACSErr__POA provided by ACS-acserridl
 #cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 #cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSErr__POA/ %{buildroot}%{_usr}/local/lib/python/site-packages/
@@ -206,6 +206,7 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/ACSErrorChecker
 cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
+cp %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ACSError.py
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 touch %{buildroot}%{_usr}/local/lib/python/site-packages/ACSError/__init__.py
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
