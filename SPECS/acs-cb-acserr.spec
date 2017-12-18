@@ -139,7 +139,7 @@ ln -s %{_usr}/local/%{_lib}/libacsutil.so %{_builddir}/%{name}-%{version}/LGPL/C
 #Pyxbgen
 mkdir -p %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/
 pyxbgen -u %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/idl/ACSError.xsd -m ACSError --archive-to-file %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError.wxs
-mv %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/
+mv %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ACSError.py
 
 source %{_sysconfdir}/profile.d/tcltk-acs.sh
 source %{_sysconfdir}/profile.d/jacorb-acs.sh
