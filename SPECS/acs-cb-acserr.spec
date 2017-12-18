@@ -206,7 +206,7 @@ mkdir -p %{buildroot}%{_usr}/local/lib/python/site-packages/ACSError
 cd %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/
 find -name "*.pyo" | xargs rm -rf
 
-cp %{_builddir}/%{name}-%{version}/ACSError.py %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ACSError.py
+cp %{_builddir}/%{name}-%{version}/ACSError.py %{buildroot}%{_usr}/local/lib/lib/python/site-packages/ACSError/ACSError.py
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/ACSError/ %{buildroot}%{_usr}/local/lib/python/site-packages/
 touch %{buildroot}%{_usr}/local/lib/python/site-packages/ACSError/__init__.py
 cp -rf %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acserr/ws/lib/python/site-packages/acserrHandlersErr/ %{buildroot}%{_usr}/local/lib/python/site-packages/
