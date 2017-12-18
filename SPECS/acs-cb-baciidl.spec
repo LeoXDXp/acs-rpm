@@ -115,8 +115,10 @@ ln -s  %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/acsutil/ws/include/ac
 # acscommon.jar and so
 ln -s %{_usr}/local/share/java/acscommon.jar %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
 ln -s %{_usr}/local/%{_lib}/libacscommonStubs.so %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/
-# CosProperty.idl
+# CosProperty.idl and orb.idl
 ln -s %{_usr}/include/orbsvcs/CosProperty.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/
+ln -s %{_usr}/include/tao/orb.idl %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/idl/orb.idl
+
 # CosProperty.jar: Manually created: jar cvf CosProperty.jar org/omg/CosPropertyService/*.class
 cp -f %{SOURCE2} %{_builddir}/%{name}-%{version}/LGPL/CommonSoftware/baciidl/ws/lib/CosProperty.jar
 
