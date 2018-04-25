@@ -2,7 +2,7 @@
 
 Name:		ACS-ExtProds
 Version:	2017.06
-Release:	2%{?dist}
+Release:	3%{?dist}
 Summary:	ACS CB ExtProds for CentOS 7	
 License:	LGPL
 URL:		http://csrg-utfsm.github.io/
@@ -22,7 +22,7 @@ BuildArch:	x86_64 %{arm}
 # Base tools
 BuildRequires: epel-release git wget unzip tar bzip2 patch gcc
 # Java and Others
-BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven >= 3.2.5, boost148, ant >= 1.9.2
+BuildRequires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo, apache-maven <= 3.3.9, boost148, ant >= 1.9.2
 # Built by Tcltk for ACS. Missing on repos: tklib tkimg snack tkman rman tclCheck msqltcl tkcon
 BuildRequires: tcltk-ACS JacORB-ACS mico-ACS
 
@@ -32,7 +32,7 @@ Requires: ace >= 6.3.0.%{oldVersion}, ace-devel >= 6.3.0.%{oldVersion}, ace-xml 
 # OmniORB
 Requires: omniORB == 4.2.1, omniORB-devel == 4.2.1, omniORB-utils == 4.2.1, omniORB-debuginfo == 4.2.1, omniORB-servers == 4.2.1, omniORB-doc == 4.2.1 python-omniORB
 # Java and Others
-Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven >= 3.2.5, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl maven-local
+Requires: java-1.8.0-openjdk java-1.8.0-openjdk-devel java-1.8.0-openjdk-demo apache-maven <= 3.3.9, boost148 antlr-tool python-virtualenv epel-release python-pip centos-release-scl maven-local
 Requires: ant >= 1.9.2, gcc, time
 # PyModules exact version in repos as in acs.req: Linecache2 v1.0.0, Traceback2 v1.4.0, Scipy v0.12.1, python-six v1.9.0, Matplotlib v1.2.0,
 Requires: python-coverage == 3.7.1, python-linecache2 == 1.0.0, python2-traceback2 == 1.4.0, scipy == 0.12.1, python-six == 1.9.0, pexpect, python-matplotlib == 1.2.0
@@ -290,6 +290,8 @@ userdel -r almadevel
 %attr(0705,almadevel,almadevel) /home/almadevel/ACS-%{version}/ExtProd/
 
 %changelog
+* Wed Apr 25 2018 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-3
+Apache-maven version must lower or equal than 3.3.9, or it must be removed due to collisions
 * Sat Aug 19 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 2017.06-1
 Updating version. Moving code to respective new rpms
 * Sun May 28 2017 Leonardo Pizarro <lepizarr@inf.utfsm.cl> - 0.1-2
