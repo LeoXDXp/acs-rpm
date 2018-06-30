@@ -216,6 +216,9 @@ ln -s %{_usr}/bin/tao_ifr %{_usr}/share/ace/bin/tao_ifr
 # Eclipse4 symlink
 ln -s %{_usr}/local/share/Eclipse4 /home/almamgr/ACS-%{version}/Eclipse4
 
+# Disable epel-apache-maven to avoid accidental apache-maven updates
+sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/epel-apache-maven.repo
+
 %preun
 # Remove symlinks 
 # Pyxbgen symlink to /usr/local/bin
