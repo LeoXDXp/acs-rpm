@@ -27,3 +27,6 @@ Sources and buildlogs available in http://repo.csrg.cl/Sources/
 - Sign the RPMs: http://giovannitorres.me/how-to-setup-an-rpm-signing-key.html
 - Complete the SysV daemons of acs commands (used in a Pacemaker PoC) and migrate them to SystemD
 
+# Apache maven repo
+https://repos.fedorapeople.org/repos/dchen/apache-maven/
+
