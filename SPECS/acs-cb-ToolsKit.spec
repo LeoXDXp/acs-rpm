@@ -1,4 +1,5 @@
 %define ALTVER JUN2017
+%define oldVersion 2017.02
 
 Name:		ACS-Tools-Kit-Benchmark
 Version:	2017.06
@@ -12,7 +13,7 @@ Source1:	Makefile-TKB
 AutoReq:	no
 
 # BuildRequires no acepta un grupo: Se agregan paquetes de Development tools por separado al final desde autoconf
-BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version} ACS-eclipse-plugins >= %{version}
+BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{oldVersion} ACS-eclipse-plugins >= %{oldVersion}
 # Tools: Hibernate provided in F24: http://rpms.remirepo.net/rpmphp/zoom.php?rpm=hibernate3
 # astyle 1.15 - 2.05 in repos
 # getopt in repos, check version. Only needed by Sun OS, Ignoring.
