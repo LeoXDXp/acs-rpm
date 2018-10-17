@@ -323,7 +323,7 @@ mv %{buildroot}%{_sysconfdir}/profile.d/acscb.sh %{buildroot}%{_sysconfdir}/prof
 
 # /var/run/
 mkdir -p %{buildroot}%{_var}/run/acscb/
-/usr/bin/unlink %{buildroot}/alma
+/usr/bin/unlink %{_builddir}/alma
 %clean
 
 %pre
