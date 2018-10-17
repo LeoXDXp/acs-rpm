@@ -17,7 +17,7 @@ BuildRequires: ACS-ExtProds >= %{version} ACS-ExtJars >= %{version} ACS-eclipse-
 # astyle 1.15 - 2.05 in repos
 # getopt in repos, check version. Only needed by Sun OS, Ignoring.
 # xsd-doc seems to be different than xsddoc (part of xframe)
-BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 castor hibernate3 xerces-c xerces-c-devel xerces-j2 
+BuildRequires: gcc gcc-c++ emacs antlr expat expat-devel cppunit cppunit-devel swig loki-lib log4cpp shunit2 hibernate3 xerces-c xerces-c-devel xerces-j2 
 # Consoles that should be unified
 BuildRequires: ksh time
 # ExtPy Module: PyXB: Required: 1.1.2. Repos: 1.2.4. 
